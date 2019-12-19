@@ -1,0 +1,987 @@
+<app-barra-navegacion></app-barra-navegacion>
+<div class="container-fluid">
+    <!-- <div id="btn-agregar-pub" class="text-center"> -->
+    <br />
+    <div class="card-header" *ngIf="!idSucursal && mymodel === 'informacion'">
+        <h1>Crear sucursal !</h1>
+    </div>
+
+    <div class="card-header" *ngIf="!idSucursal && mymodel === 'consultorios'">
+        <h1>Crear Consultorios !</h1>
+    </div>
+
+    <div class="card-header" *ngIf="idSucursal && mymodel === 'informacion'">
+        <h1>Editar sucursal !</h1>
+    </div>
+
+    <div class="card-header" *ngIf="idSucursal && mymodel === 'consultorios'">
+        <h1>Gestionar consultorios !</h1>
+    </div>
+    <br />
+
+    <!-- </div> -->
+</div>
+
+<div class="container-fluid">
+    <div class="row" style="padding-top: 10px;">
+        <div class="col-md-3 col-sm-4">
+
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item active" id="info">Información</li>
+                    <li class="list-group-item" id="consul">Consultorios</li>
+                </ul>
+            </div>
+
+            <!--  -------------------------CONSULTORIOS CREAR SUCURSAL ----------------------------------  -->
+
+            <div style="padding-top: 30px;">
+
+                <div class="contenedor">
+                    <div class="tab-content scroll" id="nav-tabContent">
+
+                        <div *ngIf="(infoSucursal && infoSucursal.consultorio && infoSucursal.consultorio.length >= 1) && mymodel === 'consultorios'">
+                            <div style="padding-top: 10px;" *ngFor="let ic of infoSucursal.consultorio; let i = index">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="text-left">
+                                                    Consultorio : {{ic.nombre}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <p><strong>Medico : </strong>{{ic.medico}}</p>
+                                        <p><strong>Servicio: </strong>{{ic.servicio}}</p>
+
+                                        <div class="text-right" style="padding-top: 10px;">
+                                            <button class="btn btn-primary" style="margin-right: 5px;" data-toggle="modal" data-target="#exampleModal" (click)="verConsultorio(ic)"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="confirmacionEliminarConsulApi(ic)"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="(infoConsultorios.length >= 1)">
+
+                            <div style="padding-top: 20px;" *ngFor="let ic of infoConsultorios; let i = index">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="text-left">
+                                                    Consultorio : {{ic.nombre}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <p><strong>Medico : </strong>{{ic.nombreMedico}}</p>
+                                        <p><strong>Servicio: </strong>{{ic.nombreServicio}}</p>
+                                        <div class="text-right" style="padding-top: 20px;"><button class="btn btn-danger" (click)="posisionAEliminar(i, ic.medico_id)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt"></i></button>
+
+                                            <!-- MODAL CONFIRMACION ELIMINAR Consultorio -->
+
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel" style="color: black">Confirmacion</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text-left">
+                                                                <p style="color: black">¿ Estas seguro que deseas eliminar este consultorio ?</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarConsultorio()">Eliminar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- FIN DE MODAL CONFIRMACION -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ----------------------------------- CONSULTORIOS EDITAR -------------------------------------------------- -->
+
+            <!-- <div *ngIf=" (infoSucursal && infoSucursal.consultorio.length >= 1) && mymodel === 'consultorios'" style="padding-top: 30px;">
+      
+          <div class="contenedor" >
+              <div class="tab-content scroll" id="nav-tabContent" >
+    
+                <div style="padding-top: 10px;" *ngFor="let ic of infoSucursal.consultorio; let i = index">
+                    <div class="card" >
+                        <div class="card-header"><div class="row">
+                            <div class="col-9">
+                              <div class="text-left">
+                                  Consultorio : {{ic.nombre}} 
+                              </div>
+                              </div>
+                        </div>       
+                    </div>
+            
+                      <div class="card-body">
+                        <p><strong>Medico : </strong>{{ic.medico}}</p>
+                        <p><strong>Servicio: </strong>{{ic.servicio}}</p>
+
+                        <div class="text-right" style="padding-top: 10px;">
+                            <button class="btn btn-primary" style="margin-right: 5px;" data-toggle="modal" data-target="#exampleModal" (click)="verConsultorio(ic)"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="confirmacionEliminarConsulApi(ic)"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                </div>               
+              </div>
+          </div>  
+      </div>  -->
+
+
+        </div>
+
+        <div class="col-md-9 col-sm-8" style="padding-left: 20px; padding-right: 20px;">
+
+            <!-- ------------------------------------- ALERTAS ------------------------------------------------- -->
+
+            <div class="alert alert-success alert-dismissible fade show container" role="alert" *ngIf="status === 'success'">
+                {{statusText}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error'">
+                {{statusText}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+            <!-- --------------------------------------- FIN ALERTAS ----------------------------------------------- -->
+
+            <div [ngSwitch]="mymodel">
+                <div *ngSwitchCase="'informacion'">
+
+                    <!-- ------------------------ INFORMACION CREAR SUCURSAL ---------------------------  -->
+                    <div *ngIf="!idSucursal">
+
+                        <form>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label">Nombre sucursal *</label>
+                                        <input type="text" class="form-control" [formControl]="nombreSucursal" maxlength="50" [class.is-invalid]="nombreSucursal.touched && nombreSucursal.hasError('required')">
+                                        <div class="invalid-feedback" *ngIf="nombreSucursal.touched && nombreSucursal.hasError('required')">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label">Telefono *</label>
+                                        <input type="text" class="form-control" [formControl]="telefonoSucursal" [class.is-invalid]="(telefonoSucursal.touched && telefonoSucursal.hasError('required')) || (telefonoSucursal.hasError('pattern')) || telefonoSucursal.hasError('minlength') || telefonoSucursal.hasError('maxlength')"
+                                            minlength="6" maxlength="12">
+
+                                        <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('required')">
+                                            * Este campo es requerido.
+                                        </div>
+
+                                        <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('pattern')">
+                                            Este campo solo acepta numeros, sin espacios ni caracteres especiales.
+                                        </div>
+
+                                        <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('minlength')">
+                                            Cantidad minima de caracteres (7)
+                                        </div>
+
+                                        <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('maxlength')">
+                                            Cantidad minima de caracteres (12)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col form-group">
+                                    <label class="form-label">Direccion *</label>
+                                    <input type="text" class="form-control" [formControl]="direccionSucursal" maxlength="100" [class.is-invalid]="direccionSucursal.touched && direccionSucursal.hasError('required')">
+                                    <div class="invalid-feedback" *ngIf="direccionSucursal.touched && direccionSucursal.hasError('required')">
+                                        * Este campo es requerido.
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label">Departamento *</label>
+                                        <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)"> 
+                                    <option *ngFor="let d of departamentos" value="{{d.id_departamento}}">{{d.nombre}}</option>
+                                  </select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label">Municipio *</label>
+                                        <select name="" id="" class="form-control" [formControl]="muniSelect"> 
+                                    <option *ngFor="let m of municipios" value="{{m.id_municipio}}">{{m.nombre}}</option>
+                                  </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid">
+                                <br />
+                                <div class="card-header" style="padding-top:10px !important">
+                                    <h1>Información de la cuenta</h1>
+                                </div>
+                                <br />
+                            </div>
+
+                            <p class="color-prevenir">* Al crear una sucursal se crea una cuenta de usuario, con la cual se gestiona citas y pacientes.</p>
+
+
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Nombre de usuario</label>
+                                    <input type="text" class="form-control" [formControl]="username" [class.is-invalid]="username.touched && username.hasError('required') || username.hasError('pattern')">
+                                    <div class="invalid-feedback" *ngIf="username.touched && username.hasError('required')">
+                                        * Este campo es requerido.
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="username.hasError('pattern')">
+                                        El nombre de usuario no admite espacios, ni la letra ñ.
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" [formControl]="pssw" [class.is-invalid]="( pssw.hasError('required') && pssw.touched ) 
+                              || pssw.hasError('minlength')">
+                                    <div class="invalid-feedback">
+                                        <p *ngIf="pssw.hasError('required') && pssw.touched">* Este campo es requerido</p>
+                                        <p *ngIf="pssw.hasError('minlength')">Cantidad minima de caracteres (8)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Confirmar contraseña</label>
+                                    <input type="password" class="form-control" [formControl]="psswConfirm" [class.is-invalid]="psswConfirm.touched && (pssw.value != psswConfirm.value)">
+                                    <div class="invalid-feedback">
+                                        <p *ngIf="psswConfirm.touched && (pssw.value != psswConfirm.value)">Las contraseñas no coinciden</p>
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+
+                        </form>
+
+                        <div class="text-right" style="padding: 30px;">
+                            <button class="btn btn-success" (click)="siguiente()" [disabled]="
+                      !nombreSucursal.valid || 
+                      !telefonoSucursal.valid || 
+                      !this.muniSelect.value || 
+                      !direccionSucursal.valid || 
+                      (pssw.value != psswConfirm.value) ||
+                      pssw.invalid ||
+                      username.invalid
+                      
+                      ">Siguiente</button>
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- ---------------------------- INFORMACION EDITAR SUCURSAL --------------------------------- -->
+                    <div *ngIf="idSucursal && infoSucursal">
+
+                        <form>
+
+                            <div class="row">
+
+
+                                <!-- <div class="col" (mouseleave)="mouseLeave('nombre')" (mouseenter)="mouseEnter('nombre')">
+                              <label class="form-label">Nombre</label>
+                              <div style="display:flex">
+                                  <input type="text" id="nombre" class="form-control" formControlName="nombre" [class.is-invalid]="datos.get('nombre').errors" (change)="cambio('nombre')" readonly>
+                                  <a *ngIf="ver === 'nombre'" (click)="editar('nombre')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                              </div>
+                             
+              
+                              <div *ngIf="datos.get('nombre').errors">
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('required')">* El campo es requerido.</p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('minlength')">Cantidad minima de caracteres (2).</p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('maxlength')">Cantidad maxima de caracteres (50).</p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('pattern')">Este campo solo acepta letras. </p>
+                              </div>
+              
+                            </div> -->
+
+
+                                <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('nombre')">
+                                    <div class="form-group">
+                                        <label class="form-label">Nombre sucursal *</label>
+                                        <div style="display:flex">
+                                            <input type="text" id="nombre" class="form-control" [formControl]="nombreSucursal" [class.is-invalid]="nombreSucursal.errors" (change)="cambio('nombre')" readonly maxlength="30">
+                                            <a *ngIf="ver === 'nombre'" (click)="editar('nombre')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        </div>
+
+                                        <div *ngIf="nombreSucursal.errors">
+                                            <p class="alerta-error" *ngIf="nombreSucursal.hasError('required')">* El campo es requerido.</p>
+                                            <p class="alerta-error" *ngIf="nombreSucursal.hasError('minlength')">Cantidad minima de caracteres (2).</p>
+                                            <p class="alerta-error" *ngIf="nombreSucursal.hasError('maxlength')">Cantidad maxima de caracteres (50).</p>
+                                            <p class="alerta-error" *ngIf="nombreSucursal.hasError('pattern')">Este campo solo acepta letras. </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('telefono')">
+                                    <div class="form-group">
+                                        <label class="form-label">Telefono *</label>
+                                        <div style="display: flex;">
+
+                                            <input type="text" id="telefono" class="form-control" [formControl]="telefonoSucursal" [class.is-invalid]="(telefonoSucursal.touched && telefonoSucursal.hasError('required')) || (telefonoSucursal.hasError('pattern')) || telefonoSucursal.hasError('minLength') || telefonoSucursal.hasError('maxLength')"
+                                                minlength="6" maxlength="12" (change)="cambio('telefono')" readonly>
+                                            <a *ngIf="ver === 'telefono'" (click)="editar('telefono')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        </div>
+
+                                        <!-- input   [class.is-invalid]="datos.get('nombres').errors" -->
+                                        <div *ngIf="telefonoSucursal.errors">
+                                            <p class="alerta-error" *ngIf="telefonoSucursal.hasError('pattern')">* Este campo solo acepta números sin caracteres especiales ni puntos.</p>
+                                            <p class="alerta-error" *ngIf="telefonoSucursal.hasError('minlength')">* Cantidad minima de caracteres (7).</p>
+                                            <p class="alerta-error" *ngIf="telefonoSucursal.hasError('maxlength')">* Cantidad maxima de caracteres (12).</p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col form-group" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('direccion')">
+                                    <label class="form-label">Direccion *</label>
+
+
+                                    <div style="display: flex;">
+                                        <input type="text" id="direccion" class="form-control" [formControl]="direccionSucursal" maxlength="100" [class.is-invalid]="direccionSucursal.errors" (change)="cambio('direccion')" readonly>
+                                        <a *ngIf="ver === 'direccion'" (click)="editar('direccion')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                    </div>
+
+                                    <div *ngIf="direccionSucursal.errors">
+                                        <p class="alerta-error" *ngIf="direccionSucursal.hasError('required')">* El campo es requerido.</p>
+                                        <p class="alerta-error" *ngIf="direccionSucursal.hasError('minlength')">Cantidad minima de caracteres (2).</p>
+                                        <p class="alerta-error" *ngIf="direccionSucursal.hasError('maxlength')">Cantidad maxima de caracteres (100).</p>
+                                    </div>
+
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label">Municipio *</label>
+                                        <input type="text" class="form-control" readonly value="{{infoSucursal.municipio}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--       
+                      <div class="row">
+                          <div class="col">
+                              <div class="form-group">
+                                  <label class="form-label">Departamento *</label>
+                                  <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)"> 
+                                    <option *ngFor="let d of departamentos" value="{{d.id_departamento}}">{{d.nombre}}</option>
+                                  </select>
+                                </div>
+                          </div>
+        
+                          <div class="col">
+                              <div class="form-group">
+                                  <label class="form-label">Municipio *</label>
+                                  <select name="" id="" class="form-control" [formControl]="muniSelect" (change)="municipioSelect($event)"> 
+                                    <option *ngFor="let m of municipios" value="{{m.id_municipio}}">{{m.nombre}}</option>
+                                  </select>
+                                </div>
+                          </div>
+                        </div> -->
+
+                        </form>
+
+                        <div class="text-center" style="padding-top: 10px;">
+                            <button class="btn btn-success" style="margin-right: 10px;" (click)="guardarInfoSucursal()" [disabled]="!nombreSucursal.valid || !telefonoSucursal.valid || !direccionSucursal.valid">Guardar Informacion</button>
+                            <button class="btn btn-primary" style="margin-right: 10px;" (click)="siguiente()">Ir a Consultorios</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div *ngSwitchCase="'consultorios'">
+
+                    <div class="container">
+                        <div class="text-center">
+                            <h5 style="color: #04ad93;">Crear nuevo consultorio</h5>
+                        </div>
+                        <br>
+
+                        <div class="card">
+
+                            <div class="card-body">
+                                <form>
+
+                                    <div class="row">
+
+
+                                        <div class="col">
+                                            <label class="form-label">Numero o nombre del consultorio *</label>
+                                            <input type="text" class="form-control" [formControl]="nombreConsultorio" maxlength="20">
+                                        </div>
+
+
+                                        <div class="col">
+                                            <label class="form-label">extension</label>
+                                            <input type="text" class="form-control" [formControl]="extensionConsultorio" maxlength="20">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Medico *</label>
+                                            <select name="" id="select-med" class="form-control" [formControl]="medicoSelect">
+                                    <option *ngFor="let m of medicos" [ngValue]="m" [disabled]="m.select === true || m.activo === 'true'">{{m.nombre}}</option>
+                                  </select>
+                                        </div>
+
+                                        <div class="col">
+                                            <label class="form-label">Servicio *</label>
+                                            <select name="" id="select-med" class="form-control" [formControl]="servicioSelect" *ngIf="servicios">
+                                    <option *ngFor="let s of servicios" [ngValue]="s">{{s.nombre}}</option>
+                                  </select>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12" style="padding: 20px; text-align: center;">
+                                <p>*Selecciona un horario de atención o más, según la disponibilidad de tu servicio</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- -------------------------------- HORARIOS  --------------------------------------------------------- -->
+
+                        <!-- ------------------------------ HORARIO1  --------------------------------------------------------- -->
+
+                        <div *ngIf="horario1 === '1'">
+                            <div id="1"></div>
+
+                            <mat-card>
+                                <mat-card-title> Horario 1</mat-card-title>
+
+                                <mat-card-content id="card-horario">
+
+                                    <div class="row div-dias">
+                                        <div class="col-lg-4 div-dias">
+                                            <p>Dias</p>
+                                            <mat-form-field>
+                                                <mat-select placeholder="Dias" multiple (selectionChange)="diasHorario1($event)" [disabled]="disableH1">
+                                                    <mat-option *ngFor="let d of ds" [value]="d.dia.nombre" [disabled]="!d.dia.disponible">
+                                                        {{d.dia.nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktManana($event,'h1')" [disabled]="disableH1">Mañana</mat-checkbox>
+                                            <br>
+
+                                            <mat-form-field *ngIf="mananaH1">
+                                                <mat-select placeholder="Desde" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'mdesde_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="mananaH1">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'mhasta_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktTarde($event,'h1')" [disabled]="disableH1">Tarde</mat-checkbox>
+                                            <br>
+                                            <mat-form-field *ngIf="tardeH1">
+                                                <mat-select placeholder="Desde" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'tdesde_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="tardeH1">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'thasta_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+                        <!-- horario 1 -->
+
+                        <div *ngIf="horario1 === '2'">
+
+                            <div id="2"></div>
+                            <mat-card>
+                                <mat-card-title> Horario 1</mat-card-title>
+
+                                <mat-card-content id="card-horario">
+
+                                    <div class="row div-dias">
+                                        <div class="col-lg-4 div-dias">
+                                            <p>Dias</p>
+                                            <mat-form-field>
+                                                <mat-select placeholder="Dias" multiple (selectionChange)="diasHorario1($event)" [disabled]="disableH1">
+                                                    <mat-option *ngFor="let d of ds" [value]="d.dia.nombre" [disabled]="!d.dia.disponible">
+                                                        {{d.dia.nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktManana($event,'h1')" [disabled]="disableH1">Mañana</mat-checkbox>
+                                            <br>
+
+                                            <mat-form-field *ngIf="mananaH1">
+                                                <mat-select placeholder="Desde" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'mdesde_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="mananaH1">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'mhasta_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktTarde($event,'h1')" [disabled]="disableH1">Tarde</mat-checkbox>
+                                            <br>
+                                            <mat-form-field *ngIf="tardeH1">
+                                                <mat-select placeholder="Desde" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'tdesde_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="tardeH1">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH1" (selectionChange)="horasHorarios($event, 'thasta_h1')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+                        <!-- ------------------------------ HORARIO2  --------------------------------------------------------- -->
+
+                        <div class="example-form" *ngIf="horario2">
+
+                            <mat-card>
+                                <mat-card-title> Horario 2</mat-card-title>
+
+                                <mat-card-content id="card-horario">
+
+                                    <div class="row div-dias">
+                                        <div class="col-lg-4 div-dias">
+                                            <p>Dias</p>
+                                            <mat-form-field>
+                                                <mat-select placeholder="Dias" multiple (selectionChange)="diasHorario2($event)" [disabled]="disableH2">
+                                                    <mat-option *ngFor="let d of ds" [value]="d.dia.nombre" [disabled]="!d.dia.disponible">
+                                                        {{d.dia.nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktManana($event, 'h2')" [disabled]="disableH2">Mañana</mat-checkbox>
+                                            <br>
+
+                                            <mat-form-field *ngIf="mananaH2">
+                                                <mat-select placeholder="Desde" [disabled]="disableH2" (selectionChange)="horasHorarios($event, 'mdesde_h2')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="mananaH2">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH2" (selectionChange)="horasHorarios($event, 'mhasta_h2')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktTarde($event, 'h2')" [disabled]="disableH2">Tarde</mat-checkbox>
+                                            <br>
+                                            <mat-form-field *ngIf="tardeH2">
+                                                <mat-select placeholder="Desde" [disabled]="disableH2" (selectionChange)="horasHorarios($event, 'tdesde_h2')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="tardeH2">
+                                                <mat-select placeholder="Hasta" [disabled]="disableH2" (selectionChange)="horasHorarios($event, 'thasta_h2')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-1 div-dias">
+                                            <button class="btn btn-danger" *ngIf="btnEliminarHorario" class="btn btn-danger btns-horario" (click)="eliminarHorario()"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+                        <!-- ------------------------------ HORARIO3  --------------------------------------------------------- -->
+
+                        <div class="example-form" *ngIf="horario3">
+
+                            <mat-card>
+                                <mat-card-title> Horario 3</mat-card-title>
+
+                                <mat-card-content id="card-horario">
+
+                                    <div class="row div-dias">
+                                        <div class="col-lg-4 div-dias">
+                                            <p>Dias</p>
+                                            <mat-form-field>
+                                                <mat-select placeholder="Dias" multiple (selectionChange)="diasHorario3($event)">
+                                                    <mat-option *ngFor="let d of ds" [value]="d.dia.nombre" [disabled]="!d.dia.disponible">
+                                                        {{d.dia.nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktManana($event,'h3')">Mañana</mat-checkbox>
+                                            <br>
+
+                                            <mat-form-field *ngIf="mananaH3">
+                                                <mat-select placeholder="Desde" (selectionChange)="horasHorarios($event, 'mdesde_h3')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="mananaH3">
+                                                <mat-select placeholder="Hasta" (selectionChange)="horasHorarios($event, 'mhasta_h3')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaManana" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 div-dias">
+                                            <mat-checkbox (change)="checktTarde($event, 'h3')">Tarde</mat-checkbox>
+                                            <br>
+                                            <mat-form-field *ngIf="tardeH3">
+                                                <mat-select placeholder="Desde" (selectionChange)="horasHorarios($event, 'tdesde_h3')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field *ngIf="tardeH3">
+                                                <mat-select placeholder="Hasta" (selectionChange)="horasHorarios($event, 'thasta_h3')">
+                                                    <mat-option *ngFor="let d of horasDesdeHastaTarde" [value]="d.value">
+                                                        {{d.hora}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-1 div-dias">
+                                            <button class="btn btn-danger" *ngIf="btnEliminarHorario" class="btn btn-danger btns-horario" (click)="eliminarHorario()"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- <app-consultorio *ngFor="let c of consultorios" [medicos]="medicos"></app-consultorio> -->
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
+                        {{statusText}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                    </div>
+
+                    <div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+
+                            <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atras</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success" (click)="mostrarHorario('false')" [disabled]="!btnHorario">Agregar otro Horario</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-info" (click)="crearConsultorio('true')" [disabled]="!this.medicoSelect.valid || !this.nombreConsultorio.valid || !this.servicioSelect.value">Crear consultorio</button>
+                        </div>
+                        <div class="col-md-1.5"></div>
+                    </div>
+
+                    <div class="row" style="padding-top: 20px; padding-bottom: 30px;">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success btns-consultorio" (click)="guardarConsultorio()" [disabled]="infoConsultorios.length < 1" *ngIf="idSucursal">Guardar Consultorios</button>
+                            <button class="btn btn-success btns-consultorio" (click)="guardar()" [disabled]="infoConsultorios.length < 1" *ngIf="!idSucursal">Guardar Sucursal</button>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-1.5"></div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Button modal publicacion exitosa -->
+<button type="button" style="display: none;" id="btn-publicacion-exitosa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalConfirmacion" data-backdrop="false">
+  Launch demo modal
+</button>
+
+<!-- Modal publicacion exitosa -->
+<div class="modal fade" id="exampleModalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                <button type="button" id="btn-cerrar-pub-exitosa" class="close" data-dismiss="modal" aria-label="Close" routerLink="/gestionar-sucursales">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                La sucursal ha sido creada correctamente.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" routerLink="/gestionar-sucursales">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------------------------------------- MODALES EDITA SUCURSAL ---------------------------------------------  -->
+
+<!-- Button trigger modal -->
+<button type="button" id="confi-eliminar-api" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-eliminar">
+    Launch demo modal
+  </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoEliminar">Confirmacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="!infoEliminar">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+
+            <div *ngIf="infoEliminar">
+                <div class="modal-body">
+                    ¿ Estas seguro que deseas eliminar este consultorio ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliConsul()">Eliminar</button>
+                </div>
+            </div>
+
+            <div *ngIf="!infoEliminar">
+                <div class="modal-body">
+                    Hay citas activas en el consultorio, por favor eliminalas antes de eliminar este consultorio.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- -------------------------------------------- MODAL VER CONSULTORIO -------------------------------------------  -->
+
+<!-- Large modal -->
+<button type="button" id="modal-ver-consultorio" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg-ver">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg-ver" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="consultorioSelect"> Consultorio : {{consultorioSelect.nombre}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" *ngIf="consultorioSelect">
+
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Medico</label>
+                        <input type="text" class="form-control" value="{{consultorioSelect.medico}}" readonly>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Servicio</label>
+                        <input type="text" class="form-control" value="{{consultorioSelect.servicio}}" readonly>
+                    </div>
+                </div>
+
+                <div style="padding-top: 35px;">
+                    <div class="text-center">
+                        <h5>Horarios</h5>
+                    </div>
+
+                    <div style="padding-top: 10px;" *ngFor="let h of consultorioSelect.horario; let i = index">
+
+                        <div class="card">
+                            <div class="card-header">Horario {{i+1}}</div>
+                            <div class="card-body">
+                                <h5>dias</h5>
+                                <div style="display: flex;">
+                                    <div *ngFor="let d of h.dias">
+                                        <p>{{d.dia}} &nbsp;&nbsp;</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col">
+                                        <h5><strong>Mañana</strong></h5>
+                                        <div *ngIf="h.de_maniana || h.a_maniana">
+                                            <p><strong>Desde : </strong> {{h.de_maniana | ampm}}</p>
+                                            <p><strong>Hasta :</strong> {{h.a_maniana | ampm}}</p>
+                                        </div>
+
+                                        <div *ngIf="!h.de_maniana || !h.a_maniana">
+                                            <p><strong>Desde : </strong> Cerrado</p>
+                                            <p><strong>Hasta :</strong>Cerrado</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <h5><strong>Tarde</strong></h5>
+                                        <div *ngIf="h.de_tarde || h.a_tarde">
+                                            <p><strong>Desde :</strong> {{h.de_tarde | ampm}}</p>
+                                            <p><strong>Hasta :</strong> {{h.a_tarde | ampm}}</p>
+                                        </div>
+                                        <div *ngIf="!h.de_tarde || !h.a_tarde">
+                                            <p><strong>Desde :</strong> Cerrado</p>
+                                            <p><strong>Hasta :</strong> Cerrado</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>

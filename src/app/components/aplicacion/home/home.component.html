@@ -1,0 +1,110 @@
+<div>
+    <app-barra-navegacion></app-barra-navegacion>
+</div>
+
+<div *ngIf="identity.medico_id || identity.id_sucursales">
+    <div class="row">
+        <div class="col-3" id="menu_admin"></div>
+        <div class="col-8"></div>
+    </div>
+
+
+
+    <div class="container-fluid nuevoContenedor">
+
+        <div class="alert alert-success alert-dismissible fade show container" role="alert" *ngIf="status === 'success'">
+            {{statusText}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error'">
+            {{statusText}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+        </div>
+
+        <div class="row">
+
+            <div id="sliders" style="padding-top: 50px;" class="col-lg-5 col-md-6 col-sm-5">
+
+                <app-sliders></app-sliders>
+
+            </div>
+
+            <div id="servicios-home" class="col-lg-7 col-md-6 col-sm-7">
+                <app-buscar-cita></app-buscar-cita>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--  ----------------------------------------HOME ADMINISTRADOR ------------------------------------------------------ -->
+
+
+<div *ngIf="!identity.medico_id && !identity.id_sucursales">
+
+    <div class="row" style="padding-top: 50px; margin: 0px !important;">
+
+        <div class="col-5">
+
+
+
+            <div class="text-center">
+                <h2>Panel de administracion</h2>
+
+                <div style="padding-top: 50px; display: inline-grid;">
+                    <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/publicaciones">Crear y gestionar Servicios</button>
+                    <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/gestionar-sucursales">Crear y gestionar sucursales</button>
+                    <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/medicos">Crear y gestionar Medicos</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="col-7" style="padding-right: 50px;">
+            <app-sliders></app-sliders>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <!-- <div class="row container-fluid" style="padding: 0px; margin-top:30px;">
+    
+        <div class="col"></div>
+    
+    
+        <div class="col">
+          <div class="contenedor">
+              <img class="imagen" src="/assets/admin1.png" alt="" style="height: 300px; width: 500px;">
+              <div class="text-center">
+                  <h2>Crea y gestiona sucursales</h2>
+              </div>
+          </div>
+        </div>
+        <div class="col"> 
+          <img src="/assets/admin1.png" alt="" style="height: 300px; width: 500px;">
+        </div>
+    
+        <div class="col"></div>
+      </div> -->
+
+</div>
+
+
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>
+
+
+<!-- <app-footer></app-footer> -->

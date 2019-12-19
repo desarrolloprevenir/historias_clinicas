@@ -1,0 +1,221 @@
+<app-barra-navegacion></app-barra-navegacion>
+<div class="container-fluid">
+
+    <br />
+    <div class="card-header">
+        <h1>Mis Servicios</h1>
+    </div>
+    <br />
+
+    <!-- <div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error'">
+      {{statusText}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div> -->
+
+
+    <div class="row contenedor">
+
+        <div class="container">
+            <!-- ALERTAS  -->
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error'">
+                {{statusText}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="status === 'success'">
+                {{statusText}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+
+            <!-- FIN ALERTAS -->
+        </div>
+
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
+
+            <mat-form-field class="w-100">
+                <mat-label>
+                    <h4>Servicios</h4>
+                </mat-label>
+                <mat-select (selectionChange)="serviciosSelecionado($event)">
+                    <mat-option *ngFor="let s of servicios" [value]="s">
+                        {{ s.provedor }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="col-lg-7">
+
+
+
+            <div *ngIf="servicios && servicios.length <= 0">
+                <h5 class="centrar">Aún no tienes servicios asociados por parte de un provedor.</h5>
+            </div>
+
+            <div style="padding-top: 20px;" *ngIf="!servicioSelect">
+                <h4 class="centrar">Escoge un servicio.</h4>
+            </div>
+
+            <div *ngIf="servicioSelect">
+
+                <div *ngIf="servicioSelect.serv.length <= 0">
+                    <h5 class="centrar">No hay servicios asociados con este provedor</h5>
+                </div>
+
+                <!-- <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let s of servicioSelect.serv">
+        <div>
+          <p>{{s.nombre}}</p>
+          <button class="btn btn-primary" (click)="irCalendario(s)">Ver citas</button>
+          <button class="btn btn-secondary" (click)="verComentarios(s)">Ver comentarios</button>
+        </div>
+        </div> -->
+
+
+                <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let s of servicioSelect.serv">
+                    <div class="row">
+                        <div class="col-lg-5 img-pub"><img src="{{apiUrl + s.fotos[0].ruta}}" alt=""></div>
+                        <div class="col-lg-7">
+                            <h3><strong>{{s.nombre}}</strong></h3>
+                            <p>{{s.descripcion}}</p>
+                            <div class="row" style="height: 5vw"></div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <p class="p-btns">
+                                        <button class="btn btn-primary w-100" (click)="irCalendario(s)">Ver citas</button>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="p-btns">
+                                        <button class="btn btn-secondary w-100" (click)="verComentarios(s)">Ver comentarios</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+            <!-- MODAL VER COMENTARIOS -->
+
+            <!-- Button trigger modal -->
+            <button type="button" id="btn-modal-comentarios" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoServicio">{{infoServicio.nombre}}</h5>
+                            <button type="button" id="cerrar-modal-comentarios" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error_modal'">
+                                {{statusText}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="status === 'success_modal'">
+                                {{statusText}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                            </div>
+
+                            <div *ngIf="comentarios && comentarios.length <= 0">
+                                No tienes comentarios por responder en este servicio.
+                            </div>
+
+                            <div>
+
+                                <div class="card" style="padding: 20px; border: 4px solid rgb(0, 174, 239); margin-bottom: 16px;" *ngFor="let c of comentarios, let i = index">
+
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="avatarModal">
+                                                <img alt="" [src]="c.avatar">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div>
+                                                <h6 style="margin-bottom: 0px"><strong>Comentario:</strong></h6>
+                                            </div>
+                                            <div class="consul"> <a>{{c.comentario}}</a></div>
+                                            <br/>
+                                            <div>
+                                                <h6 style="margin-bottom: 0px"><strong>Usuario:</strong></h6>
+                                            </div>
+                                            <div class="consul"><a>{{c.usu}}</a></div>
+
+                                        </div>
+
+                                    </div>
+                                    <br/>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <textarea [formControl]="comentarioArea" class="w-100"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <p class="p-btns">
+                                                <button class="btn btn-primary w-100" role="button" (click)="responderComent(c)">responder</button>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIN MODAL VER COMENTARIOS -->
+
+
+
+
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+
+
+</div>
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>

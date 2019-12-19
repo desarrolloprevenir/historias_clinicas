@@ -1,0 +1,15 @@
+.etiqueta {
+    background-color: #c1c6c9 !important;
+    border: 1px solid #ffffff !important;
+    color: #000000 !important;
+    width: 50px !important;
+}
+
+.card-header-hc {
+    text-align: initial !important;
+    color: black;
+}
+
+.btn-link {
+    color: gray !important;
+}
