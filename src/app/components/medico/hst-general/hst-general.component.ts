@@ -761,7 +761,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
       //   //console.log(this.idImpDiag);
       // }
-    //this.datosHistGeneral.reset();
+      // this.datosHistGeneral.reset();
 
   }
 
