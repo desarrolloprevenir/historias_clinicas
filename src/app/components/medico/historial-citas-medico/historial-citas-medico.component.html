@@ -1,0 +1,149 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<br />
+<div class="card-header">
+    <h1>Historial de citas</h1>
+</div>
+<br />
+
+<div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error'">
+    {{statusText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+
+<div class="row contenedor">
+
+
+
+    <div class="col-1"></div>
+    <div class="col-3">
+        <mat-form-field class="w-100">
+            <mat-label>
+                <h4>Provedor</h4>
+            </mat-label>
+            <mat-select (selectionChange)="serviciosSelecionado($event)">
+                <mat-option *ngFor="let s of servicios" [value]="s">
+                    {{ s.provedor }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+    <div class="col-2"></div>
+    <div class="col-3">
+        <div *ngIf="servicioSelect">
+            <mat-form-field class="w-100">
+                <mat-label>
+                    <h4>Servicios</h4>
+                </mat-label>
+                <mat-select (selectionChange)="servicioSelecionado($event)">
+                    <mat-option *ngFor="let s of servicioSelect.serv" [value]="s">
+                        {{ s.nombre }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+</div>
+
+<div class="container" *ngIf="servicio">
+    <div class="card-header" style="padding-top: 50px; padding-bottom: 50px;">
+        <h1>{{servicio.nombre}}</h1>
+    </div>
+    <br />
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
+                    Atras
+                </div>
+                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                    Hoy
+                </div>
+                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
+                    Adelante
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                    Mes
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                    Semana
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                    Dia
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" (dayClicked)="viewDate = $event.day.date; view = CalendarView.Day" [locale]="locale">
+        </mwl-calendar-month-view>
+
+        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale" [dayStartHour]="6" (dayClicked)="viewDate = $event.day.date; view = CalendarView.Day" [dayEndHour]="19" (eventClicked)="handleEvent('Clicked', $event.event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale" [dayStartHour]="6" [dayEndHour]="19" (eventClicked)="handleEvent('Clicked', $event.event)">
+        </mwl-calendar-day-view>
+    </div>
+</div>
+
+<!-- Large modal -->
+<button style="display: none" id="btn-abrir-modal-info" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" *ngIf="infoPaciente">{{infoPaciente.title}}</h5>
+                <button type="button" id="btn-cerrar-modal-info" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" *ngIf="infoPaciente">
+
+                    <div class="col-lg-5">
+                        <div class="img">
+                            <img id="userImg" src="{{infoPaciente.id.avatar}}" alt="nd">
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <p><strong>Nombre : </strong> {{infoPaciente.id.nombre}}</p>
+                        <p><strong>Apellido :</strong> {{infoPaciente.id.apellidos}}</p>
+                        <p><strong>Identificacion :</strong> {{infoPaciente.id.cedula}}</p>
+                        <p><strong>No. Contacto</strong> {{infoPaciente.id.telefono}}</p>
+                        <br>
+                        <button class="btn btn-info" [routerLink]="['/gestionar-pacientes', infoPaciente.id.cedula]" data-dismiss="modal">Ver historia clinica</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>

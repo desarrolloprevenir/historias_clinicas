@@ -1,0 +1,899 @@
+<!-- ALERTAS  -->
+
+<div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error'">
+    {{statusText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+   <span aria-hidden="true">&times;</span>
+ </button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show container" role="alert" *ngIf="status === 'success'">
+    {{statusText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<!-- FIN ALERTAS -->
+
+<!--  ///////////////////////////////////////anamnesis ////////////////////////////////////////////////////////////////// -->
+
+<div class="divisiones" *ngIf="tipo === 'anamnesis'">
+    <h3>{{tituloModal}}</h3>
+    <form [formGroup]="datosOptometria" novalidate>
+
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Tipo de consulta</label>
+                <select name="" id="" class="form-control" formControlName="tipoConsulta" [class.is-invalid]="datosOptometria.get('tipoConsulta').errors && datosOptometria.get('tipoConsulta').touched">
+              <option value="Control">Control</option>
+              <option value="Primera vez">Primera vez</option>
+          </select>
+                <!-- <section class="form-control" formControlName="tipoConsulta" ></section>>
+            <option value="Control"></option>
+            <option value="Primera vez"></option>
+          </section> -->
+            </div>
+            <div class="col"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+
+                <div class="form-group">
+                    <label for="txt-motivo-consulta" class="form-label">Motivo de la consulta</label>
+                    <textarea name="txt-motivo-consulta" rows="5" class="form-control" formControlName="motivoConsulta"></textarea>
+                </div>
+
+                <div *ngIf="datosOptometria.get('motivoConsulta').touched && datosOptometria.get('motivoConsulta').errors">
+                    <p class="alerta-error" style="font-size: 12px;" *ngIf="datosOptometria.get('motivoConsulta').hasError('required')">* El campo es requerido.</p>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="form-group">
+                    <label for="txt-motivo-consulta" class="form-label">Antecedentes</label>
+                    <textarea name="txt-motivo-consulta" rows="5" class="form-control" formControlName="antecedentes"></textarea>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="text-right">
+        <button class="btn btn-success" (click)="cambiar('anamnesis')" [disabled]="!datosOptometria.get('tipoConsulta').value || !datosOptometria.get('motivoConsulta').value">Siguiente</button>
+    </div>
+</div>
+
+
+<!-- //////////////////////////////////////////////// OPTOMETRIA ////////////////////////////////////////////////////// -->
+
+<div class="divisiones" *ngIf="tipo === 'optometria'">
+
+    <form [formGroup]="datosOptometria" novalidate>
+
+        <!-- INICIO FORM OPTOMETRIA -->
+
+        <div class="row">
+
+            <!-- prescripcion en uso -->
+            <div class="col">
+
+                <div class="card">
+                    <div class="card-header">Prescripcion en uso</div>
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col">
+
+
+                                <label for="" class="form-label">Lensometria</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OD</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OD" formControlName="lensometriaOd">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="lensometriaOi">
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col">
+                                <label for="" class="form-label">Agudeza visual</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OD</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OD" formControlName="agudezaVisualOd">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="agudezaVisualOi">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- agudeza visual sin correcion -->
+            <div class="col">
+
+                <div class="card">
+                    <div class="card-header">Agudeza visual (sin correción)</div>
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col">
+                                <label for="" class="form-label">Visión lejana</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OD</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OD" formControlName="visionLejanaOd">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="visionLejanaOi">
+                                </div>
+                            </div>
+
+
+                            <div class="col">
+                                <label for="" class="form-label">Visión cercana</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OD</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OD" formControlName="visionCercanaOd">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="visionCercanaOi">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ----------------------------------------------------------------- -->
+
+        <div class="row" style="padding-top: 20px;">
+            <div class="col" style="padding-bottom: 20px;">
+
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <label for="" class="form-label">Adicion</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 form-group" style="padding-right: 0px;">
+                                <!-- formControlName="adicionOption" -->
+                                <select name="" id="" class="form-control" [class.is-invalid]="datosOptometria.get('adicionOption').errors && datosOptometria.get('adicionOption').touched">
+                              <option value="+">+</option>
+                              <!-- <option value="- ">-</option> -->
+                            </select>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" formControlName="adicion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col" style="padding-bottom: 20px;">
+
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <label for="" class="form-label">Tipo de lente</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" formControlName="tipoLente">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ----------------------------------------------------------------- -->
+
+        <div class="row">
+
+            <div class="col">
+
+                <div class="row">
+                    <!-- EXAMEN EXTERNO -->
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">Exámen externo</div>
+                            <div class="card-body">
+
+                                <div class="input-group">
+                                    <!-- <div class="input-group-prepend">
+                                  <div class="input-group-text etiqueta">OD</div>
+                              </div> -->
+                                    <!-- <input type="text" class="form-control" placeholder="OD" formControlName="examenExternoOd"> -->
+                                    <label for="" class="form-label">Ojo derecho</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="examenExternoOd"></textarea>
+                                </div>
+
+                                <div class="input-group" style="padding-top: 20px;">
+
+                                    <label for="" class="form-label">Ojo izquierdo</label>
+                                    <br>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="examenExternoOi"></textarea>
+                                    <!-- <input type="text" class="form-control" placeholder="OI" formControlName="examenExternoOi"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OFTALMOLOGIA -->
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">Oftalmoscopia</div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <!-- <div class="input-group-prepend">
+                                    <div class="input-group-text etiqueta">OD</div>
+                                </div>
+                                <input type="text" class="form-control" placeholder="OD" formControlName="oftalmologiaOd"> -->
+                                    <label for="" class="form-label">Ojo derecho</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="oftalmologiaOd" maxlength="45"></textarea>
+                                </div>
+
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <!-- <div class="input-group-prepend">
+                                      <div class="input-group-text etiqueta">OI</div>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="OI" formControlName="oftalmologiaOi"> -->
+                                    <label for="" class="form-label">Ojo izquierdo</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="oftalmologiaOi" maxlength="45"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">Exámen motor</div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <!-- <div class="input-group-prepend">
+                                      <div class="input-group-text etiqueta">OD</div>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="OD" formControlName="examenMotorOd"> -->
+                                    <label for="" class="form-label">Ojo derecho</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="examenMotorOd" maxlength="45"></textarea>
+                                </div>
+
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <!-- <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="examenMotorOi"> -->
+
+                                    <label for="" class="form-label">Ojo izquierdo</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="examenMotorOi" maxlength="45"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">Queratometría</div>
+                            <div class="card-body">
+
+                                <div class="input-group">
+                                    <!-- <div class="input-group-prepend">
+                                      <div class="input-group-text etiqueta">OD</div>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="OD" formControlName="queratometriaOd"> -->
+
+                                    <label for="" class="form-label">Ojo derecho</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="queratometriaOd"></textarea>
+                                </div>
+
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <!-- <div class="input-group-prepend">
+                                        <div class="input-group-text etiqueta">OI</div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="OI" formControlName="queratometriaOi"> -->
+                                    <label for="" class="form-label">Ojo izquierdo</label>
+                                    <textarea style="margin-left:20px;" name="" id="" rows="3" formControlName="queratometriaOi"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ------------------------------ REFRACCION ----------------------------------- -->
+
+        <div style="padding-top: 20px;">
+            <div class="card">
+                <div class="card-header">Refracción</div>
+                <div class="card-body">
+
+
+                    <!-- OJO DERECHO -->
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Ojo derecho</label>
+                            <select name="" id="" class="form-control" formControlName="selectOdRefraccion">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="" class="form-label">Esfera</label>
+                                <input type="text" class="form-control" placeholder="OD" formControlName="esferaRefraccion" maxlength="8">
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selectRefracion1" -->
+                            <select name="" id="" class="form-control" [class.is-invalid]="datosOptometria.get('selectRefracion1').errors && datosOptometria.get('selectRefracion1').touched">
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Cilindro</label>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="cilindroRefracion" maxlength="8">
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selectRefracion2" -->
+                            <select name="" id="" class="form-control" [class.is-invalid]="datosOptometria.get('selectRefracion2').errors && datosOptometria.get('selectRefracion2').touched">
+                              <option value="X">X</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Eje</label>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="ejeRefracion" maxlength="9">
+                        </div>
+                    </div>
+
+                    <!-- OJO IZQUIERDO -->
+
+
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Ojo izquierdo</label>
+                            <select name="" id="" class="form-control" formControlName="selectOiRefraccion">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="" class="form-label">Esfera</label>
+                                <input type="text" class="form-control" placeholder="OI" formControlName="esferaRefraccionoi" maxlength="8">
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selectRefracion1Oi" -->
+                            <select name="" id="" class="form-control" [class.is-invalid]="datosOptometria.get('selectRefracion1Oi').errors && datosOptometria.get('selectRefracion1Oi').touched">
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Cilindro</label>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="cilindroRefracionOi" maxlength="8">
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selectRefracion2Oi" -->
+                            <select name="" id="" class="form-control" [class.is-invalid]="datosOptometria.get('selectRefracion2Oi').errors && datosOptometria.get('selectRefracion2Oi').touched">
+                              <option value="X">X</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Eje</label>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="ejeRefracionOi" maxlength="9">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ------------------------------ Fórmula final ----------------------------------- -->
+
+        <div style="padding-top: 20px;">
+            <div class="card">
+                <div class="card-header">Fórmula final</div>
+                <div class="card-body">
+
+
+                    <!-- OJO DERECHO -->
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Ojo derecho</label>
+                            <select name="" id="" class="form-control" formControlName="selectOdFormulaFinal">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="" class="form-label">Esfera</label>
+                                <input type="text" class="form-control" placeholder="OD" formControlName="esferaFormulaFinalOd" maxlength="8">
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selecFormulaFinal1Od" -->
+                            <select name="" id="" class="form-control">
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Cilindro</label>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="cilindrFormulaFinalOd" maxlength="8">
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selecFormulaFinal2Od" -->
+                            <select name="" id="" class="form-control">
+                              <option value="X">X</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Eje</label>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="ejFormulaFinalOd" maxlength="9">
+                        </div>
+                    </div>
+
+                    <!-- OJO IZQUIERDO -->
+
+
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Ojo izquierdo</label>
+                            <select name="" id="" class="form-control" formControlName="selectOiFormulaFinal">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="" class="form-label">Esfera</label>
+                                <input type="text" class="form-control" placeholder="OI" formControlName="esferaFormulaFinalOi" maxlength="8">
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selecFormulaFinal1Oi" -->
+                            <select name="" id="" class="form-control">
+                            <option value="-">-</option>
+                          </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Cilindro</label>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="cilindrFormulaFinalOi" maxlength="8">
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label"></label>
+                            <!-- formControlName="selecFormulaFinal2Oi" -->
+                            <select name="" id="" class="form-control">
+                              <option value="X">X</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="" class="form-label">Eje</label>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="ejFormulaFinalOi" maxlength="9">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- ---------------------------- OTROS DATOS------------------------------------- -->
+        <div class="row" style="padding-top: 20px;">
+
+            <!-- AV VL -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">AV VL</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OD</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="avvlOd">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OI</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="avvlOi">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AV VP -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">AV VP</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OD</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="avvpOd">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OI</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="avvpOi">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADICION -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">ADICION</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OD</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="adicionOd" maxlength="10">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OI</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="adicionOi" maxlength="10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DNP -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">DNP</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OD</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OD" formControlName="dnpOd" maxlength="10">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text etiqueta">OI</div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="OI" formControlName="dnpOi" maxlength="10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FIN DEL FORM OPTOMETRIA -->
+    </form>
+
+    <div class="text-right" style="margin-top: 20px;">
+        <button class="btn btn-secondary" style="margin-right: 5px;" (click)="atras('optometria')">Atras</button>
+        <button class="btn btn-success" style="margin-right: 5px;" (click)="cambiar('optometria')">Siguiente</button>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////// OPTOMETRIA2 ///////////////////////////////////////////////////////////////////// -->
+
+<div class="divisiones" *ngIf="tipo === 'optometria2'">
+
+    <form [formGroup]="datosOptometria" novalidate>
+
+        <div class="row">
+
+            <div class="col form-group">
+                <!-- <label for="" class="label-formulario-user">Diagnostico inicial</label>
+                <textarea name="" id="" rows="3" class="form-control" formControlName="diagnosticoInicial"></textarea> -->
+                <label for="" class="form-label">Diagnostico inicial</label>
+                <div id="content" #contentDiagnostico>
+                    <textarea name="" id="diagnosticoInical" rows="3" class="form-control" formControlName="diagnosticoInicial" maxlength="300"></textarea>
+                    <p style="display: none; font-family: 'Courier'; font-size: 14px;">{{this.datosOptometria.value.diagnosticoInicial}}</p>
+                </div>
+            </div>
+
+            <div class="col form-group">
+                <label for="" class="form-label">RIPS</label>
+                <textarea name="" id="" rows="3" class="form-control" formControlName="rips"></textarea>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="" class="form-label">Test de ishihara</label>
+                    <input type="text" class="form-control" formControlName="testIshihara" maxlength="25">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="" class="form-label">Test de estereópsis</label>
+                    <input type="text" class="form-control" formControlName="testEstereopsis" maxlength="25">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="" class="form-label">Conducta</label>
+                    <textarea name="" id="" rows="3" class="form-control" formControlName="conducta"></textarea>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="" class="form-label">Observaciones</label>
+                    <div id="contentObservaciones" #contentObservaciones>
+                        <textarea name="" id="" rows="3" class="form-control" formControlName="observaciones" maxlength="300"></textarea>
+                        <p style="display: none; font-family: 'Courier'; font-size: 14px;">{{this.datosOptometria.value.observaciones}}</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <div class="row">
+      <div class="col">
+          <div class="form-group">
+              <label for="" class="label-formulario-user">Remision</label>
+              <textarea name="" id="" rows="3" class="form-control" formControlName="remision"></textarea>
+          </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+            <label for="" class="label-formulario-user">Medicamentos</label>
+            <textarea name="" id="" rows="3" class="form-control" formControlName="medicamentos"></textarea>
+        </div>
+    </div>
+
+    </div> -->
+
+        <!-- -------------------------------- ACORDEON --------------------------------------- -->
+
+        <div class="accordion" id="accordionExample">
+
+
+            <div class="card">
+                <div class="card-header card-header-hc" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
+                  Medicamentos
+                </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        <div id="content" #content>
+                            <textarea name="" id="" cols="30" rows="3" class="form-control" formControlName="medicamentos" maxlength="700"></textarea>
+                            <p style="display: none; font-family: 'Courier'; font-size: 20px;">{{this.datosOptometria.value.medicamentos}}</p>
+                        </div>
+                        <br>
+
+                        <div>
+                            <button type="button" class="btn btn-info" (click)="pdfMedicamentos()"><i class="fas fa-print"></i>&nbsp; Pdf</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <div class="card-header card-header-hc" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Remision
+            </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        <div id="contentRemision" #contentRemision>
+                            <textarea name="" id="" cols="30" rows="3" class="form-control" formControlName="remision" maxlength="700"></textarea>
+                            <p style="display: none; font-family: 'Courier'; font-size: 20px;">{{this.datosOptometria.value.remision}}</p>
+                        </div>
+                        <br>
+
+                        <div>
+                            <button type="button" class="btn btn-info" (click)="pdfRemision()"><i class="fas fa-print"></i>&nbsp; Pdf</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <div class="card-header card-header-hc" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Certificado
+            </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        <div>
+                            <p class="form-label">Exportar certificado.</p>
+                        </div>
+
+                        <br>
+
+                        <div>
+                            <button type="button" class="btn btn-info" (click)="pdfCertificado()"><i class="fas fa-print"></i>&nbsp; Pdf</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="text-right" style="margin-top: 20px;">
+        <button class="btn btn-secondary" style="margin-left: 5px;" (click)="atras('optometria2')">Atras</button>
+        <button class="btn btn-success" style="margin-left: 5px;" (click)="formOptometria()">Guargar historia clinica</button>
+    </div>
+</div>
+
+
+<!-- /////////////////////////////////////////////// MODAL PUBLICACION EXITOSA //////////////////////////////////////////////////// -->
+
+
+<!-- Button trigger modal -->
+<button type="button" id="pub-exitosa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="false" style="display: none;">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                <button type="button" id="btn-cerrar-pub-exitosa" style="display: none;" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                Historia clinica guardada con exito.
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success" (click)="puExitosa()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  ----------------------------------------------------FIN MODAL----------------------------------------------------------------- -->
+
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>

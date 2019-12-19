@@ -1,0 +1,894 @@
+<div ng-app="myApp" ng-controller="miController">
+  <div class="container-fluid">
+    <form *ngIf="vista==='consulta'" [formGroup]="datosVisiomentria">
+      <div class="row divisiones">
+
+        <div class="col-md-12 form-group">
+          <label class="form-label">Tipo consulta</label>
+          <select class="form-control" formControlName="tipoConsulta"
+            [class.is-invalid]="datosVisiomentria.get('tipoConsulta').errors && datosVisiomentria.get('tipoConsulta').touched">>
+
+            <option value="Primera vez">Primera vez</option>
+            <option value="Control">Control</option>
+          </select>
+        </div>
+
+        <div *ngIf="datosVisiomentria.get('tipoConsulta').errors && datosVisiomentria.get('tipoConsulta').touched">
+          <p class="alerta-error" *ngIf="datosVisiomentria.get('tipoConsulta').hasError('required')">* El campo es
+            requerido
+          </p>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-3"> <button class="btn btn-md btn-info" (click)="siguiente('consulta')">Siguiente</button>
+        </div>
+        <div class="col-md-4"></div>
+
+      </div>
+    </form>
+
+    <form *ngIf="vista==='anteojos'" [formGroup]="datosVisiomentria">
+      <div class="row divisiones">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="form-label">Usa Anteojos: </label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberUsaGafas($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-8" *ngIf="usaGafas==='tiposGafas'">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-label">Tipos Anteojos: </label>
+                  <section class="example-section" *ngFor="let g of caracGafas">
+                    <mat-checkbox class="example-margin" (change)="checkTipos($event, g.nombre)">{{g.nombre}}</mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Frecuencia de Uso: </label>
+                  <section class="example-section">
+                    <mat-radio-group (change)="frecuencia($event)">
+                      <mat-radio-button class="example-margin" value="permanente">Permanente</mat-radio-button><br>
+                      <mat-radio-button class="example-margin" value="ocasional">Ocasional</mat-radio-button>
+                    </mat-radio-group>
+                  </section>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+        </div>
+        <div class="col-md-12" style="padding-top: 30px;">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"> <button class="btn btn-md btn-secondary"
+                (click)="anterior('anteojos')">Anterior</button></div>
+            <div class="col-md-3"> <button class="btn btn-md btn-info"
+                (click)="siguiente('anteojos')">Siguiente</button></div>
+            <div class="col-md-3"></div>
+          </div>
+
+
+        </div>
+      </div>
+    </form>
+
+    <div class="row divisiones" *ngIf="vista==='proteccion'">
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class=col-md-4>
+            <label class="form-label">Usa protección ocular, gafas de seguridad o máscara: </label>
+            <section class="example-section">
+              <mat-radio-group (change)="proteccionOcular($event)">
+                <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Cirugias: </label>
+            <section class="example-section">
+              <mat-radio-group (change)="cirugias($event)">
+                <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Accidentes Oculares: </label>
+            <section class="example-section">
+              <mat-radio-group (change)="accidentes  ($event)">
+                <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+          </div>
+        </div>
+
+      </div>
+
+        <div class="col-md-12" style="padding-top: 30px;">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+                (click)="anterior('proteccion')">Anterior</button></div>
+            <div class="col-md-2"> <button class="btn btn-md btn-info"
+                (click)="siguiente('proteccion')">Siguiente</button></div>
+            <div class="col-md-4"></div>
+          </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="row divisiones" *ngIf="vista==='signos'">
+      <label class="form-label">Signos y Sintomas: </label>
+      <br>
+      <div class="col-md-12">
+        <div class="row">
+
+          <section class="col-md-4 example-section" style="padding-top: 2px;" *ngFor="let sig of signosSintomas">
+
+            <mat-checkbox class=" example-margin" (change)="checkSintomas($event, sig.nombre)"> {{sig.nombre}}</mat-checkbox>
+
+          </section>
+        </div>
+      </div>
+
+      <div class="col-md-12" style="padding-top: 30px;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+              (click)="anterior('signos')">Anterior</button></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-info"
+              (click)="siguiente('signos')">Siguiente</button></div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ---------------------------------------- ANTECEDENTES FAMILIARES --------------------------------------------------- -->
+
+    <div class="row divisiones" id="demo" *ngIf="vista==='antecedentesF'" [formGroup]="datosVisiomentria">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <label for="txt-antecedentesF" class="tituloDivision">Antecedentes Familiares</label>
+            <div class="row">
+              <div class="col-lg-12">
+
+                <mat-form-field class="w-100">
+                  <mat-select class="place" placeholder="Antecedentes Familiares" [formControl]="antecedentesFMultiCtrl"
+                    [multiple]="true" #multiSelect>
+                    <mat-option *ngFor="let AntecedenteF of filteredAntecedentesFMulti | async"
+                      [value]="AntecedenteF.id">
+                      {{AntecedenteF.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12">
+                <form [formGroup]="datosVisiomentria">
+                  <div class="form-group">
+                    <label for="txt-otroAntecedente" class="form-label label-formulario-user">Otros</label>
+                    <textarea rows="3" class="form-control" formControlName="otroAntecedentesFamiliares"></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-12" style="padding-top: 30px;">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+                    (click)="anterior('antecedentesF')">Anterior</button></div>
+                <div class="col-md-2"> <button class="btn btn-md btn-info"
+                    (click)="siguiente('antecedentesF')">Siguiente</button></div>
+                <div class="col-md-4"></div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------ ANTECEDENTES PERSONALES  --------------------------------------------------------->
+
+    <form [formGroup]="datosVisiomentria"  *ngIf="vista==='antecedentesP'">
+
+      <div class="row divisiones">
+        <div class="col-md-12">
+          <label for="txt-antecedentesP" class="tituloDivision">Antecedentes Personales</label>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="txt-patologicos" class="form-label label-formulario-user">Patológicos</label>
+                <textarea name="txtPatologicos" formControlName="patologicos" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="txt-quirurgicos" class="form-label label-formulario-user">Quirúrgicos</label>
+                <textarea name="txtQuirurgicos" formControlName="quirurgicos" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="txt-traumaticos" class="form-label label-formulario-user">Traumáticos</label>
+                <textarea name="txtTraumaticos" formControlName="traumaticos" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12" style="padding-top: 30px;">
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+                  (click)="anterior('antecedentesP')">Anterior</button></div>
+              <div class="col-md-2"> <button class="btn btn-md btn-info"
+                  (click)="siguiente('antecedentesP')">Siguiente</button></div>
+              <div class="col-md-4"></div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+    </form>
+
+     <!-- ------------------------------------------ Agudeza Visual --------------------------------------------------------->
+
+    <form [formGroup]="datosVisiomentria" *ngIf="vista==='agudeza'">
+      <div class="row divisiones" style="padding-top: 20px;">
+        <div class="row">
+          <label for="txt-antecedentesP" class="tituloDivision">Agudeza Visual</label>
+          <!-- VL -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">VL</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="vlod">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="vloi">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">AO</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="vlao">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VP -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">VP</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="vpod">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="vpoi">
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">AO</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="vpao">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SC -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">SC</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="scod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="scoi" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">AO</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="AO" formControlName="scao" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<div class="row" style="padding-top: 50px;">
+  <label for="txt-antecedentesP" class="tituloDivision">Lensometrìa</label>
+        <!-- ESF -->
+        <div class="col">
+          <div class="card">
+            <div class="card-header">ESF</div>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OD</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OD" formControlName="esfod" maxlength="10">
+              </div>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OI</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="esfoi" maxlength="10">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-header">CIL</div>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OD</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OD" formControlName="cilod" maxlength="10">
+              </div>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OI</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="ciloi" maxlength="10">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-header">EJE</div>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OD</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OD" formControlName="ejeod" maxlength="10">
+              </div>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OI</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="ejeoi" maxlength="10">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-header">ADD</div>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OD</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OD" formControlName="addod" maxlength="10">
+              </div>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta">OI</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="addoi" maxlength="10">
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+
+        <div class="col-md-12" style="padding-top: 30px;">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+                (click)="anterior('agudeza')">Anterior</button></div>
+            <div class="col-md-2"> <button class="btn btn-md btn-info"
+                (click)="siguiente('agudeza')" >Siguiente</button></div>
+            <div class="col-md-4"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+
+ <!-- ------------------------------------------ Examen Externo --------------------------------------------------------->
+
+    <div class="row divisiones" *ngIf="vista==='examenE'">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="txt-antecedentesP" class="tituloDivision">Examen externo</label>
+            <section class="example-section" *ngFor="let e of examenExterno">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>{{e.nombre}}</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-checkbox class="example-margin" (change)="checkExamenE($event, 'OD'+'_'+e.nombre)" value="od">OD</mat-checkbox><br>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-checkbox class="example-margin" (change)="checkExamenE($event, 'OI'+'_'+e.nombre)" value="oi">OI</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </section>
+
+          </div>
+
+        </div>
+
+      </div>
+      <form [formGroup]="datosVisiomentria">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">Motilidad Ocular</div>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;">VL</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OD" formControlName="vlTexto" maxlength="10">
+              </div>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;">VP</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="vpTexto" maxlength="10">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;">HISHBERG</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="hishberg" maxlength="10">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;" >Ducciones</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="ducciones" maxlength="10">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;">Versiones</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="versiones" maxlength="10">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text etiqueta" style="width: 20px;">PPC</div>
+                </div>
+                <input type="text" class="form-control" placeholder="OI" formControlName="pcc" maxlength="10">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="col-md-12" style="padding-top: 30px;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+              (click)="anterior('examenE')">Anterior</button></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-info"
+              (click)="siguiente('examenE')" >Siguiente</button></div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+<!-- ------------------------------------------ Interpretación --------------------------------------------------------->
+
+
+    <div class="row divisiones" *ngIf="vista==='inter'">
+      <div class="col-md-6">
+        <label for="txt-antecedentesP" class="tituloDivision">Interpretación</label>
+        <section class="example-section" *ngFor="let i of interpretaciones">
+          <div class="row">
+            <div class="col-md-6">
+              <label>{{i.nombre}}</label>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin"  (change)="checkInterpretacion($event, 'OD'+'_'+i.nombre)" value="od">OD</mat-checkbox><br>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkInterpretacion($event, 'OI'+'_'+i.nombre)" mat-radio-button class="example-margin" value="oi">OI
+                  </mat-checkbox>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </section>
+
+      </div>
+
+      <div class="col-md-6">
+        <label for="txt-antecedentesP" class="tituloDivision">Visión Cromática</label>
+        <section class="example-section" *ngFor="let c of cromatica">
+          <div class="row">
+            <div class="col-md-6">
+              <label>{{c.nombre}}</label>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkCromatica($event, 'OD'+'_'+c.nombre)" value="od">OD</mat-checkbox><br>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkCromatica($event, 'OI'+'_'+c.nombre)" mat-radio-button class="example-margin" value="oi">OI
+                  </mat-checkbox>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </section>
+
+      </div>
+
+      <div class="col-md-12" style="padding-top: 30px;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+              (click)="anterior('inter')">Anterior</button></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-info"
+              (click)="siguiente('inter')" >Siguiente</button></div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+<!-- ------------------------------------------ Impresión Diag --------------------------------------------------------->
+
+    <div class="row divisiones" *ngIf="vista==='impre'">
+      <div class="col-md-6">
+        <label for="txt-antecedentesP" class="tituloDivision">Impresión Diagnostica</label>
+        <section class="example-section" *ngFor="let d of diagnostico">
+          <div class="row">
+            <div class="col-md-6">
+              <label>{{d.nombre}}</label>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkImp($event, 'OD'+'_'+d.nombre)" value="od">OD</mat-checkbox><br>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkImp($event, 'OI'+'_'+d.nombre)" mat-radio-button class="example-margin" value="oi">OI
+                  </mat-checkbox>
+                </div>
+              </div>
+                 </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-md-6">
+        <label for="txt-antecedentesP" class="tituloDivision">Recomendaciones</label>
+        <section class="example-section" *ngFor="let r of recomendaciones">
+          <div class="row">
+            <div class="col-md-6">
+              <label>{{r.nombre}}</label>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox class="example-margin" (change)="checkRec($event, r.nombre)" value=""></mat-checkbox><br>
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </section>
+
+      </div>
+      <div class="col-md-12" style="padding-top: 30px;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+              (click)="anterior('impre')">Anterior</button></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-info"
+              (click)="siguiente('impre')" >Siguiente</button></div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+<!-- ------------------------------------------ Retinoscopia --------------------------------------------------------->
+
+    <div class="row divisiones" *ngIf="vista==='retino'">
+      <form [formGroup]="datosVisiomentria">
+        <label for="txt-antecedentesP" class="tituloDivision">Retinoscopia</label>
+        <div class="row divisiones" style="padding-top: 20px;">
+          <label for="txt-antecedentesP" class="tituloDivision">Refracción</label>
+          <!-- Esfera -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Esfera</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="reesod">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="reesoi">
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Cilindro -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Cilindro</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="recilod">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="reciloi">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- EJE -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Eje</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="rejeod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="rejeoi" maxlength="10">
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row divisiones">
+          <label for="txt-antecedentesP" class="tituloDivision">Subjetivo</label>
+          <!-- ESFERA -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Esfera</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="subesfod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="subesfoi" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Cilindro</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="subcilod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="subciloi" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card">
+              <div class="card-header">EJE</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="subejeod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="subejeoi" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-header">AV</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="subavod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="subavoi" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card">
+              <div class="card-header">ADD</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OD</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OD" formControlName="subaddod" maxlength="10">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text etiqueta">OI</div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="OI" formControlName="subaddoi" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+      <div class="col-md-12" style="padding-top: 30px;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-secondary"
+              (click)="anterior('retino')">Anterior</button></div>
+          <div class="col-md-2"> <button class="btn btn-md btn-info"
+              (click)="queda()" >Guardar Visiometria</button></div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

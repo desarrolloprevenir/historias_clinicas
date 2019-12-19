@@ -1,1 +1,521 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+
+
+/* Estilos angular material */
+
+
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+
+/* Estilos calendario  */
+
+
+/* @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import 'flatpickr/dist/flatpickr.css'; */
+
+
+/* Estilos app  */
+
+#login body {
+    height: 100%;
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.loginContenedor {
+    /* width: 100%;
+  height: 100%;
+  background: url(assets/fondoDescuentosMedicos.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
+    background-repeat: no-repeat;
+    background: url(assets/loginDescuentosNuevo.png) no-repeat center center fixed;
+    background-size: 100%;
+    /* padding-top:3vw; */
+    height: 1080px;
+    width: 100%;
+}
+
+#login body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+#login .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin-top: 90px !important;
+    margin: auto;
+    text-align: center;
+    /* margin-top: 150px;
+  margin-left: 450px;
+  margin-right: 400px; */
+}
+
+#login .form-signin .checkbox {
+    font-weight: 400;
+}
+
+#login .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#login .form-signin .form-control:focus {
+    z-index: 2;
+}
+
+#login .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#login .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#login .form-signin p {
+    text-align: center;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: black;
+    background-color: #DCDCDC;
+    border-color: #DCDCDC;
+}
+
+
+/* Registro */
+
+#registro body {
+    height: 100%;
+}
+
+#registro body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+#registro .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin-top: 20px !important;
+    margin: auto;
+    text-align: center;
+    /* margin-top: 150px;
+  margin-left: 450px;
+  margin-right: 400px; */
+}
+
+#registro .form-signin .checkbox {
+    font-weight: 400;
+}
+
+#registro .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#registro .form-signin .form-control:focus {
+    z-index: 2;
+}
+
+#registro .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#registro .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#registro .form-signin p {
+    text-align: center;
+}
+
+#registro .form-signin img {
+    margin-bottom: 25px;
+}
+
+
+/* ACTIVE */
+
+.active-agregar-pub {
+    background: #6fbad6;
+}
+
+.active-navegacion {
+    /* background: #119ace; */
+    background: #048e79;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+
+
+/* HOME */
+
+#navbar nav {
+    background: #04ad93 !important;
+}
+
+#navbar .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: #f5f5f5 !important;
+}
+
+
+/* SLIDER */
+
+#sliders {
+    padding-top: 50px;
+    padding-left: 10px;
+    margin: 0px;
+}
+
+#carouselExampleIndicators .carousel-inner .carousel-item img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* PANEL SERVICIOS */
+
+#servicios-home {
+    padding-top: 50px;
+    padding-left: 30px;
+    margin: 0px;
+}
+
+
+/* GESTION PUBLICACIONES */
+
+#card-publicacion {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#card-publicacion .card {
+    width: 1000px;
+    margin-top: 40px;
+}
+
+#card-publicacion .card a {
+    text-decoration: none;
+}
+
+#btn-agregar-pub {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.abtn {
+    margin: 2px;
+}
+
+.p-btns button {
+    margin: 2px;
+}
+
+.img-pub img {
+    /* height: 250px; */
+    /* width: 250px; */
+    width: 100%;
+}
+
+
+/* AGREGAR PUBLICACION */
+
+#panel-agregar-pub {
+    margin-top: 50px;
+}
+
+#panel-agregar-pub .list-group .list-group-item a {
+    color: black;
+}
+
+
+/* CENTRAR TEXTOS */
+
+.centrar {
+    text-align: center;
+}
+
+
+/* BOTONES MEDICO */
+
+
+/* VER PERFIL MEDICO */
+
+#info-perfil-medico {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#card-publicacion .card a {
+    color: white;
+}
+
+#info-perfil-medico img {
+    height: 250px;
+    width: 250px;
+    margin-bottom: 25px;
+}
+
+#estudios-medico {
+    margin-top: 30px;
+}
+
+
+/* CREAR MEDICO MODAL */
+
+#buscar-formulario-medico {
+    margin-bottom: 30px;
+}
+
+
+/* AVATAR BARRA DE NAVEGACION */
+
+#sesion img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-top: 9px;
+    margin-right: 2px;
+}
+
+#sesion img {
+    margin: 0px;
+    height: 38px;
+    width: 38px;
+}
+
+
+/* CALENDARIO */
+
+.calendario {
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+
+/* PERFIL PROVEDOR */
+
+#perfil-provedor-imagen {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.perfil-provedor-medico {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#perfil-provedor-imagen img {
+    height: 250px;
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+#perfil-provedor-formulario {
+    margin-top: 30px;
+}
+
+#perfil-provedor-formulario form {
+    margin-top: 50px;
+}
+
+
+/* GESTIONAR MEDICOS */
+
+.img-medico img {
+    height: 250px;
+    width: 250px;
+}
+
+
+/* Quitar margenes a los row */
+
+.contenedor {
+    margin: 0px;
+}
+
+
+/* BOTONES OCULTOS PARA ABRIR MODALES EN GESTIONAR PUBLICACION Y CALENDARIO */
+
+#openModalButton {
+    display: none;
+}
+
+
+/* ESTILOS DEL LOADING */
+
+.loading {
+    /* background: white; */
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 0.5;
+    margin: 0%;
+}
+
+.loading img {
+    width: 350px;
+    height: 200px;
+    display: block;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading {
+    cursor: wait;
+}
+
+
+/* MOSTRAR EN ROJO LA ALERTA DE ERROR PARA ETIQUETAS P */
+
+.alerta-error {
+    color: red;
+}
+
+.btn-info,
+.btn-primary {
+    background-color: #00aeef !important;
+    border-color: #00aeef !important;
+    color: white !important;
+}
+
+.cal-day-view .cal-event {
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    border: none !important;
+    background-color: #00aeef !important;
+}
+
+.card-header {
+    text-align: center;
+    color: #04ad93;
+}
+
+.input-group-text {
+    background-color: #00aeef !important;
+    border: 1px solid #00aeef !important;
+    color: #ffffff !important;
+    width: 280px !important;
+}
+
+.fichasPerfiles {
+    background: #04ad93;
+    color: white;
+    border: 12px solid white;
+    text-align: center;
+    /* padding: 50px; */
+    padding-top: 50px;
+}
+
+.cardTitulo {
+    background-color: #04ad93;
+    color: white;
+}
+
+.btn-link {
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.list-group-item.active {
+    background-color: #04ad93 !important;
+    border-color: #04ad93 !important;
+}
+
+.crear-pub[_ngcontent-c1] div[_ngcontent-c1] {
+    margin-left: 15px !important;
+    margin-top: 15px !important;
+}
+
+#perfil-provedor-imagen {
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #04ad93 !important;
+    border-color: #04ad93 !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #04ad93 !important;
+}
+
+
+/* ETIQUETA PARA FORMULARIOS */
+
+.form-label {
+    margin: 0px;
+    color: grey;
+    font-size: 13px;
+}
+
+.color-prevenir {
+    color: #048e79;
+}
+
+.divisiones {
+    margin-top: 20px;
+    padding: 30px;
+    background: #f7f7f7;
+}
+
+.tituloDivision {
+    font-size: 20px;
+    padding: 20px 0 20px 0;
+    color: #04ad93;
+}

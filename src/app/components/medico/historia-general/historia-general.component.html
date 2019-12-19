@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="text-center" style="padding-top: 50px;">
+        <h1 class="card-header">Historia Clinica</h1>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3 fichasPerfiles" id="info-perfil-medico">
+            <app-barra-lateral [img]="user.avatar" [nombres]="user.nombres" [cedula]="user.cedula" [fechaNacimiento]="user.fecha_nacimiento"></app-barra-lateral>
+        </div>
+
+
+        <div class="col-md-8" style="margin-top: 30px; padding: 30px;">
+
+            <app-historia-optometria *ngIf="idCategoria == 3" [idUsuario]="user.id_usuario" [idServicio]="user.id_servicio" [categoria]="idCategoria" [nombres]="user.nombres" [cedula]="user.cedula"></app-historia-optometria>
+            <app-hst-general *ngIf="idCategoria !=3" [idUsuario]="user.id_usuario" [idServicio]="user.id_servicio"></app-hst-general>
+
+        </div>
+    </div>
+
+</div>
