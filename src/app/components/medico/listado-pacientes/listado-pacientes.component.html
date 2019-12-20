@@ -321,14 +321,14 @@
 
 
                                         <!-- <div class="card-body">
-                  
+
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text etiqueta">OD</div>
                                         </div>
                                         <input type="text" class="form-control" placeholder="OD" value="{{infoHistoriaClinica.examenExternoOd}}" readonly>
                                       </div>
-                    
+
                                       <div class="input-group">
                                           <div class="input-group-prepend">
                                               <div class="input-group-text etiqueta">OI</div>
@@ -372,7 +372,7 @@
                                           </div>
                                           <input type="text" class="form-control" placeholder="OD" value="{{infoHistoriaClinica.oftalmologiaOd}}" readonly>
                                         </div>
-                      
+
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text etiqueta">OI</div>
@@ -426,7 +426,7 @@
                                             </div>
                                             <input type="text" class="form-control" placeholder="OD" value="{{infoHistoriaClinica.examenMotorOd}}" readonly>
                                           </div>
-                        
+
                                           <div class="input-group">
                                               <div class="input-group-prepend">
                                                   <div class="input-group-text etiqueta">OI</div>
@@ -465,14 +465,14 @@
 
 
                                         <!-- <div class="card-body">
-                  
+
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text etiqueta">OD</div>
                                             </div>
                                             <input type="text" class="form-control" placeholder="OD" value="{{infoHistoriaClinica.queratometriaOd}}"  readonly>
                                           </div>
-                        
+
                                           <div class="input-group">
                                               <div class="input-group-prepend">
                                                   <div class="input-group-text etiqueta">OI</div>
@@ -754,16 +754,31 @@
 
 
                 <!-- FIN -->
+
+                <div class="row" style="padding:20px 0 20px 0;">
+
+                    <div class="col-md-4">
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-info" (click)="pdfMedicamentos()"><i class="fas fa-print"></i>&nbsp; Exportar pdf medicamentos</button>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-info" (click)="pdfRemision()"><i class="fas fa-print"></i>&nbsp; Exportar pdf remision</button>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-info" (click)="pdfCertificado()"><i class="fas fa-print"></i>&nbsp; Exportar pdf certificado</button>
+                    </div>
+                    </div>
+
+                </div>
+
                 <br>
-                <div style="padding-top: 5px;">
-                    <button type="button" class="btn btn-info" (click)="pdfMedicamentos()"><i class="fas fa-print"></i>&nbsp; Exportar pdf medicamentos</button>
-                </div>
-                <div style="padding-top: 5px;">
-                    <button type="button" class="btn btn-info" (click)="pdfRemision()"><i class="fas fa-print"></i>&nbsp; Exportar pdf remision</button>
-                </div>
-                <div style="padding-top: 5px;">
-                    <button type="button" class="btn btn-info" (click)="pdfCertificado()"><i class="fas fa-print"></i>&nbsp; Exportar pdf certificado</button>
-                </div>
+
+
+
 
 
                 <div class="modal-footer">

@@ -73,7 +73,7 @@ export class CrearSucursalComponent implements OnInit {
   nombreSucursal = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50),
   Validators.pattern('[a-z A-z ñ]*')]);
   direccionSucursal = new FormControl('', Validators.required);
-  telefonoSucursal = new FormControl('', [Validators.required , Validators.pattern('[0-9]*'), 
+  telefonoSucursal = new FormControl('', [Validators.required , Validators.pattern('[0-9]*'),
                                           Validators.minLength(7), Validators.maxLength(12)]);
   nombreConsultorio = new FormControl('', Validators.required);
   pssw = new FormControl('', [Validators.required, Validators.minLength(8)]);
@@ -593,7 +593,7 @@ export class CrearSucursalComponent implements OnInit {
     // let password = CryptoJS.SHA512(this.pssw.value).toString(CryptoJS.enc.Hex);
 
     let info = {nombre: this.nombreSucursal.value, telefono: this.telefonoSucursal.value, id_municipio: this.muniSelect.value,
-      direccion: this.direccionSucursal.value , id_provedor: this.idProvedor, consultorios: this.infoConsultorios, 
+      direccion: this.direccionSucursal.value , id_provedor: this.idProvedor, consultorios: this.infoConsultorios,
       pssw: this.aplicationService.encriptar(this.pssw.value), usuario : this.username.value};
 
     // console.log(info);
@@ -1362,7 +1362,7 @@ export class CrearSucursalComponent implements OnInit {
     this.ver = campo;
     // console.log('campo');
   }
- 
+
   mouseLeave() {
     this.ver = '';
   }
@@ -1434,7 +1434,7 @@ export class CrearSucursalComponent implements OnInit {
 
   guardarInfoSucursal() {
     this.loading = true;
-    let info = {nombre: this.nombreSucursal.value, direccion: this.direccionSucursal.value, telefono: this.telefonoSucursal.value, 
+    let info = {nombre: this.nombreSucursal.value, direccion: this.direccionSucursal.value, telefono: this.telefonoSucursal.value,
                 id_sucursal: this.idSucursal};
     // console.log(info);
     this.sucursalService.editInfoSucursal(info).subscribe( (response) => {

@@ -98,7 +98,7 @@ export class ConsultorioComponent implements OnInit {
       this.diasSemana();
   }
 
-  
+
   // ------------------------------------ METODOS CREAR CONSULTORIO -------------------------------------------------------------
 
   getMedicos(idProvedor) {
@@ -1368,14 +1368,14 @@ export class ConsultorioComponent implements OnInit {
 
       if (!this.mananaH1 && this.tardeH1) {
         h1 = { m_de: undefined, m_hasta: undefined, t_de: this.tardeDesdeH1 + ':00',
-        t_hasta: this.tardeHastaH1 + ':00', semana : this.diasH1, id_servicio: this.infoConsultorio.id_servicios, 
+        t_hasta: this.tardeHastaH1 + ':00', semana : this.diasH1, id_servicio: this.infoConsultorio.id_servicios,
         id_sucursal : this.infoConsultorio.id_sucursales, id_consul : this.infoConsultorio.id_consultorio};
         // console.log('mana n tarde s', h1);
       }
 
       if(this.mananaH1 && this.tardeH1) {
         h1 = { m_de: this.mananaDesdeH1 + ':00', m_hasta: this.mananaHastaH1 + ':00', t_de: this.tardeDesdeH1 + ':00',
-        t_hasta: this.tardeHastaH1 + ':00', semana : this.diasH1, id_servicio: this.infoConsultorio.id_servicios, 
+        t_hasta: this.tardeHastaH1 + ':00', semana : this.diasH1, id_servicio: this.infoConsultorio.id_servicios,
         id_sucursal : this.infoConsultorio.id_sucursales, id_consul : this.infoConsultorio.id_consultorio};
         // console.log('mana s tarde s', h1);
       }
@@ -1423,7 +1423,7 @@ export class ConsultorioComponent implements OnInit {
   guardarInformacion(){
 
     this.loading = true;
-    let info = {nombre: this.nombreConsultorio.value, extencion : this.extensionConsultorio.value, 
+    let info = {nombre: this.nombreConsultorio.value, extencion : this.extensionConsultorio.value,
                 id_consultorio : this.infoConsultorio.id_consultorio};
 
     this.sucursalService.editInfoConsultorio(info).subscribe( (response) => {
