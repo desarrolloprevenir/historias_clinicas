@@ -269,22 +269,22 @@
 
 
 
-                            <div class="col-4" *ngFor="let h of infoConsultorio.horario; let i = index">
+                            <div class="col-5" *ngFor="let h of infoConsultorio.horario; let i = index">
 
                                 <div class="card">
-                                    <div class="card-header">Horario {{i+1}}</div>
+                                    <h3 class="card-header">Horario {{i+1}}</h3>
                                     <div class="card-body">
-                                        <h5><strong>Dias</strong></h5>
-                                        <div style="display: flex;">
-                                            <div *ngFor="let d of h.dias">
-                                                <p>{{d.dia}} &nbsp;&nbsp;</p>
+                                        <h5 style="color: #04ad93;" ><strong>Dias</strong></h5>
+                                        <div class="row">
+                                            <div *ngFor="let d of h.dias" class="col-md-4">
+                                                <p style="text-transform: capitalize;">- {{d.dia}}</p>
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" style="padding-top: 10px;">
 
                                             <div class="col">
-                                                <h5><strong>Mañana</strong></h5>
+                                                <h5 style="color: #04ad93;"><strong>Mañana</strong></h5>
                                                 <div *ngIf="h.de_maniana || h.a_maniana">
                                                     <p><strong>Desde : </strong> {{h.de_maniana | ampm}}</p>
                                                     <p><strong>Hasta :</strong> {{h.a_maniana | ampm}}</p>
@@ -297,7 +297,7 @@
                                             </div>
 
                                             <div class="col">
-                                                <h5><strong>Tarde</strong></h5>
+                                                <h5 style="color: #04ad93;"><strong>Tarde</strong></h5>
                                                 <div *ngIf="h.de_tarde || h.a_tarde">
                                                     <p><strong>Desde :</strong> {{h.de_tarde | ampm}}</p>
                                                     <p><strong>Hasta :</strong> {{h.a_tarde | ampm}}</p>
