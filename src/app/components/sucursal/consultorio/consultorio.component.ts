@@ -947,7 +947,7 @@ export class ConsultorioComponent implements OnInit {
   // ------------------------------------ METODOS EDITAR CONSULTORIO -------------------------------------------------------------
 
   getConsultorioApi(idConsultorio) {
-    // console.log('aquiiii oeee', idConsultorio);
+    console.log('aquiiii oeee', idConsultorio);
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
       console.log('info_cc', response);

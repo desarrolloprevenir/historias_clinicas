@@ -42,7 +42,7 @@ export class MisServiciosComponent implements OnInit {
       // console.log(response);
       this.servicios = response;
       this.loading = false;
-    }, (err) => {
+    }, () => {
       // console.log(err);
       this.loading = false;
       this.status = 'error';

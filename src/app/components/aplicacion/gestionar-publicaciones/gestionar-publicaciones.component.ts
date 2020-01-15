@@ -72,6 +72,7 @@ export class GestionarPublicacionesComponent implements OnInit {
   }
 
   getPublications(id) {
+    // console.log(id);
     this.loading = true;
 
     this.provedorService.getPublications(id).subscribe( (response) => {
