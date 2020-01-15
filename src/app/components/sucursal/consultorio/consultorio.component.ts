@@ -929,13 +929,13 @@ export class ConsultorioComponent implements OnInit {
         // console.log(info);
     this.sucursalService.postConsultorioSucursal(info).subscribe( (response) => {
           // console.log(response);
-          if(response === true) {
+          if (response === true) {
             this.response = true;
             document.getElementById('btn-confirmacion-eliminar-horario').click();
           }
           this.loading = false;
-        }, (err) => {
-          console.log(err);
+        }, () => {
+          // console.log(err);
           this.status = 'error';
           this.statusText = 'Error en la conexion, Por favor revisa tu conexion o intentalo mas tarde.';
           this.loading = false;
@@ -947,9 +947,10 @@ export class ConsultorioComponent implements OnInit {
   // ------------------------------------ METODOS EDITAR CONSULTORIO -------------------------------------------------------------
 
   getConsultorioApi(idConsultorio) {
+    // console.log('aquiiii oeee', idConsultorio);
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
-      // console.log('info_cc', response);
+      console.log('info_cc', response);
       this.infoConsultorio = response[0];
       // console.log('oeeconsul',this.infoConsultorio);
       this.nombreConsultorio.setValue(this.infoConsultorio.nombre);
@@ -958,7 +959,7 @@ export class ConsultorioComponent implements OnInit {
 
       // console.log('lengh',this.infoConsultorio.horario.length);
     }, (err) => {
-      console.log(err);
+      // console.log(err);
       this.loading = false;
       this.status = 'error';
       this.statusText = 'Error en la conexion, Por favor revisa tu conexion o intentalo mas tarde.';
@@ -993,23 +994,26 @@ export class ConsultorioComponent implements OnInit {
     // console.log(this.ds);
   }
 
-  confirmacionEliminarHorario(idHorario){
-    console.log('aqui');
+  confirmacionEliminarHorario(idHorario) {
+    // console.log('aqui');
     this.id_horario = idHorario;
   // console.log(id_horario)
-    document.getElementById('btn-confirmacion-eliminar-horario').click();
+    this.loading = true;
 
     this.sucursalService.getConfirmacionEliminarHorario(this.id_horario).subscribe( (response) => {
-     console.log(response);
+     this.loading = false;
+     document.getElementById('btn-confirmacion-eliminar-horario').click();
+     console.log('respuesta', response);
      if (response[0].eventH <= 0) {
       console.log('puede eliminar');
-      this.confirmacion = true;
+      this.confirmacion = 'true';
      } else {
        console.log('hay eventos');
-       this.confirmacion = false;
+       this.confirmacion = 'false';
      }
 
    }, () => {
+     this.loading = false;
     // console.log(err);
    });
   }
@@ -1019,7 +1023,7 @@ export class ConsultorioComponent implements OnInit {
     this.loading = true;
     this.sucursalService.dltHorarioConsultorio(this.id_horario).subscribe( (response) => {
       // console.log('res,eli', response);
-      if(response === true){
+      if (response === true) {
         localStorage.removeItem('consultorio');
         this.getConsultorioApi(this.infoConsultorio.id_consultorio);
         this.status = 'success';

@@ -24,6 +24,7 @@ import { CrearSucursalComponent } from './components/admin/crear-sucursal/crear-
 import { VerPerfilMedicoComponent } from './components/medico/ver-perfil-medico/ver-perfil-medico.component';
 import { CrearPublicacionComponent } from './components/aplicacion/crear-publicacion/crear-publicacion.component';
 import { HistoriaClinicaComponent } from './components/medico/historia-clinica/historia-clinica.component';
+import { VisiometriaComponent } from './components/medico/visiometria/visiometria.component';
 
 // Este servicio sirve para restringuir el acceso a los usuarios no authentificados.
 import { UserGuard } from './services/user.guard';
@@ -33,11 +34,11 @@ import { SucursalMedico } from './services/sucursal_medico.guard';
 import { UserMedico } from './services/user_medico.guard';
 import { HistoriaGeneralComponent } from './components/medico/historia-general/historia-general.component';
 
-
 const routes: Routes = [
   {path: '', component : LoginComponent},
   {path : 'login', component: LoginComponent},
   {path : 'registro', component: RegistroComponent},
+  {path : 'visiometria', component: VisiometriaComponent},
   {path : 'recuperar-cuenta', component: OlvidoContraseniaComponent},
   {path : 'terminos-y-condiciones', component: TerminosYCondicionesComponent},
   {path : 'home', component: HomeComponent, canActivate: [UserGuard]},
@@ -66,6 +67,8 @@ const routes: Routes = [
   {path : 'historia-clinica/:id/:id_servicio/:idCategoria', component: HistoriaClinicaComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'historia-general/:idCategoria', component: HistoriaGeneralComponent, canActivate: [UserGuard, UserMedico]},
   {path: '**', component: LoginComponent}
+
+
 ];
 
 @NgModule({

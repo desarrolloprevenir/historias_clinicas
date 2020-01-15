@@ -53,6 +53,7 @@ import { HistoriaGeneralComponent } from './medico/historia-general/historia-gen
 import { BarraLateralComponent } from './medico/barra-lateral/barra-lateral.component';
 import { HistoriaOptometriaComponent } from './medico/historia-optometria/historia-optometria.component';
 import { HstGeneralComponent } from './medico/hst-general/hst-general.component';
+import { VisiometriaComponent } from './medico/visiometria/visiometria.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { HstGeneralComponent } from './medico/hst-general/hst-general.component'
   HistoriaGeneralComponent,
   BarraLateralComponent,
   HistoriaOptometriaComponent,
-  HstGeneralComponent
+  HstGeneralComponent,
+  VisiometriaComponent
   ],
   imports: [
     CommonModule,

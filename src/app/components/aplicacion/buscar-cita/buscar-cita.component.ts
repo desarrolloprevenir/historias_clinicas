@@ -79,8 +79,14 @@ export class BuscarCitaComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    clearInterval(this.intervalo);
+  }
+
   getCitasMedico(medicoId) {
-    // console.log('oe ?');
+    console.log('oe ?');
     this.home.cerrarAlerta();
     this.home.loading = true;
     this.medicoService.getCitasActivas(medicoId).subscribe( (response) => {
@@ -269,7 +275,7 @@ export class BuscarCitaComponent implements OnInit {
 
   citasUsuario() {
     this.home.cerrarAlerta();
-    // console.log('oe');
+    console.log('oe');
     this.loading = true;
     // d_sucursales
     let identity = this.userService.getIdentity();

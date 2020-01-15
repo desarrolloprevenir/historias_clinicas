@@ -635,7 +635,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
                               neurologico_desc: this.datosHistGeneral.value.neurologico_desc,
                               pielyfan_desc: this.datosHistGeneral.value.pielyfan_desc};
 
-      let examenf = { aparienciaGeneral: this.datosHistGeneral.value.aparienciaGeneral,
+      let examenf = {apariencia_g: this.datosHistGeneral.value.aparienciaGeneral,
                     frecuencia_cardica: this.datosHistGeneral.value.frecuencia_cardica,
                     temperetura: this.datosHistGeneral.value.temperetura, frecuencia_resp: this.datosHistGeneral.value.frecuencia_resp,
                     talla: this.datosHistGeneral.value.talla, presion_art: this.datosHistGeneral.value.presion_art,
@@ -761,7 +761,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
       //   //console.log(this.idImpDiag);
       // }
-      // this.datosHistGeneral.reset();
+    //this.datosHistGeneral.reset();
 
   }
 

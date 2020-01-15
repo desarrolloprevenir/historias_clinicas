@@ -589,6 +589,7 @@ export class HistoriaClinicaComponent implements OnInit {
     this.loading = true;
     window.scroll(0, 0);
     this.medicoService.getHistoriaGeneral2(idHistoriaClinica).subscribe( (response) => {
+        this.loading = false;
         console.log('info hist opto', response);
         if (this.idCategoria === '3') {
           document.getElementById('btn-ver-hc').click();
@@ -600,7 +601,7 @@ export class HistoriaClinicaComponent implements OnInit {
         }
 
 
-        this.loading = false;
+        
     }, () => {
       this.loading = false;
       document.getElementById('btn-cerrar-moda-ver-hc').click();
