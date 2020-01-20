@@ -30,6 +30,7 @@ export class VisiometriaComponent implements OnInit {
   public accidentesValor = [];
 
 
+
   public variablesSintomas = [];
   public variableExamen = [];
   public variableInterpretaciones = [];
@@ -38,6 +39,15 @@ export class VisiometriaComponent implements OnInit {
   public variableRec  = [];
 
   public resultadoUsaGafas;
+  public resultadoCirugias;
+  public tieneCirugias;
+  public cualCirugia;
+
+  public resultadoAccidente;
+  public tieneAccidente;
+  public cualAccidente;
+
+
 
   public vista;
   public infoAgudezaVisual;
@@ -58,6 +68,7 @@ export class VisiometriaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.usaGafas = 'si';
+    this.tieneCirugias = 'no';
     this.vista = 'consulta';
   }
 
@@ -128,6 +139,8 @@ export class VisiometriaComponent implements OnInit {
       subavoi: ['', [Validators.required]],
       subaddod: ['', [Validators.required]],
       subaddoi: ['', [Validators.required]],
+      cualCirugia: [''],
+      tuvoAccidente: ['']
     });
 
 
@@ -146,11 +159,40 @@ export class VisiometriaComponent implements OnInit {
   cirugias(parametro) {
     this.cirugiasValor = parametro.value;
     console.log(this.cirugiasValor);
+
+    this.resultadoCirugias = parametro.value;
+    const variable = true;
+    switch (variable === true) {
+      case parametro.value === 'si':
+        this.tieneCirugias = 'tieneCirugias';
+        break;
+
+      case parametro.value === 'no':
+        this.tieneCirugias = '';
+        break;
+
+    }
+
   }
 
   accidentes(parametro) {
     this.accidentesValor = parametro.value;
     console.log(this.accidentesValor);
+
+
+    this.resultadoAccidente = parametro.value;
+    const variable = true;
+    switch (variable === true) {
+      case parametro.value === 'si':
+        this.tieneAccidente = 'tuvoAccidente';
+        break;
+
+      case parametro.value === 'no':
+        this.tieneAccidente = '';
+        break;
+
+    }
+
   }
 
   siguiente(parametro: string) {
@@ -295,7 +337,7 @@ export class VisiometriaComponent implements OnInit {
     if (ev.checked === true) {
       this.variableDiag.push(tipo);
     } else {
-      for(let i = 0; i > this.variableDiag.length; i++) {
+      for (let i = 0; i > this.variableDiag.length; i++) {
         this.variableDiag.splice(i, 1);
       }
     }
