@@ -95,11 +95,11 @@ export class GestionarMedicosComponent implements OnInit {
       if (response === true) {
         this.getMedicos(this.identity.id_provedor);
         this.status = 'success';
-        this.statusText = 'El medico ha sido eliminado con exito.';
+        this.statusText = 'El médico ha sido eliminado con exito.';
         // this.getMedicos(this.identity.id_provedor);
       } else {
         this.status = 'error';
-        this.statusText = 'El medico no se puede eliminar por que tiene un consultorio asociado, elimina primero el consultorio.';
+        this.statusText = 'El médico no se puede eliminar por que tiene un consultorio asociado, elimina primero el consultorio.';
       }
     }, (err) => {
       // window.scroll(0,0);
@@ -175,26 +175,26 @@ export class GestionarMedicosComponent implements OnInit {
       if (response === true) {
         this.getMedicos(this.identity.id_provedor);
         this.status = 'success';
-        this.statusText = 'Medico agregado con exito.';
+        this.statusText = 'Médico agregado con exito.';
         document.getElementById('cerrarModal').click();
       }
 
       if (response === false) {
         this.status = 'error';
-        this.statusText = 'Error al agregar el medico, intentalo más tarde o revisa tu conexion';
+        this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
         document.getElementById('cerrarModal').click();
       }
 
       if (response.existe === true ) {
         this.status = 'warning';
-        this.statusText = 'No se puede agregar. El medico actualmente ya se encuentra registrado en ' + this.identity.nombre;
+        this.statusText = 'No se puede agregar. El médico actualmente ya se encuentra registrado en ' + this.identity.nombre;
         // console.log('No se puede agregar. El medico actualmente ya se encuentra registrado en el servicio.');
       }
 
      }, () => {
       // console.log(err);
         this.status = 'error';
-        this.statusText = 'Error al agregar el medico, intentalo más tarde o revisa tu conexion';
+        this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
         this.loading = false;
         document.getElementById('cerrarModal').click();
      });
@@ -216,21 +216,21 @@ export class GestionarMedicosComponent implements OnInit {
 
           if (response === true) {
             this.status = 'success';
-            this.statusText = 'Medico agregado con exito';
+            this.statusText = 'Médico agregado con exito';
             this.getMedicos(this.identity.id_provedor);
             this.formulario = false;
             this.cedula.reset();
             document.getElementById('cerrarModal').click();
           } else if (response === false) {
             this.status = 'error';
-            this.statusText = 'Error al agregar el medico, intentalo más tarde o revisa tu conexion';
+            this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
             document.getElementById('cerrarModal').click();
           }
 
           if (response.campo === 'profecional') {
               console.log('aqui prof');
               this.status = 'warning';
-              this.statusText = 'La tarjeta profecinal ya se encuentra registrada';
+              this.statusText = 'La tarjeta profesional ya se encuentra registrada';
             }
           if (response.campo === 'email') {
               this.status = 'warning';
@@ -239,7 +239,7 @@ export class GestionarMedicosComponent implements OnInit {
 
         }, () => {
           this.status = 'error';
-          this.statusText = 'Error al agregar el medico, intentalo más tarde o revisa tu conexion';
+          this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
           this.loading = false;
           document.getElementById('cerrarModal').click();
           // console.log(err);

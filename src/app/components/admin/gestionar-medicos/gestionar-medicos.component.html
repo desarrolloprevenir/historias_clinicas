@@ -34,14 +34,14 @@
 <div id="btn-agregar-pub" class="text-center">
 
     <button type="button" class="btn btn-success" (click)="limpiarForm()"><i
-      class="fas fa-plus"></i>&nbsp; Crear Medico</button>
+      class="fas fa-plus"></i>&nbsp; Crear Médico</button>
 
     <button type="button" id="btn-abriModal" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-      class="fas fa-plus"></i>&nbsp; Crear Medico</button>
+      class="fas fa-plus"></i>&nbsp; Crear Médico</button>
 </div>
 
 <div id="card-publicacion" *ngIf="vacio">
-    <h5>Aun no tienes medicos, crea uno ! </h5>
+    <h5>Aun no tienes médicos, crea uno ! </h5>
 </div>
 
 
@@ -52,7 +52,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Crear Medico</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Crear Médico</h3>
                 <button type="button" id="cerrarModal" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="alert alert-primary" role="alert" *ngIf="existe === false">
-                    El medico no existe ¿Desea crearlo?, ten en cuenta que se creara una cuenta de usuario para el medico con el correo electronico y la contraeña asignada, con la cual el profecional de la salud, podra ingresar a traves de la web o la aplicacion movil.
+                    El médico no existe ¿Desea crearlo?, ten en cuenta que se creara una cuenta de usuario para el médico con el correo electronico y la contraeña asignada, con la cual el profesional de la salud, podra ingresar a traves de la web o la aplicacion movil.
                 </div>
 
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
@@ -100,23 +100,23 @@
                 <div id="formulario-crear-medico" *ngIf="existe && formulario">
 
                     <div class="col-lg-12">
-                        <h3>Datos medico</h3>
+                        <h3>Datos médico</h3>
                         <form (ngSubmit)="agregarMedico(true)">
                             <div class="form-group">
                                 <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                                <input type="text" class="form-control" placeholder="Nombres del medico" value="{{medico.nombres}}" [readonly]="existe">
+                                <input type="text" class="form-control" placeholder="Nombres del médico" value="{{medico.nombres}}" [readonly]="existe">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
 
                             <div class="form-group">
                                 <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                                <input type="text" class="form-control" placeholder="Apellidos del medico" value="{{medico.apellidos}}" [readonly]="existe">
+                                <input type="text" class="form-control" placeholder="Apellidos del médico" value="{{medico.apellidos}}" [readonly]="existe">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
 
                             <div class="form-group">
                                 <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                                <input *ngIf="!existe" type="number" class="form-control" placeholder="Tarjeta profecional" [readonly]="existe">
+                                <input *ngIf="!existe" type="number" class="form-control" placeholder="Tarjeta profesional" [readonly]="existe">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
 
@@ -162,7 +162,7 @@
                     <form class="form-signin" [formGroup]="datos" (ngSubmit)="agregarMedico(false)" novalidate>
                         <div class="form-group">
                             <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                            <input type="text" formControlName="nombres" class="form-control" aria-describedby="emailHelp" placeholder="Nombres del medico" [readonly]="existe" [class.is-invalid]="datos.get('nombres').errors && datos.get('nombres').touched">
+                            <input type="text" formControlName="nombres" class="form-control" aria-describedby="emailHelp" placeholder="Nombres del médico" [readonly]="existe" [class.is-invalid]="datos.get('nombres').errors && datos.get('nombres').touched">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <div *ngIf="datos.get('nombres').errors && datos.get('nombres').touched">
@@ -177,7 +177,7 @@
 
                         <div class="form-group">
                             <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                            <input type="text" formControlName="apellidos" class="form-control" aria-describedby="emailHelp" placeholder="Apellidos del medico" [readonly]="existe" [class.is-invalid]="datos.get('apellidos').errors && datos.get('apellidos').touched">
+                            <input type="text" formControlName="apellidos" class="form-control" aria-describedby="emailHelp" placeholder="Apellidos del médico" [readonly]="existe" [class.is-invalid]="datos.get('apellidos').errors && datos.get('apellidos').touched">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
 
@@ -233,7 +233,7 @@
 
                         <div class="form-group">
                             <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                            <input *ngIf="!existe" type="number" formControlName="tarjetaProfecional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfecional').errors && datos.get('tarjetaProfecional').touched">
+                            <input *ngIf="!existe" type="number" formControlName="tarjetaProfesional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfecional').errors && datos.get('tarjetaProfecional').touched">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
 
@@ -283,7 +283,7 @@
                         <div class="col-lg-7">
                             <h3>{{m.nombre}}</h3>
                             <br>
-                            <p><strong>Tarjeta profecional :</strong> {{m.tarj_profecional}}</p>
+                            <p><strong>Tarjeta profesional :</strong> {{m.tarj_profecional}}</p>
                             <p><strong>Titulo : </strong> {{m.titulo}}</p>
                             <p><strong>No. Contacto : </strong> {{m.telefono}}</p>
                             <p><strong>Whatsapp : </strong> {{m.whatsapp}}</p>
@@ -314,7 +314,7 @@
                         </button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿ Estas seguro que deseas eliminar al medico {{m.nombre}}?
+                                                ¿ Estas seguro que deseas eliminar al médico {{m.nombre}}?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
