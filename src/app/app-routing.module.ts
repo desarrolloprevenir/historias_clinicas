@@ -34,7 +34,6 @@ import { SucursalMedico } from './services/sucursal_medico.guard';
 import { UserMedico } from './services/user_medico.guard';
 import { HistoriaGeneralComponent } from './components/medico/historia-general/historia-general.component';
 
-
 const routes: Routes = [
   {path: '', component : LoginComponent},
   {path : 'login', component: LoginComponent},

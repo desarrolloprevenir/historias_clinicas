@@ -79,6 +79,12 @@ export class BuscarCitaComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    clearInterval(this.intervalo);
+  }
+
   getCitasMedico(medicoId) {
     // console.log('oe ?');
     this.home.cerrarAlerta();
@@ -102,7 +108,7 @@ export class BuscarCitaComponent implements OnInit {
     this.confirmacionEli = false;
     let identity = this.userService.getIdentity();
     this.provedorService.ordenCita(this.cedula.value, identity.id_sucursales).subscribe( (response) => {
-      console.log('orden cita', response);
+      // console.log('orden cita', response);
 
       let bol = true;
       switch (bol === true) {
@@ -135,7 +141,7 @@ export class BuscarCitaComponent implements OnInit {
         case (response[0][0].activas !== undefined && response[0][0].activas === false) && (response[1][0].activas === undefined):
         this.infoCitasMascotas = response[1];
         this.infoResMasc = 'solo_mascota';
-        console.log('solo citas mascota');
+        // console.log('solo citas mascota');
         this.home.loading = false;
         document.getElementById('btn-modal-cita').click();
         break;
@@ -159,7 +165,7 @@ export class BuscarCitaComponent implements OnInit {
         break;
 
         case (response[0][0].activas !== undefined && response[0][0].activas === true) && (response[1][0].activas === undefined) :
-        console.log('cita activa usuario con citas de mascota');
+        // console.log('cita activa usuario con citas de mascota');
         this.infoCitasPaciente = response[0];
         this.infoCitasMascotas = response[1][0];
         this.infoRes = 'solo_usuario';
@@ -180,7 +186,7 @@ export class BuscarCitaComponent implements OnInit {
 
         case (response[0][0].activas !== undefined && response[0][0].activas === true) &&
         (response[1][0].activas !== undefined && response[1][0].activas === true):
-        console.log('citas activas mascota y usuario');
+        // console.log('citas activas mascota y usuario');
         this.infoCitasPaciente = response[0];
         this.infoCitasMascotas = response[1];
         this.infoRes = 'solo_usuario';
@@ -190,7 +196,7 @@ export class BuscarCitaComponent implements OnInit {
         break;
       }
 
-    }, (err) => {
+    }, () => {
       // console.log(err);
       this.home.status = 'error';
       this.home.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
@@ -245,7 +251,7 @@ export class BuscarCitaComponent implements OnInit {
         this.home.statusText = 'La cita no se puede eliminar, por favor revisa tu conexión o intentalo más tarde.';
         window.scroll(0 , 0);
       }
-    }, (err) => {
+    }, () => {
       this.home.status = 'error';
       this.home.statusText = 'La cita no se puede eliminar, por favor revisa tu conexión o intentalo más tarde.';
       window.scroll(0 , 0);
@@ -263,7 +269,7 @@ export class BuscarCitaComponent implements OnInit {
 
     if (tipo === 'mascota') {
       this.activarCita(info.id_eventos, info.categoria);
-      console.log(info);
+      // console.log(info);
     }
   }
 
@@ -294,7 +300,7 @@ export class BuscarCitaComponent implements OnInit {
       this.mascota = false;
 
       this.infoUser = info;
-      console.log('usert', this.infoUser);
+      // console.log('usert', this.infoUser);
       document.getElementById('btn-modal-info-paciente').click();
 
     } else {
@@ -306,7 +312,7 @@ export class BuscarCitaComponent implements OnInit {
         this.infoUser.dueno = this.infoUser.dueño;
         this.home.loading = false;
         document.getElementById('btn-modal-info-paciente').click();
-      }, (err) => {
+      }, () => {
         // console.log(err);
         this.home.status = 'error';
         this.home.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
@@ -323,9 +329,9 @@ export class BuscarCitaComponent implements OnInit {
     // console.log('info ac cita', info);
     this.provedorService.postCita(info).subscribe((response) => {
       this.loading = false;
-      console.log(response);
+      // console.log(response);
       if(this.medico === false) {
-        console.log('aqui');
+        // console.log('aqui');
         this.citasUsuario();
       } else {
         this.getCitasMedico(this.medicoId);
@@ -389,7 +395,7 @@ export class BuscarCitaComponent implements OnInit {
                               this.home.statusText = 'Error al cambiar el estado de la cita.';
                             }
 
-                           }, (err) => {
+                           }, () => {
                             this.home.status = 'error';
                             this.home.statusText = 'Error en la conexion, por favor intenalo más tarde o revisa tu conexión.';
                             this.loading = false;
@@ -440,7 +446,7 @@ export class BuscarCitaComponent implements OnInit {
                             this.home.statusText = 'Error al cambiar el estado de la cita.';
                           }
 
-                         }, (err) => {
+                         }, () => {
                           this.home.status = 'error';
                           this.home.statusText = 'Error en la conexion, por favor intenalo más tarde o revisa tu conexión.';
                           this.loading = false;
@@ -468,7 +474,7 @@ export class BuscarCitaComponent implements OnInit {
       if (response.actualizado === true) {
         document.getElementById('cerrar-modal-cedula-info').click();
 
-        if(this.medico === false) {
+        if (this.medico === false) {
           this.citasUsuario();
         } else {
           this.getCitasMedico(this.medicoId);
@@ -480,7 +486,7 @@ export class BuscarCitaComponent implements OnInit {
         this.home.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
       }
       this.loading = false;
-    }, (err) => {
+    }, () => {
       document.getElementById('cerrar-modal-cedula-info').click();
       this.home.status = 'error';
       this.home.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
@@ -491,16 +497,16 @@ export class BuscarCitaComponent implements OnInit {
 
   siguienteCita() {
     this.loading = true;
-    console.log(this.infoSiguienteCita.servicios_idservicios);
+    // console.log(this.infoSiguienteCita.servicios_idservicios);
     this.provedorService.putSiguienteCita(this.infoSiguienteCita.id_citas_activas , this.infoSiguienteCita.servicios_idservicios,
                         this.infoSiguienteCita.categoria).subscribe( (response) => {
-                         if(this.medico === false) {
+                         if (this.medico === false) {
                             this.citasUsuario();
                           } else {
                             this.getCitasMedico(this.medicoId);
                           }
                          this.loading = false;
-                      }, (err) => {
+                      }, () => {
                         this.home.status = 'error';
                         this.home.statusText = 'Error en la conexion, por favor intenalo más tarde o revisa tu conexión.';
                         this.loading = false;

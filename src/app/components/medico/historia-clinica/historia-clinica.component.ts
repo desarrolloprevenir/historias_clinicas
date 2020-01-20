@@ -584,9 +584,12 @@ export class HistoriaClinicaComponent implements OnInit {
   getHistoriaClinica(idHistoriaClinica) {
 
 
+    // this.loading = true;
+    // console.log('oe', idHistoriaClinica);
     this.loading = true;
-
+    window.scroll(0, 0);
     this.medicoService.getHistoriaGeneral2(idHistoriaClinica).subscribe( (response) => {
+        this.loading = false;
         console.log('info hist opto', response);
         if (this.idCategoria === '3') {
           document.getElementById('btn-ver-hc').click();
@@ -598,8 +601,9 @@ export class HistoriaClinicaComponent implements OnInit {
         }
 
 
-        this.loading = false;
+        
     }, () => {
+      this.loading = false;
       document.getElementById('btn-cerrar-moda-ver-hc').click();
       this.status = 'error';
       this.statusText = 'Error en la conexión, por favor revisa tu conexión o intentalo más tarde';

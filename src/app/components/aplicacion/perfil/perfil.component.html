@@ -591,7 +591,7 @@
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Institución donde se curso el estudio" name="nombreInstitucion" #nombreInstitucion="ngModel" [(ngModel)]="estudios.nombreInstitucion">
+                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Institución donde se curso el estudio" [formControl]="nombreInstitucion">
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
@@ -605,7 +605,7 @@
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <input class="form-control" type="date" id="example-date-input" name="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="estudios.start" max="{{today}}">
+                                                            <input class="form-control" type="date" id="example-date-input" [formControl]="start" max="{{today}}">
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
@@ -619,7 +619,7 @@
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <input class="form-control" type="date" id="example-date-input" name="fechaFinalizacion" #fechaFinalizacion="ngModel" [(ngModel)]="estudios.end" max="{{today}}">
+                                                            <input class="form-control" type="date" id="example-date-input" [formControl]="end" max="{{today}}">
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>

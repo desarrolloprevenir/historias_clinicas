@@ -8,7 +8,7 @@ const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class SucursalService {
 
   constructor(public http: HttpClient) { }
@@ -37,7 +37,7 @@ getConsultorios(idSucursales) {
 
 // Ruta para pedir informacion de un consultorio
 getInfoConsultorio(idConsultorio) {
-  return this.http.get(apiUrl+ '/consultorioid/' + idConsultorio, {headers});
+  return this.http.get(apiUrl + '/consultorioid/' + idConsultorio, {headers});
 }
 
 // Ruta para saber si un horario tiene citas o no

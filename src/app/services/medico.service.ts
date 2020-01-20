@@ -63,7 +63,8 @@ export class MedicoService {
 
   // Ruta para obtener historia clinica por idHistoriaClinica
   getHistoriaGeneral2(idHistoriaClinica): Observable<any> {
-    return this.http.get(apiUrl+ '/darhistcf/' + idHistoriaClinica, {headers});
+    // console.log(idHistoriaClinica);
+    return this.http.get(apiUrl + '/darhistcf/' + idHistoriaClinica, {headers});
   }
 
   // Ruta para ver historias clinicas usuario por servicio

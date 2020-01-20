@@ -176,7 +176,10 @@
                     <div *ngIf="!crearConsul">
 
                         <div class="text-center" *ngIf="infoConsultorio">
+
+                            <h5 *ngIf="infoConsultorio.horario === false">No tienes horarios de atencion en este servicio</h5>
                             <button class="btn btn-success" [disabled]="infoConsultorio.horario.lenght <= 3" (click)="crearHorario()">Nuevo horario</button>
+
                         </div>
 
 
@@ -271,7 +274,7 @@
                                 <div class="card">
                                     <h3 class="card-header">Horario {{i+1}}</h3>
                                     <div class="card-body">
-                                        <h5 style="color: #04ad93;" ><strong>Dias</strong></h5>
+                                        <h5 style="color: #04ad93;"><strong>Dias</strong></h5>
                                         <div class="row">
                                             <div *ngFor="let d of h.dias" class="col-md-4">
                                                 <p style="text-transform: capitalize;">- {{d.dia}}</p>
@@ -660,7 +663,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
             </div>
-            <div *ngIf="((infoConsultorio && infoConsultorio.horario.length >= 2) && confirmacion) && !response">
+            <div *ngIf="((infoConsultorio && infoConsultorio.horario) && (confirmacion === 'true')) && !response">
                 <div class="modal-body">
                     ¿ Estas seguro que deseas eliminar este horario ?.Ten en cuenta que no podras recuperarlo.
                 </div>
@@ -670,16 +673,16 @@
                 </div>
             </div>
 
-            <div *ngIf="((infoConsultorio && infoConsultorio.horario.length <= 1) && confirmacion) && !response">
+            <!-- <div *ngIf="((infoConsultorio && infoConsultorio.horario.length <= 1) && confirmacion) && !response">
                 <div class="modal-body">
                     El consultorio debe tener al menos un horario.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
                 </div>
-            </div>
+            </div> -->
 
-            <div *ngIf="!confirmacion && !response">
+            <div *ngIf="(confirmacion === 'false') && !response">
                 <div class="modal-body">
                     No se puede eliminar el horario, hay citas activas, por favor eliminalas o cambialas de horario.
                 </div>

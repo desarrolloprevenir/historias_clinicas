@@ -17,7 +17,13 @@ export class PerfilComponent implements OnInit {
   public identity;
   public provedor;
   public medico;
-  public estudios;
+  // estu.push({nombreEstudio: this.estudios.nombreEstudio , nombreInstitucion: this.estudios.nombreInstitucion,
+  //   start: this.estudios.start, end: this.estudios.end, id: this.medico.id });
+  public estudios = {nombreEstudio: '', nombreInstitucion: '', start : '', end: ''};
+  nombreEstudio = new FormControl('', [Validators.required, Validators.pattern('[a-z A-z ñ]*')]);
+  nombreInstitucion = new FormControl('', [Validators.required, Validators.pattern('[a-z A-z ñ]*')]);
+  start = new FormControl('', [Validators.required]);
+  end = new FormControl('', [Validators.required]);
   public ver;
   public campo;
   public status: string;
@@ -238,13 +244,13 @@ export class PerfilComponent implements OnInit {
     if (bol === true) {
       let estu = [];
 
-      estu.push({nombreEstudio: this.estudios.nombreEstudio , nombreInstitucion: this.estudios.nombreInstitucion,
-        start: this.estudios.start, end: this.estudios.end, id: this.medico.id });
+      estu.push({nombreEstudio: this.nombreEstudio.value , nombreInstitucion: this.nombreInstitucion.value,
+        start: this.start.value, end: this.end.value, id: this.medico.id });
 
       let info = {nombres : this.datos.value.nombres, apellidos: this.datos.value.apellidos , titulo : this.datos.value.titulo,
 
         telefono: this.datos.value.telefono , wp: this.datos.value.wp , id: this.medico.id, estudios : estu };
-        // console.log(info);
+      console.log(info);
 
       let token = this.userService.getToken();
 
