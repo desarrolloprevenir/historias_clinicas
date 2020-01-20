@@ -102,6 +102,14 @@
                 <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
               </mat-radio-group>
             </section>
+            <div *ngIf="tieneCirugias==='tieneCirugias'">
+              <form [formGroup]="datosVisiomentria">
+                <div class="form-group">
+                  <label for="txt-CualCirugia" class="form-label label-formulario-user">Cuál?</label>
+                  <textarea rows="2" class="form-control" formControlName="cualCirugia"></textarea>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="col-md-4">
             <label class="form-label">Accidentes Oculares: </label>
@@ -111,6 +119,14 @@
                 <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
               </mat-radio-group>
             </section>
+            <div *ngIf="tieneAccidente==='tuvoAccidente'">
+              <form [formGroup]="datosVisiomentria">
+                <div class="form-group">
+                  <label for="txt-tuvoAccidente" class="form-label label-formulario-user">Cuál?</label>
+                  <textarea rows="2" class="form-control" formControlName="tuvoAccidente"></textarea>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
 

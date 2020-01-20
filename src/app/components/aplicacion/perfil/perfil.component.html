@@ -142,7 +142,7 @@
                                 <p style="text-align: left">Telefono: </p>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp" placeholder="telefono" formControlName="telefono" (change)="cambio('telefono')" [class.is-invalid]="datosAdmin.get('telefono').errors" readonly>
+                                <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp" placeholder="teléfono" formControlName="telefono" (change)="cambio('telefono')" [class.is-invalid]="datosAdmin.get('telefono').errors" readonly>
 
                                 <div *ngIf="datosAdmin.get('telefono').errors">
                                     <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('required')">* El campo es requerido
@@ -560,7 +560,7 @@
 
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h3 class="modal-title" id="exampleModalScrollableTitle">Agregar estudio medico</h3>
+                                            <h3 class="modal-title" id="exampleModalScrollableTitle">Agregar estudio médico</h3>
                                             <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -573,11 +573,11 @@
                                                     <div class="row">
                                                         <div class="col-md-2"></div>
                                                         <div class="col-md-4">
-                                                            <p style="text-align: left">Titulo del estudio medico</p>
+                                                            <p style="text-align: left">Titulo del estudio médico</p>
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titulo del estudio medico" [formControl]="nombreEstudio">
+                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titulo del estudio médico" name="nombreEstudio" #nombreEstudio="ngModel" [(ngModel)]="estudios.nombreEstudio">
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>

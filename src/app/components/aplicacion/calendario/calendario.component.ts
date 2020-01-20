@@ -404,7 +404,7 @@ export class CalendarioComponent implements OnInit {
       //   console.log('nombre invalido');
       // }
       // cedula
-      // {color:"#07a9df" , start:start,usuario:id,servicio:this.id_servicio , 
+      // {color:"#07a9df" , start:start,usuario:id,servicio:this.id_servicio ,
       // consultorio : this.medicoSelect.value.consultorio, mascota : this.mascota};
 
       if (this.formBene === true) {
@@ -418,7 +418,7 @@ export class CalendarioComponent implements OnInit {
         servicio : this.serviciosSelect.value.id_servicios, fecha_nacimiento: this.fechaNacimiento.value,
         start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.numeroCedula,
         correo: this.email.value, tipoDocumento: this.tipoDocumento.value, estadoCivil : this.estadoCivil.value,
-        ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(), 
+        ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(),
         barrio : this.barrio.value.toUpperCase(),
         eps : this.eps.value.toUpperCase(), acompanante : this.acompanante.value, consultorio : this.consultorioSelecionado.id_consultorio,
         parentesco : this.parentesco.value, telefonoAcompanante : this.telAcompanante.value, benef};
@@ -575,7 +575,7 @@ export class CalendarioComponent implements OnInit {
       if (!this.consultorioSelecionado) {
       window.scroll(0, 0);
       this.statusW = true;
-      this.statusText = 'Antes de sacar una cita por favor escoge un medico.';
+      this.statusText = 'Antes de sacar una cita por favor escoge un médico.';
     } else {
 
       if (new Date() < ev.date) {
@@ -763,7 +763,7 @@ export class CalendarioComponent implements OnInit {
 
             if (coincide === false) {
                this.status = true;
-               this.statusText = 'No se puede sacar cita por fuera del horario de atención de este servicio de '  + horaInicio + ' - ' 
+               this.statusText = 'No se puede sacar cita por fuera del horario de atención de este servicio de '  + horaInicio + ' - '
                + horaFinal + ', por favor escoge otro horario';
                window.scroll(0, 0);
             }
@@ -1037,7 +1037,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   closeOpenMonthViewDay(ev) {
-    // console.log(ev); 
+    // console.log(ev);
     this.getHistorialSucursal(moment(ev).format('M'), moment(ev).format('YYYY'));
     this.getEventosSucursal(moment(ev).format('M'), moment(ev).format('YYYY'));
   }
@@ -1056,7 +1056,7 @@ export class CalendarioComponent implements OnInit {
       this.idConsultorio =  this.consultorioSelecionado.id_consultorio;
     }
 
-    // console.log('info his suc', mes,anio,this.serviciosSelect.value.id_servicios,this.serviciosSelect.value.id_categoria, 
+    // console.log('info his suc', mes,anio,this.serviciosSelect.value.id_servicios,this.serviciosSelect.value.id_categoria,
     // identity, this.id_consultorio)
 
     // tslint:disable-next-line: max-line-length
@@ -1375,7 +1375,7 @@ export class CalendarioComponent implements OnInit {
   getEventosSucursal(mes, anio) {
     // console.log('aqui ev sucu', this.serviciosSelect);
     // this._sucursalService.getServiciosSucursal()
-    // return this.http.get(this.url + '/eventser/' + mes + '/' + anio + '/' + id_serv + '/'+ id_sucursal+ '/' + id_cate, ); 
+    // return this.http.get(this.url + '/eventser/' + mes + '/' + anio + '/' + id_serv + '/'+ id_sucursal+ '/' + id_cate, );
     this.events = [];
     let consultorio;
     if (!this.consultorioSelecionado) {
@@ -1689,7 +1689,7 @@ export class CalendarioComponent implements OnInit {
   //         }
   // }
 
- 
+
 
 
 

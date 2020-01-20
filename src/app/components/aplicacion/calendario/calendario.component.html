@@ -36,7 +36,7 @@
                 <p style="margin: 0px; color: grey; font-size: 17px;">Escoge un medico</p>
                 <mat-form-field class="w-100">
                     <mat-label>
-                        <h6>Medicos</h6>
+                        <h6>Médicos</h6>
                     </mat-label>
                     <mat-select (selectionChange)="consultorioSelect($event)">
                         <mat-option *ngFor="let m of medicos" [value]="m">
@@ -50,7 +50,7 @@
 
                 <div style="padding-top: 50px;" *ngFor="let h of infoConsultorio.horario; let i = index">
                     <div class="card">
-                        <div class="card-header">Horario 1</div>
+                        <div class="card-header">Horario {{i + 1}}</div>
                         <div class="card-body">
 
                             <h5 style="color: #04ad93;"><strong>Dias</strong></h5>
@@ -450,11 +450,11 @@
                                         <div class="invalid-feedback" *ngIf="identificacion.touched && identificacion.hasError('required')">
                                           Este es requerido
                                         </div>
-                  
+
                                         <div class="invalid-feedback" *ngIf="identificacion.hasError('pattern')">
                                           Este campo solo acepta numeros, sin puntos ni caracteres especiales.
-                                        </div>          
-                                        
+                                        </div>
+
                                         <div class="invalid-feedback" *ngIf="!identificacion.valid">
                                             minimo 6 caracteres, maximo 15
                                         </div> -->
@@ -469,8 +469,8 @@
 
                                                             <div class="form-group">
                                                                 <label class="form-label">Confirmar Identificación</label>
-                                                                <input type="text" class="form-control" [formControl]="confirmarIdentificacion" [class.is-invalid]="(confirmarIdentificacion.touched && confirmarIdentificacion.hasError('required')) || 
-                                confirmarIdentificacion.hasError('pattern') || 
+                                                                <input type="text" class="form-control" [formControl]="confirmarIdentificacion" [class.is-invalid]="(confirmarIdentificacion.touched && confirmarIdentificacion.hasError('required')) ||
+                                confirmarIdentificacion.hasError('pattern') ||
                                 (confirmarIdentificacion.touched && !confirmarIdentificacion.valid)
                                 || (confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value)) " minlength="6" maxlength="15" onpaste="alert('No puedes pegar en este campo');return false">
                                                                 <div class="invalid-feedback" *ngIf="(confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value))">
@@ -612,7 +612,7 @@
 
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="modal-label">Telefono acompañante</label>
+                                                                <label class="modal-label">Teléfono acompañante</label>
                                                                 <input type="text" [formControl]="telAcompanante" class="form-control" [class.is-invalid]="telAcompanante.hasError('pattern')">
                                                                 <div class="invalid-feedback" *ngIf="telAcompanante.hasError('pattern')">
                                                                     Este campo solo acepta numeros
@@ -638,43 +638,43 @@
                                                     <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCita()" *ngIf="(existe === 'true') && !formBene ">Sacar cita</button>
 
                                                     <!-- Boton para sacar cita a un usuario no registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid || 
-                  !telefono.valid || 
-                  !fechaNacimiento.valid || 
-                  !nombre.valid || 
-                  !email.valid || 
-                  !ocupacion.valid || 
-                  !acompanante.valid || 
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
+                  !telefono.valid ||
+                  !fechaNacimiento.valid ||
+                  !nombre.valid ||
+                  !email.valid ||
+                  !ocupacion.valid ||
+                  !acompanante.valid ||
                   !telAcompanante.valid ||
                   cedula.value != confirmarIdentificacion.value ||
                   confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && !formBene">Sacar cita</button>
 
                                                     <!-- Boton para sacar cita a un beneficiario de un usuario registrado -->
                                                     <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" *ngIf="(existe === 'true') && formBene
-                  " [disabled]="!nombresBeneficiario.valid || 
-                  !apellidosBeneficiario.valid || 
-                  !fechaBeneficiario.valid || 
-                  !noIdentificacionBeneficiario.valid 
-                  || !telefonoBeneficiario.valid || 
-                  !parentescoBeneficiario.valid || 
+                  " [disabled]="!nombresBeneficiario.valid ||
+                  !apellidosBeneficiario.valid ||
+                  !fechaBeneficiario.valid ||
+                  !noIdentificacionBeneficiario.valid
+                  || !telefonoBeneficiario.valid ||
+                  !parentescoBeneficiario.valid ||
                   loading">Sacar cita beneficiario</button>
 
                                                     <!-- Boton para sacar cita a un beneficiario de un usuario no registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid || 
-                  !telefono.valid || 
-                  !fechaNacimiento.valid || 
-                  !nombre.valid || 
-                  !email.valid || 
-                  !ocupacion.valid || 
-                  !acompanante.valid || 
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
+                  !telefono.valid ||
+                  !fechaNacimiento.valid ||
+                  !nombre.valid ||
+                  !email.valid ||
+                  !ocupacion.valid ||
+                  !acompanante.valid ||
                   !telAcompanante.valid ||
-                  !nombresBeneficiario.valid || 
-                  !apellidosBeneficiario.valid || 
-                  !fechaBeneficiario.valid || 
-                  !noIdentificacionBeneficiario.valid || 
-                  !telefonoBeneficiario.valid || 
-                  !parentescoBeneficiario.valid || 
-                  loading || 
+                  !nombresBeneficiario.valid ||
+                  !apellidosBeneficiario.valid ||
+                  !fechaBeneficiario.valid ||
+                  !noIdentificacionBeneficiario.valid ||
+                  !telefonoBeneficiario.valid ||
+                  !parentescoBeneficiario.valid ||
+                  loading ||
                   cedula.value != confirmarIdentificacion.value ||
                   confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && formBene">Sacar cita beneficiario</button>
 
@@ -686,13 +686,13 @@
                                                     <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('existe')" *ngIf="mascotas === 'true' && mascotaSlt != 'agregarOtra'" [disabled]="!peludito.valid">Sacar cita</button>
 
                                                     <!-- Boton para sacar cita a mascota y usuario que no estan registrados -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('nueva')" *ngIf="mascotas === 'false'" [disabled]="!nombre.valid || 
-                  !apellidos.valid || 
-                  !telefono.valid || 
-                  !nombreMascota.valid || 
-                  !especieMascota.valid || 
-                  !sexoMascota.valid || 
-                  !esterilizado.valid || 
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('nueva')" *ngIf="mascotas === 'false'" [disabled]="!nombre.valid ||
+                  !apellidos.valid ||
+                  !telefono.valid ||
+                  !nombreMascota.valid ||
+                  !especieMascota.valid ||
+                  !sexoMascota.valid ||
+                  !esterilizado.valid ||
                   !email.valid ||
                   cedula.value != confirmarIdentificacion.value ||
                   confirmacionEmail.value != email.value">Sacar cita</button>
@@ -760,7 +760,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label class="modal-label">Telefono beneficiario</label>
+                                                        <label class="modal-label">Teléfono beneficiario</label>
                                                         <input type="text" [formControl]="telefonoBeneficiario" class="form-control" maxlength="15" [class.is-invalid]="( telefonoBeneficiario.touched && telefonoBeneficiario.hasError('required') ) || telefonoBeneficiario.hasError('pattern')">
 
                                                         <div class="invalid-feedback" *ngIf="telefonoBeneficiario.hasError('required')">
@@ -790,7 +790,7 @@
                                 <option value="si">Si</option>
                                 <option value="no">No</option>
                               </select>
-    
+
                               <div class="invalid-feedback" *ngIf="esterilizado.hasError('required')">
                                 Este campo es requerido
                               </div>
@@ -974,8 +974,8 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label class="form-label">Confirmar Identificación</label>
-                                                                <input type="text" class="form-control" [formControl]="confirmarIdentificacion" [class.is-invalid]="(confirmarIdentificacion.touched && confirmarIdentificacion.hasError('required')) || 
-                                  confirmarIdentificacion.hasError('pattern') || 
+                                                                <input type="text" class="form-control" [formControl]="confirmarIdentificacion" [class.is-invalid]="(confirmarIdentificacion.touched && confirmarIdentificacion.hasError('required')) ||
+                                  confirmarIdentificacion.hasError('pattern') ||
                                   (confirmarIdentificacion.touched && !confirmarIdentificacion.valid)
                                   || (confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value)) " minlength="6" maxlength="15" onpaste="alert('No puedes pegar en este campo');return false">
                                                                 <div class="invalid-feedback" *ngIf="(confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value))">

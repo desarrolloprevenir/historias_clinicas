@@ -54,7 +54,7 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <p><strong>Medico : </strong>{{ic.medico}}</p>
+                                        <p><strong>Médico : </strong>{{ic.medico}}</p>
                                         <p><strong>Servicio: </strong>{{ic.servicio}}</p>
 
                                         <div class="text-right" style="padding-top: 10px;">
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <p><strong>Medico : </strong>{{ic.nombreMedico}}</p>
+                                        <p><strong>Médico : </strong>{{ic.nombreMedico}}</p>
                                         <p><strong>Servicio: </strong>{{ic.nombreServicio}}</p>
                                         <div class="text-right" style="padding-top: 20px;"><button class="btn btn-danger" (click)="posisionAEliminar(i, ic.medico_id)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt"></i></button>
 
@@ -127,21 +127,21 @@
             <!-- ----------------------------------- CONSULTORIOS EDITAR -------------------------------------------------- -->
 
             <!-- <div *ngIf=" (infoSucursal && infoSucursal.consultorio.length >= 1) && mymodel === 'consultorios'" style="padding-top: 30px;">
-      
+
           <div class="contenedor" >
               <div class="tab-content scroll" id="nav-tabContent" >
-    
+
                 <div style="padding-top: 10px;" *ngFor="let ic of infoSucursal.consultorio; let i = index">
                     <div class="card" >
                         <div class="card-header"><div class="row">
                             <div class="col-9">
                               <div class="text-left">
-                                  Consultorio : {{ic.nombre}} 
+                                  Consultorio : {{ic.nombre}}
                               </div>
                               </div>
-                        </div>       
+                        </div>
                     </div>
-            
+
                       <div class="card-body">
                         <p><strong>Medico : </strong>{{ic.medico}}</p>
                         <p><strong>Servicio: </strong>{{ic.servicio}}</p>
@@ -152,9 +152,9 @@
                         </div>
                       </div>
                     </div>
-                </div>               
+                </div>
               </div>
-          </div>  
+          </div>
       </div>  -->
 
 
@@ -201,7 +201,7 @@
 
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="form-label">Telefono *</label>
+                                        <label class="form-label">Teléfono *</label>
                                         <input type="text" class="form-control" [formControl]="telefonoSucursal" [class.is-invalid]="(telefonoSucursal.touched && telefonoSucursal.hasError('required')) || (telefonoSucursal.hasError('pattern')) || telefonoSucursal.hasError('minlength') || telefonoSucursal.hasError('maxlength')"
                                             minlength="6" maxlength="12">
 
@@ -239,7 +239,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="form-label">Departamento *</label>
-                                        <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)"> 
+                                        <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)">
                                     <option *ngFor="let d of departamentos" value="{{d.id_departamento}}">{{d.nombre}}</option>
                                   </select>
                                     </div>
@@ -248,7 +248,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="form-label">Municipio *</label>
-                                        <select name="" id="" class="form-control" [formControl]="muniSelect"> 
+                                        <select name="" id="" class="form-control" [formControl]="muniSelect">
                                     <option *ngFor="let m of municipios" value="{{m.id_municipio}}">{{m.nombre}}</option>
                                   </select>
                                     </div>
@@ -279,7 +279,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" [formControl]="pssw" [class.is-invalid]="( pssw.hasError('required') && pssw.touched ) 
+                                    <input type="password" class="form-control" [formControl]="pssw" [class.is-invalid]="( pssw.hasError('required') && pssw.touched )
                               || pssw.hasError('minlength')">
                                     <div class="invalid-feedback">
                                         <p *ngIf="pssw.hasError('required') && pssw.touched">* Este campo es requerido</p>
@@ -303,14 +303,14 @@
 
                         <div class="text-right" style="padding: 30px;">
                             <button class="btn btn-success" (click)="siguiente()" [disabled]="
-                      !nombreSucursal.valid || 
-                      !telefonoSucursal.valid || 
-                      !this.muniSelect.value || 
-                      !direccionSucursal.valid || 
+                      !nombreSucursal.valid ||
+                      !telefonoSucursal.valid ||
+                      !this.muniSelect.value ||
+                      !direccionSucursal.valid ||
                       (pssw.value != psswConfirm.value) ||
                       pssw.invalid ||
                       username.invalid
-                      
+
                       ">Siguiente</button>
                         </div>
 
@@ -332,15 +332,15 @@
                                   <input type="text" id="nombre" class="form-control" formControlName="nombre" [class.is-invalid]="datos.get('nombre').errors" (change)="cambio('nombre')" readonly>
                                   <a *ngIf="ver === 'nombre'" (click)="editar('nombre')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                               </div>
-                             
-              
+
+
                               <div *ngIf="datos.get('nombre').errors">
                                 <p class="alerta-error" *ngIf="datos.get('nombre').hasError('required')">* El campo es requerido.</p>
                                 <p class="alerta-error" *ngIf="datos.get('nombre').hasError('minlength')">Cantidad minima de caracteres (2).</p>
                                 <p class="alerta-error" *ngIf="datos.get('nombre').hasError('maxlength')">Cantidad maxima de caracteres (50).</p>
                                 <p class="alerta-error" *ngIf="datos.get('nombre').hasError('pattern')">Este campo solo acepta letras. </p>
                               </div>
-              
+
                             </div> -->
 
 
@@ -365,7 +365,7 @@
 
                                 <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('telefono')">
                                     <div class="form-group">
-                                        <label class="form-label">Telefono *</label>
+                                        <label class="form-label">Teléfono *</label>
                                         <div style="display: flex;">
 
                                             <input type="text" id="telefono" class="form-control" [formControl]="telefonoSucursal" [class.is-invalid]="(telefonoSucursal.touched && telefonoSucursal.hasError('required')) || (telefonoSucursal.hasError('pattern')) || telefonoSucursal.hasError('minLength') || telefonoSucursal.hasError('maxLength')"
@@ -410,21 +410,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--       
+                            <!--
                       <div class="row">
                           <div class="col">
                               <div class="form-group">
                                   <label class="form-label">Departamento *</label>
-                                  <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)"> 
+                                  <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)">
                                     <option *ngFor="let d of departamentos" value="{{d.id_departamento}}">{{d.nombre}}</option>
                                   </select>
                                 </div>
                           </div>
-        
+
                           <div class="col">
                               <div class="form-group">
                                   <label class="form-label">Municipio *</label>
-                                  <select name="" id="" class="form-control" [formControl]="muniSelect" (change)="municipioSelect($event)"> 
+                                  <select name="" id="" class="form-control" [formControl]="muniSelect" (change)="municipioSelect($event)">
                                     <option *ngFor="let m of municipios" value="{{m.id_municipio}}">{{m.nombre}}</option>
                                   </select>
                                 </div>
@@ -445,10 +445,6 @@
                 <div *ngSwitchCase="'consultorios'">
 
                     <div class="container">
-                        <div class="text-center">
-                            <h5 style="color: #04ad93;">Crear nuevo consultorio</h5>
-                        </div>
-                        <br>
 
                         <div class="card">
 
@@ -456,8 +452,6 @@
                                 <form>
 
                                     <div class="row">
-
-
                                         <div class="col">
                                             <label class="form-label">Numero o nombre del consultorio *</label>
                                             <input type="text" class="form-control" [formControl]="nombreConsultorio" maxlength="20">
@@ -472,7 +466,7 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <label class="form-label">Medico *</label>
+                                            <label class="form-label">Médico *</label>
                                             <select name="" id="select-med" class="form-control" [formControl]="medicoSelect">
                                     <option *ngFor="let m of medicos" [ngValue]="m" [disabled]="m.select === true || m.activo === 'true'">{{m.nombre}}</option>
                                   </select>
@@ -917,7 +911,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <label class="form-label">Medico</label>
+                        <label class="form-label">Médico</label>
                         <input type="text" class="form-control" value="{{consultorioSelect.medico}}" readonly>
                     </div>
                     <div class="col">

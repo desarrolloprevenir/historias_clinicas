@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <label class="form-label">Extension telefono</label>
+                                            <label class="form-label">Extension télefono</label>
                                             <input type="text" class="form-control" [formControl]="extensionConsultorio" maxlength="10">
                                         </div>
 
@@ -92,7 +92,7 @@
                                     <div class="row">
 
                                         <div class="col">
-                                            <label class="form-label">Medico</label>
+                                            <label class="form-label">Médico</label>
                                             <input type="text" class="form-control" value="{{infoConsultorio.medico}}" readonly>
                                         </div>
                                         <div class="col">
@@ -126,7 +126,7 @@
                                         <div class="row">
 
                                             <div class="col">
-                                                <label class="form-label">Medico</label>
+                                                <label class="form-label">Médico</label>
                                                 <!-- <input type="text" class="form-control" value="{{infoConsultorio.medico}}" readonly> -->
                                                 <select class="form-control" [formControl]="medicoSelect" [class.is-invalid]="medicoSelect.hasError('required') && medicoSelect.touched">
                           <option *ngFor="let m of medicos" value="{{m.medico_id}}" [disabled]="m.activo === 'true'">{{m.nombre}}</option>

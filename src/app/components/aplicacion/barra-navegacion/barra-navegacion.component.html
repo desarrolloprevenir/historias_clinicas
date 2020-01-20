@@ -38,7 +38,7 @@
 
 
                 <li class="nav-item" *ngIf="!identity.medico_id && !identity.id_sucursales">
-                    <a class="nav-link" routerLink="/medicos" routerLinkActive="active-navegacion">Gestionar medicos</a>
+                    <a class="nav-link" routerLink="/medicos" routerLinkActive="active-navegacion">Gestionar médicos</a>
                 </li>
 
                 <li class="nav-item" *ngIf="(!identity.medico_id || !identity.id_provedor) && identity.id_sucursales">
@@ -46,7 +46,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/contactenos" routerLinkActive="active-navegacion">Contactenos</a>
+                    <a class="nav-link" routerLink="/contactenos" routerLinkActive="active-navegacion">Contáctenos</a>
                 </li>
 
                 <li class="nav-item">
@@ -78,7 +78,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" routerLink="/perfil">Mi Perfil</a>
-                            <a class="dropdown-item" style="cursor: pointer;" id="btn-cambiar-de-sesion" data-toggle="modal" data-target="#exampleModalCenter">Cambiar de sesion</a>
+                            <a class="dropdown-item" style="cursor: pointer;" id="btn-cambiar-de-sesion" data-toggle="modal" data-target="#exampleModalCenter">Cambiar de sesión</a>
                             <a class="dropdown-item" style="cursor: pointer;" (click)="logOut()">Cerrar sesión</a>
                         </div>
                     </li>
@@ -97,7 +97,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Cambiar de sesion</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Cambiar de sesión</h5>
                     <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" type="submit" (click)="login()" [disabled]="pssw.invalid || username.invalid">Iniciar sesion</button>
+                        <button type="button" class="btn btn-primary" type="submit" (click)="login()" [disabled]="pssw.invalid || username.invalid">Iniciar sesión</button>
                     </div>
                 </form>
 
