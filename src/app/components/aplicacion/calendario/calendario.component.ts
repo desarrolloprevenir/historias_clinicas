@@ -93,6 +93,8 @@ export class CalendarioComponent implements OnInit {
    public parentescos;
    public formBene;
    public entro;
+   public numeroCedula;
+   public infoConsultorio;
 
    // fechas de hoy
    public today;
@@ -214,7 +216,7 @@ export class CalendarioComponent implements OnInit {
     this.loading = true;
     let identity = this.userService.getIdentity();
     this.aplicatioService.getPublicacionesProveedor(identity.id_provedor).subscribe( (response) => {
-      console.log(response);
+      // console.log(response);
       this.loading = false;
       if (response[0].vacio === true) {
         // console.log('vacio');
@@ -311,13 +313,16 @@ export class CalendarioComponent implements OnInit {
     this.status = false;
     this.statusT = false;
 
+
     if (this.info.tipo === 'mascota') {
       this.provedorService.getMascotaInfo(this.info.id).subscribe((response) => {
+        // console.log('infoooo', this.info);
         this.mascota = response[0];
         this.mascota.dueno = this.mascota.dueño;
         this.mascota.id_eventos = this.info.id_eventos;
-        // console.log(this.mascota);
-      }, (err) => {
+        this.mascota.id_consultorio = this.info.id_consultorio;
+        // console.log('mascotaaa', this.mascota);
+      }, () => {
         // console.log(err);
       });
       document.getElementById('btn-modal-evento').click();
@@ -329,6 +334,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   addEvent(title, start, end, horaInicio, horaFinal, info): void {
+    // console.log(info);
     this.loading = true;
     // console.log('aqui add event');
     this.events = [
@@ -410,7 +416,7 @@ export class CalendarioComponent implements OnInit {
 
         datos = {  apellidos: this.apellidos.value.toUpperCase(), color : '#07a9df', existe : false, mascota: undefined,
         servicio : this.serviciosSelect.value.id_servicios, fecha_nacimiento: this.fechaNacimiento.value,
-        start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.cedula.value,
+        start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.numeroCedula,
         correo: this.email.value, tipoDocumento: this.tipoDocumento.value, estadoCivil : this.estadoCivil.value,
         ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(), 
         barrio : this.barrio.value.toUpperCase(),
@@ -421,7 +427,7 @@ export class CalendarioComponent implements OnInit {
 
         datos = {  apellidos: this.apellidos.value.toUpperCase(), color : '#07a9df', existe : false, mascota: undefined,
         servicio : this.serviciosSelect.value.id_servicios, fecha_nacimiento: this.fechaNacimiento.value,
-        start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.cedula.value,
+        start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.numeroCedula,
         correo: this.email.value, tipoDocumento: this.tipoDocumento.value, estadoCivil : this.estadoCivil.value,
         ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(),
         barrio : this.barrio.value.toUpperCase(),
@@ -480,7 +486,7 @@ export class CalendarioComponent implements OnInit {
         }
 
 
-      }, (err) => {
+      }, () => {
         this.status = true;
         this.statusText = 'Error al agregar la cita, intentalo mas tarde o revisa tu conexion.';
         window.scroll(0, 0);
@@ -628,7 +634,7 @@ export class CalendarioComponent implements OnInit {
     }
   }
 
-  horarios(dia) {
+  horarios(dia?) {
 
     this.loading = true;
     let date = moment(this.horarioCita).format('YYYY-MM-D');
@@ -643,7 +649,7 @@ export class CalendarioComponent implements OnInit {
     this.provedorService.getHorario(date, this.consultorioSelecionado.id_consultorio, this.serviciosSelect.value.id_categoria).
         subscribe((response) => {
           // console.log('horariosssssss');
-          // console.log('horarios', response);
+          console.log('horarios', response);
           this.information = response;
           this.loading = false;
           let bol = true;
@@ -950,6 +956,7 @@ export class CalendarioComponent implements OnInit {
       this.mostrar = false;
       this.mascotas = undefined;
       this.provedorService.cedula(this.cedula.value, false).subscribe( (response) => {
+      this.numeroCedula = this.cedula.value;
       // console.log(response);
       if (response === false) {
         // this.valdiacionesExiste();
@@ -1054,7 +1061,7 @@ export class CalendarioComponent implements OnInit {
 
     // tslint:disable-next-line: max-line-length
     this.sucursalService.getHistorialSucursal(mes, anio, this.serviciosSelect.value.id_servicios, this.serviciosSelect.value.id_categoria, identity, this.idConsultorio).subscribe( (response) => {
-      console.log('sucu', response);
+      // console.log('sucu', response);
 
       this.resHistorial = response;
 
@@ -1121,6 +1128,21 @@ export class CalendarioComponent implements OnInit {
     let mes =  moment(new Date).format('M');
     this.getHistorialSucursal(mes, anio);
     this.getEventosSucursal(mes, anio);
+    // this.horarios();
+    this.getInfoConsultorio(this.consultorioSelecionado.id_consultorio);
+  }
+
+  getInfoConsultorio(idConsultorio) {
+    this.loading = true;
+    this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
+      console.log('info_cc', response);
+      this.infoConsultorio = response[0];
+    }, () => {
+      // console.log(err);
+      this.loading = false;
+      this.status = 'error';
+      this.statusText = 'Error en la conexion, Por favor revisa tu conexion o intentalo mas tarde.';
+    } );
   }
 
   mascotaSelect(ev) {
@@ -1187,7 +1209,7 @@ export class CalendarioComponent implements OnInit {
                    idMascota , mascota: true, nombres: this.datosUser.nombre,
                    servicio: this.serviciosSelect.value.id_servicios, start : date, usuario: this.datosUser.id,
                    consultorio : this.consultorioSelecionado.id_consultorio};
-      // console.log('existe', datos);
+      console.log('existe', datos);
       this.loading = true;
       this.provedorService.postCitasProvedor(datos, token).subscribe ((response) => {
         console.log(response);
@@ -1356,7 +1378,7 @@ export class CalendarioComponent implements OnInit {
     // return this.http.get(this.url + '/eventser/' + mes + '/' + anio + '/' + id_serv + '/'+ id_sucursal+ '/' + id_cate, ); 
     this.events = [];
     let consultorio;
-    if(!this.consultorioSelecionado) {
+    if (!this.consultorioSelecionado) {
       consultorio = 0;
     } else {
       consultorio = this.consultorioSelecionado.id_consultorio;
@@ -1367,10 +1389,10 @@ export class CalendarioComponent implements OnInit {
     let identity = this.userService.getIdentity();
     // tslint:disable-next-line: max-line-length
     this.sucursalService.getEventsSucursal(mes, anio, this.serviciosSelect.value.id_servicios, identity.id_sucursales, this.serviciosSelect.value.id_categoria, consultorio).subscribe( (response) =>{
-      // console.log('res ev', response);
+      console.log('res ev', response);
       this.res = response;
 
-      if(this.res.length >= 1) {
+      if (this.res.length >= 1) {
         // console.log('kk');
         // var d;
         for (let i = 0; i < this.res.length; i++) {
@@ -1533,7 +1555,7 @@ export class CalendarioComponent implements OnInit {
       // usuarios_id = this._userService.getIdentity().id_sucursales;
     }
 
-    if(bol === true) {
+    if (bol === true) {
       // mascota
       categoria = 20;
     } else {
@@ -1541,10 +1563,10 @@ export class CalendarioComponent implements OnInit {
       categoria = 0;
     }
 
-    // console.log(info.id_eventos, id_consultorio, categoria);
+    console.log(info.id_eventos, id_consultorio, categoria);
 
     this.provedorService.dltCitaProvedor(info.id_eventos, id_consultorio, categoria, token).subscribe( (response) => {
-            console.log('eli',response);
+            console.log('eli', response);
             this.loading = false;
             if (response[0].borrado === true) {
               // this.getEventos();

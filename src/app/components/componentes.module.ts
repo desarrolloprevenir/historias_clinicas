@@ -54,6 +54,8 @@ import { BarraLateralComponent } from './medico/barra-lateral/barra-lateral.comp
 import { HistoriaOptometriaComponent } from './medico/historia-optometria/historia-optometria.component';
 import { HstGeneralComponent } from './medico/hst-general/hst-general.component';
 import { VisiometriaComponent } from './medico/visiometria/visiometria.component';
+import { ModalOptometriaComponent } from './medico/modales-historias-clinicas/modal-optometria/modal-optometria.component';
+import { ModalGeneralComponent } from './medico/modales-historias-clinicas/modal-general/modal-general.component';
 
 
 @NgModule({
@@ -86,7 +88,9 @@ import { VisiometriaComponent } from './medico/visiometria/visiometria.component
   BarraLateralComponent,
   HistoriaOptometriaComponent,
   HstGeneralComponent,
-  VisiometriaComponent
+  VisiometriaComponent,
+  ModalOptometriaComponent,
+  ModalGeneralComponent
   ],
   imports: [
     CommonModule,
@@ -137,7 +141,9 @@ import { VisiometriaComponent } from './medico/visiometria/visiometria.component
   HistoriaGeneralComponent,
   BarraLateralComponent,
   HistoriaOptometriaComponent,
-  HstGeneralComponent
+  HstGeneralComponent,
+  ModalOptometriaComponent,
+  ModalGeneralComponent
   ]
 })
 export class ComponentesModule { }

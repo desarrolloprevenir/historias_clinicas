@@ -1,0 +1,12 @@
+.label-formulario-user {
+    margin: 0px;
+    color: grey;
+    font-size: 13px;
+}
+
+.etiqueta {
+    background-color: #c1c6c9 !important;
+    border: 1px solid #ffffff !important;
+    color: #000000 !important;
+    width: 50px !important;
+}

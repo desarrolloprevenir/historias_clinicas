@@ -69,7 +69,7 @@ export class ConfirmarCuentaComponent implements OnInit {
     }
 
 
-    console.log('iddd', id);
+    // console.log('iddd', id);
     this.appService.getReenviarCodigoCorreo(id).subscribe( (response) => {
       // console.log(response);
       if (response === true) {

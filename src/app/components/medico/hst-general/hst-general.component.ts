@@ -125,6 +125,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
   public antecedentes = [];
   @Input() idUsuario;
   @Input() idServicio;
+  @Input() categoria;
 
   public vista;
 
@@ -680,7 +681,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
   }
 
   pubExitosa() {
-     this.router.navigate(['/home']);
+    this.router.navigate(['/historia-clinica', this.idUsuario, this.idServicio, this.categoria]);
   }
 
   siguiente(parametro: string) {

@@ -24,6 +24,9 @@ export class ListadoPacientesComponent implements OnInit {
   status;
   public imagen;
   public infoUser;
+  public servicios;
+  public servicioSelect;
+  public infoServicio;
 
   @ViewChild('content', { static: false }) content: ElementRef;
   @ViewChild('contentRemision', { static: false }) contentRemision: ElementRef;
@@ -37,6 +40,8 @@ export class ListadoPacientesComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    let identity = this.userService.getIdentity().medico_id;
+    this.getServiciosMedico(identity);
     if (this.route.params) {
       this.route.params.subscribe(params => {
 
@@ -56,26 +61,47 @@ export class ListadoPacientesComponent implements OnInit {
 
   buscarCedula() {
 
+
+    if (!this.infoServicio) {
+        this.status = 'warning';
+        this.statusText = 'Por favor escoge un provedor medico y un servicio.';
+    } else {
+
+      this.loading = true;
+      let identity = this.userService.getIdentity().medico_id;
+      // console.log(this.infoServicio.id_servicios, this.cedula.value);
+
+      this.medicoService.getHistoriasClinicaPorUsuario(this.infoServicio.id_servicios , this.cedula.value).subscribe((response) => {
+        this.loading = false;
+        // console.log(response);
+        this.infoHc = response;
+
+        if (this.infoHc.length >= 1) {
+
+          this.getUser(this.infoHc[0].usuarios_id);
+        }
+      }, () => {
+        this.status = 'error';
+        this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde.';
+        this.loading = false;
+        // console.log(err);
+      });
+    }
+
+  }
+
+  getServiciosMedico(id) {
     this.loading = true;
-    let identity = this.userService.getIdentity().medico_id;
-    // console.log(identity, this.cedula.value);
-
-    this.medicoService.getHistoriasClinicaPorUsuario(identity, this.cedula.value).subscribe((response) => {
-      this.loading = false;
+    this.medicoService.getServicios(id).subscribe( (response) => {
       // console.log(response);
-      this.infoHc = response;
-
-      if (this.infoHc.length >= 1) {
-
-        this.getUser(this.infoHc[0].id_usuario);
-      }
-    }, () => {
-      this.status = 'error';
-      this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde.';
+      this.servicios = response;
       this.loading = false;
+    }, () => {
       // console.log(err);
+      this.loading = false;
+      this.status = 'error';
+      this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde.'
     });
-
   }
 
   getUser(id) {
@@ -83,23 +109,33 @@ export class ListadoPacientesComponent implements OnInit {
 
     this.aplicationService.getUser(id).subscribe( (response) => {
       this.infoUser = response;
-      // console.log(this.infoUser);
+      console.log(this.infoUser);
     }, () => {
       // console.log(err);
     });
   }
 
+  provedorSelecionado(ev) {
+    this.servicioSelect = ev.value;
+    // console.log(this.servicioSelect);
+  }
+
+  serviciosSelecionado(ev) {
+    this.infoServicio = ev.value;
+    // console.log(this.infoServicio);
+  }
+
 
   verHistoriaClinica(info) {
     this.infoHistoriaClinica = info;
-    console.log(this.infoHistoriaClinica);
+    // console.log(this.infoHistoriaClinica);
 
     document.getElementById('btn-ver-hc').click();
   }
 
   pdfMedicamentos() {
 
-    console.log('aqui medicamentos');
+    // console.log('aqui medicamentos');
 
     var doc = new jsPDF();
 

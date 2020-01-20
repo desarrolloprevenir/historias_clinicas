@@ -48,6 +48,7 @@ export class HistoriaClinicaComponent implements OnInit {
   public imagen;
   public generos;
   public idCategoria;
+  public modal;
 
   constructor(private formBuilder: FormBuilder,
               private aplicationService: AppService,
@@ -111,7 +112,7 @@ export class HistoriaClinicaComponent implements OnInit {
       this.loading = false;
       // console.log('historia clinica general', response);
       this.infoHc = response;
-    }, () => { 
+    }, () => {
       // console.log(err);
       this.status = 'error';
       this.statusText = 'Error en la conexión, por favor revisa tu conexión o intentalo más tarde';
@@ -592,16 +593,15 @@ export class HistoriaClinicaComponent implements OnInit {
         this.loading = false;
         console.log('info hist opto', response);
         if (this.idCategoria === '3') {
-          document.getElementById('btn-ver-hc').click();
           this.infoHistoriaClinica = response;
+          document.getElementById('btn-ver-hc').click();
+          // this.modal = 'optometria';
         } else {
            this.infoHistoriaGeneral = response;
           //  console.log('bvhgi', this.infoHistoriaGeneral);
            document.getElementById('btn-ver-hg').click();
         }
 
-
-        
     }, () => {
       this.loading = false;
       document.getElementById('btn-cerrar-moda-ver-hc').click();

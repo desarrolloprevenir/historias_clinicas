@@ -104,6 +104,9 @@ export class BuscarCitaComponent implements OnInit {
   }
 
   buscarCedula() {
+    console.log(this.infoRes);
+    this.infoRes = undefined;
+    this.infoResMasc = undefined;
     this.home.loading = true;
     this.confirmacionEli = false;
     let identity = this.userService.getIdentity();
@@ -235,9 +238,10 @@ export class BuscarCitaComponent implements OnInit {
 
     let identity = this.userService.getIdentity();
     let token = this.userService.getToken();
-
+ 
     // es un usuario
-    this.provedorService.dltCitaProvedor(this.infoCita.id_eventos, identity.id_provedor, categoria, token).subscribe( (response) => {
+    // tslint:disable-next-line: max-line-length
+    this.provedorService.dltCitaProvedor(this.infoCita.id_eventos, this.infoCita.id_consultorio, categoria, token).subscribe( (response) => {
       // console.log(response);
       this.home.loading = false;
 
