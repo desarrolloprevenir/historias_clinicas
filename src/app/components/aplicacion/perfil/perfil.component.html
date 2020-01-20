@@ -13,7 +13,7 @@
                     <br>
                     <div>
                         <h4><strong>{{provedor.nombre}}</strong></h4>
-                        <p>Descripcion : {{provedor.descripcion}}</p>
+                        <p>Descripción : {{provedor.descripcion}}</p>
                     </div>
 
                 </div>
@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
-                                <p style="text-align: left">Pais</p>
+                                <p style="text-align: left">País</p>
                             </div>
 
                             <div class="col-md-4">
@@ -147,9 +147,9 @@
                                 <div *ngIf="datosAdmin.get('telefono').errors">
                                     <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('required')">* El campo es requerido
                                     </p>
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('minlength')">Cantidad minima de caracteres (5)</p>
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('maxlength')">Cantidad maxima de caracteres (15)</p>
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('minlength')">Cantidad mínima de caracteres (5)</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('maxlength')">Cantidad máxima de caracteres (15)</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('telefono').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                 </div>
 
                             </div>
@@ -179,9 +179,9 @@
                                 <input type="text" class="form-control" id="whatsapp" aria-describedby="emailHelp" placeholder="whatsapp" formControlName="whats" (change)="cambio('whatsapp')" [class.is-invalid]="datosAdmin.get('whats').errors" readonly>
 
                                 <div *ngIf="datosAdmin.get('whats').errors">
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('minlength')">Cantidad minima de caracteres (5)</p>
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('maxlength')">Cantidad maxima de caracteres (15)</p>
-                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('minlength')">Cantidad mínima de caracteres (5)</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('maxlength')">Cantidad máxima de caracteres (15)</p>
+                                    <p class="alerta-error" *ngIf="datosAdmin.get('whats').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -228,7 +228,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
-                                <p style="text-align: left">Descripcion: </p>
+                                <p style="text-align: left">Descripción: </p>
                             </div>
                             <div class="col-md-4">
                                 <textarea id="descripcion" class="form-control" (change)="cambio('descripcion')" formControlName="descripcion" [class.is-invalid]="datosAdmin.get('descripcion').errors && datosAdmin.get('descripcion').touched" readonly></textarea>
@@ -318,7 +318,7 @@
                         <div class="container-fluid">
                             <br />
                             <div class="card-header">
-                                <h1>Informacion de mi cuenta</h1>
+                                <h1>Información de mi cuenta</h1>
                             </div>
                             <br />
                         </div>
@@ -328,7 +328,7 @@
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-4">
-                                        <p style="text-align: left">Pais</p>
+                                        <p style="text-align: left">País</p>
                                     </div>
 
                                     <div class="col-md-4">
@@ -358,11 +358,11 @@
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-4">
-                                        <p style="text-align: left">Cedula</p>
+                                        <p style="text-align: left">Cédula</p>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cedula" formControlName="cedula" readonly>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cédula" formControlName="cedula" readonly>
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>
@@ -511,7 +511,7 @@
                                     <div class="col-md-1"></div>
                                 </div>
                                 <div *ngIf="datos.get('wp').errors">
-                                    <p class="alerta-error" *ngIf="datos.get('wp').hasError('pattern')">* Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                    <p class="alerta-error" *ngIf="datos.get('wp').hasError('pattern')">* Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                 </div>
                             </div>
 
@@ -696,7 +696,7 @@
                 <div class="container-fluid" *ngIf="infoSucursal">
                     <br />
                     <div class="card-header">
-                        <h1>Informacion de mi cuenta</h1>
+                        <h1>Información de mi cuenta</h1>
                     </div>
                     <br />
                 </div>
@@ -789,7 +789,7 @@
                         </div>
                         <br>
                         <div class="text-center">
-                            <button class="btn btn-success" [disabled]="!datosSucu.valid">Editar Informacion</button>
+                            <button class="btn btn-success" [disabled]="!datosSucu.valid">Editar Información</button>
                         </div>
 
                     </form>

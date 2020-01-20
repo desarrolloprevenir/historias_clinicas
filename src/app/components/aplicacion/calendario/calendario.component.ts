@@ -446,7 +446,7 @@ export class CalendarioComponent implements OnInit {
         if (response[0].cedula !== undefined && response[0].cedula === true) {
           // console.log('correo repetido');
           this.statusW = 'warning';
-          this.statusText = 'El numero de identificacion del beneficiario ya se encuentra registrado.';
+          this.statusText = 'El número de identificación del beneficiario ya se encuentra registrado.';
           this.loading = false;
         }
 
@@ -531,7 +531,7 @@ export class CalendarioComponent implements OnInit {
         if (response[0].cedula !== undefined && response[0].cedula === true) {
         // console.log('cedula repetido');
         this.statusW = 'warning';
-        this.statusText = 'El numero de identificacion del beneficiario ya se encuentra registrado.';
+        this.statusText = 'El número de identificación del beneficiario ya se encuentra registrado.';
         this.loading = false;
       }
 

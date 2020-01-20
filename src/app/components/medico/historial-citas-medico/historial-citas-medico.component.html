@@ -60,7 +60,7 @@
         <div class="col-md-4">
             <div class="btn-group">
                 <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
-                    Atras
+                    Atrás
                 </div>
                 <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
                     Hoy
@@ -125,7 +125,7 @@
                     <div class="col">
                         <p><strong>Nombre : </strong> {{infoPaciente.id.nombre}}</p>
                         <p><strong>Apellido :</strong> {{infoPaciente.id.apellidos}}</p>
-                        <p><strong>Identificacion :</strong> {{infoPaciente.id.cedula}}</p>
+                        <p><strong>Identificación :</strong> {{infoPaciente.id.cedula}}</p>
                         <p><strong>No. Contacto</strong> {{infoPaciente.id.telefono}}</p>
                         <br>
                         <button class="btn btn-info" [routerLink]="['/gestionar-pacientes', infoPaciente.id.cedula]" data-dismiss="modal">Ver historia clinica</button>

@@ -92,14 +92,14 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel" style="color: black">Confirmacion</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel" style="color: black">Confirmación</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="text-left">
-                                                                <p style="color: black">¿ Estas seguro que deseas eliminar este consultorio ?</p>
+                                                                <p style="color: black">¿ Estás seguro que deseas eliminar este consultorio ?</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -210,7 +210,7 @@
                                         </div>
 
                                         <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('pattern')">
-                                            Este campo solo acepta numeros, sin espacios ni caracteres especiales.
+                                            Este campo solo acepta números, sin espacios ni caracteres especiales.
                                         </div>
 
                                         <div class="invalid-feedback" *ngIf="telefonoSucursal.hasError('minlength')">
@@ -434,7 +434,7 @@
                         </form>
 
                         <div class="text-center" style="padding-top: 10px;">
-                            <button class="btn btn-success" style="margin-right: 10px;" (click)="guardarInfoSucursal()" [disabled]="!nombreSucursal.valid || !telefonoSucursal.valid || !direccionSucursal.valid">Guardar Informacion</button>
+                            <button class="btn btn-success" style="margin-right: 10px;" (click)="guardarInfoSucursal()" [disabled]="!nombreSucursal.valid || !telefonoSucursal.valid || !direccionSucursal.valid">Guardar Información</button>
                             <button class="btn btn-primary" style="margin-right: 10px;" (click)="siguiente()">Ir a Consultorios</button>
                         </div>
 
@@ -792,7 +792,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
 
-                            <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atras</button>
+                            <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button>
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-success" (click)="mostrarHorario('false')" [disabled]="!btnHorario">Agregar otro Horario</button>
@@ -862,7 +862,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoEliminar">Confirmacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoEliminar">Confirmación</h5>
                 <h5 class="modal-title" id="exampleModalLabel" *ngIf="!infoEliminar">Aviso</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -871,7 +871,7 @@
 
             <div *ngIf="infoEliminar">
                 <div class="modal-body">
-                    ¿ Estas seguro que deseas eliminar este consultorio ?
+                    ¿ Estás seguro que deseas eliminar este consultorio ?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

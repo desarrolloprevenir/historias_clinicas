@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
-                    {{statusText}} <a href="https://play.google.com/store/apps/details?id=com.prevenirexpress.medicos&hl=es" target="_blank">aplicacion movil</a>
+                    {{statusText}} <a href="https://play.google.com/store/apps/details?id=com.prevenirexpress.medicos&hl=es" target="_blank">Aplicación Móvil</a>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -31,7 +31,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label class="sr-only">Correo Electronico</label>
+                    <label class="sr-only">Correo Electrónico</label>
                     <input type="email" [formControl]="email" class="form-control" placeholder="Usuario o correo" [class.is-invalid]="email.hasError('required') && email.touched" required autofocus>
 
                     <div class="invalid-feedback" *ngIf="email.hasError('required') && email.touched">

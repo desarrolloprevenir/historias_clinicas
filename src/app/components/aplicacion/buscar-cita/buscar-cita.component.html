@@ -212,7 +212,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Informacion de citas</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Información de citas</h5>
                 <button type="button" id="cerrar-modal-cedula-info" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -221,7 +221,7 @@
             <!-- ------------ PACIENTE NO TIENE CITAS ------------------- -->
 
             <div class="modal-body" *ngIf="infoRes === 'sin_citas'">
-                <p>El paciente con el número de cedula <strong>{{cedula.value}}</strong> no tiene citas asignadas. ¿ Desea crear una ?</p>
+                <p>El paciente con el número de cédula <strong>{{cedula.value}}</strong> no tiene citas asignadas. ¿ Desea crear una ?</p>
             </div>
 
             <div class="modal-footer" *ngIf="infoRes === 'sin_citas'">
@@ -382,7 +382,7 @@
             <!-- CONFIRMACION ELIMINAR CITA -->
 
             <div class="modal-body" *ngIf="confirmacionEli">
-                ¿ Estas seguro que deseas eliminar esta cita ?
+                ¿ Estás seguro que deseas eliminar esta cita ?
             </div>
 
             <div class="modal-footer" *ngIf="confirmacionEli">
@@ -429,7 +429,7 @@
                         <div *ngIf="!mascota && infoUser">
                             <p><strong>Nombres : </strong> {{infoUser.nombre}}</p>
                             <p><strong>Apellidos : </strong> {{infoUser.apellidos}}</p>
-                            <p><strong>No. Cedula : </strong> {{infoUser.cedula}}</p>
+                            <p><strong>No. Cédula : </strong> {{infoUser.cedula}}</p>
                             <p><strong>Fecha Nacimiento : </strong> {{infoUser.fecha_nacimiento | fecha}}</p>
                             <p><strong>No. Contacto : </strong> {{infoUser.telefono}}</p>
                             <!-- (infoUser.estado === 0 && infoUser.categoria === 3) && !medico -->

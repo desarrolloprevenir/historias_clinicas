@@ -78,12 +78,12 @@
 
                         <div *ngIf="datos.get('nit').errors && datos.get('nit').touched">
                             <p class="alerta-error" *ngIf="datos.get('nit').hasError('required')">* El campo es requerido</p>
-                            <p class="alerta-error" *ngIf="datos.get('nit').hasError('pattern')">* El campo solo acepta numeros, sin puntos ni caracteres especiales.</p>
+                            <p class="alerta-error" *ngIf="datos.get('nit').hasError('pattern')">* El campo solo acepta números, sin puntos ni caracteres especiales.</p>
                         </div>
 
                         <div *ngIf="datos.get('codigo').errors && datos.get('codigo').touched">
                             <p class="alerta-error" *ngIf="datos.get('codigo').hasError('required')">* El digito de verificación es requerico.</p>
-                            <p class="alerta-error" *ngIf="datos.get('codigo').hasError('pattern')">* El campo solo acepta numeros, sin puntos ni caracteres especiales.</p>
+                            <p class="alerta-error" *ngIf="datos.get('codigo').hasError('pattern')">* El campo solo acepta números, sin puntos ni caracteres especiales.</p>
                         </div>
                     </div>
                 </div>
@@ -100,21 +100,21 @@
                         <input type="text" formControlName="tel" class="form-control" placeholder="Telefono" [class.is-invalid]="datos.get('tel').errors && datos.get('tel').touched">
                         <div *ngIf="datos.get('tel').errors && datos.get('tel').touched">
                             <p class="alerta-error" *ngIf="datos.get('tel').hasError('required')">* El campo es requerido</p>
-                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('minlength')">Cantidad minima de caracteres (7)
+                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('minlength')">Cantidad mínima de caracteres (7)
                             </p>
-                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('maxlength')">Cantidad maxima de caracteres (15)
+                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('maxlength')">Cantidad máxima de caracteres (15)
                             </p>
-                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('pattern')">* El camposolo acepta numeros, sin puntos ni caracteres especiales.</p>
+                            <p class="alerta-error" *ngIf="datos.get('tel').hasError('pattern')">* El campo solo acepta números, sin puntos ni caracteres especiales.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-4">
                         <input type="text" formControlName="wsp" class="form-control" placeholder="Whatsapp" [class.is-invalid]="datos.get('wsp').errors && datos.get('wsp').touched">
                         <div *ngIf="datos.get('wsp').errors && datos.get('wsp').touched">
-                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('minlength')">Cantidad minima de caracteres (7)
+                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('minlength')">Cantidad mínima de caracteres (7)
                             </p>
-                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('maxlength')">Cantidad maxima de caracteres (15)
+                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('maxlength')">Cantidad máxima de caracteres (15)
                             </p>
-                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('pattern')">* El camposolo acepta numeros, sin puntos ni caracteres especiales.</p>
+                            <p class="alerta-error" *ngIf="datos.get('wsp').hasError('pattern')">* El campo solo acepta números, sin puntos ni caracteres especiales.</p>
                         </div>
                     </div>
                 </div>

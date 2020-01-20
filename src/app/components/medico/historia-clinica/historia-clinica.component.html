@@ -76,9 +76,9 @@
 
                                     <div *ngIf="datosUsuario.get('numeroDocumento').touched && datosUsuario.get('numeroDocumento').errors">
                                         <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('required')">* El campo es requerido.</p>
-                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
-                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('minlength')">Cantidad minima de caracteres (7)</p>
-                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('maxlength')">Cantidad maxima de caracteres (15)</p>
+                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
+                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('minlength')">Cantidad mínima de caracteres (7)</p>
+                                        <p class="alerta-error" style="font-size: 12px;" *ngIf="datosUsuario.get('numeroDocumento').hasError('maxlength')">Cantidad máxima de caracteres (15)</p>
                                     </div>
                                 </div>
 
@@ -118,7 +118,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="" class="label-formulario-user">Ocupacion</label>
+                                    <label for="" class="label-formulario-user">Ocupación</label>
                                     <input type="text" class="form-control" formControlName="ocupacion" [class.is-invalid]="datosUsuario.get('ocupacion').errors">
 
                                     <div *ngIf="datosUsuario.get('ocupacion').touched && datosUsuario.get('ocupacion').errors">
@@ -179,7 +179,7 @@
                         </form>
 
                         <div class="text-center" style="padding-top: 50px">
-                            <button class="btn btn-success btn-lg" [disabled]="datosUsuario.invalid" (click)="formUsuario()">Guardar Informacion</button>
+                            <button class="btn btn-success btn-lg" [disabled]="datosUsuario.invalid" (click)="formUsuario()">Guardar Información</button>
                         </div>
 
 
@@ -347,23 +347,23 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group" *ngIf="infoUser.cedula">
-                                                        <label for="" class="label-formulario-user">Numero Documento</label>
+                                                        <label for="" class="label-formulario-user">Número Documento</label>
                                                         <input type="text" formControlName="numeroDocumento" class="form-control" [class.is-invalid]="datosUsuario.get('numeroDocumento').errors && datosUsuario.get('numeroDocumento').touched">
 
                                                         <div class="invalid-feedback" *ngIf="datosUsuario.get('numeroDocumento').errors && datosUsuario.get('numeroDocumento').touched">
                                                             <p *ngIf="datosUsuario.get('numeroDocumento').hasError('required') && datosUsuario.get('numeroDocumento').touched">*Este campo es requerido</p>
-                                                            <p *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                                            <p *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                                         </div>
 
                                                     </div>
 
                                                     <div class="form-group" *ngIf="!infoUser.cedula">
-                                                        <label for="" class="label-formulario-user">Numero Documento</label>
+                                                        <label for="" class="label-formulario-user">Número Documento</label>
                                                         <input type="text" formControlName="numeroDocumento" class="form-control" [class.is-invalid]="datosUsuario.get('numeroDocumento').errors && datosUsuario.get('numeroDocumento').touched">
 
                                                         <div class="invalid-feedback" *ngIf="datosUsuario.get('numeroDocumento').errors && datosUsuario.get('numeroDocumento').touched">
                                                             <p *ngIf="datosUsuario.get('numeroDocumento').hasError('required') && datosUsuario.get('numeroDocumento').touched">*Este campo es requerido</p>
-                                                            <p *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                                            <p *ngIf="datosUsuario.get('numeroDocumento').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                                         </div>
 
                                                     </div>
@@ -462,7 +462,7 @@
 
                                                 <div class="col-md-3">
 
-                                                    <label for="" class="label-formulario-user">Ocupacion</label>
+                                                    <label for="" class="label-formulario-user">Ocupación</label>
                                                     <input type="text" class="form-control" formControlName="ocupacion" value="{{infoUser.ocupacion}}" [class.is-invalid]="datosUsuario.get('ocupacion').errors && datosUsuario.get('ocupacion').touched">
 
                                                     <div class="invalid-feedback" *ngIf="datosUsuario.get('ocupacion').errors && datosUsuario.get('ocupacion').touched">
@@ -500,7 +500,7 @@
 
                                                         <div class="invalid-feedback" *ngIf="datosUsuario.get('telefono').errors && datosUsuario.get('telefono').touched">
                                                             <p *ngIf="datosUsuario.get('telefono').hasError('required') && datosUsuario.get('telefono').touched">*Este campo es requerido</p>
-                                                            <p *ngIf="datosUsuario.get('telefono').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                                            <p *ngIf="datosUsuario.get('telefono').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                                         </div>
                                                     </div>
 
@@ -510,7 +510,7 @@
 
                                                         <div class="invalid-feedback" *ngIf="datosUsuario.get('telefono').errors && datosUsuario.get('telefono').touched">
                                                             <p *ngIf="datosUsuario.get('telefono').hasError('required') && datosUsuario.get('telefono').touched">*Este campo es requerido</p>
-                                                            <p *ngIf="datosUsuario.get('telefono').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                                            <p *ngIf="datosUsuario.get('telefono').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                                         </div>
                                                     </div>
 
@@ -553,7 +553,7 @@
                                                     <input type="text" class="form-control" formControlName="telefonoAcompanante" [class.is-invalid]="datosUsuario.get('telefonoAcompanante').errors && datosUsuario.get('telefonoAcompanante').touched">
 
                                                     <div class="invalid-feedback" *ngIf="datosUsuario.get('telefonoAcompanante').errors && datosUsuario.get('telefonoAcompanante').touched">
-                                                        <p *ngIf="datosUsuario.get('telefonoAcompanante').hasError('pattern')">Este campo solo acepta numeros sin puntos, espacios o caracteres especiales.</p>
+                                                        <p *ngIf="datosUsuario.get('telefonoAcompanante').hasError('pattern')">Este campo solo acepta números sin puntos, espacios o caracteres especiales.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1415,9 +1415,9 @@
 
                                     <!-- BUTONS CERRAR / ATRAS -->
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="estadoModalAtras === 'cerrar'">Cerrar</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('anamnesis')" *ngIf="estadoModal === 'anamnesis'">Atras</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('optometria')" *ngIf="estadoModal === 'optometria'">Atras</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('optometria2')" *ngIf="estadoModal === 'optometria2'">Atras</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('anamnesis')" *ngIf="estadoModal === 'anamnesis'">Atrás</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('optometria')" *ngIf="estadoModal === 'optometria'">Atrás</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalHistoriaClinicaAtras('optometria2')" *ngIf="estadoModal === 'optometria2'">Atrás</button>
 
                                     <!-- BUTUNS SIGUIETE / GUARDAR -->
                                     <!-- [disabled]="!this.datosUsuario.valid" -->
