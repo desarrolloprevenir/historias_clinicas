@@ -6,8 +6,8 @@
   <div class="col-lg-3 crear-pub" style="padding-top: 30px;">
       <div>
           <ul class="list-group">
-              <li class="list-group-item active" id="informacion">Informacion</li>
-              <li class="list-group-item" id="imagenes">Imagenes </li>
+              <li class="list-group-item active" id="informacion">Información</li>
+              <li class="list-group-item" id="imagenes">Imágenes </li>
           </ul>
       </div>
 
@@ -108,7 +108,7 @@
 
     <div class="col-md-12">
         <mat-form-field class="example-full-width">
-            <input type="text" placeholder="Categoria" aria-label="Categoria" matInput [formControl]="myControl" [matAutocomplete]="auto" required>
+            <input type="text" placeholder="Categoría" aria-label="Categoria" matInput [formControl]="myControl" [matAutocomplete]="auto" required>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option.nombre}}
@@ -119,7 +119,7 @@
             </mat-error>
 
         </mat-form-field>
-        <p id="p-categoria" *ngIf="ctgaIncorrecta">Por favor seleciona una categoria correcta *.</p>
+        <p id="p-categoria" *ngIf="ctgaIncorrecta">Por favor seleciona una categoría correcta *.</p>
     </div>
 
 
@@ -217,7 +217,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <textarea matInput placeholder="Descripción del servicio" formControlName="descripcion" minlength="40" required></textarea>
-                                <mat-error *ngIf="datos.get('descripcion').hasError('required')">La descripcion es requerida.</mat-error>
+                                <mat-error *ngIf="datos.get('descripcion').hasError('required')">La descripción es requerida.</mat-error>
                                 <mat-error *ngIf="datos.get('descripcion').hasError('minlength')">La cantidad minima de caracteres es 40.</mat-error>
                             </mat-form-field>
                         </div>
@@ -245,7 +245,7 @@
               <div class="container-fluid">
                   <br />
                   <div class="card-header">
-                      <h1>Selecciona imagenes para tu servicio</h1>
+                      <h1>Selecciona imágenes para tu servicio</h1>
                   </div>
                   <br />
               </div>
@@ -269,8 +269,8 @@
 
               <div class="card">
                   <div class="card-header">
-                      <h5>Imagenes del servicio</h5>
-                      <p>* Recuerda que el servicio puede tener un maximo de 6 imagenes.</p>
+                      <h5>Imágenes del servicio</h5>
+                      <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
                   </div>
 
                   <div class="img-recorte" *ngIf="mostrarRecorte">
@@ -323,12 +323,12 @@
 
 
               <div id="cargar-imagen">
-                  <mat-checkbox *ngIf="imagenes.length >= 1" (change)="terminosCondiciones($event)"><a [routerLink]="['/terminosycondiciones']" target="_blank">Acepto terminos y condiciones !</a></mat-checkbox>
+                  <mat-checkbox *ngIf="imagenes.length >= 1" (change)="terminosCondiciones($event)"><a [routerLink]="['/terminosycondiciones']" target="_blank">Acepto términos y condiciones !</a></mat-checkbox>
               </div>
 
 
               <div id="cargar-imagen" style="padding-bottom: 40px;">
-                  <button class="btn btn-secondary" (click)="atrasImagenes()">Atras</button>
+                  <button class="btn btn-secondary" (click)="atrasImagenes()">Atrás</button>
                   <label for="file-upload" class="btn btn-info btns-horario">
                   Cargar Fotos
               </label>

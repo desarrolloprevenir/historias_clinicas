@@ -85,8 +85,8 @@
                         <div class="col-lg-5 img-pub"><img src="{{apiUrl + p.foto}}" alt=""></div>
                         <div class="col-lg-7">
                             <h3><strong>{{p.nombre}}</strong></h3>
-                            <p><strong>Categoria : </strong>{{p.categoria}}</p>
-                            <p><strong>Descripcion : </strong>{{p.descripcion}}</p>
+                            <p><strong>Categoría : </strong>{{p.categoria}}</p>
+                            <p><strong>Descripción : </strong>{{p.descripcion}}</p>
                             <div>
                                 <p><strong>Creado por : </strong>{{p.creadoPor}}</p>
                             </div>
@@ -177,8 +177,8 @@
                                                     </div>
 
                                                     <div class="card-header">
-                                                        <h5>Imagenes del servicio</h5>
-                                                        <p>* Recuerda que el servicio puede tener un maximo de 6 imagenes.</p>
+                                                        <h5>Imágenes del servicio</h5>
+                                                        <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
                                                     </div>
 
                                                     <div class="row imgs">
@@ -290,9 +290,9 @@
                                                             </div>
                                                             <div class="col">
 
-                                                                <label for="direccion">*Categoria</label>
+                                                                <label for="direccion">*Categoría</label>
                                                                 <div class="form-group link">
-                                                                    <input type="text" class="form-control" placeholder="Categoria" value="{{editInfo.categoria}}" readonly>
+                                                                    <input type="text" class="form-control" placeholder="Categoría" value="{{editInfo.categoria}}" readonly>
 
                                                                 </div>
 
@@ -311,9 +311,9 @@
                                                                     </div>
                                                                     <p class="alerta-error" *ngIf="datosEdit.get('precio').hasError('required')">* El campo es requerido.
                                                                     </p>
-                                                                    <p class="alerta-error" *ngIf="datosEdit.get('precio').hasError('min')">Cantidad minima ($0)
+                                                                    <p class="alerta-error" *ngIf="datosEdit.get('precio').hasError('min')">Cantidad mínima ($0)
                                                                     </p>
-                                                                    <p class="alerta-error" *ngIf="datosEdit.get('precio').hasError('pattern')">* El campo solo acepta numeros sin puntos ni caracteres especiales.</p>
+                                                                    <p class="alerta-error" *ngIf="datosEdit.get('precio').hasError('pattern')">* El campo solo acepta números sin puntos ni caracteres especiales.</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col">
@@ -322,11 +322,11 @@
                                                                     <input type="number" class="form-control" id="descuento" aria-describedby="emailHelp" placeholder="descuento" formControlName="descuento" min="0" max="100" (change)="cambio('descuento')" [class.is-invalid]="datosEdit.get('descuento').errors" readonly>
                                                                     <a *ngIf="ver === 'descuento'" (click)="editar('descuento')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                                                                 </div>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('min')">Cantidad minima (0)
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('min')">Cantidad mínima (0)
                                                                 </p>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('max')">Cantidad maxima (100)
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('max')">Cantidad máxima (100)
                                                                 </p>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('pattern')">* El campo solo acepta numeros</p>
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('descuento').hasError('pattern')">* El campo solo acepta números</p>
                                                             </div>
                                                         </div>
                                                         <div class="row form">
@@ -367,7 +367,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col">
-                                                                <label for="duracion">*Duracion aproximada de la cita en minutos.</label>
+                                                                <label for="duracion">*Duración aproximada de la cita en minutos.</label>
                                                                 <div class="form-group link" (mouseleave)="mouseLeave('duracion')" (mouseenter)="mouseEnter('duracion')">
                                                                     <input type="number" id="duracion" class="form-control" id="duracion" aria-describedby="emailHelp" placeholder="Duracion" min="15" max="60" formControlName="duracion" [class.is-invalid]="datosEdit.get('duracion').errors" (change)="cambio('duracion')"
                                                                         readonly>
@@ -376,9 +376,9 @@
                                                                 </div>
                                                                 <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('required')">* El campo es requerido
                                                                 </p>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('max')">Duración maxima en minutos (60)</p>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('min')">Duración minima en minutos (15)</p>
-                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('pattern')">* El campo solo acepta numeros</p>
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('max')">Duración máxima en minutos (60)</p>
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('min')">Duración mínima en minutos (15)</p>
+                                                                <p class="alerta-error" *ngIf="datosEdit.get('duracion').hasError('pattern')">* El campo solo acepta números</p>
                                                             </div>
                                                         </div>
 
@@ -415,15 +415,15 @@
 
                                                         <div class="form">
                                                             <div>
-                                                                <label for="descripcion">*Descripcion</label>
+                                                                <label for="descripcion">*Descripción</label>
                                                                 <div class="form-group link" (mouseleave)="mouseLeave('descripcion')" (mouseenter)="mouseEnter('descripcion')">
-                                                                    <textarea id="descripcion" class="form-control" placeholder="Descripcion del servicio" formControlName="descripcion" (change)="cambio('descripcion')" [class.is-invalid]="datosEdit.get('descripcion').errors" readonly></textarea>
+                                                                    <textarea id="descripcion" class="form-control" placeholder="Descripción del servicio" formControlName="descripcion" (change)="cambio('descripcion')" [class.is-invalid]="datosEdit.get('descripcion').errors" readonly></textarea>
                                                                     <a *ngIf="ver === 'descripcion'" (click)="editar('descripcion')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                                                                 </div>
                                                                 <p class="alerta-error" *ngIf="datosEdit.get
                                             ('descripcion').hasError('required')">* El campo es requerido</p>
                                                                 <p class="alerta-error" *ngIf="datosEdit.get('descripcion').hasError('minlength')">
-                                                                    Cantidad minima caracteres (40)</p>
+                                                                    Cantidad mínima caracteres (40)</p>
                                                             </div>
                                                         </div>
 
@@ -483,11 +483,11 @@
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Atras</span>
+                            <span class="sr-only">Atrás</span>
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Sigiente</span>
+                            <span class="sr-only">Siguiente</span>
                         </a>
                     </div>
                 </div>
@@ -517,7 +517,7 @@
                 <div class="modal-body">
 
                     <div class="card-header">
-                        <h5>Imagenes del servicio</h5>
+                        <h5>Imágenes del servicio</h5>
                     </div>
 
                     <div class="row imgs container-fluid" style="border: solid 0.5px whitesmoke;">
@@ -540,7 +540,7 @@
                                 <input type="text" class="form-control" value="{{infoSerSucu.nombre}}" readonly>
                             </div>
                             <div class="col form-group">
-                                <label class="form-label">Categoria</label>
+                                <label class="form-label">Categoría</label>
                                 <input type="text" class="form-control" value="{{infoSerSucu.categoria}}" readonly>
                             </div>
                         </div>
@@ -562,21 +562,21 @@
                                 <input type="text" class="form-control" value="{{infoSerSucu.precio_cliente_prevenir}}" readonly>
                             </div>
                             <div class="col form-group">
-                                <label class="form-label">Duracion</label>
+                                <label class="form-label">Duración</label>
                                 <input type="text" class="form-control" value="{{infoSerSucu.duracion}}" readonly>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col form-group">
-                                <label class="form-label">Maximo de citas por hora</label>
+                                <label class="form-label">Máximo de citas por hora</label>
                                 <input type="text" class="form-control" value="{{infoSerSucu.max_citas_ves}}" readonly>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col form-group">
-                                <label class="form-label">Descripcion</label>
+                                <label class="form-label">Descripción</label>
                                 <textarea class="form-control" readonly>{{infoSerSucu.descripcion}}</textarea>
                             </div>
                         </div>

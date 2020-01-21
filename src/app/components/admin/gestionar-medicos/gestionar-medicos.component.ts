@@ -146,7 +146,7 @@ export class GestionarMedicosComponent implements OnInit {
       email: ['', [Validators.required,
               Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       cedula: ['', [Validators.pattern('[0-9]*')]],
-      tarjetaProfecional: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      tarjetaProfesional: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       titulo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50),
               Validators.pattern('[a-z A-z]*')]],
       pssw: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],

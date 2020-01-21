@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="alert alert-primary" role="alert" *ngIf="existe === false">
-                    El médico no existe ¿Desea crearlo?, ten en cuenta que se creara una cuenta de usuario para el médico con el correo electronico y la contraeña asignada, con la cual el profesional de la salud, podra ingresar a traves de la web o la aplicacion movil.
+                    El médico no existe ¿Desea crearlo?, ten en cuenta que se creará una cuenta de usuario para el médico con el correo electrónico y la contraeña asignada, con la cual el profesional de la salud, podrá ingresar a través de la web o la aplicación móvil.
                 </div>
 
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
@@ -233,13 +233,13 @@
 
                         <div class="form-group">
                             <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                            <input *ngIf="!existe" type="number" formControlName="tarjetaProfesional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfecional').errors && datos.get('tarjetaProfecional').touched">
+                            <input *ngIf="!existe" type="number" formControlName="tarjetaProfesional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
 
-                        <div *ngIf="datos.get('tarjetaProfecional').errors && datos.get('tarjetaProfecional').touched">
-                            <p class="alerta-error" *ngIf="datos.get('tarjetaProfecional').hasError('required')">* Este campo es requerido.</p>
-                            <p class="alerta-error" *ngIf="datos.get('tarjetaProfecional').hasError('pattern')">Este campo solo acepta números, sin puntos ni caracteres especiales.</p>
+                        <div *ngIf="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
+                            <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('required')">* Este campo es requerido.</p>
+                            <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('pattern')">Este campo solo acepta números, sin puntos ni caracteres especiales.</p>
                         </div>
 
                         <div class="form-group">
@@ -314,7 +314,7 @@
                         </button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿ Estas seguro que deseas eliminar al médico {{m.nombre}}?
+                                                ¿ Estás seguro que deseas eliminar al médico {{m.nombre}}?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

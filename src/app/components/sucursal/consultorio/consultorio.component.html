@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="text-center" style="padding-top: 20px;" *ngIf="infoConsultorio">
-                        <button class="btn btn-success" style="margin-right: 5px;" (click)="guardarInformacion()" [disabled]="!nombreConsultorio.valid">Guardar Informacion</button>
+                        <button class="btn btn-success" style="margin-right: 5px;" (click)="guardarInformacion()" [disabled]="!nombreConsultorio.valid">Guardar Información</button>
                         <button class="btn btn-primary" style="margin-right: 5px;" (click)="pestana('horarios')">Ir a horarios</button>
                     </div>
 
@@ -630,7 +630,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
 
-                            <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atras</button>
+                            <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button>
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-success" (click)="mostrarHorario('false')" [disabled]="!btnHorario">Agregar Horario</button>
@@ -658,14 +658,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
                 <button type="button" id="btn-cerrar-modal-confirmacion" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
             </div>
             <div *ngIf="((infoConsultorio && infoConsultorio.horario) && (confirmacion === 'true')) && !response">
                 <div class="modal-body">
-                    ¿ Estas seguro que deseas eliminar este horario ?.Ten en cuenta que no podras recuperarlo.
+                    ¿ Estás seguro que deseas eliminar este horario ?. Ten en cuenta que no podrás recuperarlo.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

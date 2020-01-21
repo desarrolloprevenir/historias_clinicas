@@ -1322,7 +1322,7 @@ _handleReaderLoaded(readerEvt) {
 
   if(this.terminosYCondiciones === false) {
     this.statusImgs = true;
-    this.textoStatus = 'Por favor acepta terminos y condiciones antes de publicar el servicio.';
+    this.textoStatus = 'Por favor acepta términos y condiciones antes de publicar el servicio.';
   } else {
 
     this.loading = true;
@@ -1460,7 +1460,7 @@ _handleReaderLoaded(readerEvt) {
 //       this._provedorService.pubService(this.formulario).subscribe( (res) => {
 //       this.loading = false;
 //         // console.log(res);
- 
+
 //       if (res[0].agregado === true) {
 //         document.getElementById('btn-publicacion-exitosa').click();
 //       } else {

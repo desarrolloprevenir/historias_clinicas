@@ -147,7 +147,7 @@
                             <div class="col-md-4">
                                 <div class="btn-group">
                                     <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
-                                        Atras
+                                        Atrás
                                     </div>
                                     <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
                                         Hoy
@@ -236,7 +236,7 @@
                                                 <div *ngIf="!mascota && info">
                                                     <p><strong>Nombre : </strong> {{info.nombre}}</p>
                                                     <p><strong>Apellido : </strong> {{info.apellidos}}</p>
-                                                    <p><strong>No. Cedula : </strong> {{info.cedula}}</p>
+                                                    <p><strong>No. Cédula : </strong> {{info.cedula}}</p>
                                                     <p><strong>Fecha Nacimiento : </strong> {{info.fecha_nacimiento | fecha}}</p>
                                                     <p><strong>No. Contacto : </strong> {{info.telefono}}</p>
                                                     <button class="btn btn-primary" disabled> Historia Clinica </button>
@@ -249,7 +249,7 @@
                                     </div>
 
                                     <div *ngIf="eliminar">
-                                        ¿ Estas seguro que deseas eliminar esta cita ?
+                                        ¿ Estás seguro que deseas eliminar esta cita ?
                                     </div>
 
                                 </div>
@@ -307,10 +307,10 @@
                                                         <div class="row">
                                                             <div class="col-md-1"></div>
                                                             <div class="col-md-3">
-                                                                <p style="text-align: left">Cedula: </p>
+                                                                <p style="text-align: left">Cédula: </p>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input type="number" aria-label="cedula" class="form-control" placeholder="Cedula del paciente" [formControl]="cedula" [class.is-invalid]="(cedula.touched && cedula.hasError('required')) || cedula.hasError('pattern') || (cedula.touched && !cedula.valid)"
+                                                                <input type="number" aria-label="cedula" class="form-control" placeholder="Cédula del paciente" [formControl]="cedula" [class.is-invalid]="(cedula.touched && cedula.hasError('required')) || cedula.hasError('pattern') || (cedula.touched && !cedula.valid)"
                                                                     minlength="6" maxlength="15">
                                                             </div>
                                                             <div class="col-md-2">
@@ -474,7 +474,7 @@
                                 (confirmarIdentificacion.touched && !confirmarIdentificacion.valid)
                                 || (confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value)) " minlength="6" maxlength="15" onpaste="alert('No puedes pegar en este campo');return false">
                                                                 <div class="invalid-feedback" *ngIf="(confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value))">
-                                                                    <p>El numero de identificacion no coincide</p>
+                                                                    <p>El numero de identificación no coincide</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -487,7 +487,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="modal-label">Correo electronico</label>
+                                                                <label class="modal-label">Correo electrónico</label>
                                                                 <input type="email" class="form-control" [formControl]="email" [class.is-invalid]="email.touched && email.errors">
 
                                                                 <div class="invalid-feedback" *ngIf="email.touched && email.hasError('required')">
@@ -503,7 +503,7 @@
 
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="modal-label">Confirmacion Correo electronico</label>
+                                                                <label class="modal-label">Confirmación Correo electrónico</label>
                                                                 <input type="email" class="form-control" [formControl]="confirmacionEmail" [class.is-invalid]="(confirmacionEmail.touched && (confirmacionEmail.value != email.value))" onpaste="alert('No puedes pegar en este campo');return false">
 
                                                                 <div class="invalid-feedback" *ngIf="confirmacionEmail.touched && (confirmacionEmail.value != email.value)">
@@ -530,11 +530,11 @@
                                                                 </div>
 
                                                                 <div class="invalid-feedback" *ngIf="telefono.hasError('pattern')">
-                                                                    Este campo solo acepta numeros, sin puntos ni caracteres especiales.
+                                                                    Este campo solo acepta números, sin puntos ni caracteres especiales.
                                                                 </div>
 
                                                                 <div class="invalid-feedback" *ngIf="!telefono.valid">
-                                                                    minimo 6 caracteres, maximo 15
+                                                                    mínimo 6 caracteres, máximo 15
                                                                 </div>
 
                                                             </div>
@@ -544,7 +544,7 @@
                                                         <div class="col">
 
                                                             <div class="form-group">
-                                                                <label class="modal-label">Ocupacion</label>
+                                                                <label class="modal-label">Ocupación</label>
                                                                 <input type="text" class="form-control" [formControl]="ocupacion" [class.is-invalid]="ocupacion.hasError('pattern')">
                                                             </div>
 
@@ -556,7 +556,7 @@
                                                     <div class="row">
 
                                                         <div class="col">
-                                                            <label class="modal-label">Direccion</label>
+                                                            <label class="modal-label">Dirección</label>
                                                             <input type="text" class="form-control" [formControl]="direccion">
                                                         </div>
 
@@ -615,7 +615,7 @@
                                                                 <label class="modal-label">Teléfono acompañante</label>
                                                                 <input type="text" [formControl]="telAcompanante" class="form-control" [class.is-invalid]="telAcompanante.hasError('pattern')">
                                                                 <div class="invalid-feedback" *ngIf="telAcompanante.hasError('pattern')">
-                                                                    Este campo solo acepta numeros
+                                                                    Este campo solo acepta números
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -747,7 +747,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label class="modal-label">No. identificacion</label>
+                                                        <label class="modal-label">No. identificación</label>
                                                         <input type="text" [formControl]="noIdentificacionBeneficiario" class="form-control" maxlength="15" [class.is-invalid]="( noIdentificacionBeneficiario.touched && noIdentificacionBeneficiario.hasError('required') ) || noIdentificacionBeneficiario.hasError('pattern')">
 
                                                         <div class="invalid-feedback" *ngIf="noIdentificacionBeneficiario.hasError('required')">
@@ -755,7 +755,7 @@
                                                         </div>
 
                                                         <div class="invalid-feedback" *ngIf="noIdentificacionBeneficiario.hasError('pattern')">
-                                                            Este campo solo acepta numeros sin caracteres especiales ni puntos.
+                                                            Este campo solo acepta números sin caracteres especiales ni puntos.
                                                         </div>
                                                     </div>
 
@@ -768,7 +768,7 @@
                                                         </div>
 
                                                         <div class="invalid-feedback" *ngIf="telefonoBeneficiario.hasError('pattern')">
-                                                            Este campo solo acepta numeros sin caracteres especiales ni puntos.
+                                                            Este campo solo acepta números sin caracteres especiales ni puntos.
                                                         </div>
                                                     </div>
 
@@ -979,7 +979,7 @@
                                   (confirmarIdentificacion.touched && !confirmarIdentificacion.valid)
                                   || (confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value)) " minlength="6" maxlength="15" onpaste="alert('No puedes pegar en este campo');return false">
                                                                 <div class="invalid-feedback" *ngIf="(confirmarIdentificacion.touched && (cedula.value != confirmarIdentificacion.value))">
-                                                                    <p>El numero de identificacion no coincide</p>
+                                                                    <p>El numero de identificación no coincide</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -989,7 +989,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="modal-label">Correo electronico</label>
+                                                                <label class="modal-label">Correo electrónico</label>
                                                                 <input type="email" class="form-control" [formControl]="email" [class.is-invalid]="email.touched && email.errors">
 
                                                                 <div class="invalid-feedback" *ngIf="email.touched && email.hasError('required')">
@@ -1004,7 +1004,7 @@
                                                         <div class="col">
 
                                                             <div class="form-group">
-                                                                <label class="modal-label">Confirmacion Correo electronico</label>
+                                                                <label class="modal-label">Confirmación Correo electrónico</label>
                                                                 <input type="email" class="form-control" [formControl]="confirmacionEmail" [class.is-invalid]="(confirmacionEmail.touched && (confirmacionEmail.value != email.value))" onpaste="alert('No puedes pegar en este campo');return false">
 
                                                                 <div class="invalid-feedback" *ngIf="confirmacionEmail.touched && (confirmacionEmail.value != email.value)">
@@ -1026,11 +1026,11 @@
                                                         </div>
 
                                                         <div class="invalid-feedback" *ngIf="telefono.hasError('pattern')">
-                                                            Este campo solo acepta numeros, sin puntos ni caracteres especiales.
+                                                            Este campo solo acepta números, sin puntos ni caracteres especiales.
                                                         </div>
 
                                                         <div class="invalid-feedback" *ngIf="!telefono.valid">
-                                                            minimo 6 caracteres, maximo 15
+                                                            mínimo 6 caracteres, máximo 15
                                                         </div>
 
                                                     </div>
@@ -1188,7 +1188,7 @@
             <div class="col-md-4">
                 <div class="btn-group">
                     <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
-                        Atras
+                        Atrás
                     </div>
                     <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
                         Hoy
@@ -1278,7 +1278,7 @@
                                     <div *ngIf="!mascota && info">
                                         <p><strong>Nombre : </strong> {{info.nombre}}</p>
                                         <p><strong>Apellido : </strong> {{info.apellidos}}</p>
-                                        <p><strong>No. Cedula : </strong> {{info.cedula}}</p>
+                                        <p><strong>No. Cédula : </strong> {{info.cedula}}</p>
                                         <p><strong>Fecha Nacimiento : </strong> {{info.fecha_nacimiento | fecha}}</p>
                                         <p><strong>No. Contacto : </strong> {{info.telefono}}</p>
                                         <button class="btn btn-primary" disabled> Historia Clinica </button>
@@ -1291,7 +1291,7 @@
                         </div>
 
                         <div *ngIf="eliminar">
-                            ¿ Estas seguro que deseas eliminar esta cita ?
+                            ¿ Estás seguro que deseas eliminar esta cita ?
                         </div>
 
                     </div>
