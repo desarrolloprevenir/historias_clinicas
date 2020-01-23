@@ -77,8 +77,8 @@
                     <h3 class="card-title" (click)="verHistoriaClinica(hc)">Historia Clinica No. {{hc.id_historiacl}}</h3>
                     <hr>
                     <h6 class="card-text" *ngIf="infoUser">Paciente : {{infoUser.nombres}}</h6>
-                    <h6 class="card-text">Fecha : {{hc.CreatedAT | fecha}}</h6>
-                    <h6 class="card-text">Hora : {{hc.CreatedAT | hora}}</h6>
+                    <h6 class="card-text">Fecha : {{hc.CreatedATm | fecha}}</h6>
+                    <h6 class="card-text">Hora : {{hc.CreatedATm | hora}}</h6>
                     <h6 class="card-text">Tipo de consulta : {{hc.tipo_consulta}}</h6>
                 </div>
             </div>

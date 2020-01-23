@@ -51,6 +51,7 @@ Preexistente</label>
                             <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.epilepcia == 1)">Epilepcia</li>
                             <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.hipertension == 1)">Hipertension</li>
                             <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.otro == 1)">Otro</li>
+                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef === '')">Ninguna</li>
                         </ul>
 
                     </div>
@@ -237,6 +238,7 @@ Preexistente</label>
                     <div class="form-group">
                         <label for="" class="form-label label-formulario-user">Frecuencia cardiaca</label>
                         <input type="text" class="form-control" value="{{infoHistoriaGeneral.examenf.frecuencia_cardiaca}}" readonly>
+
                     </div>
                 </div>
                 <div class="col-md-4">

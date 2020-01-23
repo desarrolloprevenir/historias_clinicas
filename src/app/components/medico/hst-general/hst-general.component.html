@@ -340,7 +340,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="" class="form-label label-formulario-user">Temperatura (Si es pertinente)</label>
-                                    <input type="text" class="form-control" formControlName="temperetura">
+                                    <input type="text" class="form-control" formControlName="temperetura" type="number" >
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -354,7 +354,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="" class="form-label label-formulario-user">Talla(cm)</label>
-                                    <input type="text" class="form-control" formControlName="talla">
+                                    <input type="text" class="form-control" formControlName="talla" type="number">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -366,7 +366,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="" class="form-label label-formulario-user">Peso (kg)</label>
-                                    <input type="text" class="form-control" formControlName="peso">
+                                    <input type="text" class="form-control" formControlName="peso" type="number">
                                 </div>
                             </div>
                         </div>
@@ -459,7 +459,18 @@
           </button>
             </div>
 
+
             <div class="row">
+
+              <div class="col-md-3"></div>
+              <div class="col-md-3"> <button class="btn btn-md btn-secondary" (click)="anterior('diagnosticosPanel')">Anterior</button>
+              </div>
+              <div class="col-md-3"> <button class="btn btn-md btn-info" (click)="siguiente('diagnosticosPanel')">Siguiente</button>
+              </div>
+              <div class="col-md-3"></div>
+          </div>
+
+            <!-- <div class="row">
 
 
                 <div class="col-md-2"></div>
@@ -471,7 +482,7 @@
           clinica</button></div>
                 <div class="col-md-2"></div>
 
-            </div>
+            </div> -->
 
 
 
@@ -507,156 +518,102 @@
 
         <!----------------------------------FIN DIAGNOSTICOS------------------------------>
 
-        <!---------------------------------- INICIO CONDUCTA  ------------------------------>
-        <!-- 
-<div class="divisiones">
-    <div class="form-group">
-        <label>Seleccionar Medicamento: </label>
-        <input type="text" class="form-control" [(ngModel)]="buscar">
-        <br>
-        <div class="panel-body list-group">
-          <div class="seleccionado" *ngFor="let o of options | busqueda: buscar" (click)="guardarClick(o)"
-            style="cursor: pointer;">
-            {{o.nombre}} {{o.rips}}
-          </div>
-        </div>
-      </div>
-      <br>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th class="hidden">Id</th>
-            <th>Descripción</th>
-            <th>Código</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cd of cajaDiagnostico; let i = index">
-            <td class="hidden">{{cd.id_impresiondiag}}</td>
-            <td>{{cd.nombre}}</td>
-            <td>{{cd.rips}}</td>
-            <td><button (click)="borrarDiagnostico(i)" class="btn btn-danger">X</button></td>
-          </tr>
-        </tbody>
-      </table>
 
-   </div> -->
+             <!----------------------------------MEDICAMENTOS------------------------------>
 
-        <!---------------------------------- FIN CONDUCTA  ------------------------------>
-
-
-
-
-
-
-        <!-- ----------------------------------------------- POR HACER ---------------------------------------------------------  -->
-
-        <!-- <div class="row divisiones">
-    <label for="" class="tituloDivision">Impresión Diagnostica</label>
-
-    <div class="col-md-12">
-      <div class="col-md-12"> -->
-        <!-- <ul class="list-group">
-          <li *ngFor="let di of listaDiagnosticos" class="list-group-item list-group-item-action">
-            <span class="badge badge-primary">{{di.diag.id}}</span>
-            {{di.diag.descripcion}} - {{di.diag.codigo}}
-            
-          </li>
-        </ul> -->
-        <!-- <div class="card mt-4">
-          <div class="card-body">
-            <div class="row">
-            <div class="col-md-6">
+             <div *ngIf="vista==='medicamentosPanel'" class="divisiones">
               <div class="form-group">
-                  <label for="" class="form-label label-formulario-user">Descripción</label>
-                <input type="text" class="form-control" [(ngModel)]="descripcionDiag">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                  <label for="" class="form-label label-formulario-user">Código</label>
-                <input type="text" class="form-control" [(ngModel)]="codDiag">
-              </div>
-            </div>
-          </div>
-           
-            
-            
-          </div>
-        </div> -->
-
-        <!-- <div class="form-group">
-        <label for="datoDiagnostico" class="form-label label-formulario-user">Dato Diagnostico</label>
-        <input class="form-control" ng-change="prueba($event)" type="text">
-      </div>
-
-      <mat-form-field class="w-100">
-        <mat-select placeholder="Antecedentes Familiares" [formControl]= "antecedentesFMultiCtrl" [multiple]="true" #multiSelect (selectionChange)="guardarAnteFMulti($event)">
-          <ngx-mat-select-search [formControl]="antecedentesFMultiFilterCtrl"></ngx-mat-select-search>
-          <mat-option  *ngFor="let AntecedenteF of filteredAntecedentesFMulti | async" [value]="AntecedenteF.id" >
-            {{AntecedenteF.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-        <select name="" id="" class="form-control">
-          <option *ngFor="let d of impdiagnostica" value="{{d.id_impresiondiag}}">{{d.nombre}}</option>
-        </select>
-      </div>
-  
-    </div> -->
-        <!-- <div class="col-md-12" style="display: block;">
-        <button class="btn btn-primary ng-star-inserted" (click)="guardarDiagnostico()">Guardar</button>
-    </div> -->
-
-        <!-- </div> -->
-
-
-        <!-- <form [formGroup]="datos">
-      <div class="row divisiones">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12 ">
-              <label for="" class="tituloDivision">Final Consulta</label>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="" class="form-label label-formulario-user">Control</label>
-                  <input type="text" class="form-control" formControlName="control"
-                    [class.is-invalid]="datos.get('control').errors && datos.get('control').touched">
-                  <div class="invalid-feedback" *ngIf="datos.get('control').errors && datos.get('control').touched">
-                    <p *ngIf="datos.get('control').hasError('pattern')">Esta campo solo acepta letras.</p>
+                  <label>Seleccionar Medicamento: </label>
+                  <input type="text" class="form-control" [(ngModel)]="buscarMedicamentos">
+                  <br>
+                  <div class="panel-body list-group">
+                      <div class="seleccionado" *ngFor="let m of medicamentos | busquedaMed : buscarMedicamentos" (click)="guardarMedicamento(m)" style="cursor: pointer;">
+                          {{m.producto}} {{m.via_administra}}
+                      </div>
                   </div>
-                </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="" class="form-label label-formulario-user">Incapacidad</label>
-                  <div class="">
-                    <mat-checkbox>Si</mat-checkbox>
-                    <mat-checkbox>No</mat-checkbox>
-                  </div>
-                 
-                </div>
+              <br>
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th class="hidden">Id</th>
+                          <th>Nombre del producto</th>
+                          <th>Via administrativa</th>
+                          <th>Receta Medica</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let cM of cajaMedicamento; let i = index">
+                          <td class="hidden">{{cM.id_medicamentos}}</td>
+                          <td>{{cM.producto}}</td>
+                          <td>{{cM.via_administra}}</td>
+                          <td><textarea name="txtRecetaMedica" formControlName="recetaMedica" rows="3" class="form-control"></textarea></td>
+                          <td><button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+
+              <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="status === 'success'">
+                  {{statusText}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="" class="form-label label-formulario-user">Dias</label>
-                  <input type="text" class="form-control" formControlName="dias"
-                    [class.is-invalid]="datos.get('dias').errors && datos.get('dias').touched">
-                  <div class="invalid-feedback" *ngIf="datos.get('dias').errors && datos.get('dias').touched">
-                    <p *ngIf="datos.get('dias').hasError('pattern')">Esta campo solo acepta letras.</p>
-                  </div>
-                </div>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error'">
+                  {{statusText}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
               </div>
-            </div>
-         
+
+              <div class="row">
+
+
+                  <div class="col-md-2"></div>
+                  <div class="col-md-4"> <button class="btn btn-md btn-secondary" (click)="anterior('medicamentosPanel')">Anterior</button></div>
+
+
+
+                  <div class="col-md-4"> <button class="btn btn-md btn-info" (click)="guardarHistoriaClinica()">Guardar historia
+            clinica</button></div>
+                  <div class="col-md-2"></div>
+
+              </div>
+
+
+
           </div>
-        </div>
-      </div>
-    </form> -->
+
+
+
+          <!-- Button modal publicacion exitosa -->
+          <button type="button" style="display: none;" id="btn-publicacion-exitosa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="false">
+      Launch demo modal
+    </button>
+
+          <!-- Modal publicacion exitosa -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                          <button type="button" id="btn-cerrar-pub-exitosa" class="close" data-dismiss="modal" aria-label="Close" (click)="pubExitosa()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                      </div>
+                      <div class="modal-body">
+                          La publicación ha sido creada correctamente.
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="pubExitosa()">Aceptar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <!----------------------------------FIN MEDICAMENTOS------------------------------>
+
 
 
     </div>

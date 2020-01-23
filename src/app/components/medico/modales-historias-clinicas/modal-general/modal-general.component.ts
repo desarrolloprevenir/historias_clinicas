@@ -11,6 +11,7 @@ export class ModalGeneralComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.infoHistoriaGeneral.antecedentef.value);
   }
 
 }
