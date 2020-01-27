@@ -548,7 +548,8 @@
                           <td>{{cM.producto}}</td>
                           <td>{{cM.via_administra}}</td>
                           <td><textarea name="txtRecetaMedica" formControlName="recetaMedica" rows="3" class="form-control"></textarea></td>
-                          <td><button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
+                          <td><button (click)="agregarReceta(i)" class="btn btn-success">x</button>
+                            <button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
                       </tr>
                   </tbody>
               </table>

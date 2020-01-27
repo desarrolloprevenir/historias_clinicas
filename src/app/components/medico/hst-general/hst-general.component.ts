@@ -105,7 +105,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   public cajaMedicamento = [];
 
-  diagnosticoSeleccionado : string = '0';
+  diagnosticoSeleccionado: string = '0';
 
   myControl = new FormControl('', [Validators.required]);
   options: User[];
@@ -365,45 +365,45 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
   }
 
   revisionSistemas() {
-    let cardioRes = {id: 1, nombre: 'Cardio-Respiratorio', variable: this.varCardio, formControl: 'card_resp_desc'};
-    let vascular = {id: 2, nombre: 'Vascular', variable: this.varVascular, formControl: 'vascular_desc'};
-    let gastro = {id: 3, nombre: 'Gastro Intestinal', variable: this.varGastro, formControl: 'gastro_int_desc'};
-    let genito = {id: 4, nombre: 'Genito-Urinario', variable: this.varGenito, formControl: 'genito_uri_desc'};
-    let endo = {id: 5, nombre: 'Endocrino', variable: this.varEndo, formControl: 'endocrino_desc'};
-    let osteo = {id: 6, nombre: 'Osteomuscular', variable: this.varOsteo, formControl: 'osteomuscular_desc'};
-    let neuro = {id: 7, nombre: 'Neurológico', variable: this.varNeuro, formControl: 'neurologico_desc'};
-    let piel = {id: 8, nombre: 'Piel y Faneras', variable: this.varPiel, formControl: 'pielyfan_desc'};
+    const cardioRes = {id: 1, nombre: 'Cardio-Respiratorio', variable: this.varCardio, formControl: 'card_resp_desc'};
+    const vascular = {id: 2, nombre: 'Vascular', variable: this.varVascular, formControl: 'vascular_desc'};
+    const gastro = {id: 3, nombre: 'Gastro Intestinal', variable: this.varGastro, formControl: 'gastro_int_desc'};
+    const genito = {id: 4, nombre: 'Genito-Urinario', variable: this.varGenito, formControl: 'genito_uri_desc'};
+    const endo = {id: 5, nombre: 'Endocrino', variable: this.varEndo, formControl: 'endocrino_desc'};
+    const osteo = {id: 6, nombre: 'Osteomuscular', variable: this.varOsteo, formControl: 'osteomuscular_desc'};
+    const neuro = {id: 7, nombre: 'Neurológico', variable: this.varNeuro, formControl: 'neurologico_desc'};
+    const piel = {id: 8, nombre: 'Piel y Faneras', variable: this.varPiel, formControl: 'pielyfan_desc'};
 
     this.sistema.push(cardioRes, vascular, gastro, genito, endo, osteo, neuro, piel);
    }
 
    habitosFactoresDeRiesgo() {
-    let cigarrillo = {id: 1, nombre: 'Cigarrillo', variable: this.cigarrillo, formControl: 'cigarrillo'};
-    let alcohol = {id: 2, nombre: 'Alcohol', variable: this.alcohol, formControl: 'alcohol'};
-    let estres = {id: 3, nombre: 'Estres', variable: this.estres, formControl: 'estres'};
-    let humo = {id: 4, nombre: 'Humo', variable: this.humo, formControl: 'humo'};
-    let polvo = {id: 5, nombre: 'Polvo', variable: this.polvo, formControl: 'polvo'};
-    let ejercicio = {id: 5, nombre: 'Ejercicio', variable: this.ejercicio, formControl: 'ejercicio'};
+    const cigarrillo = {id: 1, nombre: 'Cigarrillo', variable: this.cigarrillo, formControl: 'cigarrillo'};
+    const alcohol = {id: 2, nombre: 'Alcohol', variable: this.alcohol, formControl: 'alcohol'};
+    const estres = {id: 3, nombre: 'Estres', variable: this.estres, formControl: 'estres'};
+    const humo = {id: 4, nombre: 'Humo', variable: this.humo, formControl: 'humo'};
+    const polvo = {id: 5, nombre: 'Polvo', variable: this.polvo, formControl: 'polvo'};
+    const ejercicio = {id: 5, nombre: 'Ejercicio', variable: this.ejercicio, formControl: 'ejercicio'};
 
     this.habitos.push(cigarrillo, alcohol, estres, humo, polvo, ejercicio);
    }
 
    examenMedico() {
-    let cabeza = {nombre: 'Cabeza', variable: this.varCabeza, formControl: 'cabeza_desc'};
-    let ojos = {nombre: 'Ojos', variable: this.varOjos, formControl: 'ojos_desc'};
-    let oidos = {nombre: 'Oidos', variable: this.varOidos, formControl: 'oidos_desc'};
-    let nariz = {nombre: 'Nariz', variable: this.varNariz, formControl: 'nariz_desc'};
-    let boca = {nombre: 'Boca', variable: this.varBoca, formControl: 'boca_desc'};
-    let cuello = {nombre: 'Cuello', variable: this.varCuello, formControl: 'cuello_desc'};
-    let torax = {nombre: 'Tórax Mama', variable: this.varTorax, formControl: 'torax_ma_desc'};
-    let pulmones = {nombre: 'Pulmones', variable: this.varPulmones, formControl: 'pulmones_desc'};
-    let corazon = {nombre: 'Corazón', variable: this.varCorazon, formControl: 'corazon_desc'};
-    let abdomen = {nombre: 'Abdomen', variable: this.abdomen, formControl: 'abdomen_desc'};
-    let genitoUrinario = {nombre: 'GenitoUrinario', variable: this.varGenitoUrinario, formControl: 'genitourinario_desc'};
-    let columna = {nombre: 'Columna', variable: this.varColumna, formControl: 'columna_desc'};
-    let extremidades = {nombre: 'Extremidades', variable: this.varExtremidades, formControl: 'extremidades_desc'};
-    let neurologico = {nombre: 'Neurológico', variable: this.varNeurologico, formControl: 'neurologico_desc_fisico'};
-    let faneras = {nombre: 'Piel y Faneras', variable: this.varOsteo, formControl: 'pielyfane_desc'};
+    const cabeza = {nombre: 'Cabeza', variable: this.varCabeza, formControl: 'cabeza_desc'};
+    const ojos = {nombre: 'Ojos', variable: this.varOjos, formControl: 'ojos_desc'};
+    const oidos = {nombre: 'Oidos', variable: this.varOidos, formControl: 'oidos_desc'};
+    const nariz = {nombre: 'Nariz', variable: this.varNariz, formControl: 'nariz_desc'};
+    const boca = {nombre: 'Boca', variable: this.varBoca, formControl: 'boca_desc'};
+    const cuello = {nombre: 'Cuello', variable: this.varCuello, formControl: 'cuello_desc'};
+    const torax = {nombre: 'Tórax Mama', variable: this.varTorax, formControl: 'torax_ma_desc'};
+    const pulmones = {nombre: 'Pulmones', variable: this.varPulmones, formControl: 'pulmones_desc'};
+    const corazon = {nombre: 'Corazón', variable: this.varCorazon, formControl: 'corazon_desc'};
+    const abdomen = {nombre: 'Abdomen', variable: this.abdomen, formControl: 'abdomen_desc'};
+    const genitoUrinario = {nombre: 'GenitoUrinario', variable: this.varGenitoUrinario, formControl: 'genitourinario_desc'};
+    const columna = {nombre: 'Columna', variable: this.varColumna, formControl: 'columna_desc'};
+    const extremidades = {nombre: 'Extremidades', variable: this.varExtremidades, formControl: 'extremidades_desc'};
+    const neurologico = {nombre: 'Neurológico', variable: this.varNeurologico, formControl: 'neurologico_desc_fisico'};
+    const faneras = {nombre: 'Piel y Faneras', variable: this.varOsteo, formControl: 'pielyfane_desc'};
 
     this.examen.push(cabeza , ojos, oidos, nariz, boca, cuello, torax,
                      pulmones, corazon, abdomen, genitoUrinario, columna, extremidades, neurologico, faneras);
@@ -425,8 +425,8 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   checkRevisionSistema(ev, tipo) {
     // console.log(tipo);
-    let valor = true;
-    let identificador = 0;
+    const valor = true;
+    const identificador = 0;
 
     switch (valor === true) {
       case (tipo === 'Cardio-Respiratorio') :
@@ -458,7 +458,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   checkHabitosFactores(ev, tipo) {
     // console.log(tipo);
-    let valor = true;
+    const valor = true;
     // let identificador = 0;
 
     switch (valor === true) {
@@ -485,7 +485,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   checkExamenMedico(ev, tipo) {
     // console.log(tipo);
-    let valor = true;
+    const valor = true;
     switch (valor === true) {
       case (tipo === 'Cabeza') :
       this.examen[0].variable = ev.checked;
@@ -541,8 +541,8 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
     // ANTECEDENTES FAMILIARES
 
-      let antecedeneFCombo = this.antecedentesFMultiCtrl.value;
-      let antecedentes = [
+      const antecedeneFCombo = this.antecedentesFMultiCtrl.value;
+      const antecedentes = [
       {nombre: 'Cardiopatías', disponible: 0, id: '1'},
       {nombre: 'Diabetes', disponible: 0, id: '2'},
       {nombre: 'Hipertensión', disponible: 0, id: '3'},
@@ -588,12 +588,12 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
                           gine_planificacion: this.datosHistGeneral.value.gine_planificacion
                           };
 
-      let habitosyfactores = { cigarrillo: this.datosHistGeneral.value.cigarrillo, alcohol: this.datosHistGeneral.value.alcohol,
+      const habitosyfactores = { cigarrillo: this.datosHistGeneral.value.cigarrillo, alcohol: this.datosHistGeneral.value.alcohol,
                              estres: this.datosHistGeneral.value.estres, humo: this.datosHistGeneral.value.humo,
                              polvo: this.datosHistGeneral.value.polvo, ejercicio: this.datosHistGeneral.value.ejercicio,
                              otros: this.datosHistGeneral.value.ejercicio };
 
-      let revisionpsistemas = { card_resp_desc: this.datosHistGeneral.value.card_resp_desc,
+      const revisionpsistemas = { card_resp_desc: this.datosHistGeneral.value.card_resp_desc,
                               vascular_desc: this.datosHistGeneral.value.vascular_desc,
                               gastro_int_desc: this.datosHistGeneral.value.gastro_int_desc,
                               genito_uri_desc: this.datosHistGeneral.value.genito_uri_desc,
@@ -602,7 +602,7 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
                               neurologico_desc: this.datosHistGeneral.value.neurologico_desc,
                               pielyfan_desc: this.datosHistGeneral.value.pielyfan_desc};
 
-      let examenf = {apariencia_g: this.datosHistGeneral.value.aparienciaGeneral,
+      const examenf = {apariencia_g: this.datosHistGeneral.value.aparienciaGeneral,
                     frecuencia_cardica: this.datosHistGeneral.value.frecuencia_cardica,
                     temperetura: this.datosHistGeneral.value.temperetura, frecuencia_resp: this.datosHistGeneral.value.frecuencia_resp,
                     talla: this.datosHistGeneral.value.talla, presion_art: this.datosHistGeneral.value.presion_art,
@@ -621,16 +621,17 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
                     pielyfane_desc: this.datosHistGeneral.value.pielyfane_desc
      };
 
-      let conDiagnostico = { descripDiag : this.registroDiag.value.descripDiag};
+      const conDiagnostico = { descripDiag : this.registroDiag.value.descripDiag};
 
 
-      var token = this.userService.getToken();
+      let token = this.userService.getToken();
 
       let impresion_diag = this.idImpDiag;
+      let medicamentos = this.idMed;
 
       let historia_opt = {};
 
-      let info = { tipo_consulta: this.datosHistGeneral.value.tipoConsulta, motivo_consulta: this.datosHistGeneral.value.motivoConsulta,
+      const info = { tipo_consulta: this.datosHistGeneral.value.tipoConsulta, motivo_consulta: this.datosHistGeneral.value.motivoConsulta,
                  enfermedades_preex: this.datosHistGeneral.value.enfermedadPreexistente, usuario_id: this.idUsuario,
                  id_servicios: this.idServicio, antecedentes_f, antecedentes_p, habitosyfactores, revisionpsistemas, examenf,
                  impresion_diag, historia_opt};
@@ -653,9 +654,9 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   siguiente(parametro: string) {
 
-    let variable  = true;
+    const variable  = true;
 
-    switch (variable === true){
+    switch (variable === true) {
       case parametro === 'consulta':
         this.vista = 'familiares';
         break;
@@ -683,9 +684,9 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  anterior(parametro: string){
+  anterior(parametro: string) {
 
-    let variable  = true;
+    const variable  = true;
 
     switch (variable === true) {
       case parametro === 'familiares':
@@ -725,7 +726,8 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   guardarMedicamento(m) {
     this.cajaMedicamento.push(m);
-    this.idMed.push(m.id_medicamentos);
+    // this.idMed.push({'id_medicamentos': m.id_medicamentos, 'receta': this.});
+    console.log(m);
   }
 
   borrarDiagnostico(i) {
@@ -734,6 +736,10 @@ export class HstGeneralComponent implements  OnInit, AfterViewInit, OnDestroy {
 
   borrarMedicamento(i) {
     this.cajaMedicamento.splice(i, 1);
+  }
+
+  agregarReceta(i) {
+    console.log(this.datosHistGeneral.value.recetaMedica);
   }
 
   verHistoriaGeneral(info) {
