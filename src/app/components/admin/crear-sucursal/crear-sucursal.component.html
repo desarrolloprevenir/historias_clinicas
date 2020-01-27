@@ -410,6 +410,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <label class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" value="{{infoSucursal.email}}" readonly>
+                                </div>
+
+                            </div>
                             <!--
                       <div class="row">
                           <div class="col">
@@ -433,10 +442,87 @@
 
                         </form>
 
-                        <div class="text-center" style="padding-top: 10px;">
+                        <div class="text-center" style="padding-top: 30px;">
+                            <button type="button" class="btn btn-secondary" id="abrirModalCambio" data-toggle="modal" data-target="#exampleModalLong" style="margin-right: 10px;">Cambiar contraseña</button>
                             <button class="btn btn-success" style="margin-right: 10px;" (click)="guardarInfoSucursal()" [disabled]="!nombreSucursal.valid || !telefonoSucursal.valid || !direccionSucursal.valid">Guardar Información</button>
                             <button class="btn btn-primary" style="margin-right: 10px;" (click)="siguiente()">Ir a Consultorios</button>
                         </div>
+
+
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <!-- ------------------------------------------ MODAL --------------------------------------------------- -->
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+
+                        <!-- <button >Cambiar contraseña</button> -->
+
+
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{infoSucursal.nombre}}</h5>
+                                        <button type="button" id="cerrar-modal-cambio" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form [formGroup]="formCambio">
+                                            <div class="form-group">
+                                                <label class="form-label">Contraseña administrador</label>
+                                                <input type="password" formControlName="psswAdmin" [class.is-invalid]="formCambio.get('psswAdmin').errors && formCambio.get('psswAdmin').touched" class="form-control">
+
+                                                <div>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('psswAdmin').getError('required') && formCambio.get('psswAdmin').touched">* El campo es requerido</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label">Nombre de usuario</label>
+                                                <input type="text" formControlName="nombreUsuario" [class.is-invalid]="formCambio.get('nombreUsuario').errors && formCambio.get('nombreUsuario').touched" class="form-control">
+
+                                                <div>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('nombreUsuario').getError('required') && formCambio.get('nombreUsuario').touched">* El campo es requerido</p>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('nombreUsuario').getError('pattern') && formCambio.get('nombreUsuario').touched">* El nombre de usuario no puede contener espacios o caracteres especiales.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label">Nueva nontraseña</label>
+                                                <input type="password" formControlName="pssw" [class.is-invalid]="formCambio.get('pssw').errors && formCambio.get('pssw').touched" class="form-control">
+
+                                                <div>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('pssw').getError('required') && formCambio.get('pssw').touched">* El campo es requerido</p>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('pssw').getError('minlength')">* Cantidad minima de caracteres (8)</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label">Confirmar contraseña</label>
+                                                <input type="password" formControlName="psswConfirm" [class.is-invalid]="formCambio.get('psswConfirm').errors && formCambio.get('psswConfirm').touched" class="form-control">
+
+                                                <div>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').getError('required') && formCambio.get('psswConfirm').touched">* El campo es requerido</p>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').getError('minlength')">* Cantidad minima de caracteres (8)</p>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').value != formCambio.get('pssw').value">* Las contraseñas no coinciden</p>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" (click)="cambioContrasena()">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <!-- ---------------------------------------- FIN MODAL ------------------------------------------------- -->
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+
 
                     </div>
 

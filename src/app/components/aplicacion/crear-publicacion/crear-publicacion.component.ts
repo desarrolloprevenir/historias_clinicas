@@ -1320,7 +1320,7 @@ _handleReaderLoaded(readerEvt) {
 
  publicarServicio() {
 
-  if(this.terminosYCondiciones === false) {
+  if (this.terminosYCondiciones === false) {
     this.statusImgs = true;
     this.textoStatus = 'Por favor acepta términos y condiciones antes de publicar el servicio.';
   } else {
@@ -1520,6 +1520,7 @@ _handleReaderLoaded(readerEvt) {
  recorte() {
   //  console.log(this.croppedImage);
    this.imagenes.push({base64Image: this.croppedImage});
+   console.log(this.imagenes);
    this.recortar = false;
    this.mostrarRecorte = false;
  }

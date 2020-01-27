@@ -577,7 +577,7 @@
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titulo del estudio médico" name="nombreEstudio" #nombreEstudio="ngModel" [(ngModel)]="estudios.nombreEstudio">
+                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titulo del estudio médico" [formControl]="nombreEstudio">
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
@@ -666,9 +666,9 @@
 
     <!-- -------------------------------------- PERFIL SUCURSAL ------------------------------------------------------------- -->
 
-    <div>
+    <div *ngIf="infoSucursal">
         <div class="row" style="padding-top: 50px;">
-            <div class="col-md-3 fichasPerfiles" *ngIf="infoSucursal">
+            <div class="col-md-3 fichasPerfiles">
                 <div id="perfil-provedor-imagen">
                     <img class="img-circle center-block" src="{{infoSucursal.avatar}}" style="border-radius: 138px;border: 17px solid white; background: white; " alt="">
                     <br>
@@ -801,7 +801,8 @@
         </div>
 
     </div>
+</div>
 
-    <div class="loading" *ngIf="loading">
-        <img src="/assets/pulso.gif" alt="">
-    </div>
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>

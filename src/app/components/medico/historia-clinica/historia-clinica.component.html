@@ -196,9 +196,14 @@
                 <div *ngSwitchCase="'historia'">
                     <!-- data-backdrop="false" -->
 
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary btn-lg" style="margin-right: 3px;" [routerLink]="['/historia-general', idCategoria]">Crear Historia clinica</button>
+                        <!-- <button type="button" class="btn btn-primary btn-lg" style="margin-right: 3px;">Realizar cotización</button> -->
+                    </div>
+
                     <div class="row">
+                        <div class="col-md-6"></div>
                         <!-- <div class="col-md-6"> <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target=".crear-historia-clinica" >Crear Historia clinica</button></div> -->
-                        <div class="col-md-6"><button type="button" class="btn btn-primary btn-lg float-left" [routerLink]="['/historia-general', idCategoria]">Crear Historia clinica</button></div>
                     </div>
 
 
@@ -1513,7 +1518,7 @@
             <div class="modal-body" *ngIf="infoHistoriaClinica">
 
 
-                <app-modal-optometria [infoHistoriaClinica]="infoHistoriaClinica"></app-modal-optometria>
+                <app-modal-optometria [infoHistoriaClinica]="infoHistoriaClinica" [infoUser]="infoUser"></app-modal-optometria>
 
 
                 <div class="modal-footer">

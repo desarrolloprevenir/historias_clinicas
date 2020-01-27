@@ -363,15 +363,16 @@ export class BuscarCitaComponent implements OnInit {
     this.loading = true;
     // console.log(info);
     // console.log(info.id_citas_activas , info.id_consultorio, info.categoria);
-    var id_servicio;
+    var idConsultorio;
     var ctActivas: boolean;
 
     if (tipo === 'paciente') {
-      id_servicio = info.servicios_idservicios;
-
+      idConsultorio = info.id_consultorio;
+      console.log('info', info);
+      console.log('citas agregadas', this.citasAgregadas);
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.citasAgregadas.length; i++ ) {
-          if (id_servicio === this.citasAgregadas[i].servicios_idservicios) {
+          if (idConsultorio === this.citasAgregadas[i].id_consultorio) {
               if (this.citasAgregadas[i].estado === 1) {
                 // console.log('hay citas activas');
                 ctActivas = true;
@@ -405,7 +406,7 @@ export class BuscarCitaComponent implements OnInit {
                             this.loading = false;
                             //  console.log(err);
                            });
-
+ 
       } else {
         this.infoSiguienteCita = info;
         document.getElementById('btn-confirmar-cita').click();
@@ -417,11 +418,11 @@ export class BuscarCitaComponent implements OnInit {
 
 
     if (tipo === 'mascota') {
-      id_servicio = info.id_servicios;
+      idConsultorio = info.id_consultorio;
 
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.citasAgregadasMasc.length; i++ ) {
-        if (id_servicio === this.citasAgregadasMasc[i].id_servicios) {
+        if (idConsultorio === this.citasAgregadasMasc[i].id_consultorio) {
             if (this.citasAgregadasMasc[i].estado === 1) {
               // console.log('hay citas activas');
               ctActivas = true;
@@ -439,7 +440,7 @@ export class BuscarCitaComponent implements OnInit {
                            this.loading = false;
                            if (response.activa === false && response.activada === true) {
 
-                            if(this.medico === false) {
+                            if (this.medico === false) {
                               this.citasUsuario();
                             } else {
                               this.getCitasMedico(this.medicoId);

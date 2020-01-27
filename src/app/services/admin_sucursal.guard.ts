@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router';
 import { UserService } from './user.service';
 
 @Injectable()
-export class SucursalMedico implements CanActivate {
+export class AdminSucursal implements CanActivate {
 
     constructor(private userService: UserService) {
 
@@ -12,9 +12,9 @@ export class SucursalMedico implements CanActivate {
     canActivate() {
         let identity = this.userService.getIdentity();
 
-        if (identity.id_sucursales || identity.medico_id) {
+        if (identity.id_sucursales || identity.id_provedor) {
             return true;
-        } else  if (identity.id_provedor) {
+        } else  if (identity.medico_id) {
             return false;
         }
     }

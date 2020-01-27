@@ -184,4 +184,10 @@ pubService(formulario): Observable<any> {
   return this.http.post(apiUrl + '/services' , formulario, {headers});
 }
 
+// Cambio contraseña y usuario sucursal
+
+putCambioContrasenaUsuario(info) {
+  return this.http.put(apiUrl + '/contrasuc' , info, {headers});
+}
+
 }
