@@ -56,6 +56,7 @@ import { HstGeneralComponent } from './medico/hst-general/hst-general.component'
 import { VisiometriaComponent } from './medico/visiometria/visiometria.component';
 import { ModalOptometriaComponent } from './medico/modales-historias-clinicas/modal-optometria/modal-optometria.component';
 import { ModalGeneralComponent } from './medico/modales-historias-clinicas/modal-general/modal-general.component';
+import { PreciosInventarioComponent } from './sucursal/precios-inventario/precios-inventario.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { ModalGeneralComponent } from './medico/modales-historias-clinicas/modal
   HstGeneralComponent,
   VisiometriaComponent,
   ModalOptometriaComponent,
-  ModalGeneralComponent
+  ModalGeneralComponent,
+  PreciosInventarioComponent
   ],
   imports: [
     CommonModule,
@@ -143,7 +145,8 @@ import { ModalGeneralComponent } from './medico/modales-historias-clinicas/modal
   HistoriaOptometriaComponent,
   HstGeneralComponent,
   ModalOptometriaComponent,
-  ModalGeneralComponent
+  ModalGeneralComponent,
+  PreciosInventarioComponent
   ]
 })
 export class ComponentesModule { }

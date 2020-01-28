@@ -473,7 +473,7 @@ _handleReaderLoaded(readerEvt) {
    this.loading = true;
 
    this.provedorService.dltImagenServicio(id, ruta).subscribe((response) => {
-      // console.log(response);
+      console.log(response);
       this.status = 'success';
       this.statusText = 'El servicio se actualizo con exito';
       window.scroll(0, 0);

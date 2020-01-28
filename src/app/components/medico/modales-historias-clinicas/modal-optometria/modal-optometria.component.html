@@ -611,7 +611,11 @@
 <div class="row">
     <div class="col form-group">
         <label for="" class="label-formulario-user">Diagnostico inicial</label>
-        <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.diagnosticoInical}}" readonly></textarea>
+        <div id="contentCertificado" #contentCertificado>
+            <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.diagnosticoInical}}" readonly></textarea>
+            <p style="display: none; font-family: 'Courier'; font-size: 14px;">{{infoHistoriaClinica.histoptica.diagnosticoInical}}</p>
+        </div>
+
     </div>
 
     <div class="col form-group">
@@ -647,7 +651,10 @@
     <div class="col">
         <div class="form-group">
             <label for="" class="label-formulario-user">Medicamentos</label>
-            <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.medicamentos}}" readonly></textarea>
+            <div id="content" #content>
+                <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.medicamentos}}" readonly></textarea>
+                <p style="display: none; font-family: 'Courier'; font-size: 20px;">{{infoHistoriaClinica.histoptica.medicamentos}}</p>
+            </div>
         </div>
     </div>
 </div>
@@ -656,15 +663,45 @@
     <div class="col">
         <div class="form-group">
             <label for="" class="label-formulario-user">Remision</label>
-            <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.remision}}" readonly></textarea>
+            <div id="contentRemision" #contentRemision>
+                <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.remision}}" readonly></textarea>
+                <p style="display: none; font-family: 'Courier'; font-size: 20px;">{{infoHistoriaClinica.histoptica.remision}}</p>
+            </div>
+
         </div>
     </div>
     <div class="col">
         <div class="form-group">
             <label for="" class="label-formulario-user">Observaciones</label>
-            <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.observaciones}}" readonly></textarea>
+            <div id="contentCertificadoObservaciones" #contentCertificadoObservaciones>
+                <textarea name="" id="" rows="3" class="form-control" value="{{infoHistoriaClinica.histoptica.observaciones}}" readonly></textarea>
+                <p style="display: none; font-family: 'Courier'; font-size: 14px;">{{infoHistoriaClinica.histoptica.observaciones}}</p>
+            </div>
+
         </div>
     </div>
 </div>
 
+
+
 <!-- FIN -->
+
+<div class="row" style="padding:20px 0 20px 0;">
+
+    <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-info" (click)="pdfMedicamentos()"><i class="fas fa-print"></i>&nbsp; Exportar pdf medicamentos</button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-info" (click)="pdfRemision()"><i class="fas fa-print"></i>&nbsp; Exportar pdf remision</button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-info" (click)="pdfCertificado()"><i class="fas fa-print"></i>&nbsp; Exportar pdf certificado</button>
+        </div>
+    </div>
+
+</div>

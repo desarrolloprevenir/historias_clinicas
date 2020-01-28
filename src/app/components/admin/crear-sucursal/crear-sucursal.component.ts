@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../services/app.service';
 import { ProvedorService } from 'src/app/services/provedor.service';
 import { UserService } from 'src/app/services/user.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-crear-sucursal',
@@ -66,6 +67,7 @@ export class CrearSucursalComponent implements OnInit {
   public consultorioEliminar;
   public idConsultorio;
   public infoEliminar;
+  public formCambio: FormGroup;
 
   // form control
   departSelect = new FormControl('', Validators.required);
@@ -90,9 +92,17 @@ export class CrearSucursalComponent implements OnInit {
               private provedorService: ProvedorService,
               private userService: UserService,
               private route: ActivatedRoute,
-              private sucursalService: SucursalService) {
+              private fb: FormBuilder,
+              private sucursalService: SucursalService,
+              location: PlatformLocation,
+              ) {
                 this.mymodel = 'informacion';
                 this.horario1 = '1';
+
+                location.onPopState(() => {
+                  document.getElementById('cerrar-modal-cambio').click();
+            });
+
               }
 
   ngOnInit() {
@@ -119,14 +129,18 @@ export class CrearSucursalComponent implements OnInit {
   }
 
   getInfoSucursal(idSucursal) {
+      this.loading = true;
     // console.log('oi');
       this.provedorService.getConsultoriosSucursal(idSucursal).subscribe( (response) => {
-      // console.log('sucu',response);
+      console.log('sucu', response);
+      this.loading = false;
       this.infoSucursal = response;
       this.nombreSucursal.setValue(this.infoSucursal.nombre);
       this.telefonoSucursal.setValue(this.infoSucursal.telefono);
       this.direccionSucursal.setValue(this.infoSucursal.direccion);
+      this.validacionesCambioContrasena();
     }, () => {
+        this.loading = false;
         // console.log(err);
     } );
   }
@@ -163,13 +177,25 @@ export class CrearSucursalComponent implements OnInit {
   //   console.log(this.muniSelect.value);
   // }
 
-  getServicios(idProvedor){
+  getServicios(idProvedor) {
     this.provedorService.getPublications(idProvedor).subscribe( (response) => {
       this.servicios = response;
       // console.log(response);
     }, () => {
 
     });
+  }
+
+  validacionesCambioContrasena() {
+
+    this.formCambio = this.fb.group({
+
+      psswAdmin: ['', Validators.required],
+      nombreUsuario: [this.infoSucursal.email, [Validators.required, Validators.pattern('[a-zA-z_0-9]*')]],
+      pssw : ['', [Validators.required, Validators.minLength(8)]],
+      psswConfirm : ['', [Validators.required, Validators.minLength(8)]],
+    });
+
   }
 
   siguiente() {
@@ -558,7 +584,7 @@ export class CrearSucursalComponent implements OnInit {
     // console.log(this.infoConsultorios);
   }
 
-  eliminarConsultorio(){
+  eliminarConsultorio() {
     this.infoConsultorios.splice(this.posicionEliminar, 1);
     this.medicoTrue();
   }
@@ -569,7 +595,7 @@ export class CrearSucursalComponent implements OnInit {
       // console.log(this.infoConsultorios);
 
       this.loading = true;
-      this.sucursalService.postConsultorioSucursal(this.infoConsultorios).subscribe( (response)=>{
+      this.sucursalService.postConsultorioSucursal(this.infoConsultorios).subscribe( (response) => {
         this.loading = false;
         window.scroll(0, 0);
         if (response === true){
@@ -1454,5 +1480,26 @@ export class CrearSucursalComponent implements OnInit {
       // console.log(err);
     });
   }
+
+  cambioContrasena() {
+    let admin = this.userService.getIdentity();
+
+    let info = { email: admin.correo, passadmin: this.aplicationService.encriptar(this.formCambio.value.psswAdmin),
+                 id_sucur : this.infoSucursal.id_sucursales, usu: this.formCambio.value.nombreUsuario,
+                passnu : this.aplicationService.encriptar(this.formCambio.value.pssw) };
+
+    this.provedorService.putCambioContrasenaUsuario(info).subscribe( (response) => {
+      console.log(response);
+    }, (err) => {
+      console.log(err);
+    } );
+
+    // document.getElementById('cerrar-modal-cambio').click();
+  }
+
+  // psswAdmin: ['', Validators.required],
+  //     nombreUsuario: [this.infoSucursal.email, [Validators.required, Validators.pattern('[a-zA-z_0-9]*')]],
+  //     pssw : ['', [Validators.required, Validators.minLength(8)]],
+  //     psswConfirm : ['', [Validators.required, Validators.minLength(8)]],
 
 }

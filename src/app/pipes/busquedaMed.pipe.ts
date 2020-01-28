@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'busquedaMed'
 })
 export class BusquedaMedPipe implements PipeTransform {
+  recetaMedica: [''];
 
   transform(arreglo: any[], texto: string): any {
     if (!texto) {

@@ -1135,6 +1135,7 @@ export class CalendarioComponent implements OnInit {
   getInfoConsultorio(idConsultorio) {
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
+      this.loading = false;
       console.log('info_cc', response);
       this.infoConsultorio = response[0];
     }, () => {

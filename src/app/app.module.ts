@@ -15,6 +15,7 @@ import { UserAdmin } from './services/user_admin.guard';
 import { UserSucursal } from './services/user_sucursal.guard';
 import { UserMedico } from './services/user_medico.guard';
 import { SucursalMedico } from './services/sucursal_medico.guard';
+import { AdminSucursal } from './services/admin_sucursal.guard';
 
 // MODULO PIPES
 import { PipesModule } from './pipes/pipes.module';
@@ -51,6 +52,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     UserMedico,
     UserSucursal,
     SucursalMedico,
+    AdminSucursal
     // {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

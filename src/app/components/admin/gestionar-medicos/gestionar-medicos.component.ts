@@ -61,6 +61,7 @@ export class GestionarMedicosComponent implements OnInit {
     this.loading = true;
 
     this.provedorService.getMedicosProvedor(id).subscribe((response) => {
+      console.log(response);
 
       if (response.length <= 0) {
         this.vacio = true;
@@ -101,7 +102,7 @@ export class GestionarMedicosComponent implements OnInit {
         this.status = 'error';
         this.statusText = 'El médico no se puede eliminar por que tiene un consultorio asociado, elimina primero el consultorio.';
       }
-    }, (err) => {
+    }, () => {
       // window.scroll(0,0);
       // console.log(err);
       this.status = 'error';
@@ -204,15 +205,17 @@ export class GestionarMedicosComponent implements OnInit {
       if (this.datos.value.pssw === this.datos.value.psswConf) {
 
         let info = {nombre: this.datos.value.nombres , apellidos: this.datos.value.apellidos,
-        tarj_profecional: this.datos.value.tarjetaProfecional , email: this.datos.value.email,
+        tarj_profecional: this.datos.value.tarjetaProfesional , email: this.datos.value.email,
         pssw: this.appService.encriptar(this.datos.value.pssw), cedula: this.cedula.value, titulo: this.datos.value.titulo,
         provedores_id: this.identity.id_provedor, existe: bol };
 
         // console.log(info);
 
+        // console.log(info);
+
         this.medicoService.postAgregarMedicos(info, token).subscribe((response) => {
           this.loading = false;
-          // console.log(response);
+          console.log(response);
 
           if (response === true) {
             this.status = 'success';
@@ -227,12 +230,13 @@ export class GestionarMedicosComponent implements OnInit {
             document.getElementById('cerrarModal').click();
           }
 
-          if (response.campo === 'profecional') {
+          if (response.campo === 'profesional') {
               console.log('aqui prof');
               this.status = 'warning';
               this.statusText = 'La tarjeta profesional ya se encuentra registrada';
             }
           if (response.campo === 'email') {
+              console.log('aqui correo');
               this.status = 'warning';
               this.statusText = 'El email ya se encuentra registrado';
             }
@@ -247,7 +251,7 @@ export class GestionarMedicosComponent implements OnInit {
 
       } else {
         this.status = 'warning';
-        this.statusText = 'Error las contraseñas no coinciden';
+        this.statusText = 'Las contraseñas no coinciden';
         this.loading = false;
       }
     }
