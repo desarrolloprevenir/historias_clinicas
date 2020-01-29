@@ -1,0 +1,46 @@
+<div class="calendario">
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
+                    Atrás
+                </div>
+                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                    Hoy
+                </div>
+                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay($event)">
+                    Adelante
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                    Mes
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                    Semana
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                    Dia
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" (dayClicked)="viewDate = $event.day.date; view = CalendarView.Day" [locale]="locale">
+    </mwl-calendar-month-view>
+
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale" [dayStartHour]="6" (dayClicked)="viewDate = $event.day.date; view = CalendarView.Day" [dayEndHour]="19" (hourSegmentClicked)="hourSegmentClicked($event)"
+        (eventClicked)="handleEvent('Clicked', $event.event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale" [dayStartHour]="6" [dayEndHour]="19" (hourSegmentClicked)="hourSegmentClicked($event)" (eventClicked)="handleEvent('Clicked', $event.event)">
+    </mwl-calendar-day-view>
+</div>

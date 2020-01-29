@@ -35,6 +35,7 @@ import { UserMedico } from './services/user_medico.guard';
 import { HistoriaGeneralComponent } from './components/medico/historia-general/historia-general.component';
 import { PreciosInventarioComponent } from './components/sucursal/precios-inventario/precios-inventario.component';
 import { AdminSucursal } from './services/admin_sucursal.guard';
+import { HitorialCitasComponent } from './components/admin/hitorial-citas/hitorial-citas.component';
 
 const routes: Routes = [
   {path: '', component : LoginComponent},
@@ -69,6 +70,7 @@ const routes: Routes = [
   {path : 'historia-clinica/:id/:id_servicio/:idCategoria', component: HistoriaClinicaComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'historia-general/:idCategoria', component: HistoriaGeneralComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'precios-e-inventario', component: PreciosInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
+  {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
   {path: '**', component: LoginComponent}
 
 

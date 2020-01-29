@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="nav-item" *ngIf="!identity.medico_id && !identity.id_sucursales">
-                    <a class="nav-link" routerLink="/medicos" routerLinkActive="active-navegacion">Estadisticas e Historial</a>
+                    <a class="nav-link" routerLink="/estadisticas-historial" routerLinkActive="active-navegacion">Estadisticas e Historial</a>
                 </li>
 
                 <li class="nav-item" *ngIf="(!identity.medico_id || !identity.id_provedor) && identity.id_sucursales">

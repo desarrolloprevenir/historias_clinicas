@@ -11,12 +11,6 @@ export class ModalGeneralComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('aqio', this.infoHistoriaGeneral);
-    if (this.infoHistoriaGeneral.antecedentef != null) {
-        console.log('vacio');
-    } else {
-      console.log('con antecedentes');
-    }
   }
 
 }

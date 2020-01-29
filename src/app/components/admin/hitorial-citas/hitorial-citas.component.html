@@ -1,0 +1,73 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+
+<div class="container-fluid">
+    <br />
+    <div class="card-header">
+        <h1>Historial citas por sucursal</h1>
+    </div>
+    <br />
+</div>
+
+<app-alertas [status]="status" [statusText]="statusText"></app-alertas>
+
+<br>
+
+<div class="row container-fluid">
+    <div class="col-3">
+
+        <div style="padding-top: 10px;" *ngIf="sucursales">
+            <p style="margin: 0px; color: grey; font-size: 17px;">Escoge una sucursal</p>
+            <mat-form-field class="w-100">
+                <mat-label>
+                    <h6>Sucursales</h6>
+                </mat-label>
+                <mat-select (selectionChange)="sucursalSelecionada($event)">
+                    <mat-option *ngFor="let s of sucursales" [value]="s">
+                        {{ s.nombre }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div style="padding-top: 10px;" *ngIf="servicios">
+            <p style="margin: 0px; color: grey; font-size: 17px;">Escoge un servicio</p>
+            <mat-form-field class="w-100">
+                <mat-label>
+                    <h6>Servicios</h6>
+                </mat-label>
+                <mat-select (selectionChange)="serviciosSelecionado($event)">
+                    <mat-option *ngFor="let s of servicios" [value]="s">
+                        {{ s.nombre }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div style="padding-top: 10px;" *ngIf="medicos">
+            <p style="margin: 0px; color: grey; font-size: 17px;">Escoge un medico</p>
+            <mat-form-field class="w-100">
+                <mat-label>
+                    <h6>Médicos</h6>
+                </mat-label>
+                <mat-select (selectionChange)="consultorioSelect($event)">
+                    <mat-option *ngFor="let m of medicos" [value]="m">
+                        {{ m.medico }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div class="col-9">
+        <app-calendario-reutilizable #calendario *ngIf="servicioSelect" [idConsultorio]="idConsultorio" [servicio]="servicioSelect" [idSucursal]="idSucursal"></app-calendario-reutilizable>
+    </div>
+
+    <button id="btnActualizarCalendario" style="display: none;" class="btn btn-success" (click)="calendario.llamarHistorial()"></button>
+</div>
+
+
+<div class="loading" *ngIf="loading">
+    <img src="/assets/pulso.gif" alt="">
+</div>
