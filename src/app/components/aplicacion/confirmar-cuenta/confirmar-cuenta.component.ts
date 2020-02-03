@@ -36,6 +36,7 @@ export class ConfirmarCuentaComponent implements OnInit {
     }
 
     let info = {salt: this.codigo.value, id};
+    // console.log(info);
     this.appService.confirmacionCuenta(info, token).subscribe( (response) => {
 
       if (response === true) {
