@@ -142,7 +142,7 @@ export class ListadoPacientesComponent implements OnInit {
           } else {
              this.infoHistoriaClinica = response;
             //  console.log('bvhgi', this.infoHistoriaGeneral);
-             document.getElementById('btn-ver-hc').click();
+             document.getElementById('btn-ver-hg').click();
           }
 
       }, () => {

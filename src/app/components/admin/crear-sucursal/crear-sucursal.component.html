@@ -467,6 +467,22 @@
                                     </div>
                                     <div class="modal-body">
 
+
+                                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                                        <!-- ------------------------------------------ ALERTA -------------------------------------------------- -->
+                                        <!-- ---------------------------------------------------------------------------------------------------- -->
+
+                                        <div class="alert alert-warning alert-dismissible fade show container" role="alert" *ngIf="status === 'warning_modal'">
+                                            {{statusText}}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                                        <!-- ------------------------------------------ FORMULARIO --------------------------------------------------- -->
+                                        <!-- ---------------------------------------------------------------------------------------------------- -->
+
                                         <form [formGroup]="formCambio">
                                             <div class="form-group">
                                                 <label class="form-label">Contraseña administrador</label>
@@ -512,7 +528,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary" (click)="cambioContrasena()">Guardar</button>
+                                        <button type="button" class="btn btn-primary" (click)="cambioContrasena()" [disabled]="loading ||
+                                                                                                                               formCambio.invalid || 
+                                                                                                                               formCambio.get('psswConfirm').value != formCambio.get('pssw').value">Guardar</button>
                                     </div>
                                 </div>
                             </div>

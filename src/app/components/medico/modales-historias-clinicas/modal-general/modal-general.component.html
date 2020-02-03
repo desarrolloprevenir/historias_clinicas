@@ -1,110 +1,114 @@
-<!--Tipo Consulta-->
+<div *ngIf="infoHistoriaGeneral">
+
+    <!--Tipo Consulta-->
 
 
-<div class="row divisiones">
-    <div class="col-md-6 form-group">
-        <label class="form-label">Tipo consulta</label>
-        <input name="txt-motivo-consulta" rows="5" class="form-control" value="{{infoHistoriaGeneral.tipo_consulta}}" readonly />
-    </div>
-
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="txt-motivo-consulta" class="form-label label-formulario-user">Motivo de la Consulta</label>
-                    <textarea name="txt-motivo-consulta" rows="5" class="form-control" readonly>{{infoHistoriaGeneral.motiv_oconsulta}}</textarea>
-                </div>
-            </div>
+    <div class="row divisiones">
+        <div class="col-md-6 form-group">
+            <label class="form-label">Tipo consulta</label>
+            <input name="txt-motivo-consulta" rows="5" class="form-control" value="{{infoHistoriaGeneral.tipo_consulta}}" readonly />
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="txt-enfermedadActual" class="form-label label-formulario-user">Enfermedad
-Preexistente</label>
-                    <textarea name="txt-enfermedadActual" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.enfermedades_preex}}</textarea>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
-
-
-
-<!-- Fin Tipo Consulta-->
-
-<!--Antecedentes Familiares-->
-<div class="row divisiones">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <label for="txt-antecedentesF" class="tituloDivision">Antecedentes Familiares</label>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.asma == 1)">Asma</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.cancer == 1)">Cancer</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.cardiopatias == 1)">Cardiopatias</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.diabetes == 1)">Diabetes</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.efisema == 1)">Efisema</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.enfermadad_psiquiatrica == 1)">Enfermadad Psiquiatrica</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.epilepcia == 1)">Epilepcia</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.hipertension == 1)">Hipertension</li>
-                            <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.otro == 1)">Otro</li>
-                        </ul>
-
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txt-motivo-consulta" class="form-label label-formulario-user">Motivo de la Consulta</label>
+                        <textarea name="txt-motivo-consulta" rows="5" class="form-control" readonly>{{infoHistoriaGeneral.motiv_oconsulta}}</textarea>
                     </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Fin Antecedentes Familiares-->
-
-<!--Antecedentes Personales-->
-
-<div class="row divisiones">
-    <div class="col-md-12">
-        <label for="txt-antecedentesP" class="tituloDivision">Antecedentes Personales</label>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="txt-patologicos" class="form-label label-formulario-user">Patológicos</label>
-                    <textarea name="txtPatologicos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.patologias}}</textarea>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="txt-quirurgicos" class="form-label label-formulario-user">Quirúrgicos</label>
-                    <textarea name="txtQuirurgicos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.quirurgicos}}</textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="txt-traumaticos" class="form-label label-formulario-user">Traumáticos</label>
-                    <textarea name="txtTraumaticos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.traumaticos}}</textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Fin Antecedentes Personales-->
-
-<!--Inicio Gineco-opstetra-->
-<div class="row divisiones">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12 ">
-                <label for="" class="tituloDivision">Gineco - Obstetra</label>
             </div>
             <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txt-enfermedadActual" class="form-label label-formulario-user">Enfermedad
+Preexistente</label>
+                        <textarea name="txt-enfermedadActual" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.enfermedades_preex}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Fin Tipo Consulta-->
+
+    <!--Antecedentes Familiares-->
+    <div class="row divisiones">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="txt-antecedentesF" class="tituloDivision">Antecedentes Familiares</label>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul>
+                                <!-- <li *ngFor="let i of infoHistoriaGeneral.antecedentef" >{{i}}</li> -->
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.asma === 1)">Asma</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.cancer === 1)">Cancer</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.cardiopatias === 1)">Cardiopatias</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.diabetes === 1)">Diabetes</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.efisema === 1)">Efisema</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.enfermadad_psiquiatrica === 1)">Enfermadad Psiquiatrica</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.epilepcia === 1)">Epilepcia</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.hipertension === 1)">Hipertension</li>
+                                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.antecedentef.otro === 1)">Otro</li>
+                                <li *ngIf="antecedentesF">No se encuentran antecedentes familiares</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Fin Antecedentes Familiares-->
+
+    <!--Antecedentes Personales-->
+
+    <div class="row divisiones">
+        <div class="col-md-12">
+            <label for="txt-antecedentesP" class="tituloDivision">Antecedentes Personales</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txt-patologicos" class="form-label label-formulario-user">Patológicos</label>
+                        <textarea name="txtPatologicos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.patologias}}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txt-quirurgicos" class="form-label label-formulario-user">Quirúrgicos</label>
+                        <textarea name="txtQuirurgicos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.quirurgicos}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txt-traumaticos" class="form-label label-formulario-user">Traumáticos</label>
+                        <textarea name="txtTraumaticos" rows="3" class="form-control" readonly>{{infoHistoriaGeneral.antecedentesp.traumaticos}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Fin Antecedentes Personales-->
+
+    <!--Inicio Gineco-opstetra-->
+    <div class="row divisiones">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <label for="" class="tituloDivision">Gineco - Obstetra</label>
+                </div>
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="" class="form-label label-formulario-user">Menarquía</label>
@@ -124,8 +128,8 @@ Preexistente</label>
                         <input type="text" class="form-control" value="{{infoHistoriaGeneral.antecedentesp.gine_partos}}" readonly>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="" class="form-label label-formulario-user">Abortos</label>
@@ -152,91 +156,92 @@ Preexistente</label>
                     </div>
                 </div>
 
+
+
+
             </div>
 
 
         </div>
 
 
+
+
     </div>
+    <!--Fin Gineco-opstetra-->
 
-
-
-
-</div>
-<!--Fin Gineco-opstetra-->
-
-<!--Inicio habitos y factores de riesgo-->
-<div class="row divisiones">
-
-    <div class="col-md-12">
-        <label for="" class="tituloDivision">Habitos y factores de riesgo</label>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.alcohol)">Alcohol:{{infoHistoriaGeneral.habitosyfactores.alcohol}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.cigarrillo)">Cigarrillo :{{infoHistoriaGeneral.habitosyfactores.cigarrillo}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.ejercicio)">Ejercicio: {{infoHistoriaGeneral.habitosyfactores.ejercicio}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.estres)">Estres: {{infoHistoriaGeneral.habitosyfactores.estres}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.humo)">Humo: {{infoHistoriaGeneral.habitosyfactores.humo}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.otros)">Otros: {{infoHistoriaGeneral.habitosyfactores.otros}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.polvo)">Polvo: {{infoHistoriaGeneral.habitosyfactores.polvo}}</li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Fin habitos y factores de riesgo-->
-
-<!--Revisión por sistema-->
-<div class="row divisiones">
-
-    <div class="col-md-12">
-        <label for="" class="tituloDivision">Revisión por sistema</label>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.card_resp_desc)">Cardio-Respiratorio:{{infoHistoriaGeneral.revisionps.card_resp_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.endocrino_desc)">Endocrino: {{infoHistoriaGeneral.revisionps.endocrino_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.gastro_int_desc)">Gastro Intestinal: {{infoHistoriaGeneral.revisionps.gastro_int_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.genito_uri_desc)">Genito-Urinario: {{infoHistoriaGeneral.revisionps.genito_uri_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.neurologico_dec)">Neurológico: {{infoHistoriaGeneral.revisionps.neurologico_dec}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.osteomuscular_desc)">Osteomuscular: {{infoHistoriaGeneral.revisionps.osteomuscular_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.pielyfan_desc)">Piel y Faneras: {{infoHistoriaGeneral.revisionps.pielyfan_desc}}</li>
-                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.vasc_desc)">Vascular: {{infoHistoriaGeneral.revisionps.vasc_desc}}</li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Fin Revisión por sistema-->
-
-<!--Inicio examen fisico-->
-
-<!-- ---------------------------------------------- EXAMEN FISICO ------------------------------------------------------ -->
-<div class="divisiones">
-
-
-
-    <div class="row">
-        <label for="" class="tituloDivision">Examen Físico</label>
-
+    <!--Inicio habitos y factores de riesgo-->
+    <div class="row divisiones">
 
         <div class="col-md-12">
-            <label for="" class="form-label label-formulario-user">Apariencia General</label>
-            <textarea name="txt-AparienciaGeneral" rows="3" class="form-control" value="{{infoHistoriaGeneral.examenf.apariencia_g}}" readonly></textarea>
-        </div>
-
-
-        <div class="row" style="padding: 30px;">
+            <label for="" class="tituloDivision">Habitos y factores de riesgo</label>
             <div class="row">
+                <div class="col-lg-12">
+                    <ul>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.alcohol)">Alcohol:{{infoHistoriaGeneral.habitosyfactores.alcohol}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.cigarrillo)">Cigarrillo :{{infoHistoriaGeneral.habitosyfactores.cigarrillo}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.ejercicio)">Ejercicio: {{infoHistoriaGeneral.habitosyfactores.ejercicio}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.estres)">Estres: {{infoHistoriaGeneral.habitosyfactores.estres}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.humo)">Humo: {{infoHistoriaGeneral.habitosyfactores.humo}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.otros)">Otros: {{infoHistoriaGeneral.habitosyfactores.otros}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.habitosyfactores.polvo)">Polvo: {{infoHistoriaGeneral.habitosyfactores.polvo}}</li>
+                        <li *ngIf="habitos">No tiene hábitos y factores de riesgo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin habitos y factores de riesgo-->
+
+    <!--Revisión por sistema-->
+    <div class="row divisiones">
+
+        <div class="col-md-12">
+            <label for="" class="tituloDivision">Revisión por sistema</label>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.card_resp_desc)">Cardio-Respiratorio:{{infoHistoriaGeneral.revisionps.card_resp_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.endocrino_desc)">Endocrino: {{infoHistoriaGeneral.revisionps.endocrino_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.gastro_int_desc)">Gastro Intestinal: {{infoHistoriaGeneral.revisionps.gastro_int_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.genito_uri_desc)">Genito-Urinario: {{infoHistoriaGeneral.revisionps.genito_uri_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.neurologico_dec)">Neurológico: {{infoHistoriaGeneral.revisionps.neurologico_dec}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.osteomuscular_desc)">Osteomuscular: {{infoHistoriaGeneral.revisionps.osteomuscular_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.pielyfan_desc)">Piel y Faneras: {{infoHistoriaGeneral.revisionps.pielyfan_desc}}</li>
+                        <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.revisionps.vasc_desc)">Vascular: {{infoHistoriaGeneral.revisionps.vasc_desc}}</li>
+                        <li *ngIf="revision">No tiene registro de revisión por sistema</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin Revisión por sistema-->
+
+    <!--Inicio examen fisico-->
+
+    <!-- ---------------------------------------------- EXAMEN FISICO ------------------------------------------------------ -->
+    <div class="divisiones">
+
+
+
+        <div class="row">
+            <label for="" class="tituloDivision">Examen Físico</label>
+
+
+            <div class="col-md-12">
+                <label for="" class="form-label label-formulario-user">Apariencia General</label>
+                <textarea name="txt-AparienciaGeneral" rows="3" class="form-control" value="{{infoHistoriaGeneral.examenf.apariencia_g}}" readonly></textarea>
+            </div>
+
+
+            <div class="row" style="padding: 30px;">
+
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="" class="form-label label-formulario-user">Frecuencia cardiaca</label>
                         <input type="text" class="form-control" value="{{infoHistoriaGeneral.examenf.frecuencia_cardiaca}}" readonly>
+
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -251,8 +256,8 @@ Preexistente</label>
                         <input type="text" class="form-control" value="{{infoHistoriaGeneral.examenf.frecuencia_resp}}" readonly>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="" class="form-label label-formulario-user">Talla(cm)</label>
@@ -271,49 +276,103 @@ Preexistente</label>
                         <input type="text" class="form-control" value="{{infoHistoriaGeneral.examenf.peso}}" readonly>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <ul>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.cabeza_desc)">Cabeza: {{infoHistoriaGeneral.examenf.cabeza_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.ojos_desc)">Ojos: {{infoHistoriaGeneral.examenf.ojos_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.oidos_desc)">Oidos: {{infoHistoriaGeneral.examenf.oidos_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.nariz_desc)">Nariz: {{infoHistoriaGeneral.examenf.nariz_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.boca_desc)">Boca: {{infoHistoriaGeneral.examenf.boca_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.cuello_desc)">Cuello: {{infoHistoriaGeneral.examenf.cuello_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.torax_ma_desc)">Tórax Mama: {{infoHistoriaGeneral.examenf.torax_ma_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.pulmones_desc)">Pulmones: {{infoHistoriaGeneral.examenf.pulmones_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.corazon_desc)">Corazón: {{infoHistoriaGeneral.examenf.corazon_desc}}</li>
+        <div class="row">
+            <div class="col-lg-12">
 
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.abdomen_desc)">Abdomen: {{infoHistoriaGeneral.examenf.abdomen_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.genitourinario_desc)">GenitoUrinario: {{infoHistoriaGeneral.examenf.genitourinario_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.columna_desc)">Columna: {{infoHistoriaGeneral.examenf.columna_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.extremidades_desc)">Extremidades: {{infoHistoriaGeneral.examenf.extremidades_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.neurologico_desc)">Neurológico: {{infoHistoriaGeneral.examenf.neurologico_desc}}</li>
-                <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.pielyfane_desc)">Piel y Faneras: {{infoHistoriaGeneral.examenf.pielyfane_desc}}</li>
-            </ul>
+                <ul>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.cabeza_desc)">Cabeza: {{infoHistoriaGeneral.examenf.cabeza_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.ojos_desc)">Ojos: {{infoHistoriaGeneral.examenf.ojos_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.oidos_desc)">Oidos: {{infoHistoriaGeneral.examenf.oidos_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.nariz_desc)">Nariz: {{infoHistoriaGeneral.examenf.nariz_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.boca_desc)">Boca: {{infoHistoriaGeneral.examenf.boca_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.cuello_desc)">Cuello: {{infoHistoriaGeneral.examenf.cuello_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.torax_ma_desc)">Tórax Mama: {{infoHistoriaGeneral.examenf.torax_ma_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.pulmones_desc)">Pulmones: {{infoHistoriaGeneral.examenf.pulmones_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.corazon_desc)">Corazón: {{infoHistoriaGeneral.examenf.corazon_desc}}</li>
+
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.abdomen_desc)">Abdomen: {{infoHistoriaGeneral.examenf.abdomen_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.genitourinario_desc)">GenitoUrinario: {{infoHistoriaGeneral.examenf.genitourinario_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.columna_desc)">Columna: {{infoHistoriaGeneral.examenf.columna_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.extremidades_desc)">Extremidades: {{infoHistoriaGeneral.examenf.extremidades_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.neurologico_desc)">Neurológico: {{infoHistoriaGeneral.examenf.neurologico_desc}}</li>
+                    <li *ngIf="infoHistoriaGeneral && (infoHistoriaGeneral.examenf.pielyfane_desc)">Piel y Faneras: {{infoHistoriaGeneral.examenf.pielyfane_desc}}</li>
+                    <li *ngIf="examen">No tiene registro del exámen físico</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--Fin examen fisico-->
+
+    <!--Impresión Diagnostica-->
+
+
+    <div class="row divisiones">
+
+        <div class="col-md-12">
+            <label for="" class="tituloDivision">Impresión Diagnostica</label>
+            <br>
+
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Diagnosticos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of infoHistoriaGeneral.impresiondiag">
+                        <td>{{i.nombre}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+
         </div>
     </div>
 
-</div>
+
+    <!--Fin Impresión Diagnostica -->
+
+    <!--Medicamentos-->
 
 
-<!--Fin examen fisico-->
+    <div class="row divisiones">
 
-<!--Impresión Diagnostica-->
+        <div class="col-md-12">
+            <label for="" class="tituloDivision">Medicamentos</label>
+            <br>
 
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Via</th>
+                        <th scope="col">Receta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of infoHistoriaGeneral.formula">
+                        <td>{{i.producto}}</td>
+                        <td>{{i.cantidad}} {{i.medida}}</td>
+                        <td>{{i.via_administra}}</td>
+                        <td>{{i.receta}}</td>
+                    </tr>
 
-<div class="row divisiones">
-
-    <div class="col-md-12">
-        <label for="" class="tituloDivision">Impresión Diagnostica</label>
-        <br>
-        <ul>
-            <li *ngFor="let i of infoHistoriaGeneral.impresiondiag" value="{{i.nombre}}">{{i.nombre}}</li>
-
-        </ul>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
+    <!--Fin Impresión Diagnostica -->
+
+
 </div>
-<!--Fin Impresión Diagnostica -->

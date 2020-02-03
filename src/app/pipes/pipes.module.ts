@@ -4,6 +4,7 @@ import { FechaPipe } from './fecha.pipe';
 import { HoraPipe } from './hora.pipe';
 import { AmpmPipe } from './ampm.pipe';
 import { BusquedaPipe } from './busqueda.pipe';
+import { BusquedaMedPipe } from './busquedaMed.pipe';
 
 
 
@@ -11,7 +12,8 @@ import { BusquedaPipe } from './busqueda.pipe';
   declarations: [FechaPipe,
     HoraPipe,
     AmpmPipe,
-    BusquedaPipe
+    BusquedaPipe,
+    BusquedaMedPipe
   ],
   imports: [
     CommonModule
@@ -20,7 +22,8 @@ import { BusquedaPipe } from './busqueda.pipe';
     FechaPipe,
     HoraPipe,
     AmpmPipe,
-    BusquedaPipe
+    BusquedaPipe,
+    BusquedaMedPipe
   ]
 })
 export class PipesModule { }

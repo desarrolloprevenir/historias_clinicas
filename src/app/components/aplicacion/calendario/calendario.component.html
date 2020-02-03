@@ -627,79 +627,7 @@
 
                                                 <!-- FORMULARIO AGREGAR BENEFICIARIO -->
 
-                                                <div class="text-center" style="padding-top: 30px;">
-                                                    <button style="margin-left: 10px;" class="btn btn-success" *ngIf="existe && !datosUser.usuariosBf_id && !formBene" (click)="agregarBene()">Agregar beneficiario</button>
-                                                    <button style="margin-left: 10px;" class="btn btn-danger" *ngIf="existe && !datosUser.usuariosBf_id && formBene" (click)="cancelarBene()">Cancelar cita a beneficiario</button>
 
-
-
-
-                                                    <!-- Boton para sacar cita a un usuario registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCita()" *ngIf="(existe === 'true') && !formBene ">Sacar cita</button>
-
-                                                    <!-- Boton para sacar cita a un usuario no registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
-                  !telefono.valid ||
-                  !fechaNacimiento.valid ||
-                  !nombre.valid ||
-                  !email.valid ||
-                  !ocupacion.valid ||
-                  !acompanante.valid ||
-                  !telAcompanante.valid ||
-                  cedula.value != confirmarIdentificacion.value ||
-                  confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && !formBene">Sacar cita</button>
-
-                                                    <!-- Boton para sacar cita a un beneficiario de un usuario registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" *ngIf="(existe === 'true') && formBene
-                  " [disabled]="!nombresBeneficiario.valid ||
-                  !apellidosBeneficiario.valid ||
-                  !fechaBeneficiario.valid ||
-                  !noIdentificacionBeneficiario.valid
-                  || !telefonoBeneficiario.valid ||
-                  !parentescoBeneficiario.valid ||
-                  loading">Sacar cita beneficiario</button>
-
-                                                    <!-- Boton para sacar cita a un beneficiario de un usuario no registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
-                  !telefono.valid ||
-                  !fechaNacimiento.valid ||
-                  !nombre.valid ||
-                  !email.valid ||
-                  !ocupacion.valid ||
-                  !acompanante.valid ||
-                  !telAcompanante.valid ||
-                  !nombresBeneficiario.valid ||
-                  !apellidosBeneficiario.valid ||
-                  !fechaBeneficiario.valid ||
-                  !noIdentificacionBeneficiario.valid ||
-                  !telefonoBeneficiario.valid ||
-                  !parentescoBeneficiario.valid ||
-                  loading ||
-                  cedula.value != confirmarIdentificacion.value ||
-                  confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && formBene">Sacar cita beneficiario</button>
-
-                                                    <!-- Boton para sacar cita y agregar mascota nueva a un usuario registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('agregar')" *ngIf="mascotas === 'true' && mascotaSlt === 'agregarOtra'" [disabled]="!nombreMascota.valid || !especieMascota.valid || !raza.valid || !sexoMascota.valid || !fechaNacimientoMascota.valid || !esterilizado.valid">Sacar
-                  cita</button>
-
-                                                    <!-- Boton para sacar cita a mascota existente de usuario registrado -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('existe')" *ngIf="mascotas === 'true' && mascotaSlt != 'agregarOtra'" [disabled]="!peludito.valid">Sacar cita</button>
-
-                                                    <!-- Boton para sacar cita a mascota y usuario que no estan registrados -->
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('nueva')" *ngIf="mascotas === 'false'" [disabled]="!nombre.valid ||
-                  !apellidos.valid ||
-                  !telefono.valid ||
-                  !nombreMascota.valid ||
-                  !especieMascota.valid ||
-                  !sexoMascota.valid ||
-                  !esterilizado.valid ||
-                  !email.valid ||
-                  cedula.value != confirmarIdentificacion.value ||
-                  confirmacionEmail.value != email.value">Sacar cita</button>
-
-                                                    <button style="margin-left: 10px;" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                                                </div>
 
                                                 <div *ngIf="formBene === true" style="padding-top: 30px;">
 
@@ -1095,6 +1023,83 @@
                                                     </div>
 
                                                 </form>
+
+
+                                                <div class="text-center" style="padding-top: 30px;">
+                                                    <button style="margin-left: 10px;" class="btn btn-success" *ngIf="existe && !datosUser.usuariosBf_id && !formBene" (click)="agregarBene()">Agregar beneficiario</button>
+                                                    <button style="margin-left: 10px;" class="btn btn-danger" *ngIf="existe && !datosUser.usuariosBf_id && formBene" (click)="cancelarBene()">Cancelar cita a beneficiario</button>
+
+
+
+
+                                                    <!-- Boton para sacar cita a un usuario registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCita()" *ngIf="(existe === 'true') && !formBene ">Sacar cita</button>
+
+                                                    <!-- Boton para sacar cita a un usuario no registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
+                  !telefono.valid ||
+                  !fechaNacimiento.valid ||
+                  !nombre.valid ||
+                  !email.valid ||
+                  !ocupacion.valid ||
+                  !acompanante.valid ||
+                  !telAcompanante.valid ||
+                  cedula.value != confirmarIdentificacion.value ||
+                  confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && !formBene">Sacar cita</button>
+
+                                                    <!-- Boton para sacar cita a un beneficiario de un usuario registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" *ngIf="(existe === 'true') && formBene
+                  " [disabled]="!nombresBeneficiario.valid ||
+                  !apellidosBeneficiario.valid ||
+                  !fechaBeneficiario.valid ||
+                  !noIdentificacionBeneficiario.valid
+                  || !telefonoBeneficiario.valid ||
+                  !parentescoBeneficiario.valid ||
+                  loading">Sacar cita beneficiario</button>
+
+                                                    <!-- Boton para sacar cita a un beneficiario de un usuario no registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" (click)="agregarCita()" [disabled]="!apellidos.valid ||
+                  !telefono.valid ||
+                  !fechaNacimiento.valid ||
+                  !nombre.valid ||
+                  !email.valid ||
+                  !ocupacion.valid ||
+                  !acompanante.valid ||
+                  !telAcompanante.valid ||
+                  !nombresBeneficiario.valid ||
+                  !apellidosBeneficiario.valid ||
+                  !fechaBeneficiario.valid ||
+                  !noIdentificacionBeneficiario.valid ||
+                  !telefonoBeneficiario.valid ||
+                  !parentescoBeneficiario.valid ||
+                  loading ||
+                  cedula.value != confirmarIdentificacion.value ||
+                  confirmacionEmail.value != email.value" *ngIf="(existe === 'false') && formBene">Sacar cita beneficiario</button>
+
+                                                    <!-- Boton para sacar cita y agregar mascota nueva a un usuario registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('agregar')" *ngIf="mascotas === 'true' && mascotaSlt === 'agregarOtra'" [disabled]="!nombreMascota.valid || !especieMascota.valid || !raza.valid || !sexoMascota.valid || !fechaNacimientoMascota.valid || !esterilizado.valid">Sacar
+                  cita</button>
+
+                                                    <!-- Boton para sacar cita a mascota existente de usuario registrado -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('existe')" *ngIf="mascotas === 'true' && mascotaSlt != 'agregarOtra'" [disabled]="!peludito.valid">Sacar cita</button>
+
+                                                    <!-- Boton para sacar cita a mascota y usuario que no estan registrados -->
+                                                    <button style="margin-left: 10px;" type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarCitaMascota('nueva')" *ngIf="mascotas === 'false'" [disabled]="!nombre.valid ||
+                  !apellidos.valid ||
+                  !telefono.valid ||
+                  !nombreMascota.valid ||
+                  !especieMascota.valid ||
+                  !sexoMascota.valid ||
+                  !esterilizado.valid ||
+                  !email.valid ||
+                  cedula.value != confirmarIdentificacion.value ||
+                  confirmacionEmail.value != email.value">Sacar cita</button>
+
+                                                    <!-- <button style="margin-left: 10px;" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+
+                                                </div>
+
+
 
                                             </div>
 

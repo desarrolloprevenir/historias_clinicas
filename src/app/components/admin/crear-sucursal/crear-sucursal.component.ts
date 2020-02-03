@@ -132,7 +132,7 @@ export class CrearSucursalComponent implements OnInit {
       this.loading = true;
     // console.log('oi');
       this.provedorService.getConsultoriosSucursal(idSucursal).subscribe( (response) => {
-      console.log('sucu', response);
+      // console.log('sucu', response);
       this.loading = false;
       this.infoSucursal = response;
       this.nombreSucursal.setValue(this.infoSucursal.nombre);
@@ -1473,7 +1473,7 @@ export class CrearSucursalComponent implements OnInit {
         this.status = 'error';
         this.statusText = 'Error al actualizar los datos';
       }
-    }, (err) => {
+    }, () => {
       this.status = 'error';
       this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
       this.loading = false;
@@ -1482,6 +1482,7 @@ export class CrearSucursalComponent implements OnInit {
   }
 
   cambioContrasena() {
+    this.loading = true;
     let admin = this.userService.getIdentity();
 
     let info = { email: admin.correo, passadmin: this.aplicationService.encriptar(this.formCambio.value.psswAdmin),
@@ -1489,9 +1490,22 @@ export class CrearSucursalComponent implements OnInit {
                 passnu : this.aplicationService.encriptar(this.formCambio.value.pssw) };
 
     this.provedorService.putCambioContrasenaUsuario(info).subscribe( (response) => {
-      console.log(response);
-    }, (err) => {
-      console.log(err);
+      this.loading = false;
+      // console.log(response);
+
+      if (response. resp === false) {
+          this.status = 'warning_modal';
+          this.statusText = 'La contraseña de administrador no es correcta.';
+      } else {
+        this.status = 'success';
+        this.statusText = 'Usuario o contraseña cambiados exitosamente';
+        document.getElementById('cerrar-modal-cambio').click();
+      }
+    }, () => {
+      this.loading = true;
+      this.status = 'error';
+      this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
+      this.loading = false;
     } );
 
     // document.getElementById('cerrar-modal-cambio').click();

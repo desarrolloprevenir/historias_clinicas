@@ -41,18 +41,9 @@
                     <a class="nav-link" routerLink="/medicos" routerLinkActive="active-navegacion">Gestionar médicos</a>
                 </li>
 
-                <li class="nav-item" *ngIf="!identity.medico_id && !identity.id_sucursales">
-                    <a class="nav-link" routerLink="/estadisticas-historial" routerLinkActive="active-navegacion">Estadisticas e Historial</a>
-                </li>
-
                 <li class="nav-item" *ngIf="(!identity.medico_id || !identity.id_provedor) && identity.id_sucursales">
                     <a class="nav-link" routerLink="/calendario" routerLinkActive="active-navegacion">Agendar citas</a>
                 </li>
-
-                <li class="nav-item" *ngIf="(!identity.medico_id || !identity.id_provedor) && identity.id_sucursales">
-                    <a class="nav-link" routerLink="/precios-e-inventario" routerLinkActive="active-navegacion">Precios e Inventario</a>
-                </li>
-
 
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/contactenos" routerLinkActive="active-navegacion">Contáctenos</a>

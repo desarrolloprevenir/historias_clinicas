@@ -113,7 +113,7 @@ export class CalendarioReutilizableComponent implements OnInit {
 
   }
 
-  hourSegmentClicked() {
+  hourSegmentClicked(ev) {
 
   }
 

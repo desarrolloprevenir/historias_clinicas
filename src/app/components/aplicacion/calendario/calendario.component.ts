@@ -145,7 +145,7 @@ export class CalendarioComponent implements OnInit {
    public nombreAgenda;
    public consultorioSelecionado;
    public idConsultorio;
-
+ 
   constructor(private aplicatioService: AppService,
               private userService: UserService,
               private sucursalService: SucursalService,
@@ -973,7 +973,7 @@ export class CalendarioComponent implements OnInit {
         this.existe = 'true';
         this.mostrar = true;
       }
-    }, (err) => {
+    }, () => {
       // console.log(err);
     });
     }
@@ -981,9 +981,9 @@ export class CalendarioComponent implements OnInit {
 
   getParentescos() {
     this.aplicatioService.getParentescos().subscribe( (response) => {
-      // console.log(response);
+      // console.log('parents', response);
       this.parentescos = response;
-    }, (err) => {
+    }, () => {
       // console.log(err);
     });
   }
@@ -1647,7 +1647,8 @@ export class CalendarioComponent implements OnInit {
   }
 
   agregarBene() {
-
+    console.log('aqui');
+    this.getParentescos();
     this.formBene = true;
     // this.getParentescos();
   }

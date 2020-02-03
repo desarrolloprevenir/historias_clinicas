@@ -1466,7 +1466,7 @@
 <!--Modal Historia General-->
 
 <!-- Button trigger modal -->
-<button type="button" style="display: none;" id="btn-ver-hg" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable"></button>
+<button type="button" style="display: none;" id="btn-ver-hg" (click)="modalGeneral.ngOnInit(infoHistoriaGeneral)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable"></button>
 
 <!-- Modal -->
 
@@ -1480,9 +1480,10 @@
         </button>
             </div>
 
-            <div class="modal-body" *ngIf="infoHistoriaGeneral">
-
-                <app-modal-general [infoHistoriaGeneral]="infoHistoriaGeneral"></app-modal-general>
+            <div class="modal-body">
+                <!-- <button #actualizarInfo style="display: none;" (click)="modalGeneral.infoHistoriaGeneral = infoHistoriaGeneral && 
+                modalGeneral.inicializarInfo()"></button> -->
+                <app-modal-general #modalGeneral [infoHistoriaGeneral]="infoHistoriaGeneral"></app-modal-general>
 
             </div>
 

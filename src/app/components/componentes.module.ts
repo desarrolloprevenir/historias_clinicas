@@ -60,6 +60,8 @@ import { PreciosInventarioComponent } from './sucursal/precios-inventario/precio
 import { CalendarioReutilizableComponent } from './aplicacion/calendario-reutilizable/calendario-reutilizable.component';
 import { HitorialCitasComponent } from './admin/hitorial-citas/hitorial-citas.component';
 import { AlertasComponent } from './aplicacion/alertas/alertas.component';
+import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
+import { LoadingComponent } from './aplicacion/loading/loading.component';
 
 
 @NgModule({
@@ -98,7 +100,9 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
   PreciosInventarioComponent,
   CalendarioReutilizableComponent,
   HitorialCitasComponent,
-  AlertasComponent
+  AlertasComponent,
+  VerInventarioComponent,
+  LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -155,7 +159,9 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
   PreciosInventarioComponent,
   CalendarioReutilizableComponent,
   HitorialCitasComponent,
-  AlertasComponent
+  AlertasComponent,
+  VerInventarioComponent,
+  LoadingComponent
   ]
 })
 export class ComponentesModule { }

@@ -53,7 +53,7 @@ export class PerfilComponent implements OnInit {
   getIdentity() {
     // this.loading = true;
     var user = this.userService.getIdentity();
-    // console.log(user);
+    console.log(user);
 
     if (user.medico_id) {
       this.estudios = null;
@@ -118,7 +118,6 @@ export class PerfilComponent implements OnInit {
         this.infoSucursal = response;
         this.infoSucursal.avatar = this.apiUrl + user.avatar;
         this.validacionesSucursal();
-        console.log(this.infoSucursal);
         this.loading = false;
       }, () => {
         // console.log(err);
@@ -172,7 +171,7 @@ export class PerfilComponent implements OnInit {
       descripcion: this.datosAdmin.value.descripcion, link: this.datosAdmin.value.web, video: this.datosAdmin.value.youtube,
       id: this.provedor.id };
 
-    console.log(this.provedor);
+    // console.log(this.provedor);
     let token = this.userService.getToken();
     this.provedorService.editProv(datos, token).subscribe( (response) => {
       this.res = response;
@@ -200,7 +199,7 @@ export class PerfilComponent implements OnInit {
 
   getProvedor(id) {
     this.provedorService.getIdentity(id).subscribe( (response) => {
-      console.log(response);
+      // console.log(response);
 
       localStorage.removeItem('identity');
       localStorage.setItem('identity', JSON.stringify(response));
@@ -337,7 +336,7 @@ export class PerfilComponent implements OnInit {
     let info = {nombre : this.datosSucu.value.nombre, direccion : this.datosSucu.value.direccion, telefono : this.datosSucu.value.telefono,
     id_sucursal : this.infoSucursal[0].id_sucursales};
 
-    // console.log(info);
+    console.log(info);
 
     this.sucursalService.editInfoSucursal(info).subscribe( (response) => {
       // console.log(response);
@@ -345,6 +344,8 @@ export class PerfilComponent implements OnInit {
       if (response === true) {
         this.status = 'success';
         this.statusText = 'Datos actualizados con exito.';
+        this.getIdentity();
+        // this.getSucursal(this.infoSucursal[0].id_sucursales);
       }
     }, () => {
       // console.log(err);
@@ -353,5 +354,25 @@ export class PerfilComponent implements OnInit {
       this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
     } );
   }
+
+  // getSucursal(idSucursal) {
+  //   this.loading = true;
+  //   this.sucursalService.getInfoSucursal(idSucursal).subscribe( (response) => {
+  //     console.log('vsv', response);
+  //     this.loading = false;
+  //     localStorage.removeItem('identity');
+  //     localStorage.setItem('identity', JSON.stringify(response[0]));
+  //     this.getIdentity();
+  //     this.status = 'success';
+  //     this.statusText = 'Datos actualizados correctamente.';
+  //     window.scroll(0, 0);
+  //   }, () => {
+  //     // console.log(err);
+  //     this.status = 'error';
+  //     this.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
+  //     window.scroll(0, 0);
+  //     this.loading = false;
+  //   } );
+  // }
 
 }
