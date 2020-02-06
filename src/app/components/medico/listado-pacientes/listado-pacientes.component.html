@@ -76,15 +76,9 @@
                 <div class="jumbotron jumbotron-fluid titulo" style="padding: 20px" *ngFor="let hc of infoHc">
                     <h3 class="card-title" (click)="verHistoriaClinica(hc)">Historia Clinica No. {{hc.id_historiacl}}</h3>
                     <hr>
-<<<<<<< HEAD
-                    <h6 class="card-text" *ngIf="infoUser">Paciente : {{infoUser.nombres}}</h6>
-                    <h6 class="card-text">Fecha : {{hc.CreatedATm | fecha}}</h6>
-                    <h6 class="card-text">Hora : {{hc.CreatedATm | hora}}</h6>
-=======
                     <h6 class="card-text">Nombre Paciente : {{infoUser.nombres}}</h6>
                     <h6 class="card-text">Fecha : {{hc.createdAd | fecha}}</h6>
                     <h6 class="card-text">Hora : {{hc.createdAd | hora}}</h6>
->>>>>>> 81a683af2d2a6789c2bef04c5e9d032ab30985f7
                     <h6 class="card-text">Tipo de consulta : {{hc.tipo_consulta}}</h6>
                 </div>
             </div>
@@ -111,7 +105,6 @@
             <div class="modal-body" *ngIf="infoHistoriaClinica">
 
                 <app-modal-optometria *ngIf="this.infoServicio.categoria_idcategoria === 3" [infoHistoriaClinica]="infoHistoriaClinica" [infoUser]="infoUser"></app-modal-optometria>
-                <app-modal-general *ngIf="this.infoServicio.categoria_idcategoria != '3'" [infoHistoriaGeneral]="infoHistoriaClinica"></app-modal-general>
 
 
 
@@ -125,6 +118,42 @@
 </div>
 
 <!-- FIN MODAL VER HISTORIA CLINICA -->
+
+
+<!--Modal Historia General-->
+
+<!-- Button trigger modal -->
+<button type="button" style="display: none;" id="btn-ver-hg" (click)="modalGeneral.ngOnInit(infoHistoriaClinica)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable"></button>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" *ngIf="infoHistoriaClinica">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Historia Clinica No. {{infoHistoriaClinica.id_historiacl}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- <button #actualizarInfo style="display: none;" (click)="modalGeneral.infoHistoriaGeneral = infoHistoriaGeneral && 
+                modalGeneral.inicializarInfo()"></button> -->
+                <app-modal-general #modalGeneral [infoHistoriaGeneral]="infoHistoriaClinica"></app-modal-general>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fin Modal -->
+
+<!-- Fin Modal Historia General-->
 
 
 <div class="loading" *ngIf="loading">

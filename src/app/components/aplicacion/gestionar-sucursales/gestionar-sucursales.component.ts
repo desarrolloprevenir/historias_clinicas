@@ -86,6 +86,7 @@ export class GestionarSucursalesComponent implements OnInit {
 
     this.loading = true;
     this.provedorService.getPublications(idProvedor).subscribe( (response) => {
+      // console.log('servicio', response);
       this.servicios = response;
       this.loading = false;
     }, () => {
@@ -95,10 +96,10 @@ export class GestionarSucursalesComponent implements OnInit {
     });
   }
 
-  getSucursales(idProvedor){
+  getSucursales(idProvedor) {
     this.loading = true;
     this.provedorService.getSucursales(idProvedor).subscribe( (response) => {
-      // console.log(response);
+      // console.log('sucu', response);
       this.sucursales = response;
       this.loading = false;
     }, () => {

@@ -66,7 +66,7 @@ export class BuscarCitaComponent implements OnInit {
       this.citasUsuario();
 
       this.intervalo =  setInterval(() => {
-      this.citasUsuario()}, 30000);
+      this.citasUsuario() }, 30000);
     } else {
       this.medico = true;
       // console.log('es medico');
@@ -86,11 +86,13 @@ export class BuscarCitaComponent implements OnInit {
   }
 
   getCitasMedico(medicoId) {
+    // console.log(medicoId);
     // console.log('oe ?');
     this.home.cerrarAlerta();
     this.home.loading = true;
     this.medicoService.getCitasActivas(medicoId).subscribe( (response) => {
       // console.log('1 aquiiiiii', response);
+
       this.citasAgregadas = response[0];
       this.citasAgregadasMasc =  response[1];
       this.home.loading = false;

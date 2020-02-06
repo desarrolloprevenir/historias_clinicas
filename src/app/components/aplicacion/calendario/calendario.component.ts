@@ -145,7 +145,7 @@ export class CalendarioComponent implements OnInit {
    public nombreAgenda;
    public consultorioSelecionado;
    public idConsultorio;
-
+ 
   constructor(private aplicatioService: AppService,
               private userService: UserService,
               private sucursalService: SucursalService,
@@ -211,12 +211,11 @@ export class CalendarioComponent implements OnInit {
   // }
 
 
-
   getPublicacionesProvedor() {
     this.loading = true;
     let identity = this.userService.getIdentity();
     this.aplicatioService.getPublicacionesProveedor(identity.id_provedor).subscribe( (response) => {
-      // console.log(response);
+      // console.log('este', response);
       this.loading = false;
       if (response[0].vacio === true) {
         // console.log('vacio');
@@ -974,7 +973,7 @@ export class CalendarioComponent implements OnInit {
         this.existe = 'true';
         this.mostrar = true;
       }
-    }, (err) => {
+    }, () => {
       // console.log(err);
     });
     }
@@ -982,9 +981,9 @@ export class CalendarioComponent implements OnInit {
 
   getParentescos() {
     this.aplicatioService.getParentescos().subscribe( (response) => {
-      // console.log(response);
+      // console.log('parents', response);
       this.parentescos = response;
-    }, (err) => {
+    }, () => {
       // console.log(err);
     });
   }
@@ -1049,7 +1048,7 @@ export class CalendarioComponent implements OnInit {
     let identity = this.userService.getIdentity().id_sucursales;
 
     // console.log(this.consultorioSelecionado);
-    if(!this.consultorioSelecionado) {
+    if (!this.consultorioSelecionado) {
       // console.log('1');
       this.idConsultorio = 0;
     } else {
@@ -1136,7 +1135,7 @@ export class CalendarioComponent implements OnInit {
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
       this.loading = false;
-      console.log('info_cc', response);
+      // console.log('info_cc', response);
       this.infoConsultorio = response[0];
     }, () => {
       // console.log(err);
@@ -1174,7 +1173,7 @@ export class CalendarioComponent implements OnInit {
                    servicio : this.serviciosSelect.value.id_servicios, sexo : this.sexoMascota.value, start : date,
                    usuario : this.datosUser.id, correo: this.email.value, consultorio : this.consultorioSelecionado.id_consultorio};
 
-      console.log('agregar', datos);
+      // console.log('agregar', datos);
       this.loading = true;
       this.provedorService.postCitasProvedor(datos, token).subscribe ((response) => {
         // console.log(response);
@@ -1210,10 +1209,10 @@ export class CalendarioComponent implements OnInit {
                    idMascota , mascota: true, nombres: this.datosUser.nombre,
                    servicio: this.serviciosSelect.value.id_servicios, start : date, usuario: this.datosUser.id,
                    consultorio : this.consultorioSelecionado.id_consultorio};
-      console.log('existe', datos);
+      // console.log('existe', datos);
       this.loading = true;
       this.provedorService.postCitasProvedor(datos, token).subscribe ((response) => {
-        console.log(response);
+        // console.log(response);
         window.scroll(0, 0);
         if (response[0].agregado === true) {
 
@@ -1390,7 +1389,7 @@ export class CalendarioComponent implements OnInit {
     let identity = this.userService.getIdentity();
     // tslint:disable-next-line: max-line-length
     this.sucursalService.getEventsSucursal(mes, anio, this.serviciosSelect.value.id_servicios, identity.id_sucursales, this.serviciosSelect.value.id_categoria, consultorio).subscribe( (response) =>{
-      console.log('res ev', response);
+      // console.log('res ev', response);
       this.res = response;
 
       if (this.res.length >= 1) {
@@ -1648,7 +1647,8 @@ export class CalendarioComponent implements OnInit {
   }
 
   agregarBene() {
-
+    console.log('aqui');
+    this.getParentescos();
     this.formBene = true;
     // this.getParentescos();
   }

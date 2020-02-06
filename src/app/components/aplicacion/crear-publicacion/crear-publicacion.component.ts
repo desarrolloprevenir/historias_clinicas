@@ -1498,22 +1498,30 @@ _handleReaderLoaded(readerEvt) {
 
   // metodos recorte de imagenes
   fileChangeEvent(event: any): void {
+  //  console.log(event);
+   if (event.target.files.length >= 1 ) {
+    let cadena = event.target.value;
+    let validacion = cadena.substr(-6).split('\.');
 
-   let cadena = event.target.value;
-   let validacion = cadena.substr(-6).split('\.');
-
-   if (validacion[1] === 'png' || validacion[1] === 'jpg' || validacion[1] === 'jpeg') {
-      //  console.log(cadena.substr(-6));
-   this.imageChangedEvent = event;
-   this.recortar = true;
-   this.mostrarRecorte = true;
-   this.textoStatus = '';
-   this.statusImgs = undefined;
-   } else {
-    this.statusImgs = true;
-    this.textoStatus = 'Solo se admiten imagenes tipo png, jpg, jpeg. Por favor selecciona una';
+    if (validacion[1] === 'png' ||
+        validacion[1] === 'jpg' ||
+        validacion[1] === 'jpeg' ||
+        validacion[1] === 'PNG' ||
+        validacion[1] === 'JPG' ||
+        validacion[1] === 'JPEG') {
+       //  console.log(cadena.substr(-6));
+    this.imageChangedEvent = event;
+    this.recortar = true;
+    this.mostrarRecorte = true;
+    this.textoStatus = '';
+    this.statusImgs = undefined;
+    } else {
+     this.statusImgs = true;
+     this.textoStatus = 'Solo se admiten imagenes tipo png, jpg, jpeg. Por favor selecciona una';
+    }
    }
  }
+
  imageCropped(event: ImageCroppedEvent) {
    this.croppedImage = event.base64;
  }

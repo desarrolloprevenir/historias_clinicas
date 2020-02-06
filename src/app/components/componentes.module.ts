@@ -57,6 +57,12 @@ import { VisiometriaComponent } from './medico/visiometria/visiometria.component
 import { ModalOptometriaComponent } from './medico/modales-historias-clinicas/modal-optometria/modal-optometria.component';
 import { ModalGeneralComponent } from './medico/modales-historias-clinicas/modal-general/modal-general.component';
 import { PreciosInventarioComponent } from './sucursal/precios-inventario/precios-inventario.component';
+import { CalendarioReutilizableComponent } from './aplicacion/calendario-reutilizable/calendario-reutilizable.component';
+import { HitorialCitasComponent } from './admin/hitorial-citas/hitorial-citas.component';
+import { AlertasComponent } from './aplicacion/alertas/alertas.component';
+import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
+import { LoadingComponent } from './aplicacion/loading/loading.component';
+
 
 
 @NgModule({
@@ -92,7 +98,13 @@ import { PreciosInventarioComponent } from './sucursal/precios-inventario/precio
   VisiometriaComponent,
   ModalOptometriaComponent,
   ModalGeneralComponent,
-  PreciosInventarioComponent
+  PreciosInventarioComponent,
+  CalendarioReutilizableComponent,
+  HitorialCitasComponent,
+  AlertasComponent,
+  VerInventarioComponent,
+  LoadingComponent,
+
   ],
   imports: [
     CommonModule,
@@ -146,7 +158,12 @@ import { PreciosInventarioComponent } from './sucursal/precios-inventario/precio
   HstGeneralComponent,
   ModalOptometriaComponent,
   ModalGeneralComponent,
-  PreciosInventarioComponent
+  PreciosInventarioComponent,
+  CalendarioReutilizableComponent,
+  HitorialCitasComponent,
+  AlertasComponent,
+  VerInventarioComponent,
+  LoadingComponent
   ]
 })
 export class ComponentesModule { }

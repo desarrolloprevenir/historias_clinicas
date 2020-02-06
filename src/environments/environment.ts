@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl : 'http://192.168.2.105:3000'
-  apiUrl: 'http://cdn.prevenirexpress.com:3000'
+   apiUrl : 'http://192.168.2.105:3000'
+  // apiUrl: 'http://cdn.prevenirexpress.com:3000'
 };
 
 /*

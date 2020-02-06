@@ -3,11 +3,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MedicoService } from 'src/app/services/medico.service';
 
 @Component({
-  selector: 'app-ver-perfil-medico',
-  templateUrl: './ver-perfil-medico.component.html',
-  styleUrls: ['./ver-perfil-medico.component.css']
+  selector: 'app-perfil-profesional',
+  templateUrl: './perfil-profesional.component.html',
+  styleUrls: ['./perfil-profesional.component.css']
 })
-export class VerPerfilMedicoComponent implements OnInit {
+export class PerfilProfesionalComponent implements OnInit {
+
   public infoMedico;
   public titulos: any;
 
@@ -40,6 +41,5 @@ export class VerPerfilMedicoComponent implements OnInit {
       // console.log(err);
     });
   }
-
 
 }

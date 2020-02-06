@@ -29,13 +29,15 @@ export class ConfirmarCuentaComponent implements OnInit {
     let token = this.userService.getToken();
     var id;
 
-    if (identity === undefined) {
-      id = this.userService.getIdentity().medico_id;
-    } else {
-      id = identity;
+    if (identity.medico_id) {
+      id = identity.medico_id;
     }
 
-    let info = {salt: this.codigo.value, id};
+    if (identity.id_provedor) {
+      id = identity.id_provedor;
+    }
+
+    let info = {salt: parseInt( this.codigo.value), id};
     // console.log(info);
     this.appService.confirmacionCuenta(info, token).subscribe( (response) => {
 
@@ -70,7 +72,7 @@ export class ConfirmarCuentaComponent implements OnInit {
     }
 
 
-    // console.log('iddd', id);
+    console.log('iddd', id);
     this.appService.getReenviarCodigoCorreo(id).subscribe( (response) => {
       // console.log(response);
       if (response === true) {
