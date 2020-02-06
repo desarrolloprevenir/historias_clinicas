@@ -1,0 +1,31 @@
+<app-alertas #alertas [status]="status" [statusText]="statusText"></app-alertas>
+
+<div class="img-recorte" *ngIf="mostrarRecorte">
+
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="500" [cropperMinWidth]="500" [onlyScaleDown]="true" [roundCropper]="false" format="jpeg" outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+
+
+    <div class="text-center" style="padding-top: 10px;">
+        <button class="btn btn-info" *ngIf="recortar" (click)="recorte()">Recortar</button></div>
+</div>
+
+<div class="text-center" *ngIf="imagenes.length >= 1">
+
+    <div class="row">
+        <div class="col"><img [src]="imagenes[0].base64Image" style="width: 250px; height: 250px;"></div>
+        <div class="w-100"></div>
+        <div class="col" style="margin-top: 5px;"><button class="btn btn-danger" (click)="borrarFoto()"><i class="fas fa-trash-alt"></i></button></div>
+    </div>
+
+</div>
+
+<div class="text-center" style="padding-top: 30px;">
+    <label for="file-upload" class="btn btn-info btns-horario">
+        Cargar Fotos
+    </label>
+    <input type="file" id="file-upload" style="display: none;" (change)="fileChangeEvent($event)" />
+
+    <button class="btn btn-success" style="margin-left: 5px; margin-bottom: 8px;" [disabled]="imagenes.length <= 0 || loading" (click)="cambiarAvatar()">Cambiar avatar</button>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>

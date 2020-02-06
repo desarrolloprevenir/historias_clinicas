@@ -19,7 +19,9 @@ export class AppService {
     return CryptoJS.SHA512(pssw).toString(CryptoJS.enc.Hex);
   }
 
-  // METODOS GET
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+//  <!-- --------------------------------------------- METODOS GET ------------------------------------------- -->
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
 
   // metodo para la confirmacion de la cuenta
   getConfirmacionCuenta(id) {
@@ -70,7 +72,14 @@ export class AppService {
     return this.http.get(apiUrl + '/user/' + idPaciente);
   }
 
-  // METODOS PUT
+   // metodo para pedir las categorias que tiene una sucursal
+   getCategoriasSucursal(idSucursal) {
+    return this.http.get(apiUrl + '/cinventario/' + idSucursal, {headers});
+  }
+
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+//  <!-- --------------------------------------------- METODOS PUT ------------------------------------------- -->
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
 
    // Ruta para hacer el cambio de contrasena
    cambioContrasena(info) {
@@ -94,4 +103,26 @@ export class AppService {
 
 }
 
+// Ruta para editar avatar
+putEditAvatar(info, token) {
+  return this.http.put(apiUrl + '/fotou/' + '?token=' + token , info, {headers});
+ }
+
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+//  <!-- --------------------------------------------- METODOS POST ------------------------------------------ -->
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+
+// Ruta para agregar categoria inventario
+postAddCategoria(info) {
+  return this.http.post(apiUrl + '/cinventario/', info, {headers});
+ }
+
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+//  <!-- -------------------------------------------- METODOS DELETE ----------------------------------------- -->
+//  <!-- ----------------------------------------------------------------------------------------------------- -->
+
+// Ruta para agregar categoria inventario
+dltCategoriaInventario(idCategoria) {
+  return this.http.delete(apiUrl + '/cinventario/' + idCategoria , {headers});
+ }
 }

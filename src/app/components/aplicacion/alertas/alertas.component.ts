@@ -12,6 +12,7 @@ export class AlertasComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+      // console.log('aqui');
   }
 
   cerrarAlerta() {

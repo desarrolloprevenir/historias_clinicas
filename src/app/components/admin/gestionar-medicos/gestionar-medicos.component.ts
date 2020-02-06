@@ -61,7 +61,7 @@ export class GestionarMedicosComponent implements OnInit {
     this.loading = true;
 
     this.provedorService.getMedicosProvedor(id).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
 
       if (response.length <= 0) {
         this.vacio = true;
@@ -94,9 +94,10 @@ export class GestionarMedicosComponent implements OnInit {
       // console.log(response);
       this.loading = false;
       if (response === true) {
-        this.getMedicos(this.identity.id_provedor);
         this.status = 'success';
         this.statusText = 'El médico ha sido eliminado con exito.';
+        this.medicos = [];
+        this.getMedicos(this.identity.id_provedor);
         // this.getMedicos(this.identity.id_provedor);
       } else {
         this.status = 'error';

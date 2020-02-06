@@ -557,29 +557,31 @@
           </div>
         </div>
       </div>
-      <br> <form [formGroup]="datosHistGeneral">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th class="hidden">Id</th>
-            <th>Nombre del producto</th>
-            <th>Via administrativa</th>
-            <th>Receta Medica</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cM of cajaMedicamento; let i = index">
-            <td class="hidden">{{cM.id_medicamentos}}</td>
-            <td>{{cM.producto}}</td>
-            <td>{{cM.via_administra}}</td>
+      <br>
+      <form [formGroup]="datosHistGeneral">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="hidden">Id</th>
+              <th>Nombre del producto</th>
+              <th>Via administrativa</th>
+              <th>Receta Medica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cM of cajaMedicamento; let i = index">
+              <td class="hidden">{{cM.id_medicamentos}}</td>
+              <td>{{cM.producto}}</td>
+              <td>{{cM.via_administra}}</td>
 
-            <td><textarea name="txtRecetaMedica" id="receta{{cM.id_medicamentos}}" rows="3"  class="form-control"></textarea></td>
-            <td><button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
+              <td><textarea name="txtRecetaMedica" id="receta{{cM.id_medicamentos}}" rows="3"
+                  class="form-control"></textarea></td>
+              <td><button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
 
-          </tr>
-        </tbody>
-      </table>
-    </form>
+            </tr>
+          </tbody>
+        </table>
+      </form>
       <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="status === 'success'">
         {{statusText}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -19,18 +19,24 @@
 <!-- ------------------------------------------ MODAL AGREGAR CATEGORIA ---------------------------------- -->
 <!-- ----------------------------------------------------------------------------------------------------- -->
 
-<div class="text-center">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+<div class="text-center" style="padding-bottom: 30px;">
+    <button type="button" id="btn-agregar-editar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
     Agregar nueva categoria
 </button>
 </div>
 
-<!-- Modal -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------- ALERTAS ------------------------------------------ -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<app-alertas #alertas></app-alertas>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar nueva categoria</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="!infoCategoria">Agregar nueva categoría</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoCategoria">Editar categoría</h5>
                 <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -38,19 +44,25 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label class="form-label">Nombre categoria</label>
-                        <input class="form-control" [formControl]="nombreCategoria" placeholder="Nombre Categoria">
+                        <label class="form-label">Nombre categoría</label>
+                        <input class="form-control" [formControl]="nombreCategoria" placeholder="Nombre categoría">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Descripcion</label>
-                        <textarea class="form-control w-100" [formControl]="descripcionCategoria" placeholder="Descripcion Categoria"></textarea>
+                        <textarea class="form-control w-100" [formControl]="descripcionCategoria" placeholder="Descripcion categoría"></textarea>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid" (click)="agregarCategoria()">Guardar Categoria</button>
+            <!-- ------------------------------------------------ FOOTER AGREGAR ------------------------------------------ -->
+            <div class="modal-footer" *ngIf="!infoCategoria">
+                <button type="button" id="cerrar-modal-agregar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid || loading" (click)="agregarCategoria()">Guardar categoría</button>
+            </div>
+            <!-- ------------------------------------------------ FOOTER EDITARL ------------------------------------------ -->
+            <div class="modal-footer" *ngIf="infoCategoria">
+                <button type="button" id="cerrar-modal-agregar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid || loading" (click)="agregarCategoria()">Editar categoría</button>
             </div>
         </div>
     </div>
@@ -65,27 +77,61 @@
 <!-- -------------------------------------------------- <CONTAINER> -------------------------------------- -->
 <!-- ----------------------------------------------------------------------------------------------------- -->
 
-<div class="container-fluid" style="padding-top: 50px;">
+<div class="container-fluid" style="padding-top: 20px;">
 
 
     <!-- ----------------------------------------------------------------------------------------------------- -->
-    <!-- -------------------------------------------------- LENTES ------------------------------------------- -->
+    <!-- ------------------------------------------------ CATEGORIAS ----------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
 
-    <div class="row">
-        <div class="col-3">
-            <button type="button" class="btn btn-outline-secondary btn-lg w-100" style="margin-top: 10px;" data-toggle="collapse" data-target="#multiCollapseLentes" aria-expanded="false" aria-controls="multiCollapseLentes">Lentes</button>
-        </div>
-        <div class="col-9" style="padding-bottom: 30px;">
-            <div class="collapse multi-collapse" id="multiCollapseLentes">
+    <div *ngFor="let ci of categoriasInventario,let i = index">
+        <div class="row">
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-secondary btn-lg w-100" style="margin-top: 10px;" data-toggle="collapse" [attr.data-target]="'#multiCollapse' + i" aria-expanded="false">{{ci.nombre}}</button>
+            </div>
+            <div class="col-9" style="padding-bottom: 30px;">
+                <div class="collapse multi-collapse" [id]="'multiCollapse' + i">
 
-                <div class="card card-body">
-                    <h5 class="card-title">Lentes</h5>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    <div class="text-right">
-                        <button class="btn btn-primary" style="margin-right: 5px;"><i class="fas fa-eye"></i>&nbsp; Ver productos</button>
-                        <button class="btn btn-success" style="margin-right: 5px;" (click)="agregarProducto()"><i class="fas fa-plus"></i>&nbsp; Agregar Producto</button>
+                    <div class="card card-body">
+                        <h5 class="card-title">{{ci.nombre}}</h5>
+                        {{ci.descripcion}}
+                        <div class="text-right">
+                            <button class="btn btn-danger" style="margin-right: 5px; color: white;" (click)="confirmacionEliminar(ci)" *ngIf="ci.id_cateogoriai != 1"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-warning" style="margin-right: 5px; color: white;" (click)="abrirEditarCategoria(ci)"><i class="fas fa-pen"></i></button>
+                            <button class="btn btn-primary" style="margin-right: 5px;"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-success" style="margin-right: 5px;" (click)="agregarProducto()"><i class="fas fa-plus"></i></button>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------- MODAL ELIMINAR CATEGORIA ----------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+
+
+    <button type="button" id="btn-eliminar-categoria" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEliminar" style="display: none;">
+    Launch demo modal
+  </button>
+
+    <div class="modal fade" id="exampleModalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                    <button id="btn-cerrar-modal-elicategoria" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body" *ngIf="infoCategoria">
+                    ¿ Esta seguro que desea eliminar {{infoCategoria.nombre}} ?. Ten en cuenta que no podras recuperar la información.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarCategoria()">Eliminar</button>
                 </div>
             </div>
         </div>

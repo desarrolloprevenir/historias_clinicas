@@ -14,43 +14,47 @@ export class ConfirmarCuentaComponent implements OnInit {
   public status;
   public statusText;
   public loading;
+  public identity;
+  public id;
 
   constructor(private userService: UserService,
               private appService: AppService,
               private router: Router) { }
 
   ngOnInit() {
+    this.identity = this.userService.getIdentity();
+
+    if (this.identity.id_provedor) {
+      // console.log('es provedor');
+      this.id = this.identity.id_provedor;
+    } else {
+      // console.log('es medico');
+      this.id = this.identity.medico_id;
+    }
   }
 
   confirmar() {
     // console.log("Entro");
+    // console.log(this.id);
     this.loading = true;
-    let identity = this.userService.getIdentity().id_provedor;
     let token = this.userService.getToken();
-    var id;
 
-    if (identity.medico_id) {
-      id = identity.medico_id;
-    }
-
-    if (identity.id_provedor) {
-      id = identity.id_provedor;
-    }
-
-    let info = {salt: parseInt( this.codigo.value), id};
-    // console.log(info);
+    // console.log(this.identity);
+    let info = {salt: parseInt( this.codigo.value), id: this.id};
+    // console.log(this.id);
+    console.log(info);
     this.appService.confirmacionCuenta(info, token).subscribe( (response) => {
 
       if (response === true) {
-        document.getElementById('btn-modal-exitosa').click();
         localStorage.removeItem('confirmar');
         localStorage.setItem('confirmar', JSON.stringify(true));
+        document.getElementById('btn-modal-exitosa').click();
       } else {
         this.status = 'warning';
         this.statusText = 'Codigo incorrecto.';
       }
       this.loading = false;
-    }, (err) => {
+    }, () => {
       this.status = 'error';
       this.statusText = 'Error en la conexion, por favor intentalo mas tarde o revisa tu conexion.';
       this.loading = false;
@@ -59,21 +63,8 @@ export class ConfirmarCuentaComponent implements OnInit {
 
   reenviar() {
     this.loading = true;
-    let identity = this.userService.getIdentity();
-    var id;
-    console.log(identity);
-
-    if (identity.medico_id) {
-      id = identity.medico_id;
-    }
-
-    if (identity.id_provedor) {
-      id = identity.id_provedor;
-    }
-
-
-    console.log('iddd', id);
-    this.appService.getReenviarCodigoCorreo(id).subscribe( (response) => {
+    // console.log('iddd', id);
+    this.appService.getReenviarCodigoCorreo(this.id).subscribe( (response) => {
       // console.log(response);
       if (response === true) {
         this.status = 'success';

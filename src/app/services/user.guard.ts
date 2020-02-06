@@ -12,14 +12,15 @@ export class UserGuard implements CanActivate {
     canActivate() {
         let identity = this.userService.getIdentity();
         let confirmar = JSON.parse(localStorage.getItem('confirmar'));
- 
+        var id;
+
         if (identity && confirmar === true) {
             return true;
         } else {
 
             if (identity && confirmar === false) {
-            this.router.navigate(['/confirmar-cuenta']);
-            return false;
+                this.router.navigate(['/confirmar-cuenta']);
+                return false;
         }
 
             if (!identity) {

@@ -99,7 +99,7 @@
 <!-- *ngIf="medico || servicios" -->
 <!-- *ngIf="medicos.length < 1 || servicios.length < 1" -->
 <div style="padding: 20px;" *ngIf="medicos || servicios">
-    <div *ngIf="medicos.length < 1 || servicios.length < 1">
+    <div *ngIf="(medicos && servicios) && ( medicos.length < 1 || servicios.length < 1)">
         <h5>Antes de crear una sucursal hay que tener en cuenta que debes tener creados médicos y servicios</h5>
         <div style="padding-top: 20px;" routerLink="/medicos">
             <button class="btn btn-success">Agregar Médico</button>

@@ -23,3 +23,11 @@
     box-shadow: 0 1px 16px rgba(49, 138, 172, 1);
     transition: all 0.2s ease;
 }
+
+.list-group-item {
+    background-color: #3c8e82;
+}
+
+.list-group-item.active {
+    background-color: #507872 !important;
+}

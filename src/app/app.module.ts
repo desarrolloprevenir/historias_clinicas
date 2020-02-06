@@ -25,6 +25,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 // RECORTE IMAGENES
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+
+
 // recarga
 // import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 

@@ -184,7 +184,7 @@ export class HistoriaOptometriaComponent implements OnInit {
     let info = { tipo_consulta: this.datosOptometria.value.tipoConsulta, motivo_consulta: this.datosOptometria.value.motivoConsulta,
         enfermedades_preex: this.datosOptometria.value.antecedentes, historia_opt: this.infoHcFb, usuario_id: this.idUsuario,
         id_servicios: this.idServicio, antecedentes_f: { }, antecedentes_p: { }, habitosyfactores: { }, revisionpsistemas: { },
-        examenf: { }, impresion_diag: [ ] };
+        examenf: { }, impresion_diag: [ ], medicamentos: []};
 
     console.log(info);
 

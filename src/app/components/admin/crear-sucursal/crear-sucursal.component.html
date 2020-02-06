@@ -495,11 +495,11 @@
 
                                             <div class="form-group">
                                                 <label class="form-label">Nombre de usuario</label>
-                                                <input type="text" formControlName="nombreUsuario" [class.is-invalid]="formCambio.get('nombreUsuario').errors && formCambio.get('nombreUsuario').touched" class="form-control">
+                                                <input type="text" [formControl]="usernameSucursal" [class.is-invalid]="usernameSucursal.touched && usernameSucursal.hasError('required')" class="form-control">
 
                                                 <div>
-                                                    <p class="alerta-error" *ngIf="formCambio.get('nombreUsuario').getError('required') && formCambio.get('nombreUsuario').touched">* El campo es requerido</p>
-                                                    <p class="alerta-error" *ngIf="formCambio.get('nombreUsuario').getError('pattern') && formCambio.get('nombreUsuario').touched">* El nombre de usuario no puede contener espacios o caracteres especiales.</p>
+                                                    <p class="alerta-error" *ngIf="usernameSucursal.touched && usernameSucursal.hasError('required')">* El campo es requerido</p>
+                                                    <p class="alerta-error" *ngIf="usernameSucursal.touched && usernameSucursal.hasError('pattern')">* El nombre de usuario no puede contener espacios o caracteres especiales.</p>
                                                 </div>
                                             </div>
 
@@ -530,6 +530,7 @@
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                         <button type="button" class="btn btn-primary" (click)="cambioContrasena()" [disabled]="loading ||
                                                                                                                                formCambio.invalid || 
+                                                                                                                               usernameSucursal.invalid ||
                                                                                                                                formCambio.get('psswConfirm').value != formCambio.get('pssw').value">Guardar</button>
                                     </div>
                                 </div>
