@@ -292,6 +292,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item active" id="informacion" (click)="pestana('informacion')">Información</li>
                                 <li class="list-group-item" id="estudios" (click)="pestana('estudios')">Estudios</li>
+                                <li class="list-group-item" id="experiencia" (click)="pestana('experiencia')">Experiencia Laboral</li>
                             </ul>
                         </div>
                     </div>
@@ -651,6 +652,9 @@
                         <!-- --------------------------------------------- FIN MODAL -------------------------------------------- -->
                         <!-- ---------------------------------------------------------------------------------------------------- -->
 
+
+
+
                         <br/>
 
                         <h2 *ngIf="medico.titulos.length <= 0">Aún no tienes agregados estudios a tu hoja de vida.</h2>
@@ -664,6 +668,169 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div *ngSwitchCase="'experiencia'">
+
+                      <div class="container-fluid">
+                          <br />
+                          <div class="card-header">
+                              <h1>Información de mi cuenta</h1>
+                          </div>
+                          <br />
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                              <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+                      class="fas fa-plus"></i>&nbsp;&nbsp;Agregar Estudio</button>
+                          </div>
+                          <div class="col-md-4"></div>
+                      </div>
+
+
+
+                     <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <!-- ----------------------------------------------- MODAL ---------------------------------------------- -->
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+
+
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h3 class="modal-title" id="exampleModalScrollableTitle">Agregar Experiencia Laboral</h3>
+                                          <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                                      </div>
+                                      <div class="modal-body">
+
+                                          <form class="form-signin" #experienciaLabForm="ngForm" (ngSubmit)="datosMedic()">
+
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Nombre de la empresa</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input type="text" class="form-control" id="exampleInputEmpresa" aria-describedby="empresaHelp" placeholder="Nombre de la empresa" [formControl]="nombreEmpresaExp">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Cargo que desempeño</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input type="text" class="form-control" id="exampleInputCargo" aria-describedby="cargoHelp" placeholder="Cargo que desempeño" [formControl]="cargoDesempenado">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4">
+                                                        <p style="text-align: left">Funciones que desempeño</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="exampleInputFunciones" aria-describedby="funcionesHelp" placeholder="Funciones que desempeño" [formControl]="funcionesDesempenadadas">
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                </div>
+                                            </div>
+
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Fecha de Inicio</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input class="form-control" type="date" id="example-dateExperienci-input" [formControl]="startExpe" max="{{today}}">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Fecha de Finalización</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input class="form-control" type="date" id="example-date-input" [formControl]="endExpe" max="{{today}}">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4">
+                                                        <p style="text-align: left">Teléfono</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="exampleInputTelefonoExpe" aria-describedby="TelefonoExpeHelp" placeholder="Teléfono de la empresa" [formControl]="telefonoEmpresa">
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                </div>
+                                            </div>
+
+                                          </form>
+
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                              <button (click)="datosMedic(true, nombreEmpresaExp)" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                          </div>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- ---------------------------------------------------------------------------------------------------- -->
+                      <!-- --------------------------------------------- FIN MODAL -------------------------------------------- -->
+                      <!-- ---------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+                      <br/>
+
+                      <h2 *ngIf="medico.titulos.length <= 0">Aún no tienes agregados estudios a tu hoja de vida.</h2>
+                      <div *ngIf="medico.titulos.length >= 1">
+                          <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let t of medico.titulos">
+                              <h3 class="card-title">{{t.nombre}}</h3>
+                              <hr>
+                              <h6 class="card-text">Institución : {{t.institucion}}</h6>
+                              <h6 class="card-text">Fecha de Inicio : {{t.start | fecha}}</h6>
+                              <h6 class="card-text">Fecha de Finalización : {{t.end | fecha}}</h6>
+                          </div>
+                      </div>
+                  </div>
+
 
 
 
