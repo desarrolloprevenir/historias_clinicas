@@ -75,7 +75,6 @@ const routes: Routes = [
   {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
   {path: '**', component: LoginComponent}
 
-
 ];
 
 @NgModule({

@@ -97,7 +97,7 @@ export class BarraNavegacionComponent implements OnInit {
         }
 
         if (response.esAdmin === 4) {
-
+          console.log('asda');
           localStorage.setItem('token', JSON.stringify(response.token));
           this.identityMember(response.id_usuario, response.id_member, 'sucu');
           document.getElementById('btn-cerrar-modal').click();
@@ -126,13 +126,13 @@ export class BarraNavegacionComponent implements OnInit {
 
     // this.loading = true;
 
-      // console.log(id);
+      console.log(member);
 
       if (member === 'admin') {
 
         // this.locket(id);
         this.provedorService.getIdentity(idUsuario).subscribe( (response) => {
-          // console.log('respuesta', response);
+          console.log('respuesta', response);
 
           localStorage.setItem('identity', JSON.stringify(response[0]));
           this.locket(idMember);
@@ -187,12 +187,12 @@ export class BarraNavegacionComponent implements OnInit {
   }
 
   locket(idMember) {
-    // console.log(idMember);
+    console.log(idMember);
     this.aplicationService.getConfirmacionCuenta(idMember).subscribe( (response) => {
-      console.log(response);
+      // console.log(response);
 
       if (response === true) {
-        console.log('aqui home');
+        // console.log('aqui home');
         localStorage.setItem('confirmar', JSON.stringify(true));
         // location.reload();
         this.router.navigate(['']);

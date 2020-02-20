@@ -20,7 +20,6 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AppService } from '../../../services/app.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProvedorService } from 'src/app/services/provedor.service';
-import { ImageCropperModule } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-crear-publicacion',

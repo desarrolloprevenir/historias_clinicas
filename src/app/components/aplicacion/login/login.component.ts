@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 
     this.provedorService.postLogin(this.email.value, this.aplicationService.encriptar(this.pssw.value)).subscribe((response) => {
 
-      console.log(response);
+      // console.log(response);
 
       if (response.login === true) {
 
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
 
     // this.loading = true;
 
-      // console.log(id);
+      console.log(member);
 
       if (member === 'admin') {
 
@@ -143,14 +143,14 @@ export class LoginComponent implements OnInit {
       if (member === 'sucu') {
 
         this.sucursalService.getIdentitySucursal(idMember).subscribe( (response) => {
-          console.log(response);
+          // console.log(response);
           let identity = response[0];
           localStorage.setItem('identity', JSON.stringify(identity));
           localStorage.setItem('confirmar', JSON.stringify(true));
           this.loading = false;
           this.router.navigate(['home']);
         }, (err) => {
-          console.log(err);
+          // console.log(err);
         } );
       }
   }

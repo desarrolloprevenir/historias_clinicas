@@ -62,6 +62,8 @@ import { HitorialCitasComponent } from './admin/hitorial-citas/hitorial-citas.co
 import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
+import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
+
 
 
 
@@ -104,7 +106,7 @@ import { LoadingComponent } from './aplicacion/loading/loading.component';
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-
+  ModalCambioAvatarComponent
   ],
   imports: [
     CommonModule,
@@ -163,7 +165,8 @@ import { LoadingComponent } from './aplicacion/loading/loading.component';
   HitorialCitasComponent,
   AlertasComponent,
   VerInventarioComponent,
-  LoadingComponent
+  LoadingComponent,
+  ModalCambioAvatarComponent
   ]
 })
 export class ComponentesModule { }

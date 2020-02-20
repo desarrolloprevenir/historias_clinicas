@@ -66,7 +66,7 @@ export class BuscarCitaComponent implements OnInit {
       this.citasUsuario();
 
       this.intervalo =  setInterval(() => {
-      this.citasUsuario() }, 30000);
+      this.citasUsuario()}, 30000);
     } else {
       this.medico = true;
       // console.log('es medico');
@@ -96,7 +96,7 @@ export class BuscarCitaComponent implements OnInit {
       this.citasAgregadas = response[0];
       this.citasAgregadasMasc =  response[1];
       this.home.loading = false;
-    }, (err) => {
+    }, () => {
       // console.log(err);
       this.home.status = 'error';
       this.home.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
@@ -106,7 +106,7 @@ export class BuscarCitaComponent implements OnInit {
   }
 
   buscarCedula() {
-    console.log(this.infoRes);
+    // console.log(this.infoRes);
     this.infoRes = undefined;
     this.infoResMasc = undefined;
     this.home.loading = true;

@@ -39,7 +39,7 @@ export class MisServiciosComponent implements OnInit {
   getServiciosMedico(id) {
     this.loading = true;
     this.medicoService.getServicios(id).subscribe( (response) => {
-      // console.log(response);
+      console.log(response);
       this.servicios = response;
       this.loading = false;
     }, () => {

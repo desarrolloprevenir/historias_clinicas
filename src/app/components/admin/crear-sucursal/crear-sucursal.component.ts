@@ -68,6 +68,7 @@ export class CrearSucursalComponent implements OnInit {
   public idConsultorio;
   public infoEliminar;
   public formCambio: FormGroup;
+  public usernameSucursal = new FormControl('', [Validators.required, Validators.pattern('[a-zA-z_0-9]*')] );
 
   // form control
   departSelect = new FormControl('', Validators.required);
@@ -188,10 +189,11 @@ export class CrearSucursalComponent implements OnInit {
 
   validacionesCambioContrasena() {
 
+
+    this.usernameSucursal.setValue(this.infoSucursal.email);
     this.formCambio = this.fb.group({
 
       psswAdmin: ['', Validators.required],
-      nombreUsuario: [this.infoSucursal.email, [Validators.required, Validators.pattern('[a-zA-z_0-9]*')]],
       pssw : ['', [Validators.required, Validators.minLength(8)]],
       psswConfirm : ['', [Validators.required, Validators.minLength(8)]],
     });
@@ -1486,7 +1488,7 @@ export class CrearSucursalComponent implements OnInit {
     let admin = this.userService.getIdentity();
 
     let info = { email: admin.correo, passadmin: this.aplicationService.encriptar(this.formCambio.value.psswAdmin),
-                 id_sucur : this.infoSucursal.id_sucursales, usu: this.formCambio.value.nombreUsuario,
+                 id_sucur : this.infoSucursal.id_sucursales, usu: this.usernameSucursal.value,
                 passnu : this.aplicationService.encriptar(this.formCambio.value.pssw) };
 
     this.provedorService.putCambioContrasenaUsuario(info).subscribe( (response) => {
@@ -1499,6 +1501,7 @@ export class CrearSucursalComponent implements OnInit {
       } else {
         this.status = 'success';
         this.statusText = 'Usuario o contraseña cambiados exitosamente';
+        this.formCambio.reset();
         document.getElementById('cerrar-modal-cambio').click();
       }
     }, () => {

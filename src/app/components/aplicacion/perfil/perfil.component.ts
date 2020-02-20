@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { PlatformLocation } from '@angular/common';
 import * as moment from 'moment';
@@ -7,6 +7,8 @@ import { ProvedorService } from 'src/app/services/provedor.service';
 import { MedicoService } from 'src/app/services/medico.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { environment } from '../../../../environments/environment.prod';
+import { BarraNavegacionComponent } from '../barra-navegacion/barra-navegacion.component';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,10 +23,17 @@ export class PerfilComponent implements OnInit {
   //   start: this.estudios.start, end: this.estudios.end, id: this.medico.id });
   public estudios = { nombreEstudio: '', nombreInstitucion: '', start: '', end: '' };
 
+  public generos;
+  fechaNacimiento = new FormControl('', [Validators.required]);
+
   nombreEstudio = new FormControl('', [Validators.required, Validators.pattern('[a-z A-z ñ]*')]);
   nombreInstitucion = new FormControl('', [Validators.required, Validators.pattern('[a-z A-z ñ]*')]);
   start = new FormControl('', [Validators.required]);
   end = new FormControl('', [Validators.required]);
+
+  // ---------------Departamento----------------//
+  departSelect = new FormControl('', Validators.required);
+  muniSelect = new FormControl('', Validators.required);
 
   public experiencia = {
     nombreEmpresaExp: '', cargoDesempenado: '', funcionesDesempenadadas: '',
@@ -52,16 +61,31 @@ export class PerfilComponent implements OnInit {
   public today;
   public infoSucursal;
   public apiUrl = environment.apiUrl;
+  public cambioAvatar = false;
+  public medicoBol;
+  public adminBol;
+
+  public departamentos;
+  public municipios;
+
+
+  @ViewChild('barra', { static: true }) barra: BarraNavegacionComponent;
 
   constructor(public userService: UserService,
     public provedorService: ProvedorService,
     public medicoService: MedicoService,
     public formBuilder: FormBuilder,
     location: PlatformLocation,
-    private sucursalService: SucursalService) { }
+    private sucursalService: SucursalService,
+    private aplicationService: AppService, ) {
+    location.onPopState(() => {
+      document.getElementById('btn-cerrar-modal-cambio').click();
+    });
+  }
 
   ngOnInit() {
     this.getIdentity();
+    this.getDepartamentos();
   }
 
   getIdentity() {
@@ -75,7 +99,22 @@ export class PerfilComponent implements OnInit {
       this.medico = user;
       this.medico.id = user.medico_id;
       this.mymodel = 'informacion';
+      this.adminBol = false;
+      this.medicoBol = true;
+      this.departSelect.setValue(this.medico.departamentoId);
+      this.muniSelect.setValue(this.medico.ciudad_origen);
+      this.departamentoSelect(this.medico.departamentoId);
+let fn;
       // console.log(this.medico);
+      if(this.medico.fecha_nacimiento){
+        fn = moment(this.medico.fecha_nacimiento).format('DD-M-YYYY');
+      }
+
+
+      this.generos = [{ tipo: 'masculino', nombre: 'Masculino' },
+      { tipo: 'femenino', nombre: 'Femenino' },
+      { tipo: 'otro', nombre: 'Otro' }];
+
 
       // validaciones campos perfil de medico
       this.datos = this.formBuilder.group({
@@ -83,6 +122,8 @@ export class PerfilComponent implements OnInit {
         Validators.pattern('[a-z A-z ñ]*')]],
         apellidos: [this.medico.apellidos, [Validators.required, Validators.minLength(2), Validators.maxLength(50),
         Validators.pattern('[a-z A-z ñ]*')]],
+        generos:  [this.medico.genero],
+        fechaNacimiento:  [this.medico.fecha_nacimiento],
         email: [this.medico.email, [Validators.required,
         Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
         cedula: [this.medico.cedula, [Validators.required, Validators.pattern('[0-9]*')]],
@@ -103,6 +144,8 @@ export class PerfilComponent implements OnInit {
     if (user.id_provedor && !user.id_sucursales) {
       this.provedor = user;
       this.provedor.id = user.id_provedor;
+      this.adminBol = true;
+      this.medicoBol = false;
       // console.log(this.provedor);
       // validaciones campos perfil de provedor
       this.datosAdmin = this.formBuilder.group({
@@ -218,10 +261,11 @@ export class PerfilComponent implements OnInit {
       // console.log(response);
 
       localStorage.removeItem('identity');
-      localStorage.setItem('identity', JSON.stringify(response));
+      localStorage.setItem('identity', JSON.stringify(response[0]));
       this.getIdentity();
       this.status = 'success';
       this.statusText = 'Datos actualizados correctamente.';
+      this.barra.getIdentity();
       window.scroll(0, 0);
       this.loading = false;
 
@@ -242,32 +286,69 @@ export class PerfilComponent implements OnInit {
 
       let l = document.getElementById('estudios');
       l.className = 'list-group-item';
+      // li.className = 'list-group-item active';
+
+      let i = document.getElementById('experiencia');
+      i.className = 'list-group-item';
       li.className = 'list-group-item active';
     }
 
     if (li.id === 'estudios') {
       let l = document.getElementById('informacion');
       l.className = 'list-group-item';
+      // li.className = 'list-group-item active';
+
+      let i = document.getElementById('experiencia');
+      i.className = 'list-group-item';
       li.className = 'list-group-item active';
     }
 
     if (li.id === 'experiencia') {
       let l = document.getElementById('informacion');
       l.className = 'list-group-item';
-      li.className = 'list-group-item active';
-      let i = document.getElementById('estudios');
-      i.className = 'list-group-item';
+      // li.className = 'list-group-item active';
+      let s = document.getElementById('estudios');
+      s.className = 'list-group-item';
       li.className = 'list-group-item active';
     }
   }
 
+  datosExpe(bol?, form?) {
+    let expe = [];
+
+    console.log({
+      nombreEmpresaExp: this.nombreEmpresaExp.value, cargoDesempenado: this.cargoDesempenado.value,
+      funcionesDesempenadadas: this.funcionesDesempenadadas.value, startExpe: this.startExpe.value, endExpe: this.endExpe.value,
+      telefonoEmpresa: this.telefonoEmpresa.value
+    });
+
+  }
+
+  getDepartamentos() {
+
+    this.aplicationService.getDepartamento().subscribe( (response) => {
+      this.departamentos = response;
+      // console.log(this.departamentos);
+    }, () => {
+    });
+  }
+
+  departamentoSelect(ev?) {
+
+    this.aplicationService.getMunicipio(this.departSelect.value || ev).subscribe( (response) => {
+      this.municipios = response;
+    }, () => {
+
+    });
+  }
+
   datosMedic(bol?, form?) {
 
-    // console.log(bol);
+  //  console.log(bol);
 
     if (bol === true) {
       let estu = [];
-
+console.log("entro aqui")
       estu.push({
         nombreEstudio: this.nombreEstudio.value, nombreInstitucion: this.nombreInstitucion.value,
         start: this.start.value, end: this.end.value, id: this.medico.id
@@ -275,10 +356,10 @@ export class PerfilComponent implements OnInit {
 
       let info = {
         nombres: this.datos.value.nombres, apellidos: this.datos.value.apellidos, titulo: this.datos.value.titulo,
-
+        ciudad_o: this.muniSelect.value, fecha_n: this.datos.value.fechaNacimiento, genero: this.datos.value.generos,
         telefono: this.datos.value.telefono, wp: this.datos.value.wp, id: this.medico.id, estudios: estu
       };
-      console.log(info);
+
 
       let token = this.userService.getToken();
 
@@ -305,15 +386,17 @@ export class PerfilComponent implements OnInit {
       });
 
     } else {
-
-      if (this.datos.valid && this.datos.dirty) {
+      if (this.datos.valid || this.datos.dirty) {
         this.loading = true;
-        let estu = [];
+        console.log("entro");
+       let estu = [];
         let info = {
           nombres: this.datos.value.nombres, apellidos: this.datos.value.apellidos, titulo: this.datos.value.titulo,
+          ciudad_o: this.muniSelect.value, fecha_n: this.datos.value.fechaNacimiento, genero: this.datos.value.generos,
           telefono: this.datos.value.telefono, wp: this.datos.value.wp, id: this.medico.id, estudios: estu
         };
-        // console.log(info);
+         console.log(info);
+       // console.log(this.datos.value.muniSelect);
         let token = this.userService.getToken();
 
         this.medicoService.editInfoMedico(info, token).subscribe((response) => {
@@ -348,6 +431,7 @@ export class PerfilComponent implements OnInit {
       localStorage.removeItem('identity');
       localStorage.setItem('identity', JSON.stringify(identity));
       this.getIdentity();
+      this.barra.getIdentity();
       this.status = 'success';
       this.statusText = 'Datos actualizados con exito.';
       window.scroll(0, 0);
@@ -369,7 +453,7 @@ export class PerfilComponent implements OnInit {
       id_sucursal: this.infoSucursal[0].id_sucursales
     };
 
-    console.log(info);
+   // console.log(info);
 
     this.sucursalService.editInfoSucursal(info).subscribe((response) => {
       // console.log(response);
@@ -407,5 +491,24 @@ export class PerfilComponent implements OnInit {
   //     this.loading = false;
   //   } );
   // }
+
+  cambioAvatarModal() {
+    document.getElementById('btn-mobal-cambio-avatar').click();
+  }
+
+  avatarCambiado() {
+    document.getElementById('btn-cerrar-modal-cambio').click();
+    window.scroll(0, 0);
+    this.status = 'success';
+    this.statusText = 'Avatar cambiado con exito.';
+
+    if (this.provedor) {
+      this.getProvedor(this.provedor.id);
+    }
+
+    if (this.medico) {
+      this.getIdentityMedico();
+    }
+  }
 
 }
