@@ -129,8 +129,8 @@
                                                 <label class="form-label">Médico</label>
                                                 <!-- <input type="text" class="form-control" value="{{infoConsultorio.medico}}" readonly> -->
                                                 <select class="form-control" [formControl]="medicoSelect" [class.is-invalid]="medicoSelect.hasError('required') && medicoSelect.touched">
-                          <option *ngFor="let m of medicos" value="{{m.medico_id}}" [disabled]="m.activo === 'true'">{{m.nombre}}</option>
-                        </select>
+                                                    <option *ngFor="let m of medicos" value="{{m.medico_id}}">{{m.nombre}}</option>
+                                                </select>
                                                 <div class="invalid-feedback" *ngIf="medicoSelect.hasError('required') && medicoSelect.touched">
                                                     * Este campo es requerido.
                                                 </div>
@@ -138,8 +138,8 @@
                                             <div class="col">
                                                 <label class="form-label">Servicio</label>
                                                 <select class="form-control" [formControl]="servicioSelect" [class.is-invalid]="servicioSelect.hasError('required') && servicioSelect.touched">
-                          <option *ngFor="let s of servicios" value="{{s.id_servicios}}">{{s.nombre}}</option>
-                        </select>
+                                                        <option *ngFor="let s of servicios" value="{{s.id_servicios}}">{{s.nombre}}</option>
+                                                </select>
 
                                                 <div class="invalid-feedback" *ngIf="servicioSelect.hasError('required') && servicioSelect.touched">
                                                     * Este campo es requerido.

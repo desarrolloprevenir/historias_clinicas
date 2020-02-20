@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           this.identity(response.id_usuario, response.id_member, 'admin');
         }
         if (response.esAdmin === 3) {
-
+          console.log('medico');
           localStorage.setItem('token', JSON.stringify(response.token));
           this.identity(response.id_usuario, response.id_member, 'med');
         }
@@ -97,12 +97,13 @@ export class LoginComponent implements OnInit {
   }
 
   identity(idUsuario, idMember, member) {
+    console.log('aqui');
 
     // this.loading = true;
 
-      console.log(member);
+      // console.log(member);
 
-      if (member === 'admin') {
+    if (member === 'admin') {
 
         // this.locket(id);
         this.provedorService.getIdentity(idUsuario).subscribe( (response) => {
@@ -122,7 +123,7 @@ export class LoginComponent implements OnInit {
 
       }
 
-      if (member === 'med') {
+    if (member === 'med') {
 
         // this.locket(id);
         this.medicoService.getInfoMedico(idUsuario).subscribe( (response) => {
@@ -140,10 +141,10 @@ export class LoginComponent implements OnInit {
 
       }
 
-      if (member === 'sucu') {
+    if (member === 'sucu') {
 
         this.sucursalService.getIdentitySucursal(idMember).subscribe( (response) => {
-          // console.log(response);
+          console.log(response);
           let identity = response[0];
           localStorage.setItem('identity', JSON.stringify(identity));
           localStorage.setItem('confirmar', JSON.stringify(true));

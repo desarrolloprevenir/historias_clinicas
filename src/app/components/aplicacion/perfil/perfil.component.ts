@@ -138,13 +138,17 @@ export class PerfilComponent implements OnInit {
     }
 
     if (user.id_provedor && user.id_sucursales) {
-      // console.log(user.avatar);
+      // console.log(user);
       // console.log('sucursal');
       this.loading = true;
       this.sucursalService.getInfoSucursal(user.id_sucursales).subscribe((response) => {
+        localStorage.removeItem('identity');
+        localStorage.setItem('identity', JSON.stringify(response[0]));
+        // this.barra.getIdentity();
         this.infoSucursal = response;
         this.infoSucursal.avatar = this.apiUrl + user.avatar;
         this.validacionesSucursal();
+        console.log(this.infoSucursal);
         this.loading = false;
       }, () => {
         // console.log(err);
@@ -224,6 +228,23 @@ export class PerfilComponent implements OnInit {
         this.loading = false;
       });
     }
+  }
+
+  getSucursal() {
+    this.sucursalService.getIdentitySucursal(this.infoSucursal[0].members_id).subscribe( (response) => {
+      console.log(response);
+      localStorage.removeItem('identity');
+      localStorage.setItem('identity', JSON.stringify(response[0]));
+      this.barra.getIdentity();
+      this.getIdentity();
+      this.loading = false;
+    }, () => {
+      // console.log(err);
+      this.status = 'error';
+      this.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
+      window.scroll(0, 0);
+      this.loading = false;
+    });
   }
 
   getProvedor(id) {
@@ -383,7 +404,7 @@ export class PerfilComponent implements OnInit {
       id_sucursal: this.infoSucursal[0].id_sucursales
     };
 
-    console.log(info);
+    // console.log(info);
 
     this.sucursalService.editInfoSucursal(info).subscribe((response) => {
       // console.log(response);
@@ -391,7 +412,7 @@ export class PerfilComponent implements OnInit {
       if (response === true) {
         this.status = 'success';
         this.statusText = 'Datos actualizados con exito.';
-        this.getIdentity();
+        this.getSucursal();
         // this.getSucursal(this.infoSucursal[0].id_sucursales);
       }
     }, () => {

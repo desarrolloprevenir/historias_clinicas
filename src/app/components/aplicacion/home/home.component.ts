@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProvedorService } from '../../../services/provedor.service';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment.prod';
+import { OneSignalService } from '../../../services/one-signal.service';
 
 
 @Component({
@@ -19,10 +20,12 @@ export class HomeComponent implements OnInit {
   public apiUrl = environment.apiUrl;
 
   constructor(public provedorService: ProvedorService,
-              public userService: UserService) { }
+              public userService: UserService,
+              ) { }
 
   ngOnInit() {
     this.identity = this.userService.getIdentity();
+    // this.oneSignal.iniciar();
   }
 
   cerrarAlerta() {

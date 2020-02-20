@@ -433,11 +433,11 @@ export class CalendarioComponent implements OnInit {
         eps : this.eps.value.toUpperCase(), acompanante : this.acompanante.value, consultorio : this.consultorioSelecionado.id_consultorio,
         parentesco : this.parentesco.value, telefonoAcompanante : this.telAcompanante.value, benef};
 
-      }
-      // console.log(datos);
+      } 
+      console.log(datos);
       this.loading = true;
       this.provedorService.postCitasProvedor(datos, token).subscribe ((response) => {
-        console.log('no existe', response);
+        // console.log('no existe', response);
         this.loading = false;
         let res = response[0];
 
