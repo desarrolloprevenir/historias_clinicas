@@ -63,6 +63,7 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
+import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
 
 
 
@@ -106,7 +107,8 @@ import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/mod
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-  ModalCambioAvatarComponent
+  ModalCambioAvatarComponent,
+  HistOdComponent
   ],
   imports: [
     CommonModule,
@@ -166,6 +168,7 @@ import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/mod
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
+  HistOdComponent,
   ModalCambioAvatarComponent
   ]
 })

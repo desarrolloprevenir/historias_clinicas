@@ -17,7 +17,6 @@ export class RegistroComponent implements OnInit {
 
   constructor(private provedorService: ProvedorService,
               private router: Router,
-              private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private appService: AppService) {
 

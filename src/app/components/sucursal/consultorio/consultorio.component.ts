@@ -100,7 +100,7 @@ export class ConsultorioComponent implements OnInit {
 
 
   // ------------------------------------ METODOS CREAR CONSULTORIO -------------------------------------------------------------
-
+ 
   getMedicos(idProvedor) {
     this.loading = true;
     this.provedorService.getMedicosProvedor(idProvedor).subscribe( (response) => {

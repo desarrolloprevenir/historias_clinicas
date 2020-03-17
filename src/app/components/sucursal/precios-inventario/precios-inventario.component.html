@@ -16,13 +16,21 @@
 
 
 <!-- ----------------------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------ MODAL AGREGAR CATEGORIA ---------------------------------- -->
+<!-- ------------------------------------- MODAL AGREGAR / EDITAR CATEGORIA ------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------------- -->
 
 <div class="text-center" style="padding-bottom: 30px;">
-    <button type="button" id="btn-agregar-editar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+    <button style="display: none;" type="button" id="btn-agregar-editar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
     Agregar nueva categoria
 </button>
+
+    <button type="button" class="btn btn-success" (click)="agregarCategoriaModal()">
+    Agregar nueva categoria
+</button>
+</div>
+
+<div *ngIf="categoriasInventario && categoriasInventario.length <= 0">
+    <h5 class="text-center">Aún no tienes una categoria agregada</h5>
 </div>
 
 <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -53,16 +61,70 @@
                         <textarea class="form-control w-100" [formControl]="descripcionCategoria" placeholder="Descripcion categoría"></textarea>
                     </div>
                 </form>
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- --------------------------------------- SUCURSALES AGREGAR CATEGORIA -------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div *ngIf="!infoCategoria && (infoUser.id_provedor && sucursales)">
+
+                    <p class="form-label">* Las categorias solo seran visibles para las sucursales que escojas.</p>
+
+                    <!-- <div class="form-check" style="padding-top: 5px;">
+                        <input class="form-check-input" type="checkbox" id="blankCheckbox" (change)="selectSucursal('todas',$event)">
+                        <label class="form-check-label" for="blankCheckbox">Seleccionar todas</label>
+                    </div> -->
+
+                    <div class="form-check" style="padding-top: 5px;" *ngFor="let s of sucursales; let i = index;">
+                        <input class="form-check-input" type="checkbox" [value]="s.id_sucursales" id="blankCheckbox{{i}}" (change)="selectSucursal(s.id_sucursales, $event)">
+                        <label class="form-check-label" for="blankCheckbox{{i}}">{{s.nombre}}</label>
+                    </div>
+
+
+                </div>
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- ---------------------------------------- SUCURSALES EDITAR CATEGORIA -------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <div *ngIf="infoCategoria && sucursales">
+
+                    <p class="form-label">* Solo en las sucursales activas aparecera visible la categoria.</p>
+                    <br>
+
+                    <div *ngFor="let s of sucursalesEdit; let i = index">
+
+                        <div class="row">
+                            <div class="col">
+                                <p>{{s.nombre}}</p>
+                            </div>
+                            <div class="col">
+
+                                <div class="custom-control custom-switch">
+                                    <div>
+
+                                    </div>
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{i}}" (change)="swithInput($event, s.id_sucursales)" [checked]="s.checked">
+                                    <label class="custom-control-label" for="customSwitch{{i}}"></label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <!-- ------------------------------------------------ FOOTER AGREGAR ------------------------------------------ -->
             <div class="modal-footer" *ngIf="!infoCategoria">
                 <button type="button" id="cerrar-modal-agregar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid || loading" (click)="agregarCategoria()">Guardar categoría</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || 
+                                                                                               descripcionCategoria.invalid || 
+                                                                                               loading || 
+                                                                                               sucursalesSelect.length <= 0" (click)="agregarCategoria()">Guardar categoría</button>
             </div>
             <!-- ------------------------------------------------ FOOTER EDITARL ------------------------------------------ -->
             <div class="modal-footer" *ngIf="infoCategoria">
                 <button type="button" id="cerrar-modal-agregar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid || loading" (click)="agregarCategoria()">Editar categoría</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nombreCategoria.invalid || descripcionCategoria.invalid || loading" (click)="editarCategoria()">Editar categoría</button>
             </div>
         </div>
     </div>
@@ -96,15 +158,19 @@
                         <h5 class="card-title">{{ci.nombre}}</h5>
                         {{ci.descripcion}}
                         <div class="text-right">
-                            <button class="btn btn-danger" style="margin-right: 5px; color: white;" (click)="confirmacionEliminar(ci)" *ngIf="ci.id_cateogoriai != 1"><i class="fas fa-trash"></i></button>
-                            <button class="btn btn-warning" style="margin-right: 5px; color: white;" (click)="abrirEditarCategoria(ci)"><i class="fas fa-pen"></i></button>
-                            <button class="btn btn-primary" style="margin-right: 5px;"><i class="fas fa-eye"></i></button>
-                            <button class="btn btn-success" style="margin-right: 5px;" (click)="agregarProducto()"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-danger" style="margin-right: 5px; color: white;" (click)="confirmacionEliminar(ci)" *ngIf="ci.nombre !== 'Material Lentes'"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-warning" style="margin-right: 5px; color: white;" (click)="abrirEditarCategoria(ci)" *ngIf="ci.nombre !== 'Material Lentes'"><i class="fas fa-pen"></i></button>
+                            <button class="btn btn-primary" style="margin-right: 5px;" [routerLink]="['/inventario', ci.id_cateogoriai]"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-success" style="margin-right: 5px;" (click)="agregarProducto(ci)"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div style="padding-top: 50px;">
+
     </div>
 
 
@@ -146,7 +212,7 @@
     <button style="display: none;" id="btn-abrir-modal-producto" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar producto</h5>
@@ -154,7 +220,11 @@
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
-                <div class="modal-body">
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- --------------------------------------------- AGREGAR LENTES ---------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <div class="modal-body" *ngIf="infoCategoria && infoCategoria.nombre === 'Material Lentes'">
 
                     <div>
                         <div class="row">
@@ -177,27 +247,30 @@
                             <div class="card-body">
                                 <h5 class="card-title">Lente terminado</h5>
 
-                                <div class="row">
-                                    <div class="col form-group">
-                                        <label class="form-label">Tipo</label>
-                                        <input class="form-control" placeholder="Tipo material">
-                                    </div>
-                                    <div class="col form-group">
-                                        <label class="form-label">Esfera</label>
-                                        <input class="form-control" placeholder="Esfera">
-                                    </div>
-                                    <div class="col form-group">
-                                        <label class="form-label">Cilindro</label>
-                                        <input class="form-control" placeholder="Cilindro">
-                                    </div>
-                                    <div class="col form-group">
-                                        <label class="form-label">Valor unitario</label>
-                                        <input class="form-control" placeholder="$">
+                                <div *ngFor="let lt of lenterTerminados; let i = index">
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label class="form-label">Tipo</label>
+                                            <input class="form-control" placeholder="Tipo material" id="tipo{{i}}">
+                                        </div>
+                                        <div class="col form-group">
+                                            <label class="form-label">Esfera</label>
+                                            <input class="form-control" placeholder="Esfera" id="esfera{{i}}">
+                                        </div>
+                                        <div class="col form-group">
+                                            <label class="form-label">Cilindro</label>
+                                            <input class="form-control" placeholder="Cilindro" id="cilindro{{i}}">
+                                        </div>
+                                        <div class="col form-group">
+                                            <label class="form-label">Valor unitario</label>
+                                            <input class="form-control" placeholder="$" id="valorUnitario{{i}}" type="number" min="0">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="text-right">
-                                    <button class="btn btn-success" type="button"><i class="fas fa-plus"></i></button>
+                                    <button class="btn btn-danger" style="margin-right: 5px;" type="button" (click)="eliminarLenteTerminado()" *ngIf="lenterTerminados.length >= 2"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-success" type="button" (click)="lenterTerminados.push({lente : 'lente terminado'})"><i class="fas fa-plus"></i>&nbsp; Agregar formula</button>
                                 </div>
                             </div>
                         </div>
@@ -210,38 +283,129 @@
                             <div class="card-body">
                                 <h5 class="card-title">Lente tallado</h5>
 
+                                <div style="padding-bottom: 30px;" *ngIf="lentesAgregados.length >= 1">
+                                    <!-- <h5 class="card-title">Lentes agregados</h5> -->
+                                    <label class="form-label">Lentes agregados</label>
+                                    <div class="row">
+                                        <div class="col-3" *ngFor="let la of lentesAgregados" style="padding-top: 10px;">
+                                            <h4>{{la.nombre}}</h4>
+                                            <button class="btn btn-danger btn-sm" (click)="eliminarTipo()" style="margin-right: 5px;"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col form-group">
                                         <label class="form-label">Nombre lente</label>
-                                        <input class="form-control" placeholder="Progresivos, Bifocales ...">
+                                        <input class="form-control" placeholder="Progresivos, Bifocales ..." id="nombreLenteLta">
                                     </div>
                                     <div class="col form-group">
                                         <label class="form-label">Tipo</label>
-                                        <input class="form-control" placeholder="Focus silver, focus gold ...">
+                                        <input class="form-control" placeholder="Focus silver, focus gold ..." id="tipoLta">
                                     </div>
                                     <div class="col form-group">
                                         <label class="form-label">Valor unitario</label>
-                                        <input class="form-control" placeholder="$">
+                                        <input class="form-control" placeholder="$" type="number" min="0" id="valorUnitarioLta">
+                                    </div>
+                                </div>
+
+                                <div *ngFor="let lta of agregarTipo; let i = index;">
+                                    <div class="row">
+                                        <div class="col"></div>
+                                        <div class="col form-group">
+                                            <label class="form-label">Tipo</label>
+                                            <input class="form-control" placeholder="Focus silver, focus gold ..." id="tipoLta{{i}}">
+                                        </div>
+                                        <div class="col form-group">
+                                            <label class="form-label">Valor unitario</label>
+                                            <input class="form-control" placeholder="$" type="number" min="0" id="valorUnitarioLta{{i}}">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="text-right">
-                                    <button class="btn btn-success"><i class="fas fa-plus"></i>&nbsp;Agregar tipo</button>
+                                    <button class="btn btn-danger" (click)="eliminarTipo()" style="margin-right: 5px;" *ngIf="agregarTipo.length >= 1"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-success" (click)="agregarTipo.push({tipo : 'tipo lente tallado'});"><i class="fas fa-plus"></i>&nbsp;Agregar tipo</button>
                                 </div>
 
                                 <div class="text-center">
-                                    <button class="btn btn-success"><i class="fas fa-plus"></i>&nbsp;Agregar Lente</button>
+                                    <button class="btn btn-success" (click)="agregarLente()"><i class="fas fa-plus"></i>&nbsp;Agregar Lente</button>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+                </div>
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- -------------------------------------------- AGREGAR PRODUCTO --------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div class="modal-body" *ngIf="infoCategoria && infoCategoria.nombre != 'Material Lentes'">
+
+                    <form [formGroup]="datosProducto">
+                        <div class="row">
+                            <div class="col form-group">
+                                <label class="form-label">Nombre producto *</label>
+                                <input type="text" class="form-control" placeholder="Nombre o marca" formControlName="nombre">
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Referencia del producto *</label>
+                                <input type="text" class="form-control" placeholder="Referencia" formControlName="referencia">
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Cantidad de unidades *</label>
+                                <input type="number" class="form-control" placeholder="Ejm: 1, 10, 20" formControlName="cantidad" min="0">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col form-group">
+                                <label class="form-label">Categoria *</label>
+                                <select class="form-control" formControlName="categoria">
+                                    <option *ngFor="let ci of categoriasInventario" [value]="ci.id_cateogoriai" [disabled]="ci.nombre === 'Material Lentes'">{{ci.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Producto grabable *</label>
+                                <select class="form-control" formControlName="productoGrabable">
+                                    <option value="si">Si</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Iva</label>
+                                <input type="number" class="form-control" placeholder="%" formControlName="iva" min="0">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col form-group">
+                                <label class="form-label">Precio de compra</label>
+                                <input type="number" class="form-control" placeholder="Precio de compra" formControlName="precioCompra" min="0">
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Precio de venta</label>
+                                <input type="number" class="form-control" placeholder="Precio de venta" formControlName="precioVenta" min="0">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col form-group">
+                                <label class="form-label">Precio total (iva incluido)</label>
+                                <input type="number" class="form-control" placeholder="Precio total" readonly [value]="datosProducto.value.precioVenta + ( datosProducto.value.precioVenta * (datosProducto.value.iva / 100) ) ">
+                            </div>
+                            <div class="col form-group">
+                                <label class="form-label">Margen de utilidad</label>
+                                <input type="text" class="form-control" placeholder="Margen de utilidad" *ngIf="datosProducto.get('precioVenta').valid && datosProducto.get('precioCompra').valid" readonly [value]="(datosProducto.value.precioVenta - datosProducto.value.precioCompra ) / ( datosProducto.value.precioCompra / 100) + '%'">
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Guardar Producto</button>
+
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button " class="btn btn-success" data-dismiss="modal" (click)="guardarProducto()">Guardar Producto</button>
                 </div>
             </div>
         </div>
@@ -262,4 +426,4 @@
 <!-- ----------------------------------------------------------------------------------------------------- -->
 <!-- -------------------------------------------------- LOADING ------------------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------------- -->
-<app-loading *ngIf="loading"></app-loading>
+<app-loading *ngIf="loading "></app-loading>

@@ -1502,6 +1502,7 @@ export class CrearSucursalComponent implements OnInit {
         this.status = 'success';
         this.statusText = 'Usuario o contraseña cambiados exitosamente';
         this.formCambio.reset();
+        this.getInfoSucursal(this.idSucursal);
         document.getElementById('cerrar-modal-cambio').click();
       }
     }, () => {

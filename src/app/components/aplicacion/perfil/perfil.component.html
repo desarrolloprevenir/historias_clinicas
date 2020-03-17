@@ -542,13 +542,16 @@
                                     <p style="text-align: left">Fecha de Nacimiento</p>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-4" *ngIf="this.medico.fecha_nacimiento">
                                 <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
-                                <input class="form-control" type="date" id="fechaN_medico" formControlName="fechaNacimiento"  (change)="cambio('fechaN_medico')" [class.is-invalid]="datos.get('fechaNacimiento').errors" readonly>
+                                <input class="form-control" type="text" id="fechaN_medico" formControlName="fechaNacimiento"  (change)="cambio('fechaN_medico')" [class.is-invalid]="datos.get('fechaNacimiento').errors" readonly>
                               </div>
-                                <div class="col-md-1">
-                                  <a *ngIf="ver === 'fechaN_medico'" (click)="editar('fechaN_medico')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                </div>
+
+                              <div class="col-md-4" *ngIf="!this.medico.fecha_nacimiento">
+                                <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
+                                <input class="form-control" type="date" id="fechaN_medico" formControlName="fechaNacimiento"      [class.is-invalid]="datos.get('fechaNacimiento').errors && datos.get('fechaNacimiento').touched">
+                              </div>
+
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
@@ -563,12 +566,12 @@
                               <div class="col-md-4">
                               <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
                              <select id="genero_medico" class="form-control" formControlName="generos" (change)="cambio('genero_medico')"
-                             [class.is-invalid]="datos.get('generos').errors" readonly>
+                             [class.is-invalid]="datos.get('generos').errors && datos.get('generos').touched">
                              <option *ngFor="let g of generos" [value]="g.tipo">{{g.nombre}}</option>
                              </select>
                             </div>
                               <div class="col-md-1">
-                                <a *ngIf="ver === 'genero_medico'" (click)="editar('genero_medico')" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+
                               </div>
                               <div class="col-md-1"></div>
                           </div>

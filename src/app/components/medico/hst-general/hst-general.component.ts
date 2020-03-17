@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 import { DiagnosticoService } from '../../../services/diagnostico.service';
 import { MedicamentosService } from '../../../services/medicamentos.service';
 
+
 export interface User {
   nombre: string;
   id_impresiondiag: number;

@@ -520,7 +520,7 @@
                                                 <div>
                                                     <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').getError('required') && formCambio.get('psswConfirm').touched">* El campo es requerido</p>
                                                     <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').getError('minlength')">* Cantidad minima de caracteres (8)</p>
-                                                    <p class="alerta-error" *ngIf="formCambio.get('psswConfirm').value != formCambio.get('pssw').value">* Las contraseñas no coinciden</p>
+                                                    <p class="alerta-error" *ngIf="formCambio.get('pssw').touched && (formCambio.get('psswConfirm').value != formCambio.get('pssw').value)">* Las contraseñas no coinciden</p>
                                                 </div>
                                             </div>
                                         </form>

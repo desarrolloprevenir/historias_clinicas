@@ -73,8 +73,8 @@ export class AppService {
   }
 
    // metodo para pedir las categorias que tiene una sucursal
-   getCategoriasSucursal(idSucursal) {
-    return this.http.get(apiUrl + '/cinventario/' + idSucursal, {headers});
+   getCategoriasInventario(idSucursal, idProvedor) {
+    return this.http.get(apiUrl + '/cinventario/' + idSucursal + '/' + idProvedor, {headers});
   }
 
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -108,6 +108,11 @@ putEditAvatar(info, token) {
   return this.http.put(apiUrl + '/fotou/' + '?token=' + token , info, {headers});
  }
 
+ // Ruta para editar categoria de inventario
+putEditCategoriaInventario(info) {
+  return this.http.put(apiUrl + '/cinventario/', info, {headers});
+ }
+
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
 //  <!-- --------------------------------------------- METODOS POST ------------------------------------------ -->
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -122,7 +127,7 @@ postAddCategoria(info) {
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
 
 // Ruta para agregar categoria inventario
-dltCategoriaInventario(idCategoria) {
-  return this.http.delete(apiUrl + '/cinventario/' + idCategoria , {headers});
+dltCategoriaInventario(idCategoria, idProvedor) {
+  return this.http.delete(apiUrl + '/cinventario/' + idCategoria + '/' + idProvedor , {headers});
  }
 }

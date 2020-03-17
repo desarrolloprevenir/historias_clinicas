@@ -123,7 +123,7 @@ let fn;
         apellidos: [this.medico.apellidos, [Validators.required, Validators.minLength(2), Validators.maxLength(50),
         Validators.pattern('[a-z A-z ñ]*')]],
         generos:  [this.medico.genero],
-        fechaNacimiento:  [this.medico.fecha_nacimiento],
+        fechaNacimiento:  [fn, [Validators.required]],
         email: [this.medico.email, [Validators.required,
         Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
         cedula: [this.medico.cedula, [Validators.required, Validators.pattern('[0-9]*')]],
@@ -168,13 +168,17 @@ let fn;
     }
 
     if (user.id_provedor && user.id_sucursales) {
-      // console.log(user.avatar);
+      // console.log(user);
       // console.log('sucursal');
       this.loading = true;
       this.sucursalService.getInfoSucursal(user.id_sucursales).subscribe((response) => {
+        localStorage.removeItem('identity');
+        localStorage.setItem('identity', JSON.stringify(response[0]));
+        // this.barra.getIdentity();
         this.infoSucursal = response;
         this.infoSucursal.avatar = this.apiUrl + user.avatar;
         this.validacionesSucursal();
+        console.log(this.infoSucursal);
         this.loading = false;
       }, () => {
         // console.log(err);
@@ -254,6 +258,23 @@ let fn;
         this.loading = false;
       });
     }
+  }
+
+  getSucursal() {
+    this.sucursalService.getIdentitySucursal(this.infoSucursal[0].members_id).subscribe( (response) => {
+      console.log(response);
+      localStorage.removeItem('identity');
+      localStorage.setItem('identity', JSON.stringify(response[0]));
+      this.barra.getIdentity();
+      this.getIdentity();
+      this.loading = false;
+    }, () => {
+      // console.log(err);
+      this.status = 'error';
+      this.statusText = 'Error en la conexión, por favor intentalo más tarde o revisa tu conexión.';
+      window.scroll(0, 0);
+      this.loading = false;
+    });
   }
 
   getProvedor(id) {
@@ -453,7 +474,7 @@ console.log("entro aqui")
       id_sucursal: this.infoSucursal[0].id_sucursales
     };
 
-   // console.log(info);
+    // console.log(info);
 
     this.sucursalService.editInfoSucursal(info).subscribe((response) => {
       // console.log(response);
@@ -461,7 +482,7 @@ console.log("entro aqui")
       if (response === true) {
         this.status = 'success';
         this.statusText = 'Datos actualizados con exito.';
-        this.getIdentity();
+        this.getSucursal();
         // this.getSucursal(this.infoSucursal[0].id_sucursales);
       }
     }, () => {

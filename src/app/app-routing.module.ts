@@ -25,6 +25,10 @@ import { VerPerfilMedicoComponent } from './components/medico/ver-perfil-medico/
 import { CrearPublicacionComponent } from './components/aplicacion/crear-publicacion/crear-publicacion.component';
 import { HistoriaClinicaComponent } from './components/medico/historia-clinica/historia-clinica.component';
 import { VisiometriaComponent } from './components/medico/visiometria/visiometria.component';
+import { HitorialCitasComponent } from './components/admin/hitorial-citas/hitorial-citas.component';
+import { VerInventarioComponent } from './components/aplicacion/ver-inventario/ver-inventario.component';
+import { HistoriaGeneralComponent } from './components/medico/historia-general/historia-general.component';
+import { PreciosInventarioComponent } from './components/sucursal/precios-inventario/precios-inventario.component';
 
 
 // Este servicio sirve para restringuir el acceso a los usuarios no authentificados.
@@ -33,10 +37,9 @@ import { UserAdmin } from './services/user_admin.guard';
 import { UserSucursal } from './services/user_sucursal.guard';
 import { SucursalMedico } from './services/sucursal_medico.guard';
 import { UserMedico } from './services/user_medico.guard';
-import { HistoriaGeneralComponent } from './components/medico/historia-general/historia-general.component';
-import { PreciosInventarioComponent } from './components/sucursal/precios-inventario/precios-inventario.component';
 import { AdminSucursal } from './services/admin_sucursal.guard';
-import { HitorialCitasComponent } from './components/admin/hitorial-citas/hitorial-citas.component';
+
+import { HistOdComponent } from './components/odontologia/hist-od/hist-od.component';
 
 
 const routes: Routes = [
@@ -72,7 +75,9 @@ const routes: Routes = [
   {path : 'historia-clinica/:id/:id_servicio/:idCategoria', component: HistoriaClinicaComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'historia-general/:idCategoria', component: HistoriaGeneralComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'precios-e-inventario', component: PreciosInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
+  {path : 'inventario/:id', component: VerInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
+  {path : 'histOd', component: HistOdComponent},
   {path: '**', component: LoginComponent}
 
 ];
