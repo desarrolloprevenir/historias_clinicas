@@ -148,17 +148,17 @@ export class VisiometriaComponent implements OnInit {
 
   frecuencia(parametro) {
     this.frecuenciaUso = parametro.value;
-    console.log(this.frecuenciaUso);
+    //console.log(this.frecuenciaUso);
   }
 
   proteccionOcular(parametro) {
     this.proteccionOcularValor = parametro.value;
-    console.log(this.proteccionOcularValor);
+    //console.log(this.proteccionOcularValor);
   }
 
   cirugias(parametro) {
     this.cirugiasValor = parametro.value;
-    console.log(this.cirugiasValor);
+   // console.log(this.cirugiasValor);
 
     this.resultadoCirugias = parametro.value;
     const variable = true;
@@ -177,7 +177,7 @@ export class VisiometriaComponent implements OnInit {
 
   accidentes(parametro) {
     this.accidentesValor = parametro.value;
-    console.log(this.accidentesValor);
+    //console.log(this.accidentesValor);
 
 
     this.resultadoAccidente = parametro.value;
@@ -283,7 +283,7 @@ export class VisiometriaComponent implements OnInit {
         }
       }
     }
-    console.log(this.variablesTipos);
+    //console.log(this.variablesTipos);
   }
 
   checkExamenE(ev, tipo) {
@@ -295,7 +295,7 @@ export class VisiometriaComponent implements OnInit {
         break;
       }
     }
-    console.log(this.variableExamen);
+    //console.log(this.variableExamen);
   }
 
   checkSintomas(ev, tipo) {
@@ -307,7 +307,7 @@ export class VisiometriaComponent implements OnInit {
         break;
       }
     }
-    console.log(this.variablesSintomas);
+    //console.log(this.variablesSintomas);
   }
 
   checkInterpretacion(ev, tipo) {
@@ -319,7 +319,7 @@ export class VisiometriaComponent implements OnInit {
         break;
       }
     }
-    console.log(this.variableInterpretaciones);
+    // console.log(this.variableInterpretaciones);
   }
 
   checkCromatica(ev, tipo) {
@@ -330,7 +330,7 @@ export class VisiometriaComponent implements OnInit {
         this.variableCromatica.splice(i, 1);
       }
     }
-    console.log(this.variableCromatica);
+   // console.log(this.variableCromatica);
   }
 
   checkImp(ev, tipo) {
@@ -341,7 +341,7 @@ export class VisiometriaComponent implements OnInit {
         this.variableDiag.splice(i, 1);
       }
     }
-    console.log(this.variableDiag);
+    //console.log(this.variableDiag);
   }
 
   checkRec(ev, tipo) {
@@ -352,7 +352,7 @@ export class VisiometriaComponent implements OnInit {
         this.variableRec.splice(i, 1);
       }
     }
-    console.log(this.variableRec);
+    // console.log(this.variableRec);
   }
 
   getTiposGafas() {
@@ -396,7 +396,7 @@ export class VisiometriaComponent implements OnInit {
   }
 
   saberUsaGafas(parametro) {
-    console.log(parametro.value);
+    // console.log(parametro.value);
 
     this.resultadoUsaGafas = parametro.value;
     const variable = true;
@@ -468,7 +468,7 @@ export class VisiometriaComponent implements OnInit {
       otro: this.datosVisiomentria.value.otroAntecedentesFamiliares
     };
 
-    console.log(this.antecedentes_f);
+    //console.log(this.antecedentes_f);
   }
 
   public queda() {

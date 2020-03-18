@@ -5,6 +5,7 @@ import { HoraPipe } from './hora.pipe';
 import { AmpmPipe } from './ampm.pipe';
 import { BusquedaPipe } from './busqueda.pipe';
 import { BusquedaMedPipe } from './busquedaMed.pipe';
+import { BusquedaCodOdontoPipe } from './busqueda-cod-odonto.pipe';
 
 
 
@@ -13,7 +14,8 @@ import { BusquedaMedPipe } from './busquedaMed.pipe';
     HoraPipe,
     AmpmPipe,
     BusquedaPipe,
-    BusquedaMedPipe
+    BusquedaMedPipe,
+    BusquedaCodOdontoPipe
   ],
   imports: [
     CommonModule
@@ -23,7 +25,8 @@ import { BusquedaMedPipe } from './busquedaMed.pipe';
     HoraPipe,
     AmpmPipe,
     BusquedaPipe,
-    BusquedaMedPipe
+    BusquedaMedPipe,
+    BusquedaCodOdontoPipe
   ]
 })
 export class PipesModule { }

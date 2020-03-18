@@ -1,0 +1,618 @@
+<div ng-app="odontologia" ng-controller="miController">
+  <div class="container-fluid">
+    <form [formGroup]="datosOdonto">
+      <div class="row divisiones">
+        <div class="col-md-6 form-group">
+          <select class="form-control" formControlName="tipoConsulta"
+            [class.is-invalid]="datosOdonto.get('tipoConsulta').errors && datosOdonto.get('tipoConsulta').touched">
+            <option value="Primera vez">Primera vez</option>
+            <option value="Control">Control</option>
+          </select>
+        </div>
+        <div *ngIf="datosOdonto.get('tipoConsulta').errors && datosOdonto.get('tipoConsulta').touched">
+          <p class="alerta-error" *ngIf="datosOdonto.get('tipoConsulta').hasError('required')">* El campo es
+            requerido</p>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="txt-motivo-consulta" class="form-label label-formulario-user">Motivo de la Consulta</label>
+                <textarea name="txt-motivo-consulta" rows="5" formControlName="motivoConsulta"
+                  class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="txt-enfermedadActual" class="form-label label-formulario-user">Enfermedad
+                  Preexistente</label>
+                <textarea name="txt-enfermedadActual" rows="3" class="form-control"
+                  formControlName="enfermedadPreexistente"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-4"></div>
+            <div class="col-md-3"> <button class="btn btn-md btn-info"
+                [disabled]="!this.datosOdonto.valid">Siguiente</button></div>
+            <div class="col-md-4"></div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form [formGroup]="datosOdonto">
+      <div class="row divisiones">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="txt-ultimoTratamiento" class="form-label label-formulario-user">¿Cuando fue la última vez
+                  que recibio tratamiento odontológico</label>
+                <textarea rows="1" class="form-control" formControlName="ultimoTratamiento"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="txt-ultimoTratamiento" class="form-label label-formulario-user">¿Está en tratamiento
+                      médico?</label>
+                    <section class="example-section">
+                      <mat-radio-group (change)="saberSiTratamiento($event)">
+                        <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                        <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                      </mat-radio-group>
+                    </section>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" *ngIf="siTratamiento==='causa'">
+                    <label class="form-label">¿Por qué causa?: </label>
+                    <textarea name="txt-causaTratamiento" rows="3" class="form-control"
+                      formControlName="causaTratamiento"></textarea>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="txt-ultimoTratamiento" class="form-label label-formulario-user">¿Toma
+                      medicamentos?</label>
+                    <section class="example-section">
+                      <mat-radio-group (change)="saberSiMedicamento($event)">
+                        <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                        <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                      </mat-radio-group>
+                    </section>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" *ngIf="medicamentos==='medicamentos'">
+                    <label class="form-label">¿Cuáles?: </label>
+                    <textarea name="txt-cualesMedicamentos" rows="3" class="form-control"
+                      formControlName="cualesMedicamentos"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-6">
+                    <label class="form-label">¿Tuvo Hemorragias?: </label>
+                    <section class="example-section">
+                      <mat-radio-group (change)="saberSiHemorragia($event)">
+                        <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                        <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                      </mat-radio-group>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-4">
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="txt-ultimoTratamiento" class="form-label label-formulario-user">¿Fue operad@ en los
+        últimos
+        diez años?</label>
+      <section class="example-section">
+        <mat-radio-group (change)="saberSiOperado($event)">
+          <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+          <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group" *ngIf="operado==='operado'">
+      <label class="form-label">¿Causa?: </label>
+      <textarea name="txt-operados" rows="3" class="form-control"
+        formControlName="causaOperado"></textarea>
+    </div>
+  </div>
+</div>
+
+
+            </div>
+            <div class="col-md-4">
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="txt-ultimoTratamiento" class="form-label label-formulario-user">¿Alegias?</label>
+                    <section class="example-section">
+                      <mat-radio-group (change)="saberSiAlergias($event)">
+                        <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                        <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                      </mat-radio-group>
+                    </section>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" *ngIf="alergia==='alergia'">
+                    <label class="form-label">¿Cuales?: </label>
+                    <textarea name="txt-alergias" rows="3" class="form-control"
+                      formControlName="causaAlergia"></textarea>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <label class="form-label">Trastornos psquiatricos</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiTranstornosP($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Diabetes</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiDiabetes($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Dolencia Cardiaca</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiDolencia($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Hemofilia</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiHemofilia($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">
+              <label class="form-label">Problemas Neurológicos</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiNeuro($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Problemas Renales</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiRenales($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Dialisis</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiDialisis($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Hepatitis</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiHepatitis($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-3">
+              <label class="form-label">Tuberculosis</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiTuber($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Neumonia</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiNeumo($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sifilis</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiSifi($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Hipertención</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiHiper($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label">¿Está embarazada?</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiEmbarazada($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tiene o tuvo infecciones a repetición? (Herpes Zoster, Mononucleosis)</label>
+              <section class="example-section">
+                <mat-radio-group (change)="saberSiHerpes($event)">
+                  <mat-radio-button class="example-margin" value="si">Si</mat-radio-button><br>
+                  <mat-radio-button class="example-margin" value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+
+
+
+    <form [formGroup]="datosOdonto">
+      <div class="row divisiones">
+        <div class="col-md-12">
+          <label for="txt-antecedentesP" class="tituloDivision">Ortograma</label>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <table>
+                  <tr>
+                    <td>
+                      <div class="card">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                          <img class="card-img-top" src="/assets/diente.png" style="width: 50px;" alt="Card image cap">
+                        </button>
+
+                        <div class="card-body">
+                          <h5 class="card-title">18</h5>
+
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Seleccione la Simbología</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-9">
+
+
+
+              <!-- <mat-form-field class="w-100">
+                <mat-select class="place" placeholder="Antecedentes Familiares" [formControl]="codificacionMultiCtrl"
+                  [multiple]="true" #multiSelect>
+                  <mat-option *ngFor="let codificacionesOdontograma of filteredAntecedentesFMulti | async"
+                    [value]="codificacionesOdontograma.id">
+                    {{codificacionesOdontograma.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+              <div class="divisiones">
+                <div class="form-group">
+                  <label>Seleccionar Codificación: </label>
+                  <input type="text" class="form-control" [(ngModel)]="buscar">
+                  <br>
+                  <div class="panel-body list-group">
+                    <div class="seleccionado" *ngFor="let o of options | busquedaCodOdonto: buscar" (click)="guardarClick(o)"
+                      style="cursor: pointer;">
+                      {{o.nombre}} {{o.codigo}}
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+
+                      <th>Decripción</th>
+                      <th>Código</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let cd of cajaCodificaciones; let i = index">
+
+                      <td>{{cd.nombre}}</td>
+                      <td>{{cd.codigo}}</td>
+                      <td><button (click)="borrarMedicamento(i)" class="btn btn-danger">X</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <label></label>
+
+              <!-- <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente1.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Diente Sano</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente2.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Caries</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente3.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Mala Higiene</h5>
+
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente4.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Diente Quebrado</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente5.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Sarro</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente6.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Diente con Ortodoncia</h5>
+
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente7.png"
+                          style="width:100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Caries</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente8.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Implante</h5>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="card">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <img class="card-img-top" src="/assets/Odontologia/Dientes/diente9.png"
+                          style="width: 100px;" alt="Card image cap">
+                      </button>
+
+                      <div class="card-body">
+                        <h5 class="card-title">Sano</h5>
+
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              </table>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table" style="width: 100%;">
+                <thead class="thead-dark">
+                  hola
+                </thead>
+                <tr>
+                  <td>
+                    <mat-checkbox>Vestibular</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-checkbox>Distal</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-checkbox>Oclusal</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-checkbox>Palatino/lingual</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-checkbox>Mesial</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-checkbox>Diente Completo</mat-checkbox>
+                  </td>
+                </tr>
+              </table> -->
+            </div>
+            <div class="col-md-3">
+              <table border="1px">
+                <tr>
+                 <td colspan="3"><div class="visitas" style="height: 20px;"(click)="enableDisableRule($event.target)" id="superior" ></div></td>
+                </tr>
+                <tr>
+                  <td><div class="visitas" style="width: 20px; height: 50px" (click)="enableDisableRule($event.target)" id="izquierdo"></div></td>
+                  <td><div class="visitas" style="width: 50px; height: 50px;" (click)="enableDisableRule($event.target)" id="centro"></div></td>
+                  <td><div class="visitas" style="width: 20px; height: 50px" (click)="enableDisableRule($event.target)" id="derecho"></div></td>
+                </tr>
+                <tr>
+                  <td colspan="3"><div class="visitas" style="height: 20px;" (click)="enableDisableRule($event.target)" id="inferior"></div></td>
+                 </tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+</div>

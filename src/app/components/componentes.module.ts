@@ -63,8 +63,13 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
+<<<<<<< HEAD
 import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
 import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
+=======
+import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
+
+>>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
 
 
 
@@ -108,8 +113,12 @@ import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.
   VerInventarioComponent,
   LoadingComponent,
   ModalCambioAvatarComponent,
+<<<<<<< HEAD
   PerfilProfesionalComponent,
   AgregarLenteComponent
+=======
+  HistOdComponent
+>>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
   ],
   imports: [
     CommonModule,
@@ -169,9 +178,14 @@ import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
+<<<<<<< HEAD
   ModalCambioAvatarComponent,
   PerfilProfesionalComponent,
   AgregarLenteComponent
+=======
+  HistOdComponent,
+  ModalCambioAvatarComponent
+>>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
   ]
 })
 export class ComponentesModule { }

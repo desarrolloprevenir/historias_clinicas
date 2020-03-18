@@ -296,6 +296,7 @@
                         <ul class="list-group">
                             <li class="list-group-item active" id="informacion" style="cursor: pointer;" (click)="pestana('informacion')">Información</li>
                             <li class="list-group-item" id="estudios" style="cursor: pointer;" (click)="pestana('estudios')">Estudios</li>
+                            <li class="list-group-item" id="experiencia" style="cursor: pointer;" (click)="pestana('experiencia')">Experiencia Profesional</li>
                         </ul>
                     </div>
 
@@ -499,6 +500,84 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                              <div class="row">
+                                  <div class="col-md-2"></div>
+                                  <div class="col-md-4">
+                                      <p style="text-align: left">Departamento</p>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                    <select name="" id="" class="form-control" [formControl]="departSelect" (change)="departamentoSelect($event)">
+                                      <option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.nombre}}</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-1"></div>
+                              </div>
+
+                          </div>
+                          <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <p style="text-align: left">Municipio</p>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <select name="" id="" class="form-control" [formControl]="muniSelect" >
+                                    <option *ngFor="let m of municipios" [value]="m.id_municipio">{{m.nombre}}</option>
+                                  </select>
+                                </div>
+
+                                <div class="col-md-1"></div>
+                            </div>
+
+                        </div>
+
+                          <div class="form-group" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('fechaN_medico')">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <p style="text-align: left">Fecha de Nacimiento</p>
+                                </div>
+
+                                <div class="col-md-4" *ngIf="this.medico.fecha_nacimiento">
+                                <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
+                                <input class="form-control" type="text" id="fechaN_medico" formControlName="fechaNacimiento"  (change)="cambio('fechaN_medico')" [class.is-invalid]="datos.get('fechaNacimiento').errors" readonly>
+                              </div>
+
+                              <div class="col-md-4" *ngIf="!this.medico.fecha_nacimiento">
+                                <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
+                                <input class="form-control" type="date" id="fechaN_medico" formControlName="fechaNacimiento"      [class.is-invalid]="datos.get('fechaNacimiento').errors && datos.get('fechaNacimiento').touched">
+                              </div>
+
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('genero_medico')">
+                          <div class="row">
+                              <div class="col-md-2"></div>
+                              <div class="col-md-4">
+                                  <p style="text-align: left">Género</p>
+                              </div>
+
+                              <div class="col-md-4">
+                              <!-- <input class="form-control" type="text" id="example-date-input" formControlName="fechaNacimiento" readonly > -->
+                             <select id="genero_medico" class="form-control" formControlName="generos" (change)="cambio('genero_medico')"
+                             [class.is-invalid]="datos.get('generos').errors && datos.get('generos').touched">
+                             <option *ngFor="let g of generos" [value]="g.tipo">{{g.nombre}}</option>
+                             </select>
+                            </div>
+                              <div class="col-md-1">
+
+                              </div>
+                              <div class="col-md-1"></div>
+                          </div>
+                      </div>
+
+
 
                             <div class="form-group" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('telefono_medico')">
                                 <div class="row">
@@ -695,164 +774,168 @@
 
                     <div *ngSwitchCase="'experiencia'">
 
-                        <div class="container-fluid">
-                            <br />
-                            <div class="card-header">
-                                <h1>Información de mi cuenta</h1>
-                            </div>
-                            <br />
-                        </div>
+                      <div class="container-fluid">
+                          <br />
+                          <div class="card-header">
+                              <h1>Experiencia Laboral</h1>
+                          </div>
+                          <br />
+                      </div>
 
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                      class="fas fa-plus"></i>&nbsp;&nbsp;Agregar Estudio</button>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
+                      <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                              <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+                      class="fas fa-plus"></i>&nbsp;&nbsp;Agregar Experiencia</button>
+                          </div>
+                          <div class="col-md-4"></div>
+                      </div>
 
 
 
-                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                     <!-- ---------------------------------------------------------------------------------------------------- -->
                         <!-- ----------------------------------------------- MODAL ---------------------------------------------- -->
                         <!-- ---------------------------------------------------------------------------------------------------- -->
 
 
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
 
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3 class="modal-title" id="exampleModalScrollableTitle">Agregar Experiencia Laboral</h3>
-                                            <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h3 class="modal-title" id="exampleModalScrollableTitle">Agregar Experiencia Laboral</h3>
+                                          <button type="button" id="btn-cerrar-modal" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                                        </div>
-                                        <div class="modal-body">
+                                      </div>
+                                      <div class="modal-body">
 
-                                            <form class="form-signin" #experienciaLabForm="ngForm" (ngSubmit)="datosMedic()">
+                                          <form class="form-signin" #experienciaLabForm="ngForm" (ngSubmit)="datosMedic()">
 
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Nombre de la empresa</p>
-                                                        </div>
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Nombre de la empresa</p>
+                                                      </div>
 
-                                                        <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputEmpresa" aria-describedby="empresaHelp" placeholder="Nombre de la empresa" [formControl]="nombreEmpresaExp">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <input type="text" class="form-control" id="exampleInputEmpresa" aria-describedby="empresaHelp" placeholder="Nombre de la empresa" [formControl]="nombreEmpresaExp">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Cargo que desempeño</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input type="text" class="form-control" id="exampleInputCargo" aria-describedby="cargoHelp" placeholder="Cargo que desempeño" [formControl]="cargoDesempenado">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4">
+                                                        <p style="text-align: left">Funciones que desempeño</p>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Cargo que desempeño</p>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputCargo" aria-describedby="cargoHelp" placeholder="Cargo que desempeño" [formControl]="cargoDesempenado">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="exampleInputFunciones" aria-describedby="funcionesHelp" placeholder="Funciones que desempeño" [formControl]="funcionesDesempenadadas">
                                                     </div>
+                                                    <div class="col-md-2"></div>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Funciones que desempeño</p>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputFunciones" aria-describedby="funcionesHelp" placeholder="Funciones que desempeño" [formControl]="funcionesDesempenadadas">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Fecha de Inicio</p>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <input class="form-control" type="date" id="example-dateExperienci-input" [formControl]="startExpe" max="{{today}}">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Fecha de Finalización</p>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <input class="form-control" type="date" id="example-date-input" [formControl]="endExpe" max="{{today}}">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-4">
-                                                            <p style="text-align: left">Teléfono</p>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <input type="text" class="form-control" id="exampleInputTelefonoExpe" aria-describedby="TelefonoExpeHelp" placeholder="Teléfono de la empresa" [formControl]="telefonoEmpresa">
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                    </div>
-                                                </div>
-
-                                            </form>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                <button (click)="datosMedic(true, nombreEmpresaExp)" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                             </div>
 
-                                        </div>
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Fecha de Inicio</p>
+                                                      </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                      <div class="col-md-4">
+                                                          <input class="form-control" type="date" id="example-dateExperienci-input" [formControl]="startExpe" max="{{today}}">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
 
-                        <!-- ---------------------------------------------------------------------------------------------------- -->
-                        <!-- --------------------------------------------- FIN MODAL -------------------------------------------- -->
-                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                                              <div class="form-group">
+                                                  <div class="row">
+                                                      <div class="col-md-2"></div>
+                                                      <div class="col-md-4">
+                                                          <p style="text-align: left">Fecha de Finalización</p>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <input class="form-control" type="date" id="example-date-input" [formControl]="endExpe" max="{{today}}">
+                                                      </div>
+                                                      <div class="col-md-2"></div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4">
+                                                        <p style="text-align: left">Teléfono</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="exampleInputTelefonoExpe" aria-describedby="TelefonoExpeHelp" placeholder="Teléfono de la empresa" [formControl]="telefonoEmpresa">
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                </div>
+                                            </div>
+
+                                          </form>
+
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                              <button (click)="datosExpe(true, nombreEmpresaExp)" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                          </div>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- ---------------------------------------------------------------------------------------------------- -->
+                      <!-- --------------------------------------------- FIN MODAL -------------------------------------------- -->
+                      <!-- ---------------------------------------------------------------------------------------------------- -->
 
 
 
 
 
-                        <br/>
+                      <br/>
 
-                        <h2 *ngIf="medico.titulos.length <= 0">Aún no tienes agregados estudios a tu hoja de vida.</h2>
-                        <div *ngIf="medico.titulos.length >= 1">
-                            <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let t of medico.titulos">
-                                <h3 class="card-title">{{t.nombre}}</h3>
-                                <hr>
-                                <h6 class="card-text">Institución : {{t.institucion}}</h6>
-                                <h6 class="card-text">Fecha de Inicio : {{t.start | fecha}}</h6>
-                                <h6 class="card-text">Fecha de Finalización : {{t.end | fecha}}</h6>
-                            </div>
-                        </div>
-                    </div>
+                      <h2 *ngIf="medico.titulos.length <= 0">Aún no tienes agregados estudios a tu hoja de vida.</h2>
+                      <div *ngIf="medico.titulos.length >= 1">
+                          <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let t of medico.titulos">
+                              <h3 class="card-title">{{t.nombre}}</h3>
+                              <hr>
+                              <h6 class="card-text">Nombre de la empresa : {{t.institucion}}</h6>
+                              <h6 class="card-text">Cargo que desempeño: {{t.start | fecha}}</h6>
+                              <h6 class="card-text">Funciones que desempeño : {{t.end | fecha}}</h6>
+                              <h6 class="card-text">Fecha de Inicio: {{t.end | fecha}}</h6>
+                              <h6 class="card-text">Fecha de Finalización: {{t.end | fecha}}</h6>
+                              <h6 class="card-text">Teléfono: {{t.end | fecha}}</h6>
+                          </div>
+                      </div>
+                  </div>
+
 
 
 

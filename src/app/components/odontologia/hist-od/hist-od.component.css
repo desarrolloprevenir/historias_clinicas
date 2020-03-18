@@ -1,0 +1,23 @@
+.tamaño{
+  width: 100%;
+}
+
+.visitas {
+  background-color:white;
+}
+
+.list-group {
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.seleccionado:hover {
+  background-color: #04ad93;
+  color: white;
+}
+
+#mat-input-1::placeholder {
+  color: white;
+}
