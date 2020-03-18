@@ -63,6 +63,8 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
+import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
+import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
 
 
 
@@ -105,7 +107,9 @@ import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/mod
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-  ModalCambioAvatarComponent
+  ModalCambioAvatarComponent,
+  PerfilProfesionalComponent,
+  AgregarLenteComponent
   ],
   imports: [
     CommonModule,
@@ -165,7 +169,9 @@ import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/mod
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-  ModalCambioAvatarComponent
+  ModalCambioAvatarComponent,
+  PerfilProfesionalComponent,
+  AgregarLenteComponent
   ]
 })
 export class ComponentesModule { }

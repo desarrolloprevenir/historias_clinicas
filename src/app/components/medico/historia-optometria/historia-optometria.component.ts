@@ -41,6 +41,9 @@ export class HistoriaOptometriaComponent implements OnInit {
 
   ngOnInit() {
     this.validacionesFormOptometria();
+
+    // var number = 200000000;
+    // console.log(number.toLocaleString('es'));
   }
 
   validacionesFormOptometria() {
@@ -186,13 +189,14 @@ export class HistoriaOptometriaComponent implements OnInit {
         id_servicios: this.idServicio, antecedentes_f: { }, antecedentes_p: { }, habitosyfactores: { }, revisionpsistemas: { },
         examenf: { }, impresion_diag: [ ], medicamentos: []};
 
-    console.log(info);
+    // console.log(info);
 
     this.medicoService.postHistoriasClinicas(info).subscribe( (response) => {
 
-          console.log('hc', response);
+          // console.log('hc', response);
 
           if (response === true) {
+            this.pdfCertificado();
             this.status = 'success';
             this.statusText = 'Historia clinica guarda con exito.';
             this.datosOptometria.reset();
@@ -203,6 +207,7 @@ export class HistoriaOptometriaComponent implements OnInit {
           // console.log('aqui');
           this.status = 'error';
           this.statusText = 'Error al guardar la historia clinica, por favor revisa tu conexión o intentalo más tarde.';
+          this.pdfCertificado();
           this.loading = false;
       } );
 

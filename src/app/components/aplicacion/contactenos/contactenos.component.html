@@ -35,7 +35,7 @@
             <div class="col-md-6">
                 <form [formGroup]="datos" (ngSubmit)="contactenos()" novalidate>
                     <div class="form-group">
-                        <label for="nombre">Nombre Completo</label>
+                        <label for="nombre" class="form-label">Nombre Completo</label>
                         <input type="text" class="form-control" formControlName="nombres" id="nombre" aria-describedby="nombre" placeholder="Ingrese su nombre" [class.is-invalid]="datos.get('nombres').errors && datos.get('nombres').touched">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="cedula">Cédula</label>
+                        <label for="cedula" class="form-label">Cédula</label>
                         <input type="text" class="form-control" formControlName="cedula" id="cedula" aria-describedby="cedulaHelp" placeholder="Ingrese su numero de identificación" [class.is-invalid]="datos.get('cedula').errors && datos.get('cedula').touched">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
+                        <label for="email" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" formControlName="email" id="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electrónico" [class.is-invalid]="datos.get('email').errors && datos.get('email').touched">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
@@ -74,7 +74,7 @@
 
 
                     <div class="form-group">
-                        <label for="tel">Teléfono</label>
+                        <label for="tel" class="form-label">Teléfono</label>
                         <input type="text" class="form-control" formControlName="telefono" id="tel" aria-describedby="telHelp" placeholder="Ingrese su numero de contacto" [class.is-invalid]="datos.get('telefono').errors && datos.get('telefono').touched">
                     </div>
 
@@ -94,7 +94,7 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <label class="modal-label">Departamento</label>
+                                <label class="modal-label" class="form-label">Departamento</label>
                                 <select class="form-control" [formControl]="departamento" [class.is-invalid]="departamento.errors && departamento.touched" (change)="departamentoSelect($event)">
                       <option *ngFor="let d of departamentos" value="{{d.id_departamento}}">{{d.nombre}}</option>
                     </select>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group ">
-                                <label class="modal-label">Municipio</label>
+                                <label class="modal-label" class="form-label">Municipio</label>
                                 <select class="form-control" [formControl]="municipio" [class.is-invalid]="municipio.errors && municipio.touched">
                       <option *ngFor="let m of municipios" value="{{m.id_municipio}}">{{m.nombre}}</option>
                     </select>
@@ -120,19 +120,18 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="asunto">Asunto</label>
+                        <label for="asunto" class="form-label">Asunto</label>
                         <input type="text" class="form-control" id="asunto" placeholder="Asunto">
                     </div>
 
                     <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
+                        <label for="mensaje" class="form-label">Mensaje</label>
                         <textarea class="form-control" id="mensaje" formControlName="mensaje" placeholder="Cuentanos tus inquetudes" [class.is-invalid]="datos.get('mensaje').errors && datos.get('mensaje').touched"> </textarea>
                     </div>
 
                     <div *ngIf="datos.get('mensaje').errors && datos.get('mensaje').touched">
                         <p class="alerta-error" *ngIf="datos.get('mensaje').hasError('required')">* El campo es requerido</p>
-                        <p class="alerta-error" *ngIf="datos.get('mensaje').hasError('minlength')">Cantidad minima de caracteres (5)
-                        </p>
+                        <p class="alerta-error" *ngIf="datos.get('mensaje').hasError('minlength')">Cantidad minima de caracteres (5)</p>
                     </div>
 
 
@@ -140,7 +139,7 @@
                 </form>
             </div>
             <div class="col-md-5">
-                <img style="width: 70%;" src="../../../assets/GifLíneasFunenrarias.gif" alt="">
+                <div class="text-center"><img style="width: 70%;" src="../../../assets/GifLíneasFunenrarias.gif" alt=""></div>
             </div>
 
         </div>

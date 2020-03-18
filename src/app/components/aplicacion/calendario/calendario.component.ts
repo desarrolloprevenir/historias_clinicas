@@ -405,6 +405,26 @@ export class CalendarioComponent implements OnInit {
       // cedula
       // {color:"#07a9df" , start:start,usuario:id,servicio:this.id_servicio ,
       // consultorio : this.medicoSelect.value.consultorio, mascota : this.mascota};
+      let ocupacion;
+      let direccion;
+      let barrio;
+      let eps;
+
+      if (this.ocupacion.value) {
+            ocupacion = this.ocupacion.value.toUpperCase();
+      }
+
+      if (this.direccion.value) {
+          direccion = this.direccion.value.toUpperCase();
+      }
+
+      if (this.barrio.value) {
+          barrio = this.barrio.value.toUpperCase();
+      }
+
+      if (this.eps.value) {
+          eps = this.eps.value.toUpperCase();
+      }
 
       if (this.formBene === true) {
 
@@ -417,9 +437,8 @@ export class CalendarioComponent implements OnInit {
         servicio : this.serviciosSelect.value.id_servicios, fecha_nacimiento: this.fechaNacimiento.value,
         start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.numeroCedula,
         correo: this.email.value, tipoDocumento: this.tipoDocumento.value, estadoCivil : this.estadoCivil.value,
-        ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(),
-        barrio : this.barrio.value.toUpperCase(),
-        eps : this.eps.value.toUpperCase(), acompanante : this.acompanante.value, consultorio : this.consultorioSelecionado.id_consultorio,
+        ocupacion, direccion, barrio, eps, acompanante : this.acompanante.value,
+        consultorio : this.consultorioSelecionado.id_consultorio,
         parentesco : this.parentesco.value, telefonoAcompanante : this.telAcompanante.value, benef};
 
       } else {
@@ -428,12 +447,10 @@ export class CalendarioComponent implements OnInit {
         servicio : this.serviciosSelect.value.id_servicios, fecha_nacimiento: this.fechaNacimiento.value,
         start: date, contacto: this.telefono.value, nombres: this.nombre.value.toUpperCase(), usuario: this.numeroCedula,
         correo: this.email.value, tipoDocumento: this.tipoDocumento.value, estadoCivil : this.estadoCivil.value,
-        ocupacion : this.ocupacion.value.toUpperCase(), direccion : this.direccion.value.toUpperCase(),
-        barrio : this.barrio.value.toUpperCase(),
-        eps : this.eps.value.toUpperCase(), acompanante : this.acompanante.value, consultorio : this.consultorioSelecionado.id_consultorio,
+        ocupacion, direccion, barrio, eps, acompanante : this.acompanante.value, consultorio : this.consultorioSelecionado.id_consultorio,
         parentesco : this.parentesco.value, telefonoAcompanante : this.telAcompanante.value, benef};
 
-      } 
+      }
       console.log(datos);
       this.loading = true;
       this.provedorService.postCitasProvedor(datos, token).subscribe ((response) => {

@@ -110,7 +110,7 @@ export class HistoriaClinicaComponent implements OnInit {
     this.loading = true;
     this.medicoService.getHistoriaClinicaGeneral(idUsuario, idServicio).subscribe( (response) => {
       this.loading = false;
-      // console.log('historia clinica general', response);
+      console.log('historia clinica general', response);
       this.infoHc = response;
     }, () => {
       // console.log(err);
@@ -591,7 +591,7 @@ export class HistoriaClinicaComponent implements OnInit {
     window.scroll(0, 0);
     this.medicoService.getHistoriaGeneral2(idHistoriaClinica).subscribe( (response) => {
         this.loading = false;
-        console.log('info hist opto', response);
+        console.log('info hist opto hst', response);
         if (this.idCategoria === '3') {
           this.infoHistoriaClinica = response;
           document.getElementById('btn-ver-hc').click();

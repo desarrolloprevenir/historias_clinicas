@@ -38,6 +38,7 @@ import { UserSucursal } from './services/user_sucursal.guard';
 import { SucursalMedico } from './services/sucursal_medico.guard';
 import { UserMedico } from './services/user_medico.guard';
 import { AdminSucursal } from './services/admin_sucursal.guard';
+import { AgregarLenteComponent } from './components/aplicacion/agregar-lente/agregar-lente.component';
 
 
 const routes: Routes = [
@@ -73,8 +74,9 @@ const routes: Routes = [
   {path : 'historia-clinica/:id/:id_servicio/:idCategoria', component: HistoriaClinicaComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'historia-general/:idCategoria', component: HistoriaGeneralComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'precios-e-inventario', component: PreciosInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
-  {path : 'inventario/:id', component: VerInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
+  {path : 'inventario/:idCategoria', component: VerInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
+  {path : 'agregar-lente/:idCategoria', component: AgregarLenteComponent, canActivate: [UserGuard, AdminSucursal]},
   {path: '**', component: LoginComponent}
 
 ];

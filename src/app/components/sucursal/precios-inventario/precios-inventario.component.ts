@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { AlertasComponent } from '../../aplicacion/alertas/alertas.component';
 import { ProvedorService } from '../../../services/provedor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-precios-inventario',
@@ -21,24 +22,32 @@ export class PreciosInventarioComponent implements OnInit {
   public infoCategoria;
   public lenterTerminados = [];
   public agregarTipo = [];
-  public lentesAgregados = [];
+  public lentesTallados = [];
+  public tipos = [];
+  public lentesTal: any;
   public sucursales;
   public sucursalesSelect = [];
   public eliminar = [];
   public agregar = [];
   public sucursalesEdit = [];
   public datosProducto: FormGroup;
+  public nombreMaterial = new FormControl ('', Validators.required);
+  public descripcionMaterial = new FormControl ('', Validators.required);
+  public pLenteTerminado = false;
 
   constructor(location: PlatformLocation,
               private userService: UserService,
               private aplicationService: AppService,
               private provedorService: ProvedorService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
       location.onPopState(() => {
         document.getElementById('btn-cerrar-modal-elicategoria').click();
         document.getElementById('btn-cerrar-modal').click();
         document.getElementById('btn-cerrar-modal-producto').click();
       });
+        
+
      }
 
   ngOnInit() {
@@ -99,9 +108,10 @@ export class PreciosInventarioComponent implements OnInit {
 
     if (info.nombre === 'Material Lentes') {
         // console.log('lentes');
-        if (this.lenterTerminados.length <= 0) {
-          this.lenterTerminados.push({lente : 'lente terminado'});
-        }
+        // if (this.lenterTerminados.length <= 0) {
+        //   this.lenterTerminados.push({lente : 'lente terminado'});
+        // }
+        this.router.navigate(['/agregar-lente', info.id_cateogoriai]);
     } else {
       this.datosProducto = this.formBuilder.group({
         nombre : [''],
@@ -113,9 +123,9 @@ export class PreciosInventarioComponent implements OnInit {
         precioCompra: ['', [Validators.required]],
         precioVenta: ['', [Validators.required]]
       });
-    }
 
-    document.getElementById('btn-abrir-modal-producto').click();
+      document.getElementById('btn-abrir-modal-producto').click();
+    }
   }
 
   agregarCategoria() {
@@ -261,6 +271,8 @@ export class PreciosInventarioComponent implements OnInit {
 
   guardarProducto() {
 
+    // this.loading = true;
+
     if (this.infoCategoria.nombre === 'Material Lentes') {
       var lentesTer = [];
       // tslint:disable-next-line: prefer-for-of
@@ -268,14 +280,38 @@ export class PreciosInventarioComponent implements OnInit {
         let tipo = (<HTMLInputElement>document.getElementById('tipo' + i)).value;
         let esfera = (<HTMLInputElement>document.getElementById('esfera' + i)).value;
         let cilindro = (<HTMLInputElement>document.getElementById('cilindro' + i)).value;
+        let adiccion = (<HTMLInputElement>document.getElementById('adiccion' + i)).value;
         let valor_u = (<HTMLInputElement>document.getElementById('valorUnitario' + i)).value;
-
-        lentesTer.push({tipo, esfera, cilindro, valor_u});
+  
+        if (!tipo && !esfera && !cilindro && !valor_u) {
+          this.pLenteTerminado = true;
+        } else {
+          this.pLenteTerminado = false;
+          lentesTer.push({tipo, esfera, cilindro, valor_u, adiccion});
+        }
       }
 
-      console.log(lentesTer);
-    } else {
+      if (this.lentesTallados.length <= 0) {
+        this.validacionesLenteTallado('agregarLente');
+      }
 
+      let info = { nombre: this.nombreMaterial.value, descripcion: this.descripcionMaterial.value,
+                   id_cateogoriai: this.infoCategoria.id_cateogoriai, lentes_ter: lentesTer, lentes_tall: this.lentesTallados };
+
+      console.log(info);
+
+      this.aplicationService.postGuardarLentes(info).subscribe( (response) => {
+        console.log(response);
+        this.loading = false;
+      }, (err) => {
+        console.log(err);
+        this.loading = false;
+        this.alertas.status = 'error';
+        this.alertas.statusText = 'Error en la conexión, por favor revisa tu conexión o intentalo más tarde.';
+      } );
+
+    } else {
+      this.loading = false;
       // nombre : [''],
       // referencia : [''],
       // cantidad: [''],
@@ -294,32 +330,19 @@ export class PreciosInventarioComponent implements OnInit {
     }
   }
 
+
   eliminarTipo() {
     if (this.agregarTipo.length >= 1) {
       let posicion = this.agregarTipo.length - 1;
       // console.log(posicion);
       this.agregarTipo.splice(posicion, 1);
+      this.tipos.splice(posicion, 1);
     }
   }
 
-  agregarLente() {
-    let nombre = (<HTMLInputElement>document.getElementById('nombreLenteLta')).value;
-    let tipo = (<HTMLInputElement>document.getElementById('tipoLta')).value;
-    let valor_u = (<HTMLInputElement>document.getElementById('valorUnitarioLta')).value;
+  validacionesLenteTallado(info) {
 
-    if (!nombre || !tipo || !valor_u) {
-      console.log('vacios');
-    }
-
-    // let info = [{nombre: tipo, valor_u}];
-
-    // this.lentesAgregados.push({ nombre, tipos: info });
-    // console.log(this.lentesAgregados);
-  }
-
-  validacionesLenteTallado() {
-
-
+    // console.log('aqui');
     let nombre = (<HTMLInputElement>document.getElementById('nombreLenteLta')).value;
     let tipo = (<HTMLInputElement>document.getElementById('tipoLta')).value;
     let valor_u = (<HTMLInputElement>document.getElementById('valorUnitarioLta')).value;
@@ -327,19 +350,100 @@ export class PreciosInventarioComponent implements OnInit {
     if (this.agregarTipo.length <= 0) {
 
       if (!nombre) {
-        document.getElementById('nombreLenteLta').className = 'invalid-feedback';
+        // console.log('aqui n');
+        document.getElementById('nombreLenteLta').className = 'form-control is-invalid';
+        // return false;
       }
-
       if (!tipo) {
-
+        document.getElementById('tipoLta').className = 'form-control is-invalid';
+        // return false;
       }
 
       if (!valor_u) {
+        document.getElementById('valorUnitarioLta').className = 'form-control is-invalid';
+        // return false;
+      }
+      if (nombre && tipo && valor_u) {
+        document.getElementById('nombreLenteLta').className = 'form-control';
+        document.getElementById('tipoLta').className = 'form-control';
+        document.getElementById('valorUnitarioLta').className = 'form-control';
+        this.tipos.push({nombre: tipo, valor_u });
+        this.lentesTal = {nombre, tipos: this.tipos};
+
+        if ( info === 'agregarTipo') {
+           this.agregarTipo.push({tipo : 'tipo lente tallado'});
+        } else {
+          this.lentesTallados.push(this.lentesTal);
+          this.agregarTipo = [];
+          this.tipos = [];
+          let nombre = (<HTMLInputElement>document.getElementById('nombreLenteLta'));
+          let tipo  = (<HTMLInputElement>document.getElementById('tipoLta'));
+          let valor = (<HTMLInputElement>document.getElementById('valorUnitarioLta'));
+          nombre.value = '';
+          tipo.value = '';
+          valor.value = '';
+          console.log(this.lentesTallados);
+        }
+        // this.agregarTipo.push({tipo : 'tipo lente tallado'});
 
       }
+    } else {
+      // tslint:disable-next-line: prefer-for-of
+      // console.log(this.agregarTipo);
+      for (let i = 0; i < this.agregarTipo.length; i ++) {
+      //   console.log('posicion', i , 'lenght', this.agregarTipo.length);
+        let tipo =  (<HTMLInputElement>document.getElementById('tipoLta' + i)).value;
+        let valor_u = (<HTMLInputElement>document.getElementById('valorUnitarioLta' + i)).value;
+        // console.log(tipo, valor_u);
 
+        if (!tipo) {
+          document.getElementById('tipoLta' + i).className = 'form-control is-invalid';
+        }
+
+        if (!valor_u) {
+          document.getElementById('valorUnitarioLta' + i).className = 'form-control is-invalid';
+        }
+
+        if (!tipo && !valor_u) {
+            break;
+        }
+        // console.log(tipo, valor_u);
+        if (tipo && valor_u) {
+          document.getElementById('tipoLta' + i).className = 'form-control';
+          document.getElementById('valorUnitarioLta' + i).className = 'form-control';
+          if ( (i + 1) === this.agregarTipo.length) {
+            this.tipos.push({nombre: tipo, valor_u});
+            // console.log(this.lentesTal);
+
+            if (info === 'agregarTipo') {
+                this.agregarTipo.push({tipo : 'tipo lente tallado'});
+            } else {
+              this.lentesTallados.push(this.lentesTal);
+              this.agregarTipo = [];
+              this.tipos = [];
+              let nombre = (<HTMLInputElement>document.getElementById('nombreLenteLta'));
+              let tipo  = (<HTMLInputElement>document.getElementById('tipoLta'));
+              let valor = (<HTMLInputElement>document.getElementById('valorUnitarioLta'));
+              nombre.value = '';
+              tipo.value = '';
+              valor.value = '';
+              console.log(this.lentesTallados);
+            }
+            // this.agregarTipo.push({tipo : 'tipo lente tallado'});
+          }
+        }
+        // console.log(tipo, valor_u);
+      }
     }
 
+  }
+
+  inputsLenteTallado(ev) {
+    // console.log(ev.target.id);
+
+    if (ev.target.value) {
+        document.getElementById(ev.target.id).className = 'form-control';
+    }
   }
 
   selectSucursal(id, ev) {
@@ -420,10 +524,12 @@ export class PreciosInventarioComponent implements OnInit {
       } else {
         this.agregar.push({idsuc: id, idcat: this.infoCategoria.id_cateogoriai});
       }
-
       // console.log(this.agregar);
-
     }
+  }
+
+  eliminarLenteTallado(index) {
+    this.lentesTallados.splice(index, 1);
   }
 
 

@@ -61,8 +61,8 @@ export class AppService {
     return this.http.get(apiUrl + '/services/' + idProvedor);
   }
 
-   // Get parentescos
-   getParentescos(): Observable<any> {
+  // Get parentescos
+  getParentescos(): Observable<any> {
     return this.http.get(apiUrl + '/parent');
   }
 
@@ -75,6 +75,16 @@ export class AppService {
    // metodo para pedir las categorias que tiene una sucursal
    getCategoriasInventario(idSucursal, idProvedor) {
     return this.http.get(apiUrl + '/cinventario/' + idSucursal + '/' + idProvedor, {headers});
+  }
+
+  // Ruta que retorna el materiales de lentes
+  getMaterialesLentes(idCategoria) {
+    return this.http.get(apiUrl + '/material-adm/' + idCategoria, {headers});
+  }
+
+  // Ruta para obtener la informacion de un material con sus lentes tallados y terminados
+  getInfoMaterialLentes(idMaterial) {
+    return this.http.get(apiUrl + '/tertall/' + idMaterial, {headers});
   }
 
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -122,6 +132,11 @@ postAddCategoria(info) {
   return this.http.post(apiUrl + '/cinventario/', info, {headers});
  }
 
+// Ruta para guardar los lentes
+postGuardarLentes(info) {
+  return this.http.post(apiUrl + '/material-l', info, {headers});
+}
+
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
 //  <!-- -------------------------------------------- METODOS DELETE ----------------------------------------- -->
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -129,5 +144,9 @@ postAddCategoria(info) {
 // Ruta para agregar categoria inventario
 dltCategoriaInventario(idCategoria, idProvedor) {
   return this.http.delete(apiUrl + '/cinventario/' + idCategoria + '/' + idProvedor , {headers});
+ }
+
+ dltMaterialLentes(idMaterial) {
+  return this.http.delete(apiUrl + '/cinventario/' + idMaterial , {headers});
  }
 }

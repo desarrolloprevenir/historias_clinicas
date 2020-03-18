@@ -825,7 +825,6 @@
             </div>
 
 
-
             <div class="card">
                 <div class="card-header card-header-hc" id="headingThree">
                     <h2 class="mb-0">
@@ -840,14 +839,10 @@
                         <div>
                             <p class="form-label">Exportar certificado.</p>
                         </div>
-
                         <br>
-
                         <div>
                             <button type="button" class="btn btn-info" (click)="pdfCertificado()"><i class="fas fa-print"></i>&nbsp; Pdf</button>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -855,14 +850,18 @@
 
     </form>
 
-    <div class="text-right" style="margin-top: 20px;">
-        <button class="btn btn-secondary" style="margin-left: 5px;" (click)="atras('optometria2')">Atrás</button>
-        <button class="btn btn-success" style="margin-left: 5px;" (click)="formOptometria()">Guardar historia clinica</button>
+    <div class="text-center" style="margin-top: 20px;">
+        <button class="btn btn-secondary" style="margin-left: 7px;" (click)="atras('optometria2')">Atrás</button>
+        <!-- <button class="btn btn-primary" style="margin-left: 7px;" data-toggle="modal" data-target=".bd-example-modal-lg">Realizar cotizacion</button>
+        <button class="btn btn-primary" style="margin-left: 7px;">Realizar venta</button> -->
+        <button class="btn btn-success" style="margin-left: 7px;" (click)="formOptometria()">Guardar historia clinica</button>
     </div>
 </div>
 
 
-<!-- /////////////////////////////////////////////// MODAL PUBLICACION EXITOSA //////////////////////////////////////////////////// -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------- MODAL PUBLICACION EXITOSA ----------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
 
 
 <!-- Button trigger modal -->
@@ -881,7 +880,7 @@
         </button>
             </div>
             <div class="modal-body">
-                Historia clinica guardada con exito.
+                Historia clinica guardada con exito, se descargara un pdf con el certificado de la historia clinica.
             </div>
             <div class="modal-footer">
 
@@ -892,7 +891,149 @@
 </div>
 
 
-<!--  ----------------------------------------------------FIN MODAL----------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------- FIN MODAL PUBLICACION EXITOSA --------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------- MODAL REALIZAR COTIZACION ----------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Realizar cotización</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- --------------------------------------------- FORMULA FINAL ----------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+
+                        <div class="text-center" style="padding-bottom: 10px;">
+                            <h5>Formula final</h5>
+                        </div>
+
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Rx</th>
+                                    <th scope="col">Esfera</th>
+                                    <th scope="col">Cilindro</th>
+                                    <th scope="col">Eje</th>
+                                    <th scope="col">Add</th>
+                                    <th scope="col">Dp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">OD</th>
+                                    <td>{{datosOptometria.value.selectOdFormulaFinal + ' ' + datosOptometria.value.esferaFormulaFinalOd}}</td>
+                                    <td>{{'-' + ' ' + datosOptometria.value.cilindrFormulaFinalOd}}</td>
+                                    <td>{{datosOptometria.value.ejFormulaFinalOd}}</td>
+                                    <td>{{datosOptometria.value.adicionOd}}</td>
+                                    <td>{{datosOptometria.value.dnpOd}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">OI</th>
+                                    <td>{{datosOptometria.value.selectOiFormulaFinal + ' ' + datosOptometria.value.esferaFormulaFinalOi}}</td>
+                                    <td>{{'-' + ' ' + datosOptometria.value.cilindrFormulaFinalOi}}</td>
+                                    <td>{{datosOptometria.value.ejFormulaFinalOi}}</td>
+                                    <td>{{datosOptometria.value.adicionOi}}</td>
+                                    <td>{{datosOptometria.value.dnpOi}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- ------------------------------------------- FIN FORMULA FINAL --------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- ------------------------------------------ LENTES / MONTURAS ---------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div class="text-center" style="padding-bottom: 20px;">
+                    <h5>Monturas</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-7">
+                        <label class="form-label">Nombre</label>
+                        <p>caasda sdf sdf sd fsd fsd fsd fsdf sd fsdf ssf ds fd</p>
+                    </div>
+                    <div class="col-5">
+                        <label class="form-label">Precio</label>
+                        <p>$ 400.000.000 &nbsp;<button class="btn btn-danger btn-sm">X</button></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="form-label">Buscar montura</label>
+                            <input type="text" placeholder="Buscar por nombre o referencia" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-3" style="padding-right: 0px;">
+                        <div class="form-group">
+                            <label class="form-label">Precio</label>
+                            <input type="text" placeholder="Precio de venta" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div style="padding-top: 24px;">
+                            <button class="btn btn-success">Agregar</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="text-center" style="padding-bottom: 20px;">
+                    <h5>Lentes</h5>
+                </div>
+
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- ---------------------------------------- FIN LENTES / MONTURAS -------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar cotización</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------- FIN MODAL REALIZAR COTIZACION --------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+
 
 <div class="loading" *ngIf="loading">
     <img src="/assets/pulso.gif" alt="">

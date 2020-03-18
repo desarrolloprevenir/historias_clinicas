@@ -1,1 +1,188 @@
 <app-barra-navegacion></app-barra-navegacion>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------- MATERIALES LENTES -------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<br />
+<div class="card-header">
+    <h1>Materiales lentes</h1>
+</div>
+<br />
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------- ALERTAS ------------------------------------------ -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<app-alertas #alertas></app-alertas>
+
+<div class="row" style="margin: 0px;">
+
+    <div class="col-4" *ngFor="let ml of materialLentes" style="padding: 15px;">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ml.material}}</h5>
+                <p class="card-text"> <strong>Descripción : </strong> {{ml.descripcion}}</p>
+
+                <div class="text-right">
+                    <button class="btn btn-danger" style="margin-right: 5px; color: white;" (click)="confirmarEliminarMaterial(ml)"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-warning" style="margin-right: 5px; color: white;" (click)="abrirModalEditarMaterial(ml)"><i class="fas fa-pen"></i></button>
+                    <button class="btn btn-primary" style="margin-right: 5px;" (click)="abrirModalMaterial(ml)"><i class="fas fa-eye"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------- MODAL VER MATERIAL ------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<button type="button" id="btn-modal-ver-material" class="btn btn-primary" style="display: none;" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" *ngIf="infoMaterial">{{infoMaterial.material}}</h5>
+                <button type="button" id="btn-cerrar-modal-ver-material" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" *ngIf="infoFormulas">
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- --------------------------------------------- LENTES TERMINADOS ------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div class="card">
+                    <div class="card-header">
+                        Lentes terminados
+                    </div>
+                    <div class="card-body">
+                        <h5 *ngIf="infoFormulas.terminados.length <= 0">No se registrarón lentes tallados.</h5>
+                        <div *ngFor="let lt of infoFormulas.terminados">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Tipo</label>
+                                    <input class="form-control" value="{{lt.tipo}}">
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label">Esfera</label>
+                                    <input class="form-control" value="{{lt.esfera}}">
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label">Cilindro</label>
+                                    <input class="form-control" value="{{lt.cilindro}}">
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label">Adición</label>
+                                    <input class="form-control" value="{{lt.adicion}}">
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label">Valores</label>
+                                    <input class="form-control" value="{{lt.valores[0].valor}}" data-toggle="collapse" [attr.data-target]="'#multiCollapse' + lt.id_terminados" aria-expanded="false">
+                                </div>
+                            </div>
+
+                            <div style="padding-top: 15px; padding-bottom: 15px;" class="collapse multi-collapse" [id]="'multiCollapse' + lt.id_terminados">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Valores</h5>
+                                        <div class="row" *ngFor="let ltv of lt.valores">
+
+
+                                            <div class="col-8">{{ltv.nombre}}</div>
+                                            <div class="col-4">{{ltv.valor}}</div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+                <!-- ---------------------------------------------- LENTES TALLADOS -------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                <div class="card">
+
+                    <div class="card-header">
+                        Lentes tallados
+                    </div>
+                    <div class="card-body">
+                        <h5 *ngIf="infoFormulas.tallados.length <= 0">No se registrarón lentes tallados.</h5>
+
+                        <div>
+                            <div class="card-body" *ngFor="let lta of infoFormulas.tallados">
+                                <h5 class="card-title">{{lta.nombre}}</h5>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Tipo</label>
+                                        <input class="form-control" value="tipo">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Valores</label>
+                                        <input class="form-control" value="Valores" data-toggle="collapse" [attr.data-target]="'#multiCollapselta' + lta.id_lentestall" aria-expanded="false">
+                                    </div>
+                                </div>
+
+                                <div class="collapse multi-collapse" style="padding-bottom: 15px; padding-top: 15px;" [id]="'multiCollapselta' + lta.id_lentestall">
+                                    oe
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-loading *ngIf="loading "></app-loading>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------- CONFIRMACION ELIMINAR ----------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<button type="button" style="display: none;" id="btn-confirmar-eliminar" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                <button type="button" id="btn-cerrar-confirmar-eliminar" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body" *ngIf="infoMaterial">
+                ¿ Estas seguro que deseas eliminar {{infoMaterial.material}} ?. Ten en cuenta que no podras recuperarlo.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarMaterial()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------- LOADING ------------------------------------------ -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<app-loading *ngIf="loading "></app-loading>
