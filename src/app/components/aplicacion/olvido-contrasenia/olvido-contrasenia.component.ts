@@ -26,10 +26,11 @@ export class OlvidoContraseniaComponent implements OnInit {
 
   comprobarCorreo() {
     this.loading = true;
-    this.aplicationService.getConfirmacionCorreo(this.email.value).subscribe( (response) => {
+    console.log(this.email.value);
+    this.aplicationService.getConfirmacionCorreo(this.email.value).subscribe( (response: any) => {
       console.log(response);
       this.loading = false;
-      if (response === true) {
+      if (response.email === true || response.sms === true) {
         this.cambio = true;
       } else {
         this.status = 'warning';

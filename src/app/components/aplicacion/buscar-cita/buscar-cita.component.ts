@@ -66,7 +66,7 @@ export class BuscarCitaComponent implements OnInit {
       this.citasUsuario();
 
       this.intervalo =  setInterval(() => {
-      this.citasUsuario()}, 30000);
+      this.citasUsuario() }, 30000);
     } else {
       this.medico = true;
       // console.log('es medico');

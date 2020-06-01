@@ -4,8 +4,8 @@
     /* margin: 10px; */
 }
 
-.paddingLabels{
-  padding: 20px 70px 0 70px;
+.paddingLabels {
+    padding: 20px 70px 0 70px;
 }
 
 #select-medico p {
@@ -134,4 +134,11 @@ a {
 a:hover {
     color: #04ad93 !important;
     text-decoration: none !important;
+}
+
+
+/* CHIPS */
+
+.example-chip-list {
+    width: 100%;
 }

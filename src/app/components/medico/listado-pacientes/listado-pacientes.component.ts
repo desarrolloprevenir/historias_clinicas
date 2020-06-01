@@ -71,7 +71,7 @@ export class ListadoPacientesComponent implements OnInit {
 
       this.medicoService.getHistoriasClinicaPorUsuario(this.infoServicio.id_servicios , this.cedula.value).subscribe((response) => {
         this.loading = false;
-        // console.log('res hits cli', response);
+        console.log('res hits cli', response);
         this.infoHc = response;
 
         if (this.infoHc.length >= 1) {
@@ -133,7 +133,7 @@ export class ListadoPacientesComponent implements OnInit {
     window.scroll(0, 0);
     this.medicoService.getHistoriaGeneral2(idHistoriaClinica.id_historiacl).subscribe( (response) => {
           this.loading = false;
-          console.log('info hist opto', response);
+          // console.log('info hist opto', response);
           if (this.infoServicio.categoria_idcategoria === 3) {
             console.log('aqui optometria');
             this.infoHistoriaClinica = response;

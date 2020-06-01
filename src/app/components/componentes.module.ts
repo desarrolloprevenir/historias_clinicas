@@ -22,7 +22,7 @@ import { ConsultorioComponent } from './sucursal/consultorio/consultorio.compone
 
 // ANGULAR MATERIAL
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
-  MatAutocompleteModule, MatRadioModule} from '@angular/material';
+  MatAutocompleteModule, MatRadioModule, MatChipsModule, MatIconModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
@@ -63,13 +63,9 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
-<<<<<<< HEAD
-import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
-import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
-=======
 import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
-
->>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
+import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
+import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
 
 
 
@@ -113,12 +109,9 @@ import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
   VerInventarioComponent,
   LoadingComponent,
   ModalCambioAvatarComponent,
-<<<<<<< HEAD
-  PerfilProfesionalComponent,
-  AgregarLenteComponent
-=======
-  HistOdComponent
->>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
+  HistOdComponent,
+  AgregarLenteComponent,
+  PerfilProfesionalComponent
   ],
   imports: [
     CommonModule,
@@ -135,6 +128,8 @@ import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatCardModule,
+    MatChipsModule,
+    MatIconModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -178,14 +173,9 @@ import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-<<<<<<< HEAD
-  ModalCambioAvatarComponent,
-  PerfilProfesionalComponent,
-  AgregarLenteComponent
-=======
   HistOdComponent,
-  ModalCambioAvatarComponent
->>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
+  ModalCambioAvatarComponent,
+  AgregarLenteComponent
   ]
 })
 export class ComponentesModule { }

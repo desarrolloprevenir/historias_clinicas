@@ -950,7 +950,7 @@ export class ConsultorioComponent implements OnInit {
     // console.log('aquiiii oeee', idConsultorio);
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
-      // console.log('info_cc', response);
+      // console.log('info_cc', response
       this.infoConsultorio = response[0];
       // console.log('oeeconsul',this.infoConsultorio);
       this.nombreConsultorio.setValue(this.infoConsultorio.nombre);
@@ -995,20 +995,20 @@ export class ConsultorioComponent implements OnInit {
   }
 
   confirmacionEliminarHorario(idHorario) {
-    // console.log('aqui');
-    this.id_horario = idHorario;
-  // console.log(id_horario)
+    // console.log(idHorario);
+    this.id_horario = idHorario.id_horario;
+    // console.log(this.id_horario);
     this.loading = true;
 
     this.sucursalService.getConfirmacionEliminarHorario(this.id_horario).subscribe( (response) => {
      this.loading = false;
      document.getElementById('btn-confirmacion-eliminar-horario').click();
-     console.log('respuesta', response);
+    //  console.log('respuesta', response);
      if (response[0].eventH <= 0) {
-      console.log('puede eliminar');
+      // console.log('puede eliminar');
       this.confirmacion = 'true';
      } else {
-       console.log('hay eventos');
+      //  console.log('hay eventos');
        this.confirmacion = 'false';
      }
 

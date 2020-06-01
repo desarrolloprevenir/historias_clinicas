@@ -57,6 +57,7 @@ export class CalendarioReutilizableComponent implements OnInit {
   locale = 'es';
 
   //////// Variables
+  public res;
   public resHistorial;
   @Input() idConsultorio: FormControl = new FormControl();
   @Input() servicio;
@@ -73,11 +74,13 @@ export class CalendarioReutilizableComponent implements OnInit {
     let anio = moment(new Date).format('YYYY');
     let mes =  moment(new Date).format('M');
     this.getHistorialSucursal(mes, anio);
+    // this.getEventosSucursal(mes, anio);
   }
 
   closeOpenMonthViewDay(ev) {
     // console.log(ev);
     this.getHistorialSucursal(moment(ev).format('M'), moment(ev).format('YYYY'));
+    // this.getEventosSucursal(moment(ev).format('M'), moment(ev).format('YYYY'));
   }
 
   setView(view: CalendarView) {
@@ -118,6 +121,7 @@ export class CalendarioReutilizableComponent implements OnInit {
   }
 
   getHistorialSucursal(mes, anio) {
+    console.log('aquii');
     this.historiaCitas.loading = true;
     // console.log('consultorio', this.idConsultorio, 'servicio', this.servicio, 'idSucursal', this.idSucursal);
     // console.log(this.id_consultorio);
@@ -139,7 +143,6 @@ export class CalendarioReutilizableComponent implements OnInit {
     // console.log(mes, anio, this.servicio.id_servicios, this.servicio.id_categoria , this.idSucursal, consultorio);
     // tslint:disable-next-line: max-line-length
     this.sucursalService.getHistorialSucursal(mes, anio, this.servicio.id_servicios, this.servicio.id_categoria , this.idSucursal, consultorio).subscribe( (response) => {
-      // console.log('sucu', response);
       this.historiaCitas.loading = false;
       this.resHistorial = response;
 
@@ -180,12 +183,16 @@ export class CalendarioReutilizableComponent implements OnInit {
           this.addEvent(title, Date.parse(start), Date.parse(start), horaSs, horaEe, info );
         }
       }
+
+      // this.getEventosSucursal(mes, anio);
     }, () => {
       this.historiaCitas.loading = false;
       // console.log(err);
     } );
 
   }
+
+  
 
   addEvent(title, start, end, horaInicio, horaFinal, info): void {
     // console.log(info);
@@ -223,6 +230,96 @@ export class CalendarioReutilizableComponent implements OnInit {
     //   }
     // ];
     // console.log(this.events);
+  }
+
+  getEventosSucursal(mes, anio) {
+    console.log('aqui');
+    console.log(mes, anio, this.servicio.id_servicios, this.idSucursal, this.servicio.this.servicio.id_categoria);
+    // console.log('aqui ev sucu', this.serviciosSelect);
+    // this._sucursalService.getServiciosSucursal()
+    // return this.http.get(this.url + '/eventser/' + mes + '/' + anio + '/' + id_serv + '/'+ id_sucursal+ '/' + id_cate, );
+    // this.events = [];
+    let consultorio;
+    if (!this.idConsultorio) {
+      // console.log('1');
+      consultorio = 0;
+    } else {
+       consultorio = this.idConsultorio;
+    }
+    // let anio = moment(new Date).format('YYYY');
+    // let mes =  moment(new Date).format('M');
+    console.log(mes, anio, this.servicio.id_servicios, this.idSucursal, this.servicio.this.servicio.id_categoria, consultorio);
+    // tslint:disable-next-line: max-line-length
+    this.sucursalService.getEventsSucursal(mes, anio, this.servicio.id_servicios, this.idSucursal, this.servicio.this.servicio.id_categoria, consultorio).subscribe( (response) =>{
+      console.log('res ev', response);
+      this.res = response;
+
+      if (this.res.length >= 1) {
+        // console.log('kk');
+        // var d;
+        for (let i = 0; i < this.res.length; i++) {
+
+          let title = this.res[i].title;
+
+          let diaS = moment(this.res[i].start).format('ddd');
+          let mesS = moment(this.res[i].start).format('MMM');
+          let fechaS = moment(this.res[i].start).format('DD-YYYY');
+          let horaS = moment.utc(this.res[i].start).format('h:mm:ss');
+          let horaSs = moment.utc(this.res[i].start).format('H');
+          let start = diaS + ' ' + mesS + ' ' + fechaS + ' ' +  horaS;
+          let id_consultorio = this.res[i].id_consultorio;
+          // d = horaS;
+
+          let diaE = moment(this.res[i].end).format('ddd');
+          let mesE = moment(this.res[i].end).format('MMM');
+          let fechaE = moment(this.res[i].end).format('DD-YYYY');
+          let horaE = moment.utc(this.res[i].end).format('h:mm:ss');
+          let horaEe = moment.utc(this.res[i].end).format('H');
+
+          let end = diaE + ' ' + mesE + ' ' + fechaE + ' ' +  horaE;
+          let id_eventos = this.res[i].id_eventos;
+          let info = {};
+
+
+          if (this.res[i].id_mascotas) {
+
+          let id_usuarios = this.res[i].id_usuarios;
+          // let color = this.res[i].color;
+          let especie = this.res[i].especie;
+          let esterilizado = this.res[i].esterilizado;
+          let fecha_nacimineto = this.res[i].fecha_nacimineto;
+          let nombre = this.res[i].nombre ;
+          let raza = this.res[i].raza;
+          let sexo = this.res[i].sexo;
+          let avatar = response[i].avatar;
+
+          info = {id : this.res[i].id_mascotas , tipo : 'mascota' , id_usuarios , especie,
+             esterilizado, fecha_nacimineto, nombre, raza, sexo, avatar,
+             id_eventos, color : colors.prevenir, id_consultorio};
+          this.addEvent(title, Date.parse(start), Date.parse(start), horaSs, horaEe, info );
+          } else {
+
+          let apellidos = response[i].apellidos;
+          let avatar = response[i].avatar;
+          let cedula = response[i].cedula;
+          let fecha_nacimiento = response[i].fecha_nacimiento;
+          let nombre = response[i].nombre;
+          let telefono = response[i].telefono;
+
+          info = {id : this.res[i].usuarios_id, tipo : 'usuario', apellidos , avatar , cedula, id_consultorio,
+                    fecha_nacimiento, nombre, telefono, id_eventos , color : colors.prevenir} ;
+          this.addEvent(title, Date.parse(start), Date.parse(start), horaSs, horaEe, info );
+          }
+          // console.log('info',info);
+        }
+      }
+
+
+    }, () => {
+      // console.log(err);
+      this.historiaCitas.loading = false;
+    } );
+
   }
 
 }

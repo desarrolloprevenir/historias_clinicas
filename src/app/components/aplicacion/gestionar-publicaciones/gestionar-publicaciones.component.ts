@@ -78,7 +78,7 @@ export class GestionarPublicacionesComponent implements OnInit {
     this.provedorService.getPublications(id).subscribe( (response) => {
 
         this.publications = response;
-        // console.log(this.publications);
+        console.log(this.publications);
 
         if (this.publications[0].vacio === true) {
         this.vacio = true;

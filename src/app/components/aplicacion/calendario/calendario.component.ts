@@ -107,7 +107,7 @@ export class CalendarioComponent implements OnInit {
    email = new FormControl('', [Validators.required, Validators.email,
                                 Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]);
    confirmacionEmail = new FormControl('', [Validators.required, Validators.email,
-     Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]);
+                                            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]);
    telefono = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]);
    barrio = new FormControl('');
    direccion = new FormControl('');
