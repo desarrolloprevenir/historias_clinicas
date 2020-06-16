@@ -22,7 +22,7 @@ import { ConsultorioComponent } from './sucursal/consultorio/consultorio.compone
 
 // ANGULAR MATERIAL
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
-  MatAutocompleteModule, MatRadioModule} from '@angular/material';
+  MatAutocompleteModule, MatRadioModule, MatChipsModule, MatIconModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
@@ -63,8 +63,14 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
+<<<<<<< HEAD
 import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
 import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
+=======
+import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
+import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
+import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
+>>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
 
 
 
@@ -108,8 +114,14 @@ import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.
   VerInventarioComponent,
   LoadingComponent,
   ModalCambioAvatarComponent,
+<<<<<<< HEAD
   PerfilProfesionalComponent,
   AgregarLenteComponent
+=======
+  HistOdComponent,
+  AgregarLenteComponent,
+  PerfilProfesionalComponent
+>>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
   ],
   imports: [
     CommonModule,
@@ -126,6 +138,8 @@ import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.
     ReactiveFormsModule,
     MatSelectModule,
     MatCardModule,
+    MatChipsModule,
+    MatIconModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -169,8 +183,11 @@ import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
+<<<<<<< HEAD
+=======
+  HistOdComponent,
+>>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
   ModalCambioAvatarComponent,
-  PerfilProfesionalComponent,
   AgregarLenteComponent
   ]
 })

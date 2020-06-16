@@ -222,7 +222,29 @@
                             </mat-form-field>
                         </div>
 
+
+                        <div class="col-md-12" style="padding-top: 20px;">
+
+                            <p style="color: #6e6a6a;"><i class="fas fa-exclamation-triangle"></i> Para ayudar a los usuarios a encontrar tu servicio con mayor facilidad puedes escribir cinco palabras claves que seran usadas en la busqueda</p>
+
+                            <mat-form-field class="example-chip-list">
+                                <mat-chip-list #chipList aria-label="Fruit selection">
+                                    <mat-chip *ngFor="let c of chips" [selectable]="selectable" [removable]="removable" (removed)="remove(c)">
+                                        {{c.nombre}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Escribe una etiqueta y presiona enter" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+
+
                     </div>
+
+
+
+
+
 
 
                     <!-- ------------------------------------------- Fin de formulario  --------------------------------------------------------- -->
@@ -254,6 +276,13 @@
                 <!-- <p>*Selecciona una o más imagenes para tu servicio, maximo 6 </p> -->
 
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="statusImgs" (click)="cerrarAlerta('imagenes')">
+                    {{textoStatus}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="statusW === 'warning'" (click)="cerrarAlerta('imagenes')">
                     {{textoStatus}}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -329,10 +358,10 @@
 
                 <div id="cargar-imagen" style="padding-bottom: 40px;">
                     <button class="btn btn-secondary" (click)="atrasImagenes()">Atrás</button>
-                    <label for="file-upload" class="btn btn-info btns-horario">
+                    <label for="file-upload" class="btn btn-info btns-horario" (click)="validacionMaximoImagenes()">
                   Cargar Fotos
               </label>
-                    <input type="file" id="file-upload" (change)="fileChangeEvent($event)" />
+                    <input type="file" id="file-upload" (change)="fileChangeEvent($event)" [disabled]="imagenes.length >= 6" />
                     <button class="btn btn-success" (click)="publicarServicio()" *ngIf="imagenes.length >= 1">Publicar Servicio</button>
                 </div>
 

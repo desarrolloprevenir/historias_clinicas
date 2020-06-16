@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ProvedorService } from 'src/app/services/provedor.service';
 import { AppService } from '../../../services/app.service';
@@ -21,7 +21,7 @@ export class RegistroComponent implements OnInit {
               private appService: AppService) {
 
                 this.datos = this.formBuilder.group({
-                  nombre: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40), Validators.pattern('[a-z A-z]*')]],
+                  nombre: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40), Validators.pattern('[a-z A-z ñ]*')]],
                   email: ['', [Validators.required, Validators.email, 
                                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
                   pssw: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],

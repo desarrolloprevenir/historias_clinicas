@@ -27,6 +27,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
+
 // recarga
 // import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 

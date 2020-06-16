@@ -46,8 +46,6 @@ export class PreciosInventarioComponent implements OnInit {
         document.getElementById('btn-cerrar-modal').click();
         document.getElementById('btn-cerrar-modal-producto').click();
       });
-        
-
      }
 
   ngOnInit() {
@@ -103,7 +101,7 @@ export class PreciosInventarioComponent implements OnInit {
 
 
   agregarProducto(info) {
-    // console.log(info);
+    console.log(info);
     this.infoCategoria = info;
 
     if (info.nombre === 'Material Lentes') {
@@ -113,6 +111,8 @@ export class PreciosInventarioComponent implements OnInit {
         // }
         this.router.navigate(['/agregar-lente', info.id_cateogoriai]);
     } else {
+      this.sucursalesEdit = [];
+      this.activarCategorias();
       this.datosProducto = this.formBuilder.group({
         nombre : [''],
         referencia : [''],
@@ -187,29 +187,31 @@ export class PreciosInventarioComponent implements OnInit {
   }
 
   abrirEditarCategoria(info) {
-    console.log(info);
+    // console.log(info);
     this.sucursalesEdit = [];
     this.infoCategoria = info;
-
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.sucursales.length; i++) {
-        let nombre = this.sucursales[i].nombre;
-        let id_sucursales = this.sucursales[i].id_sucursales;
-        this.sucursalesEdit.push({nombre, id_sucursales,  checked: false});
-
-        // tslint:disable-next-line: prefer-for-of
-        for (let j = 0; j < this.infoCategoria.sucursales.length; j++) {
-              if (id_sucursales === this.infoCategoria.sucursales[j].id_sucursales) {
-                  this.sucursalesEdit[i].checked = true;
-                  continue;
-              }
-        }
-    }
-    // console.log(this.sucursalesEdit);
-
+    this.activarCategorias();
     this.nombreCategoria.setValue(info.nombre);
     this.descripcionCategoria.setValue(info.descripcion);
     document.getElementById('btn-agregar-editar').click();
+  }
+
+  activarCategorias() {
+         // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.sucursales.length; i++) {
+      let nombre = this.sucursales[i].nombre;
+      let id_sucursales = this.sucursales[i].id_sucursales;
+      this.sucursalesEdit.push({nombre, id_sucursales,  checked: false});
+
+      // tslint:disable-next-line: prefer-for-of
+      for (let j = 0; j < this.infoCategoria.sucursales.length; j++) {
+            if (id_sucursales === this.infoCategoria.sucursales[j].id_sucursales) {
+                this.sucursalesEdit[i].checked = true;
+                continue;
+            }
+      }
+  }
+  // console.log(this.sucursalesEdit);
   }
 
   editarCategoria() {

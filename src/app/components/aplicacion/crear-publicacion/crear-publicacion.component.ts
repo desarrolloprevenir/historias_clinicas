@@ -21,6 +21,18 @@ import { AppService } from '../../../services/app.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProvedorService } from 'src/app/services/provedor.service';
 
+// Sweet alert
+import Swal from 'sweetalert2';
+
+// CHIPS
+
+import {ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+export interface Chip {
+  nombre: string;
+}
+
 @Component({
   selector: 'app-crear-publicacion',
   templateUrl: './crear-publicacion.component.html',
@@ -40,6 +52,7 @@ export class CrearPublicacionComponent implements OnInit {
   myControl = new FormControl('', [Validators.required]);
   options: User[];
   filteredOptions: Observable<User[]>;
+  public statusW: string;
 
 
   // public horasDesdeHastaManana;
@@ -101,6 +114,16 @@ export class CrearPublicacionComponent implements OnInit {
   croppedImage: any = '';
   mostrarRecorte = true;
   recortar = false;
+
+
+  // CHIPS
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER];
+  chips: Chip[] = [];
+  public chipsPrueba;
 
 
   constructor(public userService: UserService,
@@ -1328,18 +1351,37 @@ _handleReaderLoaded(readerEvt) {
     let token = this.userService.getToken();
     let user = this.userService.getIdentity();
 
+    let ch;
+
+    if (this.chips.length >= 1) {
+
+     // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.chips.length; i++) {
+
+      if (!ch) {
+        ch = this.chips[i].nombre;
+      } else {
+        ch = ch + ',' + ' ' + this.chips[i].nombre;
+      }
+    }
+
+    }
+
     this.formulario = {id_usuario: user.id_provedor, token, nombre: this.datos.value.nombre,
         precio: this.datos.value.precio, imagenes: this.imagenes,
         descuento: this.datos.value.descuento, duracion: this.datos.value.duracion,
         id_ctga: this.myControl.value.id_categoria, video : this.datos.value.video,
-        max_citas: this.numeroMaxCitas.value, descripcion: this.datos.value.descripcion, creador: user.nombre };
+        max_citas: this.numeroMaxCitas.value, descripcion: this.datos.value.descripcion, creador: user.nombre, chips : ch };
+
+
+
 
 
     // console.log(this.formulario);
 
     this.provedorService.pubService(this.formulario).subscribe( (res) => {
       this.loading = false;
-      console.log(res);
+      // console.log(res);
 
       if (res[0].agregado === true) {
         document.getElementById('btn-publicacion-exitosa').click();
@@ -1497,7 +1539,9 @@ _handleReaderLoaded(readerEvt) {
 
   // metodos recorte de imagenes
   fileChangeEvent(event: any): void {
-  //  console.log(event);
+
+
+         //  console.log(event);
    if (event.target.files.length >= 1 ) {
     let cadena = event.target.value;
     let validacion = cadena.substr(-6).split('\.');
@@ -1521,6 +1565,15 @@ _handleReaderLoaded(readerEvt) {
    }
  }
 
+ validacionMaximoImagenes() {
+
+  if (this.imagenes.length >= 6) {
+    this.statusW = 'warning';
+    this.textoStatus = 'Máximo 6 imagenes por servicio.';
+  }
+
+ }
+
  imageCropped(event: ImageCroppedEvent) {
    this.croppedImage = event.base64;
  }
@@ -1532,4 +1585,41 @@ _handleReaderLoaded(readerEvt) {
    this.mostrarRecorte = false;
  }
 
+
+//  CHIPS
+
+add(event: MatChipInputEvent): void {
+  const input = event.input;
+  const value = event.value;
+
+  // console.log('aqui');
+  if (this.chips.length < 5) {
+
+      // Add our fruit
+  if ((value || '').trim()) {
+    this.chips.push({nombre: value.trim()});
+  }
+
+  // Reset the input value
+  if (input) {
+    input.value = '';
+  }
+  }
+
+  // if (this.chips.length >= 5) {
+  //   Swal.fire('', 'Puedes poner hasta cinco palabras clave', 'warning');
+  //   console.log('mas de 5');
+  // }
+
 }
+
+remove(chip: Chip): void {
+  const index = this.chips.indexOf(chip);
+
+  if (index >= 0) {
+    this.chips.splice(index, 1);
+  }
+ }
+}
+
+

@@ -219,135 +219,11 @@
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar producto</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="infoCategoria">Agregar producto en {{infoCategoria.nombre}}</h5>
                     <button type="button" id="btn-cerrar-modal-producto" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
-
-                <!-- ----------------------------------------------------------------------------------------------------- -->
-                <!-- --------------------------------------------- AGREGAR LENTES ---------------------------------------- -->
-                <!-- ----------------------------------------------------------------------------------------------------- -->
-                <div class="modal-body" *ngIf="infoCategoria && infoCategoria.nombre === 'Material Lentes'">
-
-                    <div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <label class="form-label">Material *</label>
-                                <input class="form-control" placeholder="Nombre del material" [formControl]="nombreMaterial" [class.is-invalid]="nombreMaterial.touched && nombreMaterial.invalid">
-                            </div>
-
-                            <div class="col form-group">
-                                <label class="form-label">Descripcion</label>
-                                <input class="form-control" placeholder="Descripcion del material" [formControl]="descripcionMaterial">
-                            </div>
-                        </div>
-
-                        <!-- ----------------------------------------------------------------------------------------------------- -->
-                        <!-- -------------------------------------------- LENTE TERMINADO ---------------------------------------- -->
-                        <!-- ----------------------------------------------------------------------------------------------------- -->
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Lente terminado</h5>
-
-                                <div *ngFor="let lt of lenterTerminados; let i = index">
-                                    <div class="row">
-                                        <div class="col form-group">
-                                            <label class="form-label">Tipo</label>
-                                            <input class="form-control" placeholder="Tipo material" id="tipo{{i}}">
-                                        </div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Esfera</label>
-                                            <input class="form-control" placeholder="Esfera" id="esfera{{i}}">
-                                        </div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Cilindro</label>
-                                            <input class="form-control" placeholder="Cilindro" id="cilindro{{i}}">
-                                        </div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Adicción</label>
-                                            <input class="form-control" placeholder="Adicción" id="adiccion{{i}}" type="number" min="0">
-                                        </div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Valor unitario</label>
-                                            <input class="form-control" placeholder="$" id="valorUnitario{{i}}" type="number" min="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <p class="alerta-error" *ngIf="pLenteTerminado">* Debes llenar al menos un dato</p>
-                                </div>
-
-                                <div class="text-right">
-                                    <button class="btn btn-danger" style="margin-right: 5px;" type="button" (click)="eliminarLenteTerminado()" *ngIf="lenterTerminados.length >= 2"><i class="fa fa-trash"></i></button>
-                                    <button class="btn btn-success" type="button" (click)="lenterTerminados.push({lente : 'lente terminado'})"><i class="fas fa-plus"></i>&nbsp; Agregar formula</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ----------------------------------------------------------------------------------------------------- -->
-                        <!-- --------------------------------------------- LENTE TALLADO ----------------------------------------- -->
-                        <!-- ----------------------------------------------------------------------------------------------------- -->
-
-                        <div class="card" style="margin-top: 50px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Lente tallado</h5>
-
-                                <div style="padding-bottom: 30px;" *ngIf="lentesTallados.length >= 1">
-                                    <!-- <h5 class="card-title">Lentes agregados</h5> -->
-                                    <label class="form-label">Lentes agregados</label>
-                                    <div class="row">
-                                        <div class="col-3" *ngFor="let la of lentesTallados; let i = index;" style="padding-top: 10px;">
-                                            <h4>{{la.nombre}}</h4>
-                                            <button class="btn btn-danger btn-sm" (click)="eliminarLenteTallado(i)" style="margin-right: 5px;"><i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col form-group">
-                                        <label class="form-label">Nombre lente</label>
-                                        <input class="form-control" placeholder="Progresivos, Bifocales ..." id="nombreLenteLta" (change)="inputsLenteTallado($event)">
-                                    </div>
-                                    <div class="col form-group">
-                                        <label class="form-label">Tipo</label>
-                                        <input class="form-control" placeholder="Focus silver, focus gold ..." id="tipoLta" (change)="inputsLenteTallado($event)">
-                                    </div>
-                                    <div class="col form-group">
-                                        <label class="form-label">Valor unitario</label>
-                                        <input class="form-control" placeholder="$" type="number" min="0" id="valorUnitarioLta" (change)="inputsLenteTallado($event)">
-                                    </div>
-                                </div>
-
-                                <div *ngFor="let lta of agregarTipo; let i = index;">
-                                    <div class="row">
-                                        <div class="col"></div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Tipo</label>
-                                            <input class="form-control" placeholder="Focus silver, focus gold ..." id="tipoLta{{i}}" (change)="inputsLenteTallado($event)">
-                                        </div>
-                                        <div class="col form-group">
-                                            <label class="form-label">Valor unitario</label>
-                                            <input class="form-control" placeholder="$" type="number" min="0" id="valorUnitarioLta{{i}}" (change)="inputsLenteTallado($event)">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="text-right">
-                                    <button class="btn btn-danger" (click)="eliminarTipo()" style="margin-right: 5px;" *ngIf="agregarTipo.length >= 1"><i class="fa fa-trash"></i></button>
-                                    <button class="btn btn-success" (click)="validacionesLenteTallado('agregarTipo')"><i class="fas fa-plus"></i>&nbsp;Agregar tipo</button>
-                                </div>
-
-                                <div class="text-center">
-                                    <button class="btn btn-success" (click)="validacionesLenteTallado('agregarLente')"><i class="fas fa-plus"></i>&nbsp;Agregar Lente</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- ----------------------------------------------------------------------------------------------------- -->
                 <!-- -------------------------------------------- AGREGAR PRODUCTO --------------------------------------- -->
                 <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -409,6 +285,39 @@
                             <div class="col form-group">
                                 <label class="form-label">Margen de utilidad</label>
                                 <input type="text" class="form-control" placeholder="Margen de utilidad" *ngIf="datosProducto.get('precioVenta').valid && datosProducto.get('precioCompra').valid" readonly [value]="(datosProducto.value.precioVenta - datosProducto.value.precioCompra ) / ( datosProducto.value.precioCompra / 100) + '%'">
+                            </div>
+                        </div>
+                    </form>
+
+                    <h5 style="padding-top: 15px; padding-bottom: 15px;">Sucursales</h5>
+
+                    <form>
+                        <div>
+                            <div *ngFor="let s of sucursalesEdit; let i = index">
+
+                                <div class="row" *ngIf="s.checked" style="padding-top: 8px;">
+
+                                    <div class="col">
+                                        <label class="form-label">Sucursal</label>
+                                        <p>{{s.nombre}}</p>
+                                    </div>
+
+                                    <div class="col">
+                                        <label class="form-label">Cantidad de unidades *</label>
+                                        <input class="form-control" placeholder="Ejm: 1, 10, 20">
+                                    </div>
+
+                                    <div class="col">
+                                        <label class="form-label">Precio de venta</label>
+                                        <input class="form-control" placeholder="Precio de venta">
+                                    </div>
+
+                                    <div class="col">
+                                        <label class="form-label">Margen de utilidad</label>
+                                        <input class="form-control" placeholder="Margen de utilidad">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </form>
