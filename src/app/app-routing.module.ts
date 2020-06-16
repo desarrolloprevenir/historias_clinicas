@@ -78,11 +78,7 @@ const routes: Routes = [
   {path : 'precios-e-inventario', component: PreciosInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'inventario/:idCategoria', component: VerInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
-<<<<<<< HEAD
   {path : 'agregar-lente/:idCategoria', component: AgregarLenteComponent, canActivate: [UserGuard, AdminSucursal]},
-=======
-  {path : 'histOd', component: HistOdComponent},
->>>>>>> 756c7269050c39be5cab59d2cb35df384559643c
   {path: '**', component: LoginComponent}
 
 ];
