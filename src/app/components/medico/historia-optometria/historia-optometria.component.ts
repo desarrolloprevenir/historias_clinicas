@@ -17,10 +17,10 @@ export class HistoriaOptometriaComponent implements OnInit {
   @Input() nombres: string;
   @Input() cedula: string;
   @Input() categoria;
-  @ViewChild('content', { static: false }) content: ElementRef;
-  @ViewChild('contentRemision', { static: false }) contentRemision: ElementRef;
-  @ViewChild('contentDiagnostico', { static: false }) contentDiagnostico: ElementRef;
-  @ViewChild('contentObservaciones', { static: false }) contentObservaciones: ElementRef;
+  @ViewChild('content') content: ElementRef;
+  @ViewChild('contentRemision') contentRemision: ElementRef;
+  @ViewChild('contentDiagnostico') contentDiagnostico: ElementRef;
+  @ViewChild('contentObservaciones') contentObservaciones: ElementRef;
 
   public datosOptometria: FormGroup;
   public infoHcFb: {};

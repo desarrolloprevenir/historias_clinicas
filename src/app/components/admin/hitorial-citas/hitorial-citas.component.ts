@@ -18,7 +18,7 @@ export class HitorialCitasComponent implements OnInit {
   public medicos;
   public servicioSelect;
   public idConsultorio;
-  @ViewChild('calendario', { static: false }) calendario;
+  @ViewChild('calendario') calendario;
   // public info = {idConsultorio: '', idServicio: '', categoria: '', idSucursal: ''};
 
   // @Input() idConsultorio;

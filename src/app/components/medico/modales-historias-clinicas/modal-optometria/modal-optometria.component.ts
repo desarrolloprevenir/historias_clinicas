@@ -10,10 +10,10 @@ import * as moment from 'moment';
 export class ModalOptometriaComponent implements OnInit {
   @Input() infoHistoriaClinica;
   @Input() infoUser;
-  @ViewChild('content', { static: false }) content: ElementRef;
-  @ViewChild('contentRemision', { static: false }) contentRemision: ElementRef;
-  @ViewChild('contentCertificado', { static: false }) contentCertificado: ElementRef;
-  @ViewChild('contentCertificadoObservaciones', { static: false }) contentCertificadoObservaciones: ElementRef;
+  @ViewChild('content') content: ElementRef;
+  @ViewChild('contentRemision') contentRemision: ElementRef;
+  @ViewChild('contentCertificado') contentCertificado: ElementRef;
+  @ViewChild('contentCertificadoObservaciones') contentCertificadoObservaciones: ElementRef;
   public imagen;
 
   constructor() { }
