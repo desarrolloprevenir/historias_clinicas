@@ -77,14 +77,9 @@ const routes: Routes = [
   {path : 'historia-general/:idCategoria', component: HistoriaGeneralComponent, canActivate: [UserGuard, UserMedico]},
   {path : 'precios-e-inventario', component: PreciosInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'inventario/:idCategoria', component: VerInventarioComponent, canActivate: [UserGuard, AdminSucursal]},
-<<<<<<< HEAD
-  {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
-  {path : 'agregar-lente/:idCategoria', component: AgregarLenteComponent, canActivate: [UserGuard, AdminSucursal]},
-=======
   {path : 'agregar-lente/:idCategoria', component: AgregarLenteComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'estadisticas-historial', component: HitorialCitasComponent, canActivate: [UserGuard, AdminSucursal]},
   {path : 'histOd', component: HistOdComponent},
->>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
   {path: '**', component: LoginComponent}
 
 ];

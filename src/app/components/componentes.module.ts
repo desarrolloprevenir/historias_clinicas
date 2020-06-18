@@ -63,14 +63,10 @@ import { AlertasComponent } from './aplicacion/alertas/alertas.component';
 import { VerInventarioComponent } from './aplicacion/ver-inventario/ver-inventario.component';
 import { LoadingComponent } from './aplicacion/loading/loading.component';
 import { ModalCambioAvatarComponent } from './aplicacion/modal-cambio-avatar/modal-cambio-avatar.component';
-<<<<<<< HEAD
-import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
-import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
-=======
 import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
 import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
 import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
->>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
+import {GmedicosComponent} from './gestor/gmedicos/gmedicos.component';
 
 
 
@@ -114,14 +110,10 @@ import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-p
   VerInventarioComponent,
   LoadingComponent,
   ModalCambioAvatarComponent,
-<<<<<<< HEAD
-  PerfilProfesionalComponent,
-  AgregarLenteComponent
-=======
   HistOdComponent,
   AgregarLenteComponent,
-  PerfilProfesionalComponent
->>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
+  PerfilProfesionalComponent,
+  GmedicosComponent
   ],
   imports: [
     CommonModule,
@@ -183,10 +175,7 @@ import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-p
   AlertasComponent,
   VerInventarioComponent,
   LoadingComponent,
-<<<<<<< HEAD
-=======
   HistOdComponent,
->>>>>>> 3896bd16ba3c6ec0de933c5ad7fb8b5fd6f62f0d
   ModalCambioAvatarComponent,
   AgregarLenteComponent
   ]

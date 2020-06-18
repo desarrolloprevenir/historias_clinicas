@@ -60,6 +60,9 @@
                 <h2>Panel de administración</h2>
 
                 <div style="padding-top: 50px; display: inline-grid;">
+                  <button type="button" style="margin-top: 10px" class="btn btn-success btn-lg" data-toggle="modal" data-target="#GestorModal">
+                    Gestor de Publicaciones
+                  </button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/publicaciones">Crear y gestionar Servicios</button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/gestionar-sucursales">Crear y gestionar Sucursales</button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/medicos">Crear y gestionar Médicos</button>
@@ -68,6 +71,27 @@
                 </div>
 
             </div>
+
+            <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="GestorModal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="GestorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="GestorModalLabel">Gestor De Publicaciones</h5>
+        <button type="button" class="close" id="cerrarGestor" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <app-gmedicos>
+          </app-gmedicos>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cerrarGestor2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
