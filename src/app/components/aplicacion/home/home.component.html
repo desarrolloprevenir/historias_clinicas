@@ -60,9 +60,7 @@
                 <h2>Panel de administración</h2>
 
                 <div style="padding-top: 50px; display: inline-grid;">
-                  <button type="button" style="margin-top: 10px" class="btn btn-success btn-lg" data-toggle="modal" data-target="#GestorModal">
-                    Gestor de Publicaciones
-                  </button>
+                    <button style="margin-top: 10px" class="btn btn-success btn-lg" (click)="openModal(template)">Gestor de Publicaciones</button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/publicaciones">Crear y gestionar Servicios</button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/gestionar-sucursales">Crear y gestionar Sucursales</button>
                     <button style="margin-top: 10px" class="btn btn-success btn-lg" routerLink="/medicos">Crear y gestionar Médicos</button>
@@ -92,6 +90,20 @@
     </div>
   </div>
 </div>
+
+<!-- Nuevo Modal -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Gestor De Publicaciones</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-gmedicos>
+    </app-gmedicos>
+  </div>
+</ng-template>
 
 
 

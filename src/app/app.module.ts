@@ -16,6 +16,7 @@ import { UserSucursal } from './services/user_sucursal.guard';
 import { UserMedico } from './services/user_medico.guard';
 import { SucursalMedico } from './services/sucursal_medico.guard';
 import { AdminSucursal } from './services/admin_sucursal.guard';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // MODULO PIPES
 import { PipesModule } from './pipes/pipes.module';
@@ -47,7 +48,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    ModalModule.forRoot()
   ],
   providers: [
     UserGuard,

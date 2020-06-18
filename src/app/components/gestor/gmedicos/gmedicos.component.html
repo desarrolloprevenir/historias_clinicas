@@ -1,6 +1,19 @@
 <div class="container-fluid">
-<h6>Para Crear una Publicacion y se visible para todos los clientes debe seguir una serie de pasos
-lo primero es crear un medico</h6>
+<h6>Para Crear una Publicacion y sea visible para todos los clientes debe seguir una serie de pasos
+lo primero es crear un medico </h6>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
 <hr>
 
 <!-- ----------------------------------------- ALERTAS ------------------------------------------------- -->
@@ -26,11 +39,11 @@ lo primero es crear un medico</h6>
 
 <div id="btn-agregar-pub" class="text-center">
 
-<button type="button" class="btn btn-success" (click)="limpiarForm()"><i
+<button type="button" class="btn btn-success" (click)="limpiarForm(templateNested)"><i
     class="fas fa-plus"></i>&nbsp; Crear Médico</button>
-
+<!--
   <button type="button" id="btn-abriModal" class="btn btn-success" data-toggle="modal" data-target="#agregaMed"><i
-    class="fas fa-plus"></i>&nbsp; Crear Médico</button>
+    class="fas fa-plus"></i>&nbsp; Crear Médico</button> -->
 
 </div>
 
@@ -38,264 +51,238 @@ lo primero es crear un medico</h6>
   <h5>Aun no tienes médicos, crea uno ! </h5>
 </div>
 
-
-
 <!-- MODAL CREAR MEDICO -->
-
-<div class="modal fade bd-example-modal-lg" id="agregaMed" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h3 class="modal-title" id="agregaMedLabel">Crear Médico</h3>
-              <button type="button" id="cerrarModal" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          </div>
-
-          <div class="modal-body">
-              <!-- <app-modal-crear-medico></app-modal-crear-medico> -->
-
-
-
-              <div id="buscar-formulario-medico">
-                  <div class="col-md-1"></div>
-                  <div class="col-md-10">
-                      <div class="input-group" id="buscarC">
-                          <form class="form-signin" #cedulaForm="ngForm" (ngSubmit)="buscarMedico()" style="margin: auto; display: block">
-                              <div class="input-group-prepend">
-                                  <!-- <span class="input-group-text">Cedula</span> -->
-                                  <input type="text" aria-label="cedula" placeholder="Cédula" class="form-control" [formControl]="cedula" [class.is-invalid]="cedula.hasError('pattern')">
-                                  <button class="btn btn-info" [disabled]="!cedula.valid">Buscar</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-                  <div class="col-md-1"></div>
-              </div>
-
-              <div class="alert alert-primary" role="alert" *ngIf="existe === false">
-                  El médico no existe ¿Desea crearlo?, ten en cuenta que se creará una cuenta de usuario para el médico con el correo electrónico y la contraeña asignada, con la cual el profesional de la salud, podrá ingresar a través de la web o la aplicación móvil.
-              </div>
-
-              <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
-                  {{statusText}}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-              </div>
-
-              <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error_modal'">
-            {{statusText}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div> -->
-
-              <div id="formulario-crear-medico" *ngIf="existe && formulario">
-
-                  <div class="col-lg-12">
-                      <h3>Datos médico</h3>
-                      <form (ngSubmit)="agregarMedico(true)">
-                          <div class="form-group">
-                              <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                              <input type="text" class="form-control" placeholder="Nombres del médico" value="{{medico.nombres}}" [readonly]="existe">
-                              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                          </div>
-
-                          <div class="form-group">
-                              <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                              <input type="text" class="form-control" placeholder="Apellidos del médico" value="{{medico.apellidos}}" [readonly]="existe">
-                              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                          </div>
-
-                          <div class="form-group">
-                              <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                              <input *ngIf="!existe" type="number" class="form-control" placeholder="Tarjeta profesional" [readonly]="existe">
-                              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                          </div>
-
-                          <div class="form-group">
-                              <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                              <input type="text" class="form-control" placeholder="Especialidad medica" value="{{medico.titulo}}" [readonly]="existe">
-                              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                          </div>
-
-                          <button type="submit" class="btn btn-success">Agregar</button>
-                      </form>
-                  </div>
-
-              </div>
-
-
-              <!-- FORMULARIO CUANDO NO EXISTE MEDICO -->
-
-
-
-              <div class="loading" *ngIf="loading">
-                  <img src="/assets/pulso.gif" alt="">
-              </div>
-
-
-          </div>
-
-          <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error_modal'">
-        {{statusText}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> -->
-
-          <!-- FORMULARIO CUANDO NO EXISTE MEDICO -->
-
-
-          <div id="formulario-crear-medico" *ngIf="!existe && formulario" style="padding:30px">
-
-              <div class="col-lg-12">
-                  <h3 class="text-center">Por favor ingresa los datos</h3>
-                  <br/>
-                  <form class="form-signin" [formGroup]="datos" (ngSubmit)="agregarMedico(false)" novalidate>
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="text" formControlName="nombres" class="form-control" aria-describedby="emailHelp" placeholder="Nombres del médico" [readonly]="existe" [class.is-invalid]="datos.get('nombres').errors && datos.get('nombres').touched">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-                      <div *ngIf="datos.get('nombres').errors && datos.get('nombres').touched">
-                          <p class="alerta-error" *ngIf="datos.get('nombres').hasError('required')">* El campo es requerido</p>
-                          <p class="alerta-error" *ngIf="datos.get('nombres').hasError('minlength')">Cantidad minima de caracteres (2)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('nombres').hasError('maxlength')">Cantidad maxima de caracteres (50)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('nombres').hasError('pattern')">Este campo solo acepta letras
-                          </p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="text" formControlName="apellidos" class="form-control" aria-describedby="emailHelp" placeholder="Apellidos del médico" [readonly]="existe" [class.is-invalid]="datos.get('apellidos').errors && datos.get('apellidos').touched">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('apellidos').errors && datos.get('apellidos').touched">
-                          <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('required')">* El campo es requerido
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('minlength')">Cantidad minima de caracteres (2)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('maxlength')">Cantidad maxima de caracteres (50)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('pattern')">Este campo solo acepta letras
-                          </p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="email" formControlName="email" class="form-control" aria-describedby="emailHelp" placeholder="correo_medico@ejemplo.com" [readonly]="existe" [class.is-invalid]="datos.get('email').errors && datos.get('email').touched">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('email').errors && datos.get('email').touched">
-                          <p class="alerta-error" *ngIf="datos.get('email').hasError('required')">* El campo es requerido</p>
-                          <p class="alerta-error" *ngIf="datos.get('email').hasError('pattern') || datos.get('email').hasError('email')">El correo no es valido.</p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="password" formControlName="pssw" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña" [readonly]="existe" [class.is-invalid]="datos.get('pssw').errors && datos.get('pssw').touched">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('pssw').errors && datos.get('pssw').touched">
-                          <p class="alerta-error" *ngIf="datos.get('pssw').hasError('required')">* El campo es requerido.</p>
-                          <p class="alerta-error" *ngIf="datos.get('pssw').hasError('minlength')">Cantidad minima de caracteres (8)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('pssw').hasError('maxlength')">Cantidad minima de caracteres (15)
-                          </p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="password" formControlName="psswConf" [class.is-invalid]="datos.get('psswConf').errors && datos.get('psswConf').touched" class="form-control" aria-describedby="emailHelp" placeholder="Confirmar contraseña" [readonly]="existe">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('psswConf').errors && datos.get('psswConf').touched">
-                          <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('required')">* El campo es requerido.</p>
-                          <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('minlength')">Cantidad minima de caracteres (8)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('maxlength')">Cantidad minima de caracteres (15)
-                          </p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input *ngIf="!existe" type="number" formControlName="tarjetaProfesional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
-                          <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('required')">* Este campo es requerido.</p>
-                          <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('pattern')">Este campo solo acepta números, sin puntos ni caracteres especiales.</p>
-                      </div>
-
-                      <div class="form-group">
-                          <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
-                          <input type="text" formControlName="titulo" class="form-control" [class.is-invalid]="datos.get('titulo').errors && datos.get('titulo').touched" aria-describedby="emailHelp" placeholder="Especialidad medica" [readonly]="existe">
-                          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                      </div>
-
-                      <div *ngIf="datos.get('titulo').errors && datos.get('titulo').touched">
-                          <p class="alerta-error" *ngIf="datos.get('titulo').hasError('required')">* El campo es requerido</p>
-                          <p class="alerta-error" *ngIf="datos.get('titulo').hasError('minlength')">Cantidad minima de caracteres (2)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('titulo').hasError('maxlength')">Cantidad maxima de caracteres (50)
-                          </p>
-                          <p class="alerta-error" *ngIf="datos.get('titulo').hasError('pattern')">Este campo solo acepta letras
-                          </p>
-                      </div>
-
-
-                      <button type="submit" class="btn btn-primary" [disabled]="!this.datos.valid || loading">Agregar</button>
-
-                  </form>
-              </div>
-
-          </div>
-
-      </div>
-  </div>
+<ng-template #templateNested>
+  <div class="modal-header">
+    <h3 class="modal-title" id="agregaMedLabel">Crear Médico</h3>
+    <button type="button" id="cerrarModal" class="close" (click)="modalRef2.hide()" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
 </div>
+
+<div class="modal-body">
+    <!-- <app-modal-crear-medico></app-modal-crear-medico> -->
+
+
+
+    <div id="buscar-formulario-medico">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="input-group" id="buscarC">
+                <form class="form-signin" #cedulaForm="ngForm" (ngSubmit)="buscarMedico()" style="margin: auto; display: block">
+                    <div class="input-group-prepend">
+                        <!-- <span class="input-group-text">Cedula</span> -->
+                        <input type="text" aria-label="cedula" placeholder="Cédula" class="form-control" [formControl]="cedula" [class.is-invalid]="cedula.hasError('pattern')">
+                        <button class="btn btn-info" [disabled]="!cedula.valid">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="alert alert-primary" role="alert" *ngIf="existe === false">
+        El médico no existe ¿Desea crearlo?, ten en cuenta que se creará una cuenta de usuario para el médico con el correo electrónico y la contraeña asignada, con la cual el profesional de la salud, podrá ingresar a través de la web o la aplicación móvil.
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning'">
+        {{statusText}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+  <span aria-hidden="true">&times;</span>
+</button>
+    </div>
+
+    <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error_modal'">
+  {{statusText}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
+
+    <div id="formulario-crear-medico" *ngIf="existe && formulario">
+
+        <div class="col-lg-12">
+            <h3>Datos médico</h3>
+            <form (ngSubmit)="agregarMedico(true)">
+                <div class="form-group">
+                    <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                    <input type="text" class="form-control" placeholder="Nombres del médico" value="{{medico.nombres}}" [readonly]="existe">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                    <input type="text" class="form-control" placeholder="Apellidos del médico" value="{{medico.apellidos}}" [readonly]="existe">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                    <input *ngIf="!existe" type="number" class="form-control" placeholder="Tarjeta profesional" [readonly]="existe">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                    <input type="text" class="form-control" placeholder="Especialidad medica" value="{{medico.titulo}}" [readonly]="existe">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- FORMULARIO CUANDO NO EXISTE MEDICO -->
+
+
+
+    <div class="loading" *ngIf="loading">
+        <img src="/assets/pulso.gif" alt="">
+    </div>
+
+
+</div>
+
+<!-- <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="status === 'error_modal'">
+{{statusText}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+ </div> -->
+
+<!-- FORMULARIO CUANDO NO EXISTE MEDICO -->
+
+
+<div id="formulario-crear-medico" *ngIf="!existe && formulario" style="padding:30px">
+
+    <div class="col-lg-12">
+        <h3 class="text-center">Por favor ingresa los datos</h3>
+        <br/>
+        <form class="form-signin" [formGroup]="datos" (ngSubmit)="agregarMedico(false)" novalidate>
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="text" formControlName="nombres" class="form-control" aria-describedby="emailHelp" placeholder="Nombres del médico" [readonly]="existe" [class.is-invalid]="datos.get('nombres').errors && datos.get('nombres').touched">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <div *ngIf="datos.get('nombres').errors && datos.get('nombres').touched">
+                <p class="alerta-error" *ngIf="datos.get('nombres').hasError('required')">* El campo es requerido</p>
+                <p class="alerta-error" *ngIf="datos.get('nombres').hasError('minlength')">Cantidad minima de caracteres (2)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('nombres').hasError('maxlength')">Cantidad maxima de caracteres (50)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('nombres').hasError('pattern')">Este campo solo acepta letras
+                </p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="text" formControlName="apellidos" class="form-control" aria-describedby="emailHelp" placeholder="Apellidos del médico" [readonly]="existe" [class.is-invalid]="datos.get('apellidos').errors && datos.get('apellidos').touched">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('apellidos').errors && datos.get('apellidos').touched">
+                <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('required')">* El campo es requerido
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('minlength')">Cantidad minima de caracteres (2)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('maxlength')">Cantidad maxima de caracteres (50)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('apellidos').hasError('pattern')">Este campo solo acepta letras
+                </p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="email" formControlName="email" class="form-control" aria-describedby="emailHelp" placeholder="correo_medico@ejemplo.com" [readonly]="existe" [class.is-invalid]="datos.get('email').errors && datos.get('email').touched">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('email').errors && datos.get('email').touched">
+                <p class="alerta-error" *ngIf="datos.get('email').hasError('required')">* El campo es requerido</p>
+                <p class="alerta-error" *ngIf="datos.get('email').hasError('pattern') || datos.get('email').hasError('email')">El correo no es valido.</p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="password" formControlName="pssw" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña" [readonly]="existe" [class.is-invalid]="datos.get('pssw').errors && datos.get('pssw').touched">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('pssw').errors && datos.get('pssw').touched">
+                <p class="alerta-error" *ngIf="datos.get('pssw').hasError('required')">* El campo es requerido.</p>
+                <p class="alerta-error" *ngIf="datos.get('pssw').hasError('minlength')">Cantidad minima de caracteres (8)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('pssw').hasError('maxlength')">Cantidad minima de caracteres (15)
+                </p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="password" formControlName="psswConf" [class.is-invalid]="datos.get('psswConf').errors && datos.get('psswConf').touched" class="form-control" aria-describedby="emailHelp" placeholder="Confirmar contraseña" [readonly]="existe">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('psswConf').errors && datos.get('psswConf').touched">
+                <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('required')">* El campo es requerido.</p>
+                <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('minlength')">Cantidad minima de caracteres (8)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('psswConf').hasError('maxlength')">Cantidad minima de caracteres (15)
+                </p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input *ngIf="!existe" type="number" formControlName="tarjetaProfesional" class="form-control" aria-describedby="emailHelp" placeholder="Tarjeta profesional" [readonly]="existe" [class.is-invalid]="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('tarjetaProfesional').errors && datos.get('tarjetaProfesional').touched">
+                <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('required')">* Este campo es requerido.</p>
+                <p class="alerta-error" *ngIf="datos.get('tarjetaProfesional').hasError('pattern')">Este campo solo acepta números, sin puntos ni caracteres especiales.</p>
+            </div>
+
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Nombre medico</label> -->
+                <input type="text" formControlName="titulo" class="form-control" [class.is-invalid]="datos.get('titulo').errors && datos.get('titulo').touched" aria-describedby="emailHelp" placeholder="Especialidad medica" [readonly]="existe">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+            <div *ngIf="datos.get('titulo').errors && datos.get('titulo').touched">
+                <p class="alerta-error" *ngIf="datos.get('titulo').hasError('required')">* El campo es requerido</p>
+                <p class="alerta-error" *ngIf="datos.get('titulo').hasError('minlength')">Cantidad minima de caracteres (2)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('titulo').hasError('maxlength')">Cantidad maxima de caracteres (50)
+                </p>
+                <p class="alerta-error" *ngIf="datos.get('titulo').hasError('pattern')">Este campo solo acepta letras
+                </p>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary" [disabled]="!this.datos.valid || loading">Agregar</button>
+
+        </form>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button *ngIf="modalRef2" type="button" class="btn btn-danger" (click)="modalRef2.hide()">Close first modal</button>
+  </div>
+</ng-template>
 
 
 <!-- ---------------------------------------------------------- -->
 <div class="container-fluid">
   <div class="row">
-<!-- Modal -->
-<div class="modal fade" id="agregaMed1" tabindex="-1" role="dialog" aria-labelledby="agregaMed1Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="agregaMed1Label">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      <div class="col-md-7">
+      <div class="col-md-12">
           <div id="card-publicacion">
               <div class="jumbotron jumbotron-fluid" style="padding: 20px" *ngFor="let m of medicos">
                   <div class="row">
                       <div class="col-lg-7">
                           <h4>{{m.nombre}}</h4>
-                          <p><strong>Tarjeta profesional :</strong> {{m.tarj_profecional}}</p>
                           <p><strong>Titulo : </strong> {{m.titulo}}</p>
                           <div class="row">
                           </div>

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { PlatformLocation } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { ProvedorService } from '../../../services/provedor.service';
@@ -29,8 +31,10 @@ export class GmedicosComponent implements OnInit {
     public read;
     public nombre;
     cedula = new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('[0-9]*')]);
+    public modalRef2: BsModalRef;
 
     constructor(public userService: UserService,
+              private modalService: BsModalService,
               public provedorService: ProvedorService,
               private router: Router,
               private appService: AppService,
@@ -178,13 +182,15 @@ export class GmedicosComponent implements OnInit {
         this.getMedicos(this.identity.id_provedor);
         this.status = 'success';
         this.statusText = 'Médico agregado con exito.';
-        document.getElementById('cerrarModal').click();
+        //document.getElementById('cerrarModal').click();
+        //this.modalMedi.hide();
+        this.modalRef2.hide();
       }
 
       if (response === false) {
         this.status = 'error';
         this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
-        document.getElementById('cerrarModal').click();
+        this.modalRef2.hide();
       }
 
       if (response.existe === true ) {
@@ -198,7 +204,7 @@ export class GmedicosComponent implements OnInit {
         this.status = 'error';
         this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
         this.loading = false;
-        document.getElementById('cerrarModal').click();
+        this.modalRef2.hide();
      });
 
     } else {
@@ -224,11 +230,11 @@ export class GmedicosComponent implements OnInit {
             this.getMedicos(this.identity.id_provedor);
             this.formulario = false;
             this.cedula.reset();
-            document.getElementById('cerrarModal').click();
+            this.modalRef2.hide();
           } else if (response === false) {
             this.status = 'error';
             this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
-            document.getElementById('cerrarModal').click();
+            this.modalRef2.hide();
           }
 
           if (response.campo === 'profesional') {
@@ -246,7 +252,7 @@ export class GmedicosComponent implements OnInit {
           this.status = 'error';
           this.statusText = 'Error al agregar el médico, intentalo más tarde o revisa tu conexion';
           this.loading = false;
-          document.getElementById('cerrarModal').click();
+          this.modalRef2.hide();
           // console.log(err);
         });
 
@@ -262,12 +268,16 @@ export class GmedicosComponent implements OnInit {
     this.status = undefined;
   }
 
-  limpiarForm() {
+  limpiarForm(template: TemplateRef<any>) {
     this.datos.reset();
     this.existe = undefined;
     this.formulario = false;
     this.cedula.reset();
-    document.getElementById('btn-abriModal').click();
+    console.log(template);
+    //this.modalMedi.show();
+   this.modalRef2 = this.modalService.show(template,{class: 'second'});
+   //console.log(modal);
+    //document.getElementById('btn-abriModal').click();
   }
 
 }

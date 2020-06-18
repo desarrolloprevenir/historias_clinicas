@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ProvedorService } from '../../../services/provedor.service';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment.prod';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OneSignalService } from '../../../services/one-signal.service';
 
 
@@ -18,8 +20,10 @@ export class HomeComponent implements OnInit {
   public statusText: string;
   public identity;
   public apiUrl = environment.apiUrl;
+  public modalRef: BsModalRef;
 
   constructor(public provedorService: ProvedorService,
+              private modalService: BsModalService,
               public userService: UserService,
               ) { }
 
@@ -34,6 +38,10 @@ export class HomeComponent implements OnInit {
 
   cambiarSesion() {
     document.getElementById('btn-cambiar-de-sesion').click();
+  }
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
 
 
