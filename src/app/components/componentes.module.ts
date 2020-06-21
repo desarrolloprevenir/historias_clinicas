@@ -67,6 +67,8 @@ import { HistOdComponent } from './odontologia/hist-od/hist-od.component';
 import { AgregarLenteComponent } from './aplicacion/agregar-lente/agregar-lente.component';
 import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-profesional.component';
 import {GmedicosComponent} from './gestor/gmedicos/gmedicos.component';
+import { GserviciosComponent } from './gestor/gservicios/gservicios.component';
+import { GCreaServicioComponent } from './gestor/gcrea-servicio/gcrea-servicio.component';
 
 
 
@@ -113,7 +115,9 @@ import {GmedicosComponent} from './gestor/gmedicos/gmedicos.component';
   HistOdComponent,
   AgregarLenteComponent,
   PerfilProfesionalComponent,
-  GmedicosComponent
+  GmedicosComponent,
+  GserviciosComponent,
+  GCreaServicioComponent
   ],
   imports: [
     CommonModule,

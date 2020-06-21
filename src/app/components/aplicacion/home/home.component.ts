@@ -21,6 +21,11 @@ export class HomeComponent implements OnInit {
   public identity;
   public apiUrl = environment.apiUrl;
   public modalRef: BsModalRef;
+  medico = true;
+  sucursal = false;
+  servicio = false;
+  cambio = 0;
+  mensaje = 'Para Crear una Publicacion y sea visible para todos los clientes debe seguir una serie de pasos lo primero es crear un medico';
 
   constructor(public provedorService: ProvedorService,
               private modalService: BsModalService,
@@ -41,8 +46,31 @@ export class HomeComponent implements OnInit {
   }
 
   public openModal(template: TemplateRef<any>) {
+    this.cambio = 0;
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
 
+  next()
+  {
+    console.log(this.cambio);
+
+    if(this.cambio<=1)
+    {
+      console.log('mas');
+      this.cambio++;
+    }
+  }
+
+  prev()
+  {
+    console.log(this.cambio);
+
+    if(this.cambio>=1)
+    {
+      console.log('menos');
+
+      this.cambio--;
+    }
+  }
 
 }

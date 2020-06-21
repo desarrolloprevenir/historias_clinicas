@@ -24,6 +24,10 @@
     transform: scale(1.3);
 }
 
+.gr {
+color: #04ad93 !important;
+}
+
 .contenedor {
     overflow: hidden;
 }
