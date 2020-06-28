@@ -138,7 +138,7 @@ export class CrearPublicacionComponent implements OnInit {
                 this.datos = this.formBuilder.group({
                 nombre: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]],
                 duracion : ['', [Validators.required, Validators.max(60), Validators.min(15), Validators.pattern('[0-9]*')]],
-                precio: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]*')]],
+                precio: ['0', [Validators.required, Validators.min(0), Validators.pattern('[0-9]*')]],
                 descuento: ['', [Validators.max(100), Validators.min(10), Validators.pattern('[0-9]*')]],
                 video : [''],
                 // direccion : ['', [Validators.required, Validators.maxLength(60)]],

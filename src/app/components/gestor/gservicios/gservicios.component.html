@@ -36,6 +36,14 @@
       Publicación</button>
   </div>
 </div>
+<br>
+<div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="creada">
+ Su <strong>Publicacion</strong> a sido creada correctamente.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <div id="card-publicacion" *ngIf="vacio">
   <h5>No tienes Publicaciones, crea una !</h5>
 </div>
@@ -518,7 +526,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-gcrea-servicio>
+    <app-gcrea-servicio (servicioCreado)="servicioCreado()">
 
     </app-gcrea-servicio>
   </div>

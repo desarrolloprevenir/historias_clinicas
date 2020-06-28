@@ -25,6 +25,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // RECORTE IMAGENES
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -45,6 +46,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     PipesModule,
     ImageCropperModule,
     RouterModule,
+    ReactiveFormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

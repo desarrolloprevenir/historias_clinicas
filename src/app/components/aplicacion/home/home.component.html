@@ -108,9 +108,9 @@
           <li class="page-item">
             <a class="gr page-link" tabindex="-1" (click)="prev()">Anterior</a>
           </li>
-          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=0">1</a></li>
-          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=1">2</a></li>
-          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=2">3</a></li>
+          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=0" (click)="updateMensaje()">1</a></li>
+          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=1" (click)="updateMensaje()">2</a></li>
+          <li class="page-item"><a class="gr page-link" tabindex="-1" (click)="cambio=2" (click)="updateMensaje()">3</a></li>
           <li class="page-item">
             <a class="gr page-link" (click)="next()" tabindex="-1">siguiente</a>
           </li>
@@ -120,15 +120,17 @@
     </div>
   <div class="modal-body" [ngSwitch]="cambio">
     <div *ngSwitchCase="0">
-    <app-gmedicos>
-    </app-gmedicos>
-  </div>
-  <div *ngSwitchCase="1">
       <app-gservicios>
       </app-gservicios>
   </div>
+  <div *ngSwitchCase="1">
+    <app-gmedicos>
+    </app-gmedicos>
+  </div>
   <div *ngSwitchCase="2">
-  <p>Div de sucursal</p>
+  <app-gsucursales>
+
+  </app-gsucursales>
   </div>
   </div>
 </ng-template>

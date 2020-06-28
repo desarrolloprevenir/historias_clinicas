@@ -1,8 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { Router} from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+;
 
 // Autocompletar
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
@@ -42,7 +43,10 @@ export interface Chip {
 })
 export class GCreaServicioComponent implements OnInit {
 
+  registerForm: FormGroup;
+  submitted = false;
   public mymodel;
+  @Output() servicioCreado = new EventEmitter<any>();
   // public publicacion: Publicacion;
   // public departamentos;
   public loading = false;
@@ -107,17 +111,6 @@ export class GCreaServicioComponent implements OnInit {
       this.mymodel = 'informacion';
       this.status = false;
 
-      this.datos = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]],
-      duracion : ['', [Validators.required, Validators.max(60), Validators.min(15), Validators.pattern('[0-9]*')]],
-      precio: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]*')]],
-      descuento: ['', [Validators.max(100), Validators.min(10), Validators.pattern('[0-9]*')]],
-      video : [''],
-      // direccion : ['', [Validators.required, Validators.maxLength(60)]],
-      descripcion: ['', [Validators.required, Validators.minLength(40)]],
-      // check: [false, [Validators.requiredTrue]],
-      });
-
       location.onPopState(() => {
       document.getElementById('btn-cerrar-pub-exitosa').click();
       });
@@ -125,13 +118,17 @@ export class GCreaServicioComponent implements OnInit {
 
      ngOnInit() {
       this.getCategorias();
-    }
 
-      // AUTOCOMPLETAR ---------------------------------------------
-
-
-  displayFn(user?: User): string | undefined {
-    return user ? user.nombre : undefined;
+      this.registerForm = this.formBuilder.group({
+          nombre: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]],
+          categoria: ['',[ Validators.required]],
+          duracion: ['',[ Validators.required]],
+          precio: ['', [Validators.required]],
+          descuento: ['', [Validators.max(100),Validators.required, Validators.min(10), Validators.pattern('[0-9]*')]],
+          video : [''],
+          descripcion : ['', [Validators.required, Validators.minLength(40)]],
+          acceptTerms: [false, Validators.requiredTrue]
+      });
   }
 
   private _filter(nombre: string): User[] {
@@ -140,234 +137,113 @@ export class GCreaServicioComponent implements OnInit {
     return this.options.filter(option => option.nombre.toLowerCase().indexOf(filterValue) > -1);
   }
 
-  // ---------------------------------------------------------------
 
+    // convenience getter for easy access to form fields
+    get f() { return this.registerForm.controls; }
 
-  pestana(pestana) {
-    this.mymodel = pestana;
+    onSubmit() {
+        this.submitted = true;
+        // stop here if form is invalid
+        // console.log(this.registerForm.value.nombre);
+        // let cate = this.registerForm.value.categoria[0];
+        // console.log(this.registerForm.value.categoria);
+        // console.log(cate);
 
-    var li = document.getElementById(this.mymodel);
+        if (this.registerForm.invalid) {
+            return;
+        }
+        else {
+          // console.log('dentro del else');
+        // console.log(this.registerForm.value.categoria);
+        this.loading = true;
+        let token = this.userService.getToken();
+        let user = this.userService.getIdentity();
 
-    if (this.mymodel === 'informacion') {
+        // let ch;
 
-        let l2 = document.getElementById('imagenes');
-        l2.className = 'list-group-item';
-        li.className = 'list-group-item active';
-    }
+        // if (this.chips.length >= 1) {
 
+        //  // tslint:disable-next-line: prefer-for-of
+        // for (let i = 0; i < this.chips.length; i++) {
 
-    if (this.mymodel === 'imagenes') {
+        //   if (!ch) {
+        //     ch = this.chips[i].nombre;
+        //   } else {
+        //     ch = ch + ',' + ' ' + this.chips[i].nombre;
+        //   }
+        // }
 
-        let l = document.getElementById('informacion');
+        // }
 
-        l.className = 'list-group-item';
-        li.className = 'list-group-item active';
-    }
+        this.formulario = {id_usuario: user.id_provedor, token, nombre: this.registerForm.value.nombre,
+            precio: this.registerForm.value.precio, imagenes: this.imagenes,
+            descuento: this.registerForm.value.descuento, duracion: this.registerForm.value.duracion,
+            id_ctga: this.registerForm.value.categoria, video : this.registerForm.value.video,
+            descripcion: this.registerForm.value.descripcion, creador: user.nombre};
+        console.log(this.formulario);
 
-  }
+        this.provedorService.pubService(this.formulario).subscribe( (res) => {
+          this.loading = false;
+          console.log(res);
 
+          if (res[0].agregado === true) {
 
-  // ------------------ Metodos para almacenar la información de la publciacion ------------
+            // document.getElementById('btn-publicacion-exitosa').click();
+            this.servicioCreado.emit(true);
+            // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+          } else {
+            // this.pg.status = 'error';
+            // this.pg.statusText = 'Error al agregar el servicio.';
+            this.statusImgs = true;
+            this.textoStatus = 'Error al agregar el servicio.';
+          }
+          }, () => {
+            this.statusImgs = true;
+            this.textoStatus = 'Error al agregar el servicio.';
+            this.loading = false;
+            // console.log(err);
+          });
 
-  siguienteInformacion() {
-
-
-      if (this.myControl.value === '' || this.myControl.value.id_categoria === undefined) {
-        // console.log('No hya categoria');
-        this.ctgaIncorrecta = true;
-        window.scroll(0, 0);
-      } else if (this.numeroMaxCitas.value === '') {
-        // console.log('No hya max citas');
-      } else if (!this.datos.valid) {
-        // console.log('falta llenar lso datos');
-      } else {
-        this.pestana('imagenes');
-      }
-  }
-
-
-  // Metodo para obtener las categorias, y a travez de filterOptions hacer el autocomplete
-  getCategorias() {
-    this.aplicationService.getCategorias().subscribe( (res) => {
-      this.options = res;
-      console.log(this.options);
-
-      this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith<string | User>(''),
-        map(value => typeof value === 'string' ? value : value.nombre),
-        map(nombre => nombre ? this._filter(nombre) : this.options.slice())
-      );
-    }, () => {
-      // console.log(err);
-    });
-  }
-
-
-  // ---------------------------------- CARGAR IMAGENES ------------------------
-
-openGalery(evt) {
-  // console.log(evt);
-  var files = evt.target.files;
-  var file = files[0];
-
-  // console.log(file.name.split('\.'));
-
-  let validacionImagen = file.name.split('\.');
-  let num = validacionImagen.length;
-
-  for (var i = 0; i < validacionImagen.length; i++) {
-      if (num = i) {
-        var tipoImg = validacionImagen[i];
+        // display form values on success
       }
     }
 
-  if (tipoImg === 'png' || tipoImg === 'jpg' || tipoImg === 'jpeg') {
-      // console.log('si es imagen');
+    getCategorias() {
+      this.aplicationService.getCategorias().subscribe( (res) => {
+        this.options = res;
+        // console.log(this.options);
 
-      if (files && file) {
-        var reader = new FileReader();
-
-        reader.onload = this._handleReaderLoaded.bind(this);
-
-        reader.readAsBinaryString(file);
-       }
-
-    } else {
-      this.statusImgs = true;
-      this.textoStatus = 'Solo se admiten imagenes, Por favor selecciona una';
-    }
-}
-
-_handleReaderLoaded(readerEvt) {
-  var binaryString = readerEvt.target.result;
-  // this.base64textString = btoa(binaryString);
-  // console.log(btoa(binaryString));
-  // console.log(this.base64textString);
-  this.imagenes.push({base64Image: 'data:image/jpeg;base64,' + btoa(binaryString)});
-  // console.log(this.imagenes);
- }
-
- borrarFoto(i) {
-  this.imagenes.splice(i, 1);
- }
-
- atrasImagenes() {
-
-  this.pestana('informacion');
- }
-
-
- /////////////////////////////// PUBLICAR SERVICIO ///////////////////////////////////////
-
- publicarServicio(templete: TemplateRef<any>) {
-
-  if (this.terminosYCondiciones === false) {
-    this.statusImgs = true;
-    this.textoStatus = 'Por favor acepta términos y condiciones antes de publicar el servicio.';
-  } else {
-
-    this.loading = true;
-    let token = this.userService.getToken();
-    let user = this.userService.getIdentity();
-
-    let ch;
-
-    if (this.chips.length >= 1) {
-
-     // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.chips.length; i++) {
-
-      if (!ch) {
-        ch = this.chips[i].nombre;
-      } else {
-        ch = ch + ',' + ' ' + this.chips[i].nombre;
-      }
-    }
-
-    }
-
-    this.formulario = {id_usuario: user.id_provedor, token, nombre: this.datos.value.nombre,
-        precio: this.datos.value.precio, imagenes: this.imagenes,
-        descuento: this.datos.value.descuento, duracion: this.datos.value.duracion,
-        id_ctga: this.myControl.value.id_categoria, video : this.datos.value.video,
-        max_citas: this.numeroMaxCitas.value, descripcion: this.datos.value.descripcion, creador: user.nombre, chips : ch };
-
-
-
-
-
-    // console.log(this.formulario);
-
-    this.provedorService.pubService(this.formulario).subscribe( (res) => {
-      this.loading = false;
-      // console.log(res);
-
-      if (res[0].agregado === true) {
-        this.modalRef4 = this.modalService.show(templete,{class: 'second'});
-        // document.getElementById('btn-publicacion-exitosa').click();
-      } else {
-        // this.pg.status = 'error';
-        // this.pg.statusText = 'Error al agregar el servicio.';
-        this.statusImgs = true;
-        this.textoStatus = 'Error al agregar el servicio.';
-      }
+        this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith<string | User>(''),
+          map(value => typeof value === 'string' ? value : value.nombre),
+          map(nombre => nombre ? this._filter(nombre) : this.options.slice())
+        );
       }, () => {
-        this.statusImgs = true;
-        this.textoStatus = 'Error al agregar el servicio.';
-        this.loading = false;
         // console.log(err);
       });
-
-  }
-
- }
-
-
- cerrarAlerta(tipo) {
-  if (tipo === 'horarios') {
-    this.status = false;
-  } else {
-    this.statusImgs = false;
-  }
- }
-
- terminosCondiciones(ev) {
-  // console.log(ev.checked);
-  this.terminosYCondiciones = ev.checked;
- }
-
- pubExitosa() {
-  this.router.navigate(['/publicaciones']);
- }
-
-  // metodos recorte de imagenes
-  fileChangeEvent(event: any): void {
-
-
-         //  console.log(event);
-   if (event.target.files.length >= 1 ) {
-    let cadena = event.target.value;
-    let validacion = cadena.substr(-6).split('\.');
-
-    if (validacion[1] === 'png' ||
-        validacion[1] === 'jpg' ||
-        validacion[1] === 'jpeg' ||
-        validacion[1] === 'PNG' ||
-        validacion[1] === 'JPG' ||
-        validacion[1] === 'JPEG') {
-       //  console.log(cadena.substr(-6));
-    this.imageChangedEvent = event;
-    this.recortar = true;
-    this.mostrarRecorte = true;
-    this.textoStatus = '';
-    this.statusImgs = undefined;
-    } else {
-     this.statusImgs = true;
-     this.textoStatus = 'Solo se admiten imagenes tipo png, jpg, jpeg. Por favor selecciona una';
     }
-   }
- }
+
+    onReset() {
+        this.submitted = false;
+        this.registerForm.reset();
+    }
+
+    imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64;
+    }
+    recorte() {
+     //  console.log(this.croppedImage);
+      this.imagenes.push({base64Image: this.croppedImage});
+      console.log(this.imagenes);
+      this.recortar = false;
+      this.mostrarRecorte = false;
+    }
+
+    borrarFoto(i) {
+      this.imagenes.splice(i, 1);
+     }
+
 
  validacionMaximoImagenes() {
 
@@ -378,46 +254,39 @@ _handleReaderLoaded(readerEvt) {
 
  }
 
- imageCropped(event: ImageCroppedEvent) {
-   this.croppedImage = event.base64;
- }
- recorte() {
-  //  console.log(this.croppedImage);
-   this.imagenes.push({base64Image: this.croppedImage});
-   console.log(this.imagenes);
-   this.recortar = false;
-   this.mostrarRecorte = false;
+ cerrarAlerta(tipo) {
+  if (tipo === 'horarios') {
+    this.status = false;
+  } else {
+    this.statusImgs = false;
+  }
  }
 
+  // metodos recorte de imagenes
+  fileChangeEvent(event: any): void {
 
-//  CHIPS
 
-add(event: MatChipInputEvent): void {
-  const input = event.input;
-  const value = event.value;
+    //  console.log(event);
+if (event.target.files.length >= 1 ) {
+let cadena = event.target.value;
+let validacion = cadena.substr(-6).split('\.');
 
-  // console.log('aqui');
-  if (this.chips.length < 5) {
-
-      // Add our fruit
-  if ((value || '').trim()) {
-    this.chips.push({nombre: value.trim()});
-  }
-
-  // Reset the input value
-  if (input) {
-    input.value = '';
-  }
-  }
-
+if (validacion[1] === 'png' ||
+   validacion[1] === 'jpg' ||
+   validacion[1] === 'jpeg' ||
+   validacion[1] === 'PNG' ||
+   validacion[1] === 'JPG' ||
+   validacion[1] === 'JPEG') {
+  //  console.log(cadena.substr(-6));
+this.imageChangedEvent = event;
+this.recortar = true;
+this.mostrarRecorte = true;
+this.textoStatus = '';
+this.statusImgs = undefined;
+} else {
+this.statusImgs = true;
+this.textoStatus = 'Solo se admiten imagenes tipo png, jpg, jpeg. Por favor selecciona una';
 }
-
-remove(chip: Chip): void {
-  const index = this.chips.indexOf(chip);
-
-  if (index >= 0) {
-    this.chips.splice(index, 1);
+}
   }
- }
-
 }

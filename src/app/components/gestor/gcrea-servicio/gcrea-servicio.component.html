@@ -1,456 +1,135 @@
-<!-- <div>
-  <app-barra-navegacion></app-barra-navegacion>
-</div> -->
-
-<div class="row contenedor">
-  <!-- <div class="col-lg-3 crear-pub" style="padding-top: 30px;">
-    <div>
-      <ul class="list-group">
-        <li class="list-group-item active" id="informacion">Información</li>
-        <li class="list-group-item" id="imagenes">Imágenes </li>
-      </ul>
-    </div>
-
-    <button class="btn btn-primary btn-lg">Guardar</button>
-
-    </div> -->
-
-    <div class="col-lg-10 crear-pub">
-
-
-    <div class="info-publicacion">
-
-      <!-- <div class="container-fluid">
-                <br />
-                <div class="card-header" >
-                  <h1>Información del servicio</h1>
-                </div>
-                <br />
-              </div> -->
-
-
-      <form class="form-signin example-form" [formGroup]="datos" (ngSubmit)="siguienteInformacion()">
-
-        <!-- <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                   <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Medico" (selectionChange)="medicoSelect($event)" [formControl]="selectMedico" required>
-                      <mat-option *ngFor="let m of medicos" [value]="m.medico_id">
-                        {{m.nombre}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="selectMedico.hasError('required')">
-                      Este campo es requerido.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-5"></div>
-                <div class="col-md-1"></div>
-            </div> -->
-
-
-        <div class="container-fluid">
-          <br />
-          <div class="card-header">
-            <h1>Información del servicio</h1>
+<!-- main app container -->
+<div class="card m-3">
+  <h5 class="card-header">Creacion de Servicios</h5>
+  <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Categoria</label>
+                  <select formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }">
+                      <option value="">Seleccione una Categoria</option>
+                      <option *ngFor="let option of options" value={{option.id_categoria}}>{{option.nombre}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
+                      <div *ngIf="f.categoria.errors.required">Seleccione una Categoria</div>
+                  </div>
+              </div>
           </div>
-          <br />
-        </div>
-
-        <!-- <div class="row">
-                  <div class="col-md-1 col-sm-0"></div>
-                  <div class="col-md-4 col-sm-3">
-                      <mat-form-field class="example-full-width">
-                          <mat-select placeholder="Departamento" (selectionChange)="deparSelect($event)" [formControl]="selectDepartamento" required>
-                            <mat-option *ngFor="let d of departamentos" [value]="d.id_departamento">
-                              {{d.nombre}}
-                            </mat-option>
-                          </mat-select>
-                          <mat-error *ngIf="selectDepartamento.hasError('required')">
-                            Este campo es requerido.
-                          </mat-error>
-                        </mat-form-field>
+          <div class="form-row">
+              <div class="form-group col-6">
+                  <label>Nombre del servicio</label>
+                  <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                  <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                      <div *ngIf="f.nombre.errors.required">El nombre del servicio es requerido</div>
+                      <div *ngIf="f.nombre.errors.minlength">El nombre del servicio debe tener al menos 4 caratcteres</div>
                   </div>
-                  <div class="col-md-4 col-sm-3">
-                      <mat-form-field class="example-full-width">
-                          <mat-select placeholder="Municipio" (selectionChange)="muniSelect($event)" [formControl]="selectMunicipio" required>
-                            <mat-option *ngFor="let m of municipios" [value]="m.id_municipio">
-                              {{m.nombre}}
-                            </mat-option>
-                          </mat-select>
-                          <mat-error *ngIf="selectMunicipio.hasError('required')">
-                            Este campo es requerido.
-                          </mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div class="col-md-1 col-sm-0"></div>
-              </div> -->
-
-
-
-
-        <!-- ------------------------------------------- Autocompletar  --------------------------------------------------------- -->
-
-
-        <!-- <div class="container-fluid">
-                 <br />
-                    <div class="card-header" style="padding-top: 10px !important">
-                <h1>Cuentanos más!</h1>
+              </div>
+              <div class="form-group col-6">
+                <label>Citas max / hora</label>
+                <select formControlName="duracion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.duracion.errors }">
+                  <option value="">Numero max de citas / hora</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+              </select>
+              <div *ngIf="submitted && f.duracion.errors" class="invalid-feedback">
+                  <div *ngIf="f.duracion.errors.required">La duracion de las citas es requerida</div>
+              </div>
+          </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label>Precio de la cita a particulares</label>
+              <input type="number" formControlName="precio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }"/>
+              <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+                  <div *ngIf="f.precio.errors.required">El precio no debe estar vacio</div>
+              </div>
+          </div>
+          <div class="form-group col-6">
+            <label>Descuento para usuarios</label>
+            <input type="number" formControlName="descuento" placeholder="Descuento para clientes Prevenir Descuentos"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descuento.errors }" />
+            <div *ngIf="submitted && f.descuento.errors" class="invalid-feedback">
+                <div *ngIf="f.descuento.errors.required">El descuento no puede estar vacio</div>
+                <div *ngIf="f.descuento.errors.min">El descuento no puede ser menor al 10%</div>
+                <div *ngIf="f.descuento.errors.max">El descuento no puede ser mayor al 100%</div>
+                <div *ngIf="f.descuento.errors.pattern">Solo debe contener numeros</div>
             </div>
-            <br />
-            </div> -->
-
-
-        <div class="row paddingLabels">
-
-
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width">
-              <input type="text" placeholder="Categoría" aria-label="Categoria" matInput [formControl]="myControl"
-                [matAutocomplete]="auto" required>
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option.nombre}}
-                </mat-option>
-              </mat-autocomplete>
-              <mat-error *ngIf="myControl.hasError('required')">
-                Este campo es requerido.
-              </mat-error>
-
-            </mat-form-field>
-            <p id="p-categoria" *ngIf="ctgaIncorrecta">Por favor seleciona una categoría correcta *.</p>
-          </div>
-
-
         </div>
-
-
-
-
-        <!-- ------------------------------------------- Fin de Autocompletar  --------------------------------------------------------- -->
-        <div class="row paddingLabels">
-
-
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width">
-              <input type="text" matInput aria-label="Nombre del servicio" placeholder="Nombre del servicio"
-                name="nombre" formControlName="nombre" minlength="3" required>
-              <mat-error *ngIf="datos.get('nombre').hasError('required')">El nombre del servicio es obligatorio
-              </mat-error>
-              <mat-error *ngIf="datos.get('nombre').hasError('minlength')">Cantidad minima de caracteres (4)</mat-error>
-              <mat-error *ngIf="datos.get('nombre').hasError('maxlength')">Cantidad minima de caracteres (60)
-              </mat-error>
-            </mat-form-field>
           </div>
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width">
-              <input type="number" matInput aria-label="Duración aproximada de la cita en minutos"
-                placeholder="Duración aproximada de la cita en minutos" formControlName="duracion" min=15 max=60
-                required>
-              <mat-error *ngIf="datos.get('duracion').hasError('required')">El campo es requerido</mat-error>
-              <mat-error *ngIf="datos.get('duracion').hasError('min')">La duración de la cita no puede ser menor a 15
-                minutos.</mat-error>
-              <mat-error *ngIf="datos.get('duracion').hasError('max')">La duración de la cita no puede ser mayor a 60
-                minutos.</mat-error>
-              <mat-error *ngIf="datos.get('duracion').hasError('pattern')">Este campo no puede llevar puntos o
-                caracteres especiales.</mat-error>
-
-            </mat-form-field>
+          <div class="form-group">
+            <label>Link video Promocional Youtube</label>
+            <input type="url" formControlName="video" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.video.errors }" />
           </div>
-
-        </div>
-
-        <div class="row paddingLabels">
-
-          <div class="col-md-6 ">
-            <mat-form-field class="example-full-width">
-              <mat-select placeholder="Número maxito de citas / hora" [formControl]="numeroMaxCitas" required>
-                <mat-option value="1">1</mat-option>
-                <mat-option value="2">2</mat-option>
-                <mat-option value="3">3</mat-option>
-                <mat-option value="4">4</mat-option>
-                <mat-option value="5">5</mat-option>
-              </mat-select>
-
-              <mat-error *ngIf="numeroMaxCitas.hasError('required')">
-                Este campo es requerido.
-              </mat-error>
-            </mat-form-field>
-
+          <div class="form-group">
+            <label>Descripcion</label>
+            <textarea class="form-control" formControlName="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" rows="3" ></textarea>
+            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+              <div *ngIf="f.descripcion.errors.required">La descripcion no debe estar vacia</div>
+              <div *ngIf="f.descripcion.errors.minlength">La descripcion debe contener al menos 40 caracteres</div>
           </div>
-          <div class="col-md-6 ">
-            <mat-form-field class="example-full-width">
-              <input type="number" matInput aria-label="Precio a particulares" placeholder="Precio a particulares"
-                formControlName="precio" min=0 required>
-              <mat-error *ngIf="datos.get('precio').hasError('required')">* El campo es requerido</mat-error>
-              <mat-error *ngIf="datos.get('precio').hasError('min')">Cantidad minima ($0)</mat-error>
-              <mat-error *ngIf="datos.get('precio').hasError('pattern')">Este campo no puede llevar puntos o caracteres
-                especiales.</mat-error>
-            </mat-form-field>
-          </div>
-
-        </div>
-
-
-        <div class="row paddingLabels">
-
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width">
-              <input type="number" matInput aria-label="Descuento clientes prevenir, de 10 a 100 sin (%)"
-                placeholder="Descuento clientes prevenir, de 10 a 100 sin (%)" formControlName="descuento" min=10
-                max=100>
-              <mat-error *ngIf="datos.get('descuento').hasError('min')">Cantidad minima 10</mat-error>
-              <mat-error *ngIf="datos.get('descuento').hasError('max')">Cantidad maxima 100.</mat-error>
-              <mat-error *ngIf="datos.get('descuento').hasError('pattern')">Este campo no puede llevar puntos o
-                caracteres especiales.</mat-error>
-            </mat-form-field>
-
-          </div>
-          <div class="col-md-6">
-
-            <!-- <mat-form-field class="example-full-width">
-                 <input type="text" matInput aria-label="Dirección" placeholder="Dirección" formControlName="direccion" required>
-                    <mat-error *ngIf="datos.get('direccion').hasError('required')">Este campo es requerido.</mat-error>
-                <mat-error *ngIf="datos.get('direccion').hasError('maxlength')">El campo no puede tener más de 60 caracteres.</mat-error>
-                </mat-form-field> -->
-
-            <mat-form-field class="example-full-width">
-              <input type="text" matInput aria-label="Link del video publicitario en YouTube"
-                placeholder="Link del video publicitario en YouTube" formControlName="video">
-            </mat-form-field>
-
           </div>
 
 
-        </div>
+          <!-------------------------------------------------------------------------------------------------->
+          <!-------------------------------- Carga de fotos -------------------------------------------------->
+          <!-------------------------------------------------------------------------------------------------->
 
-        <div class="row paddingLabels">
+          <div class="card">
+            <div class="card-header">
+              <h5>Imágenes del servicio</h5>
+              <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
+            </div>
 
-          <div class="col-md-12">
+            <div class="img-recorte" *ngIf="mostrarRecorte">
 
-            <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Descripción del servicio" formControlName="descripcion" minlength="40"
-                required></textarea>
-              <mat-error *ngIf="datos.get('descripcion').hasError('required')">La descripción es requerida.</mat-error>
-              <mat-error *ngIf="datos.get('descripcion').hasError('minlength')">La cantidad minima de caracteres es 40.
-              </mat-error>
-            </mat-form-field>
+              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+                [resizeToWidth]="500" [cropperMinWidth]="500" [onlyScaleDown]="true" [roundCropper]="false" format="jpeg"
+                outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+
+
+              <div class="text-center" style="padding-top: 10px;">
+                <button class="btn btn-info" *ngIf="recortar" (click)="recorte()">Recortar</button></div>
+            </div>
+
+            <div class="row rw">
+              <div class="col-2 contenedores" *ngFor="let item of imagenes; let i = index">
+                <img [src]="item.base64Image" class="imagenes">
+                <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
+              </div>
+
+            </div>
+          </div>
+          <div id="cargar-imagen" style="padding-bottom: 40px;">
+            <label for="file-upload" class="btn btn-info btns-horario" (click)="validacionMaximoImagenes()">
+              Cargar Fotos
+            </label>
+            <input type="file" id="file-upload" (change)="fileChangeEvent($event)" [disabled]="imagenes.length >= 6" />
+            <!-- <button class="btn btn-success" (click)="publicarServicio(servokmod)" *ngIf="imagenes.length >= 1">Publicar Servicio</button> -->
           </div>
 
 
-          <div class="col-md-12" style="padding-top: 20px;">
+          <!------------------------------------------------------------------------------------------------->
 
-            <p style="color: #6e6a6a;"><i class="fas fa-exclamation-triangle"></i> Para ayudar a los usuarios a
-              encontrar tu servicio con mayor facilidad puedes escribir cinco palabras claves que seran usadas en la
-              busqueda</p>
 
-            <mat-form-field class="example-chip-list">
-              <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip *ngFor="let c of chips" [selectable]="selectable" [removable]="removable"
-                  (removed)="remove(c)">
-                  {{c.nombre}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="Escribe una etiqueta y presiona enter" [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event)">
-              </mat-chip-list>
-            </mat-form-field>
+
+
+
+
+          <div class="form-group form-check">
+              <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+              <label for="acceptTerms" class="form-check-label">Accepto terminos y condicines</label>
+              <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Aceptar Ts & Cs es requerido</div>
           </div>
-
-
-        </div>
-
-
-
-
-
-
-
-        <!-- ------------------------------------------- Fin de formulario  --------------------------------------------------------- -->
-
-
-        <div class="btn-siguiente paddingLabels">
-          <button type="submit" class="btn btn-primary">Siguiente</button>
-        </div>
-
-
+          <div id="cargar-imagen text-center" style="padding-bottom: 40px;">
+            <button class="btn btn-success" *ngIf="imagenes.length >= 1">Crear
+              Servicio</button>
+          </div>
       </form>
-
-    </div>
-
-
-    <!-- -------------------------------- IMAGENES  ----------------------------------------------------->
-
-    <div>
-
-      <div class="container-fluid">
-        <br />
-        <div class="card-header">
-          <h3>Selecciona imágenes para tu servicio</h3>
-        </div>
-        <br />
-      </div>
-
-
-      <!-- <p>*Selecciona una o más imagenes para tu servicio, maximo 6 </p> -->
-
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="statusImgs"
-        (click)="cerrarAlerta('imagenes')">
-        {{textoStatus}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="statusW === 'warning'"
-        (click)="cerrarAlerta('imagenes')">
-        {{textoStatus}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <!-- <div class="contenedor-scroll">
-            <div class="scroll">
-
-            </div>
-            </div> -->
-
-
-      <div class="card">
-        <div class="card-header">
-          <h5>Imágenes del servicio</h5>
-          <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
-        </div>
-
-        <div class="img-recorte" *ngIf="mostrarRecorte">
-
-          <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
-            [resizeToWidth]="500" [cropperMinWidth]="500" [onlyScaleDown]="true" [roundCropper]="false" format="jpeg"
-            outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
-
-
-          <div class="text-center" style="padding-top: 10px;">
-            <button class="btn btn-info" *ngIf="recortar" (click)="recorte()">Recortar</button></div>
-        </div>
-
-        <div class="row rw">
-          <div class="col-2 contenedores" *ngFor="let item of imagenes; let i = index">
-            <img [src]="item.base64Image" class="imagenes">
-            <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- <div id="card-publicacion">
-                <div class="card">
-                    <div class="card-header">
-                       <h5>Imagenes del servicio</h5>
-                       <p>* Recuerda que el servicio puede tener un maximo de 6 imagenes.</p>
-                      </div>
-
-
-
-              </div>
-
-            </div> -->
-
-
-      <!-- <div id="LoadedImages" *ngIf="imagenes">
-              <div *ngFor="let item of imagenes; let i = index">
-              <img [src]="item.base64Image" class="imagenes">
-              <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
-              </div>
-            </div> -->
-
-      <!-- <div id="LoadedImages" *ngIf="imagenes">
-              <div *ngFor="let item of imagenes; let i = index">
-              <img [src]="item.base64Image" class="imagenes">
-              <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
-              </div>
-            </div> -->
-
-
-
-      <div id="cargar-imagen">
-        <mat-checkbox *ngIf="imagenes.length >= 1" (change)="terminosCondiciones($event)"><a
-            [routerLink]="['/terminosycondiciones']" target="_blank">Acepto términos y condiciones !</a></mat-checkbox>
-      </div>
-
-
-      <div id="cargar-imagen" style="padding-bottom: 40px;">
-        <button class="btn btn-secondary" (click)="atrasImagenes()">Atrás</button>
-        <label for="file-upload" class="btn btn-info btns-horario" (click)="validacionMaximoImagenes()">
-          Cargar Fotos
-        </label>
-        <input type="file" id="file-upload" (change)="fileChangeEvent($event)" [disabled]="imagenes.length >= 6" />
-        <button class="btn btn-success" (click)="publicarServicio(servokmod)" *ngIf="imagenes.length >= 1">Publicar
-          Servicio</button>
-      </div>
-
-    </div>
   </div>
-
 </div>
 
-
-<!-- ----------------------------------------------------------------------------------------------------- -->
-<!-- ---------------------------------------- MODAL PUBLICACION EXITOSA ---------------------------------- -->
-<!-- ----------------------------------------------------------------------------------------------------- -->
-<button type="button" id="btn-publicacion-exitosa" class="btn btn-primary" data-toggle="modal"
-  data-target="#exampleModal" data-backdrop="false">
-  Launch demo modal
-</button>
-
-<!-- Modal publicacion exitosa -->
-<ng-template #servokmod1>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
-          <button type="button" id="btn-cerrar-pub-exitosa" class="close" data-dismiss="modal" aria-label="Close"
-            (click)="modalRef4.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          La publicación ha sido creada correctamente.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modalRef4.hide()">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #servokmod>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
-    <button type="button" id="btn-cerrar-pub-exitosa" class="close" data-dismiss="modal" aria-label="Close"
-      (click)="modalRef4.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    La publicación ha sido creada correctamente.
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modalRef4.hide()">Aceptar</button>
-  </div>
-</ng-template>
-<!-- ----------------------------------------------------------------------------------------------------- -->
-<!-- -------------------------------------- FIN MODAL PUBLICACION EXITOSA -------------------------------- -->
-<!-- ----------------------------------------------------------------------------------------------------- -->
-
-<div class="loading" *ngIf="loading">
+<div class="loading container-fluid" *ngIf="loading">
   <img src="/assets/pulso.gif" alt="">
 </div>
 
-<!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading> -->

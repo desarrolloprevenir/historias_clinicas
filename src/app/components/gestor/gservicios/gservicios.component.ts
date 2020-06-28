@@ -20,6 +20,13 @@ export class GserviciosComponent implements OnInit {
   public publications;
   public vacio;
   public loading = false;
+  public config = {
+    animated: true,
+    keyboard: false,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
+  creada = false;
   myPos;
   departamentos;
   municipios;
@@ -78,7 +85,7 @@ export class GserviciosComponent implements OnInit {
 
   openModal(templete: TemplateRef<any>)
   {
-    this.modalRef3 = this.modalService.show(templete,{class: 'second'});
+    this.modalRef3 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'second modal-xl'}));
   }
 
   getPublications(id) {
@@ -115,7 +122,8 @@ export class GserviciosComponent implements OnInit {
         // console.log('no hay medicos');
         document.getElementById('openModalButton').click();
       } else {
-        this.modalRef3 = this.modalService.show(templete,{class: 'second modal-xl'});
+        // this.modalRef3 = this.modalService.show(templete,{class: 'second modal-xl'});
+        this.modalRef3 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'second modal-xl'}));
       }
     }, (err) => {
       // console.log(err);
@@ -123,6 +131,13 @@ export class GserviciosComponent implements OnInit {
       this.status = 'error';
       this.statusText = 'Error en la conexión, Por favor revisa tu conexión o intentalo más tarde.';
     } );
+  }
+
+  servicioCreado()
+  {
+    this.creada = true;
+    this.getPublications(this.identity.id_provedor);
+    this.modalRef3.hide();
   }
 
   crearMedico() {

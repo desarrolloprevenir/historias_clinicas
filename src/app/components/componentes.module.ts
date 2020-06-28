@@ -69,6 +69,8 @@ import { PerfilProfesionalComponent } from './medico/perfil-profesional/perfil-p
 import {GmedicosComponent} from './gestor/gmedicos/gmedicos.component';
 import { GserviciosComponent } from './gestor/gservicios/gservicios.component';
 import { GCreaServicioComponent } from './gestor/gcrea-servicio/gcrea-servicio.component';
+import {GsucursalesComponent} from './gestor/gsucursales/gsucursales.component';
+import { GAdminSucursalComponent } from './gestor/g-admin-sucursal/g-admin-sucursal.component';
 
 
 
@@ -117,7 +119,9 @@ import { GCreaServicioComponent } from './gestor/gcrea-servicio/gcrea-servicio.c
   PerfilProfesionalComponent,
   GmedicosComponent,
   GserviciosComponent,
-  GCreaServicioComponent
+  GCreaServicioComponent,
+  GsucursalesComponent,
+  GAdminSucursalComponent
   ],
   imports: [
     CommonModule,
