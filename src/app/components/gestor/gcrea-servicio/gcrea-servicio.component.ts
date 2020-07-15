@@ -30,7 +30,7 @@ import Swal from 'sweetalert2';
 // CHIPS
 
 import {ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
+// import {MatChipInputEvent} from '@angular/material/chips';
 
 export interface Chip {
   nombre: string;
@@ -101,13 +101,15 @@ export class GCreaServicioComponent implements OnInit {
   public chipsPrueba;
   public modalRef4: BsModalRef;
 
+  numero;
+
   constructor(public userService: UserService,
-    private modalService: BsModalService,
-    public aplicationService: AppService,
-    public provedorService: ProvedorService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    location: PlatformLocation) {
+              private modalService: BsModalService,
+              public aplicationService: AppService,
+              public provedorService: ProvedorService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              location: PlatformLocation) {
       this.mymodel = 'informacion';
       this.status = false;
 
@@ -129,6 +131,16 @@ export class GCreaServicioComponent implements OnInit {
           descripcion : ['', [Validators.required, Validators.minLength(40)]],
           acceptTerms: [false, Validators.requiredTrue]
       });
+  }
+
+
+  keyPress(ev) {
+    console.log('aqui');
+        // var number = 200000000;
+    console.log(this.registerForm.value.precio);
+    console.log(this.registerForm.value.precio.toLocaleString('es'));
+    // this.numero = this.registerForm.value.precio.toLocaleString('es');
+    // console.log(number.toLocaleString('es'));
   }
 
   private _filter(nombre: string): User[] {
@@ -180,11 +192,11 @@ export class GCreaServicioComponent implements OnInit {
             descuento: this.registerForm.value.descuento, duracion: this.registerForm.value.duracion,
             id_ctga: this.registerForm.value.categoria, video : this.registerForm.value.video,
             descripcion: this.registerForm.value.descripcion, creador: user.nombre};
-        console.log(this.formulario);
+        // console.log(this.formulario);
 
         this.provedorService.pubService(this.formulario).subscribe( (res) => {
           this.loading = false;
-          console.log(res);
+          // console.log(res);
 
           if (res[0].agregado === true) {
 

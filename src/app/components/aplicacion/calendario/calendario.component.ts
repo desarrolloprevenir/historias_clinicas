@@ -145,14 +145,14 @@ export class CalendarioComponent implements OnInit {
    public nombreAgenda;
    public consultorioSelecionado;
    public idConsultorio;
- 
+
   constructor(private aplicatioService: AppService,
               private userService: UserService,
               private sucursalService: SucursalService,
               private provedorService: ProvedorService,
               private medicoService: MedicoService,
               location: PlatformLocation) {
-                location.onPopState(() => {
+                  location.onPopState(() => {
                   document.getElementById('btn-cerrar-modal-ver-cita').click();
                   document.getElementById('btn-cerrar-agregar-cita').click();
                   document.getElementById('btn-cerrar-ver-cita-medico').click();
@@ -327,7 +327,15 @@ export class CalendarioComponent implements OnInit {
       document.getElementById('btn-modal-evento').click();
     } else {
       this.mascota = false;
-      document.getElementById('btn-modal-evento').click();
+      this.aplicatioService.getUser(this.info.id).subscribe( (res: any) => {
+          console.log('infoUser', res);
+          this.info.direccion = res.direccion;
+          this.info.barrio = res.barrio;
+          this.info.correo = res.correo;
+          this.info.residencia = res.nomMuni + ' - ' + res.nomDepa;
+          document.getElementById('btn-modal-evento').click();
+      });
+  
     }
 
   }
@@ -671,6 +679,8 @@ export class CalendarioComponent implements OnInit {
           let bol = true;
 
           switch (bol === true) {
+
+          // No hay horario de atención
           case (this.information[0].maniana.length <= 1) && (this.information[1].tardes.length <= 1):
 
           this.status = true;
@@ -678,6 +688,7 @@ export class CalendarioComponent implements OnInit {
           window.scroll(0, 0);
           break;
 
+          // Horario solo en la tarde
           case (this.information[0].maniana.length <= 1) && (this.information[1].tardes.length >= 1):
           // console.log('Solo horario en la tarde');
           if (h[1] === 'am') {
@@ -735,6 +746,7 @@ export class CalendarioComponent implements OnInit {
           this.loading = false;
           break;
 
+          // Horario solo en la mañana
           case (this.information[0].maniana.length >= 1) && (this.information[1].tardes.length <= 1):
           // console.log('Solo horario en la mañana');
 
@@ -747,7 +759,7 @@ export class CalendarioComponent implements OnInit {
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < this.information[0].maniana.length; i++) {
 
-              if( parseInt(hora) === parseInt(this.information[0].maniana[i].hora)  ) {
+              if ( parseInt(hora) === parseInt(this.information[0].maniana[i].hora)  ) {
                 // console.log('coincide', hora, this.information[0].maniana[i].hora);
                 coincide = true;
 
@@ -793,6 +805,7 @@ export class CalendarioComponent implements OnInit {
           this.loading = false;
           break;
 
+          // Horario todo el día
           case (this.information[0].maniana.length >= 1) && (this.information[1].tardes.length >= 1):
           // console.log('horario todo el dia');
 
@@ -850,11 +863,11 @@ export class CalendarioComponent implements OnInit {
             let num = this.information[1].tardes.length;
             horaInicio = this.information[1].tardes[0].hora;
             var coincide;
-
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < this.information[1].tardes.length; i++) {
+              console.log('horaaaaaaa', hora);
 
-              if( parseInt(hora) === parseInt(this.information[1].tardes[i].hora)  ) {
+              if ( parseInt(hora) === parseInt(this.information[1].tardes[i].hora)  ) {
                 // console.log('coincide', hora, this.information[1].tardes[i].hora);
                 coincide = true;
 
@@ -1152,7 +1165,7 @@ export class CalendarioComponent implements OnInit {
     this.loading = true;
     this.sucursalService.getInfoConsultorio(idConsultorio).subscribe( (response) => {
       this.loading = false;
-      // console.log('info_cc', response);
+      console.log('info_cc', response);
       this.infoConsultorio = response[0];
     }, () => {
       // console.log(err);

@@ -47,7 +47,7 @@ export class GestionarPublicacionesComponent implements OnInit {
 
   constructor(public userService: UserService,
               public provedorService: ProvedorService,
-              private router: Router,
+              public router: Router,
               public aplicationService: AppService,
               public medicoService: MedicoService,
               private formBuilder: FormBuilder,
@@ -77,14 +77,14 @@ export class GestionarPublicacionesComponent implements OnInit {
 
     this.provedorService.getPublications(id).subscribe( (response) => {
 
-        this.publications = response;
-        console.log(this.publications);
-
-        if (this.publications[0].vacio === true) {
+      if (response[0].vacio === true) {
         this.vacio = true;
         // console.log(this.vacio);
+      } else {
+        this.vacio = false;
+        this.publications = response;
       }
-        this.loading = false;
+      this.loading = false;
     }, () => {
       this.loading = false;
       this.status = 'error';
@@ -94,25 +94,29 @@ export class GestionarPublicacionesComponent implements OnInit {
   }
 
   crearPublicacion() {
-    this.loading = true;
-    let id = this.userService.getIdentity();
-    id = id.id_provedor;
-    // console.log(id);
-    this.provedorService.getMedicosProvedor(id).subscribe( (res) => {
-      // console.log(res);
-      this.loading = false;
-      if ( res.length <= 0) {
-        // console.log('no hay medicos');
-        document.getElementById('openModalButton').click();
-      } else {
-        this.router.navigate(['/crear-publicacion']);
-      }
-    }, (err) => {
-      // console.log(err);
-      this.loading = false;
-      this.status = 'error';
-      this.statusText = 'Error en la conexión, Por favor revisa tu conexión o intentalo más tarde.';
-    } );
+
+    this.router.navigate(['/crear-publicacion']);
+
+
+    // this.loading = true;
+    // let id = this.userService.getIdentity();
+    // id = id.id_provedor;
+    // // console.log(id);
+    // this.provedorService.getMedicosProvedor(id).subscribe( (res) => {
+    //   // console.log(res);
+    //   this.loading = false;
+    //   if ( res.length <= 0) {
+    //     // console.log('no hay medicos');
+    //     document.getElementById('openModalButton').click();
+    //   } else {
+    
+    //   }
+    // }, (err) => {
+    //   // console.log(err);
+    //   this.loading = false;
+    //   this.status = 'error';
+    //   this.statusText = 'Error en la conexión, Por favor revisa tu conexión o intentalo más tarde.';
+    // } );
   }
 
   crearMedico() {

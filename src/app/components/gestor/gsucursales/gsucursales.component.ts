@@ -8,6 +8,8 @@ import { UserService } from 'src/app/services/user.service';
 // manejo de modales reactivos
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import Swal from 'sweetalert2';
+import { reverse } from 'dns';
 
 @Component({
   selector: 'app-gsucursales',
@@ -28,7 +30,7 @@ export class GsucursalesComponent implements OnInit {
   public campo;
   public loading;
   public siguiente;
-  public idsc =0;
+  public idsc;
   public modalRef1: BsModalRef;
   public config = {
     animated: true,
@@ -37,12 +39,12 @@ export class GsucursalesComponent implements OnInit {
     ignoreBackdropClick: true
   };
   constructor(private userService: UserService,
-    private provedorService: ProvedorService,
-    private modalService: BsModalService,
-    private router: Router,
-    location: PlatformLocation,
-    public formBuilder: FormBuilder,
-    private sucursalService: SucursalService) {
+              private provedorService: ProvedorService,
+              private modalService: BsModalService,
+              private router: Router,
+              location: PlatformLocation,
+              public formBuilder: FormBuilder,
+              private sucursalService: SucursalService) {
       location.onPopState(() => {
         document.getElementById('btn-cerrar-modal-editar').click();
         document.getElementById('btn-cerrar-modal-confirmacion').click();
@@ -55,13 +57,12 @@ export class GsucursalesComponent implements OnInit {
     this.getSucursales(identity);
   }
 
-  openModal(templete: TemplateRef<any>, id:number )
-  {
-    console.log('open modal')
-    console.log(id);
+  openModal(templete: TemplateRef<any>, id: number ) {
+    // console.log('open modal');
+    // console.log(id);
 
     this.idsc = id;
-    this.modalRef1 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'modal-xl'}));
+    this.modalRef1 = this.modalService.show(templete, Object.assign({}, this.config, {class: 'modal-xl'}));
   }
 
   getMedicos() {
@@ -122,7 +123,7 @@ export class GsucursalesComponent implements OnInit {
     this.provedorService.getSucursales(idProvedor).subscribe( (response) => {
       // console.log('sucu', response);
       this.sucursales = response;
-      console.log(this.sucursales);
+      // console.log(this.sucursales);
 
       this.loading = false;
     }, () => {
@@ -151,8 +152,37 @@ export class GsucursalesComponent implements OnInit {
   // }
 
   confirmacioEliminarSucursal(infoSucursal) {
+    // console.log(infoSucursal);
     this.sucursalEliminar = infoSucursal;
-    document.getElementById('btn-modal-confirmacion').click();
+    // document.getElementById('btn-modal-confirmacion').click();
+
+    // title: 'Are you sure?',
+    // text: "You won't be able to revert this!",
+    // icon: 'warning',
+    // showCancelButton: true,
+    // confirmButtonColor: '#d33',
+    // cancelButtonColor: '#3085d6',
+    // confirmButtonText: 'Eliminar',
+    // cancelButtonText: 'Cancelar'
+    // reverseButtons: true
+
+    Swal.fire({
+      title: 'Estas seguro que deseas eliminar ' + this.sucursalEliminar.nombre + ' ?',
+      text: 'Te encuenta que esta información no se podra recuperar',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.eliminarSucursal();
+      }
+    });
+
+
   }
 
   eliminarSucursal() {
@@ -199,6 +229,12 @@ export class GsucursalesComponent implements OnInit {
   cambio(campo) {
     this.campo = document.getElementById(campo);
     this.campo.readOnly = true;
+  }
+
+  publicacionExitosa() {
+    this.modalRef1.hide();
+    let identity = this.userService.getIdentity().id_provedor;
+    this.getSucursales(identity);
   }
 
 }

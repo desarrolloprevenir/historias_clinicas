@@ -296,13 +296,13 @@ export class CrearSucursalComponent implements OnInit {
         this.status = false;
         this.disableH2 = false;
       // console.log(this.diasH2);
-        if(this.horario1 === '1') {
+        if (this.horario1 === '1') {
             this.horario1 = '2';
          } else {
             this.horario1 = '1';
          }
         if (tipo === false) {
-        if(this.horario1 === '1') {
+        if (this.horario1 === '1') {
           this.horario1 = '2';
        } else {
           this.horario1 = '1';
@@ -600,7 +600,7 @@ export class CrearSucursalComponent implements OnInit {
       this.sucursalService.postConsultorioSucursal(this.infoConsultorios).subscribe( (response) => {
         this.loading = false;
         window.scroll(0, 0);
-        if (response === true){
+        if (response === true) {
           this.getInfoSucursal(this.idSucursal);
           this.infoConsultorios = [];
           this.status = 'success';
@@ -617,7 +617,7 @@ export class CrearSucursalComponent implements OnInit {
   guardar() {
 
     this.loading = true;
-    window.scroll(0,0);
+    window.scroll(0, 0);
     // let password = CryptoJS.SHA512(this.pssw.value).toString(CryptoJS.enc.Hex);
 
     let info = {nombre: this.nombreSucursal.value, telefono: this.telefonoSucursal.value, id_municipio: this.muniSelect.value,
@@ -658,6 +658,7 @@ export class CrearSucursalComponent implements OnInit {
     ];
 
     this.horasDesdeHastaTarde = [
+      { hora : '12 p.m', value : '12:00' },
       { hora : '1 p.m', value : '13:00' },
       { hora : '2 p.m', value : '14:00' },
       { hora : '3 p.m', value : '15:00' },
@@ -690,7 +691,7 @@ export class CrearSucursalComponent implements OnInit {
   // Dias seleccionados en el horario 1
   diasHorario1(ev) {
     this.diasH1 = ev.value;
-    // console.log(this.diasH1);
+    console.log(this.diasH1);
   }
 
   // Dias seleccionados en el horario 2

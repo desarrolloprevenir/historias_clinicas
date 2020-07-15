@@ -1,135 +1,132 @@
 <!-- main app container -->
 <div class="card m-3">
-  <h5 class="card-header">Creacion de Servicios</h5>
-  <div class="card-body">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="form-row">
-              <div class="form-group col">
-                  <label>Categoria</label>
-                  <select formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }">
+    <h5 class="card-header">Creacion de Servicios</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Categoria</label>
+                    <select formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }">
                       <option value="">Seleccione una Categoria</option>
                       <option *ngFor="let option of options" value={{option.id_categoria}}>{{option.nombre}}</option>
                   </select>
-                  <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
-                      <div *ngIf="f.categoria.errors.required">Seleccione una Categoria</div>
-                  </div>
-              </div>
-          </div>
-          <div class="form-row">
-              <div class="form-group col-6">
-                  <label>Nombre del servicio</label>
-                  <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
-                  <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
-                      <div *ngIf="f.nombre.errors.required">El nombre del servicio es requerido</div>
-                      <div *ngIf="f.nombre.errors.minlength">El nombre del servicio debe tener al menos 4 caratcteres</div>
-                  </div>
-              </div>
-              <div class="form-group col-6">
-                <label>Citas max / hora</label>
-                <select formControlName="duracion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.duracion.errors }">
+                    <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
+                        <div *ngIf="f.categoria.errors.required">Seleccione una Categoria</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Nombre del servicio</label>
+                    <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                    <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                        <div *ngIf="f.nombre.errors.required">El nombre del servicio es requerido</div>
+                        <div *ngIf="f.nombre.errors.minlength">El nombre del servicio debe tener al menos 4 caratcteres</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Citas max / hora</label>
+                    <select formControlName="duracion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.duracion.errors }">
                   <option value="">Numero max de citas / hora</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
               </select>
-              <div *ngIf="submitted && f.duracion.errors" class="invalid-feedback">
-                  <div *ngIf="f.duracion.errors.required">La duracion de las citas es requerida</div>
-              </div>
-          </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-6">
-              <label>Precio de la cita a particulares</label>
-              <input type="number" formControlName="precio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }"/>
-              <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
-                  <div *ngIf="f.precio.errors.required">El precio no debe estar vacio</div>
-              </div>
-          </div>
-          <div class="form-group col-6">
-            <label>Descuento para usuarios</label>
-            <input type="number" formControlName="descuento" placeholder="Descuento para clientes Prevenir Descuentos"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descuento.errors }" />
-            <div *ngIf="submitted && f.descuento.errors" class="invalid-feedback">
-                <div *ngIf="f.descuento.errors.required">El descuento no puede estar vacio</div>
-                <div *ngIf="f.descuento.errors.min">El descuento no puede ser menor al 10%</div>
-                <div *ngIf="f.descuento.errors.max">El descuento no puede ser mayor al 100%</div>
-                <div *ngIf="f.descuento.errors.pattern">Solo debe contener numeros</div>
+                    <div *ngIf="submitted && f.duracion.errors" class="invalid-feedback">
+                        <div *ngIf="f.duracion.errors.required">La duracion de las citas es requerida</div>
+                    </div>
+                </div>
             </div>
-        </div>
-          </div>
-          <div class="form-group">
-            <label>Link video Promocional Youtube</label>
-            <input type="url" formControlName="video" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.video.errors }" />
-          </div>
-          <div class="form-group">
-            <label>Descripcion</label>
-            <textarea class="form-control" formControlName="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" rows="3" ></textarea>
-            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
-              <div *ngIf="f.descripcion.errors.required">La descripcion no debe estar vacia</div>
-              <div *ngIf="f.descripcion.errors.minlength">La descripcion debe contener al menos 40 caracteres</div>
-          </div>
-          </div>
-
-
-          <!-------------------------------------------------------------------------------------------------->
-          <!-------------------------------- Carga de fotos -------------------------------------------------->
-          <!-------------------------------------------------------------------------------------------------->
-
-          <div class="card">
-            <div class="card-header">
-              <h5>Imágenes del servicio</h5>
-              <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Precio de la cita a particulares</label>
+                    <input type="number" formControlName="precio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }" />
+                    <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+                        <div *ngIf="f.precio.errors.required">El precio no debe estar vacio</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Descuento para usuarios</label>
+                    <input type="number" formControlName="descuento" placeholder="Descuento para clientes Prevenir Descuentos" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descuento.errors }" />
+                    <div *ngIf="submitted && f.descuento.errors" class="invalid-feedback">
+                        <div *ngIf="f.descuento.errors.required">El descuento no puede estar vacio</div>
+                        <div *ngIf="f.descuento.errors.min">El descuento no puede ser menor al 10%</div>
+                        <div *ngIf="f.descuento.errors.max">El descuento no puede ser mayor al 100%</div>
+                        <div *ngIf="f.descuento.errors.pattern">Solo debe contener numeros</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Link video Promocional Youtube</label>
+                <input type="url" formControlName="video" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.video.errors }" />
+            </div>
+            <div class="form-group">
+                <label>Descripcion</label>
+                <textarea class="form-control" formControlName="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" rows="3"></textarea>
+                <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                    <div *ngIf="f.descripcion.errors.required">La descripcion no debe estar vacia</div>
+                    <div *ngIf="f.descripcion.errors.minlength">La descripcion debe contener al menos 40 caracteres</div>
+                </div>
             </div>
 
-            <div class="img-recorte" *ngIf="mostrarRecorte">
 
-              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
-                [resizeToWidth]="500" [cropperMinWidth]="500" [onlyScaleDown]="true" [roundCropper]="false" format="jpeg"
-                outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+            <!-------------------------------------------------------------------------------------------------->
+            <!-------------------------------- Carga de fotos -------------------------------------------------->
+            <!-------------------------------------------------------------------------------------------------->
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Imágenes del servicio</h5>
+                    <p>* Recuerda que el servicio puede tener un máximo de 6 imágenes.</p>
+                </div>
+
+                <div class="img-recorte" *ngIf="mostrarRecorte">
+
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="500" [cropperMinWidth]="500" [onlyScaleDown]="true" [roundCropper]="false" format="jpeg" outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
 
 
-              <div class="text-center" style="padding-top: 10px;">
-                <button class="btn btn-info" *ngIf="recortar" (click)="recorte()">Recortar</button></div>
+                    <div class="text-center" style="padding-top: 10px;">
+                        <button class="btn btn-info" *ngIf="recortar" (click)="recorte()">Recortar</button></div>
+                </div>
+
+                <div class="row rw">
+                    <div class="col-2 contenedores" *ngFor="let item of imagenes; let i = index">
+                        <img [src]="item.base64Image" class="imagenes">
+                        <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+
+                </div>
             </div>
-
-            <div class="row rw">
-              <div class="col-2 contenedores" *ngFor="let item of imagenes; let i = index">
-                <img [src]="item.base64Image" class="imagenes">
-                <button class="btn btn-danger" (click)="borrarFoto(i)"><i class="fas fa-trash-alt"></i></button>
-              </div>
-
-            </div>
-          </div>
-          <div id="cargar-imagen" style="padding-bottom: 40px;">
-            <label for="file-upload" class="btn btn-info btns-horario" (click)="validacionMaximoImagenes()">
+            <div id="cargar-imagen" style="padding-bottom: 40px;">
+                <label for="file-upload" class="btn btn-info btns-horario" (click)="validacionMaximoImagenes()">
               Cargar Fotos
             </label>
-            <input type="file" id="file-upload" (change)="fileChangeEvent($event)" [disabled]="imagenes.length >= 6" />
-            <!-- <button class="btn btn-success" (click)="publicarServicio(servokmod)" *ngIf="imagenes.length >= 1">Publicar Servicio</button> -->
-          </div>
+                <input type="file" id="file-upload" (change)="fileChangeEvent($event)" [disabled]="imagenes.length >= 6" />
+                <!-- <button class="btn btn-success" (click)="publicarServicio(servokmod)" *ngIf="imagenes.length >= 1">Publicar Servicio</button> -->
+            </div>
 
 
-          <!------------------------------------------------------------------------------------------------->
-
-
-
+            <!------------------------------------------------------------------------------------------------->
 
 
 
-          <div class="form-group form-check">
-              <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
-              <label for="acceptTerms" class="form-check-label">Accepto terminos y condicines</label>
-              <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Aceptar Ts & Cs es requerido</div>
-          </div>
-          <div id="cargar-imagen text-center" style="padding-bottom: 40px;">
-            <button class="btn btn-success" *ngIf="imagenes.length >= 1">Crear
+
+
+
+            <div class="form-group form-check">
+                <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                <label for="acceptTerms" class="form-check-label">Accepto terminos y condicines</label>
+                <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Aceptar Ts & Cs es requerido</div>
+            </div>
+            <div id="cargar-imagen text-center" style="padding-bottom: 40px;">
+                <button class="btn btn-success" *ngIf="imagenes.length >= 1">Crear
               Servicio</button>
-          </div>
-      </form>
-  </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="loading container-fluid" *ngIf="loading">
-  <img src="/assets/pulso.gif" alt="">
+    <img src="/assets/pulso.gif" alt="">
 </div>
-

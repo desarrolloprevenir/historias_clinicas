@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -24,24 +24,25 @@ export class GmedicosComponent implements OnInit {
   public vacio = false;
   public datos: FormGroup;
 
-    // Variables modal
-    public medico;
-    public existe: boolean;
-    public formulario: boolean;
-    public read;
-    public nombre;
-    cedula = new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('[0-9]*')]);
-    public modalRef2: BsModalRef;
+  // Variables modal
+  public medico; 
+  public existe: boolean;
+  public formulario: boolean;
+  public read;
+  public nombre;
+  cedula = new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('[0-9]*')]);
+  public modalRef2: BsModalRef;
+  @Output() medicoCreado = new EventEmitter<any>();
 
     constructor(public userService: UserService,
-              private modalService: BsModalService,
-              public provedorService: ProvedorService,
-              private router: Router,
-              private appService: AppService,
-              private route: ActivatedRoute,
-              public medicoService: MedicoService,
-              public formBuilder: FormBuilder,
-              location: PlatformLocation) {
+                private modalService: BsModalService,
+                public provedorService: ProvedorService,
+                private router: Router,
+                private appService: AppService,
+                private route: ActivatedRoute,
+                public medicoService: MedicoService,
+                public formBuilder: FormBuilder,
+                location: PlatformLocation) {
                 this.formulario = false;
 
                 location.onPopState(() => {
@@ -182,9 +183,10 @@ export class GmedicosComponent implements OnInit {
         this.getMedicos(this.identity.id_provedor);
         this.status = 'success';
         this.statusText = 'Médico agregado con exito.';
-        //document.getElementById('cerrarModal').click();
-        //this.modalMedi.hide();
+        // document.getElementById('cerrarModal').click();
+        // this.modalMedi.hide();
         this.modalRef2.hide();
+        this.medicoCreado.emit(true);
       }
 
       if (response === false) {

@@ -338,7 +338,7 @@
 
                     <!-- -------------------------------------------- HORARIOS CREAR CONSULTORIO --------------------------------------------- -->
 
-                    <div class="row">
+                    <div class="row" *ngIf="crearConsul">
                         <div class="col-md-12" style="padding: 20px; text-align: center;">
                             <p>*Selecciona un horario de atención o más, según la disponibilidad de tu servicio</p>
                         </div>
@@ -352,6 +352,7 @@
                     </div>
 
                     <!-- ------------------------------ HORARIO1  --------------------------------------------------------- -->
+
 
                     <div *ngIf="horario1 === '1'">
                         <div id="1"></div>
@@ -634,10 +635,9 @@
 
                     </div>
 
-
                     <!-- /////////////////////////////////////////////// BTNS  -->
 
-                    <div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+                    <div class="row" style="padding-top: 40px; padding-bottom: 40px;" *ngIf="crearConsul">
 
                         <div class="col-md-1"></div>
                         <div class="col-md-3">

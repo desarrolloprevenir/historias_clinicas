@@ -72,12 +72,12 @@ export class PerfilComponent implements OnInit {
   @ViewChild('barra', { static: true }) barra: BarraNavegacionComponent;
 
   constructor(public userService: UserService,
-    public provedorService: ProvedorService,
-    public medicoService: MedicoService,
-    public formBuilder: FormBuilder,
-    location: PlatformLocation,
-    private sucursalService: SucursalService,
-    private aplicationService: AppService, ) {
+              public provedorService: ProvedorService,
+              public medicoService: MedicoService,
+              public formBuilder: FormBuilder,
+              location: PlatformLocation,
+              private sucursalService: SucursalService,
+              private aplicationService: AppService, ) {
     location.onPopState(() => {
       document.getElementById('btn-cerrar-modal-cambio').click();
     });

@@ -573,7 +573,7 @@
                                         <div class="col">
                                             <label class="form-label">Médico *</label>
                                             <select name="" id="select-med" class="form-control" [formControl]="medicoSelect">
-                                    <option *ngFor="let m of medicos" [ngValue]="m" [disabled]="m.select === true || m.activo === 'true'">{{m.nombre}}</option>
+                                    <option *ngFor="let m of medicos" [ngValue]="m">{{m.nombre}}</option>
                                   </select>
                                         </div>
 

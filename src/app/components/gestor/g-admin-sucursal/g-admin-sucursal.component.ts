@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, TemplateRef } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../services/app.service';
@@ -6,6 +6,8 @@ import { ProvedorService } from 'src/app/services/provedor.service';
 import { UserService } from 'src/app/services/user.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { PlatformLocation } from '@angular/common';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-g-admin-sucursal',
@@ -30,9 +32,9 @@ export class GAdminSucursalComponent implements OnInit {
   // variables horarios para consultorios
   public horasDesdeHastaManana;
   public horasDesdeHastaTarde;
-  public diasH1;
-  public diasH2;
-  public diasH3;
+  public diasH1 = [];
+  public diasH2 = [];
+  public diasH3 = [];
   public ds = [];
   public mananaH1 = false;
   public mananaH2 = false;
@@ -70,6 +72,9 @@ export class GAdminSucursalComponent implements OnInit {
   public formCambio: FormGroup;
   public usernameSucursal = new FormControl('', [Validators.required, Validators.pattern('[a-zA-z_0-9]*')] );
 
+
+  @Output() pubExitosa = new EventEmitter<any>();
+
   // form control
   departSelect = new FormControl('', Validators.required);
   muniSelect = new FormControl('', Validators.required);
@@ -96,7 +101,7 @@ export class GAdminSucursalComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private sucursalService: SucursalService,
-              location: PlatformLocation,
+              location: PlatformLocation
               ) {
                 this.mymodel = 'informacion';
                 this.horario1 = '1';
@@ -109,28 +114,25 @@ export class GAdminSucursalComponent implements OnInit {
 
   ngOnInit(): void {
     this.idProvedor = this.userService.getIdentity().id_provedor;
+    // console.log('Info provedor', this.userService.getIdentity());
 
-    if(this.idSucursal>0)
-    {
-      console.log("dentro de id sucursal");
+    let provedor = this.userService.getIdentity();
+    this.nombreSucursal.setValue(provedor.nombre);
+    this.telefonoSucursal.setValue(provedor.telefono);
+    this.direccionSucursal.setValue(provedor.direccion);
 
-    }
-
-    if (this.route.params) {
-
-      this.route.params.subscribe(params => {
-        if (params['id_sucursal']) {
-          this.idSucursal = params['id_sucursal'];
-          //  console.log(params['id_sucursal']);
-          this.getInfoSucursal(this.idSucursal);
-        }
-    });
+    // if (this.idSucursal > 0) {
+    //   console.log("dentro de id sucursal");
+    // }
+    if (this.idSucursal) {
+        //  console.log(params['id_sucursal']);
+        this.getInfoSucursal(this.idSucursal);
   }
-  this.getMedicos(this.idProvedor);
-this.getServicios(this.idProvedor);
-this.getDepartamentos();
-this.horas();
-this.diasSemana();
+    this.getMedicos(this.idProvedor);
+    this.getServicios(this.idProvedor);
+    this.getDepartamentos();
+    this.horas();
+    this.diasSemana();
 
 }
 
@@ -139,7 +141,7 @@ getInfoSucursal(idSucursal) {
   this.loading = true;
 // console.log('oi');
   this.provedorService.getConsultoriosSucursal(idSucursal).subscribe( (response) => {
-  // console.log('sucu', response);
+  console.log('sucu', response);
   this.loading = false;
   this.infoSucursal = response;
   this.nombreSucursal.setValue(this.infoSucursal.nombre);
@@ -607,17 +609,19 @@ guardarConsultorio() {
   this.loading = true;
   this.sucursalService.postConsultorioSucursal(this.infoConsultorios).subscribe( (response) => {
     this.loading = false;
-    window.scroll(0, 0);
-    if (response === true){
+    // window.scroll(0, 0);
+    if (response === true) {
       this.getInfoSucursal(this.idSucursal);
       this.infoConsultorios = [];
-      this.status = 'success';
-      this.statusText = 'Consultorios creados exitosamente.';
+      // this.status = 'success';
+      // this.statusText = 'Consultorios creados exitosamente.';
+      Swal.fire('Se creo', 'El consultorio exitosamente', 'success');
     }
   }, () => {
-    window.scroll(0, 0);
-    this.status = 'error';
-    this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
+    // window.scroll(0, 0);
+    // this.status = 'error';
+    // this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
+    Swal.fire('Error', 'En la conexión, por favor intentalo más tarde.', 'error');
     this.loading = false;
   });
 }
@@ -637,11 +641,11 @@ let info = {nombre: this.nombreSucursal.value, telefono: this.telefonoSucursal.v
 this.provedorService.crearSucursal(info).subscribe( (response) => {
   // console.log('respuesta', response);
   this.loading = false;
-  if(response === true) {
+  if (response === true) {
     document.getElementById('btn-publicacion-exitosa').click();
   } else {
     this.status = 'error';
-    this.statusText = 'El nombre de usuario ya existe, por favor escribe otro.'
+    this.statusText = 'El nombre de usuario ya existe, por favor escribe otro.';
   }
 
 }, () => {
@@ -666,6 +670,7 @@ this.horasDesdeHastaManana = [
 ];
 
 this.horasDesdeHastaTarde = [
+  { hora : '12 p.m', value : '12:00' },
   { hora : '1 p.m', value : '13:00' },
   { hora : '2 p.m', value : '14:00' },
   { hora : '3 p.m', value : '15:00' },
@@ -697,19 +702,55 @@ for ( var i = 0; i < days.length; i++) {
 
 // Dias seleccionados en el horario 1
 diasHorario1(ev) {
-this.diasH1 = ev.value;
-// console.log(this.diasH1);
+// this.diasH1 = ev;
+
+ if (ev.target.checked) {
+  this.diasH1.push(ev.target.value);
+} else {
+
+  let posicion = this.diasH1.indexOf(ev.target.value);
+  console.log(posicion);
+
+  if (posicion >= 0) {
+    this.diasH1.splice(posicion, 1);
+  }
+}
+
+//  console.log(this.diasH1);
 }
 
 // Dias seleccionados en el horario 2
 diasHorario2(ev) {
-this.diasH2 = ev.value;
+  if (ev.target.checked) {
+    this.diasH2.push(ev.target.value);
+  } else {
+
+    let posicion = this.diasH2.indexOf(ev.target.value);
+    console.log(posicion);
+
+    if (posicion >= 0) {
+      this.diasH2.splice(posicion, 1);
+    }
+  }
+
 // console.log(this.diasH2);
 }
 
 // Dias seleccionados en el horario 3
 diasHorario3(ev) {
-this.diasH3 = ev.value;
+
+  if (ev.target.checked) {
+    this.diasH3.push(ev.target.value);
+  } else {
+
+    let posicion = this.diasH3.indexOf(ev.target.value);
+    console.log(posicion);
+
+    if (posicion >= 0) {
+      this.diasH3.splice(posicion, 1);
+    }
+  }
+
 // console.log(this.diasH3);
 }
 
@@ -748,54 +789,54 @@ if (ev.checked === false && h === 'h3') {
 
 
 horasHorarios(ev, info) {
-// console.log(ev, info);
+console.log(ev, info);
 
 // H1
 
 if (info === 'mdesde_h1') {
   // tslint:disable-next-line:radix
-  this.mananaDesdeH1 = parseInt(ev.value);
-  // console.log(this.mananaDesdeH1);
+  this.mananaDesdeH1 = parseInt(ev.target.value);
+  console.log(this.mananaDesdeH1);
 }
 
 if (info === 'mhasta_h1') {
   // tslint:disable-next-line:radix
-  this.mananaHastaH1 = parseInt(ev.value);
-  // console.log(this.mananaHastaH1);
+  this.mananaHastaH1 = parseInt(ev.target.value);
+  console.log(this.mananaHastaH1);
 }
 
 if (info === 'tdesde_h1') {
   // tslint:disable-next-line:radix
-  this.tardeDesdeH1 = parseInt(ev.value);
-  // console.log(this.tardeDesdeH1);
+  this.tardeDesdeH1 = parseInt(ev.target.value);
+  console.log(this.tardeDesdeH1);
 }
 
 if (info === 'thasta_h1') {
   // tslint:disable-next-line:radix
-  this.tardeHastaH1 = parseInt(ev.value);
-  // console.log(this.tardeHastaH1);
+  this.tardeHastaH1 = parseInt(ev.target.value);
+  console.log(this.tardeHastaH1);
 }
 
 // H2
 
 if (info === 'mdesde_h2') {
   // tslint:disable-next-line:radix
-  this.mananaDesdeH2 = parseInt(ev.value);
+  this.mananaDesdeH2 = parseInt(ev.target.value);
 }
 
 if (info === 'mhasta_h2') {
   // tslint:disable-next-line:radix
-  this.mananaHastaH2 = parseInt(ev.value);
+  this.mananaHastaH2 = parseInt(ev.target.value);
 }
 
 if (info === 'tdesde_h2') {
   // tslint:disable-next-line:radix
-  this.tardeDesdeH2 = parseInt(ev.value);
+  this.tardeDesdeH2 = parseInt(ev.target.value);
 }
 
 if (info === 'thasta_h2') {
   // tslint:disable-next-line:radix
-  this.tardeHastaH2 = parseInt(ev.value);
+  this.tardeHastaH2 = parseInt(ev.target.value);
 }
 
 
@@ -803,23 +844,23 @@ if (info === 'thasta_h2') {
 
 if (info === 'mdesde_h3') {
   // tslint:disable-next-line:radix
-  this.mananaDesdeH3 = parseInt(ev.value);
+  this.mananaDesdeH3 = parseInt(ev.target.value);
 }
 
 if (info === 'mhasta_h3') {
   // tslint:disable-next-line:radix
-  this.mananaHastaH3 = parseInt(ev.value);
+  this.mananaHastaH3 = parseInt(ev.target.value);
 }
 
 if (info === 'tdesde_h3') {
   // tslint:disable-next-line:radix
-  this.tardeDesdeH3 = parseInt(ev.value);
+  this.tardeDesdeH3 = parseInt(ev.target.value);
 }
 
 if (info === 'thasta_h3') {
   // console.log('aquiii');
   // tslint:disable-next-line:radix
-  this.tardeHastaH3 = parseInt(ev.value);
+  this.tardeHastaH3 = parseInt(ev.target.value);
   // console.log(this.tardeHastaH3);
 }
 }
@@ -881,7 +922,7 @@ validacionesH1(bol): boolean {
 
 // console.log('aqui val1')
 
-if (this.diasH1 === undefined) {
+if (this.diasH1.length <= 0) {
     this.status = 'warning';
     this.statusText = 'Por favor completa los dias de atención en el horario 1.';
     return false;
@@ -891,6 +932,7 @@ if (this.diasH1 === undefined) {
   switch (val === true) {
 
   case (this.mananaH1 === true && this.tardeH1 === false) :
+  // console.log(this.mananaDesdeH1, this.mananaHastaH1);
   if (this.mananaDesdeH1 === undefined || this.mananaHastaH1 === undefined) {
     this.status = 'warning';
     this.statusText = 'Por favor completa una hora de inicio y terminación en la mañana del horario 1.';
@@ -1024,7 +1066,7 @@ validacionesH2(bol): boolean {
 
 // console.log('aquiii');
 
-if (this.diasH2 === undefined) {
+if (this.diasH2.length <= 0) {
     this.status = 'warning';
     this.statusText = 'Por favor completa los dias de atención en el horario 2.';
     return false;
@@ -1169,7 +1211,7 @@ if (this.diasH2 === undefined) {
 
 validacionesH3(): boolean {
 
-if (this.diasH3 === undefined) {
+if (this.diasH3.length <= 0) {
     this.status = 'warning';
     this.statusText = 'Por favor completa los dias de atención en el horario 3.';
 } else {
@@ -1365,7 +1407,7 @@ switch (bol === true) {
   this.btnEliminarHorario = false;
   this.enabledDiasH1();
   this.disableH1 = false;
-  this.diasH2 = undefined;
+  this.diasH2 = [];
   this.mananaDesdeH2 = undefined;
   this.mananaHastaH2 = undefined;
   this.tardeDesdeH2 = undefined;
@@ -1378,7 +1420,7 @@ switch (bol === true) {
   this.disableH2 = false;
   this.enabledDiasH2();
   this.enabledDiasH3();
-  this.diasH3 = undefined;
+  this.diasH3 = [];
   this.mananaDesdeH3 = undefined;
   this.mananaHastaH3 = undefined;
   this.tardeDesdeH3 = undefined;
@@ -1413,10 +1455,98 @@ this.campo = document.getElementById(campo);
 this.campo.readOnly = true;
 }
 
-verConsultorio(info){
+verConsultorio(info, template: TemplateRef<any>) {
 this.consultorioSelect = info;
 // console.log(this.consultorioSelect);
-document.getElementById('modal-ver-consultorio').click();
+// document.getElementById('modal-ver-consultorio').click();
+
+
+// <div class="col">
+// <label class="form-label">Médico</label>
+// <input type="text" class="form-control" value="{{consultorioSelect.medico}}" readonly>
+// </div>
+// <div class="col">
+// <label class="form-label">Servicio</label>
+// <input type="text" class="form-control" value="{{consultorioSelect.servicio}}" readonly>
+// </div>
+
+Swal.fire({
+  title: 'Test Title',
+  text: 'Test Text',
+});
+
+// Swal.fire({
+//   title: '<strong>HTML <u>example</u></strong>',
+//   icon: 'info',
+//   html:
+//     // tslint:disable-next-line: max-line-length
+//     '<div class="row"> <div class="col"><label class="form-label">Médico</label><input type="text" class="form-control" [value]="consultorioSelect.medico" readonly></div> <div class="col"><label class="form-label">Servicio</label><input type="text" class="form-control" [value]="consultorioSelect.servicio" readonly></div> </div>' +
+//     '<a href="//sweetalert2.github.io">links</a> ' +
+//     'and other HTML tags',
+//   showCloseButton: true,
+//   showCancelButton: true,
+//   focusConfirm: false,
+//   confirmButtonText:
+//     '<i class="fa fa-thumbs-up"></i> Great!',
+//   confirmButtonAriaLabel: 'Thumbs up, great!',
+//   cancelButtonText:
+//     '<i class="fa fa-thumbs-down"></i>',
+//   cancelButtonAriaLabel: 'Thumbs down'
+// });
+
+}
+
+cambioContra() {
+
+//   <div class="alert alert-warning alert-dismissible fade show container" role="alert" *ngIf="status === 'warning_modal'">
+//   {{statusText}}
+//   <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+//   <span aria-hidden="true">&times;</span>
+//   </button>
+// </div>
+
+
+  Swal.fire({
+    title: this.infoSucursal.nombre,
+    html:
+      '<form ngNativeValidate>' +
+      '<div class="form-group">' +
+      '<label class="form-label text-left">Contraseña Administrador</label>' +
+      // tslint:disable-next-line: max-line-length
+      ' <input type="password" id="contraAdmin" class="form-control" required minlength="8">' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label class="form-label text-left">Nombre de usuario</label>' +
+      // tslint:disable-next-line: max-line-length
+      ' <input type="text" id="username" class="form-control" required>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label class="form-label text-left">Nueva Contraseña</label>' +
+      // tslint:disable-next-line: max-line-length
+      ' <input type="password" id="newContra" class="form-control" required minlength="8">' +
+      '</div>' +
+      '</form>',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#808080',
+      confirmButtonText: 'Cambiar Contraseña',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+  }).then((result) => {
+    console.log(result);
+
+    if (result.value) {
+      var psswAdmin: any;
+      var username: any;
+      var psswNew: any;
+
+      psswAdmin = document.getElementById('contraAdmin');
+      username = document.getElementById('username');
+      psswNew = document.getElementById('newContra');
+      
+      // validaciones
+    }
+  });
 }
 
 confirmacionEliminarConsulApi(info) {
@@ -1429,14 +1559,36 @@ this.sucursalService.getEventsConsul(info.id_consultorio).subscribe( (response) 
   // console.log(response);
   this.loading = false;
   window.scroll(0, 0);
-  if(response[0].eventsC <= 0 ) {
+  if (response[0].eventsC <= 0 ) {
   //  console.log('elimianr');
    this.infoEliminar = true;
-   document.getElementById('confi-eliminar-api').click();
+  //  document.getElementById('confi-eliminar-api').click();
+
+   Swal.fire({
+    title: 'Estas seguro que deseas eliminar este consultorio ?',
+    text: 'Te encuenta que esta información no se podra recuperar',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Eliminar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.value) {
+      this.eliConsul();
+    }
+  });
   } else {
     // console.log('no se puse eliminar');
     this.infoEliminar = false;
-    document.getElementById('confi-eliminar-api').click();
+    // document.getElementById('confi-eliminar-api').click();
+
+    Swal.fire({
+      icon: 'warning',
+      title: 'No se puede eliminar',
+      text: 'Hay citas activas en el consultorio, por favor eliminalas antes de eliminar este consultorio.',
+    });
   }
 }, (err) => {
   this.loading = false;
@@ -1451,18 +1603,20 @@ eliConsul() {
 this.loading = true;
 this.sucursalService.dltConsultorio(this.idConsultorio).subscribe( (response) => {
   this.loading = false;
-  window.scroll(0,0);
-  if(response === true){
-    this.status = 'success';
-    this.statusText = 'Consultorio eliminado exitosamente.';
+  // window.scroll(0, 0);
+  if (response === true) {
+    // this.status = 'success';
+    // this.statusText = 'Consultorio eliminado exitosamente.';
+    Swal.fire('Se elimino', 'El consultorio exitosamente', 'success');
     this.getInfoSucursal(this.idSucursal);
     this.getMedicos(this.idProvedor);
   }
   // console.log(response);
 }, () => {
-  window.scroll(0, 0);
-  this.status = 'error';
-  this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde.';
+  // window.scroll(0, 0);
+  // this.status = 'error';
+  // this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde.';
+  Swal.fire('Error', 'En la conexión, por favor intentalo más tarde.', 'error');
   this.loading = false;
   // console.log(err);
 } );
@@ -1527,6 +1681,11 @@ this.provedorService.putCambioContrasenaUsuario(info).subscribe( (response) => {
 //     nombreUsuario: [this.infoSucursal.email, [Validators.required, Validators.pattern('[a-zA-z_0-9]*')]],
 //     pssw : ['', [Validators.required, Validators.minLength(8)]],
 //     psswConfirm : ['', [Validators.required, Validators.minLength(8)]],
+
+
+publicacionExitosa() {
+  this.pubExitosa.emit(true);
+}
 
 
 

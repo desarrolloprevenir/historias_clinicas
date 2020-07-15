@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { Router} from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { PlatformLocation } from '@angular/common';
@@ -20,12 +20,6 @@ export class GserviciosComponent implements OnInit {
   public publications;
   public vacio;
   public loading = false;
-  public config = {
-    animated: true,
-    keyboard: false,
-    backdrop: true,
-    ignoreBackdropClick: false
-  };
   creada = false;
   myPos;
   departamentos;
@@ -54,15 +48,16 @@ export class GserviciosComponent implements OnInit {
   public maxCitasHora = [];
   public maxCitas;
   public modalRef3: BsModalRef;
+  @Output() servicioCreate = new EventEmitter<any>();
 
     constructor(public userService: UserService,
-              private modalService: BsModalService,
-              public provedorService: ProvedorService,
-              private router: Router,
-              public aplicationService: AppService,
-              public medicoService: MedicoService,
-              private formBuilder: FormBuilder,
-              location: PlatformLocation) {
+                private modalService: BsModalService,
+                public provedorService: ProvedorService,
+                private router: Router,
+                public aplicationService: AppService,
+                public medicoService: MedicoService,
+                private formBuilder: FormBuilder,
+                location: PlatformLocation) {
 
                 location.onPopState(() => {
                   document.getElementById('btn-cerrar-modal-crear-medico').click();
@@ -83,23 +78,28 @@ export class GserviciosComponent implements OnInit {
     this.getPublications(this.identity.id_provedor);
   }
 
-  openModal(templete: TemplateRef<any>)
-  {
-    this.modalRef3 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'second modal-xl'}));
+  openModal(templete: TemplateRef<any>) {
+    let config = {
+      animated: true,
+      keyboard: false,
+      backdrop: true,
+      ignoreBackdropClick: true
+    };
+    this.modalRef3 = this.modalService.show(templete , Object.assign({}, config, {class: 'second modal-xl'}));
   }
 
   getPublications(id) {
-    // console.log(id);
+    // console.log('publicaciones', id);
     this.loading = true;
 
     this.provedorService.getPublications(id).subscribe( (response) => {
 
-        this.publications = response;
-        console.log(this.publications);
-
-        if (this.publications[0].vacio === true) {
+        if (response[0].vacio === true) {
         this.vacio = true;
         // console.log(this.vacio);
+      } else {
+        this.vacio = false;
+        this.publications = response;
       }
         this.loading = false;
     }, () => {
@@ -111,33 +111,41 @@ export class GserviciosComponent implements OnInit {
   }
 
   crearPublicacion(templete: TemplateRef<any>) {
-    this.loading = true;
-    let id = this.userService.getIdentity();
-    id = id.id_provedor;
+    // this.loading = true;
+    // let id = this.userService.getIdentity();
+    // id = id.id_provedor;
+    let config = {
+      animated: true,
+      keyboard: false,
+      backdrop: true,
+      ignoreBackdropClick: true
+    };
+    this.modalRef3 = this.modalService.show(templete, Object.assign({}, config, {class: 'second modal-xl'}))
     // console.log(id);
-    this.provedorService.getMedicosProvedor(id).subscribe( (res) => {
-      // console.log(res);
-      this.loading = false;
-      if ( res.length <= 0) {
-        // console.log('no hay medicos');
-        document.getElementById('openModalButton').click();
-      } else {
-        // this.modalRef3 = this.modalService.show(templete,{class: 'second modal-xl'});
-        this.modalRef3 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'second modal-xl'}));
-      }
-    }, (err) => {
-      // console.log(err);
-      this.loading = false;
-      this.status = 'error';
-      this.statusText = 'Error en la conexión, Por favor revisa tu conexión o intentalo más tarde.';
-    } );
+    // this.provedorService.getMedicosProvedor(id).subscribe( (res) => {
+    //   // console.log(res);
+    //   this.loading = false;
+    //   if ( res.length <= 0) {
+    //     // console.log('no hay medicos');
+    //     document.getElementById('openModalButton').click();
+    //   } else {
+    //     // this.modalRef3 = this.modalService.show(templete,{class: 'second modal-xl'});
+    //     this.modalRef3 = this.modalService.show(templete,Object.assign({}, this.config, {class: 'second modal-xl'}));
+    //   }
+    // }, (err) => {
+    //   // console.log(err);
+    //   this.loading = false;
+    //   this.status = 'error';
+    //   this.statusText = 'Error en la conexión, Por favor revisa tu conexión o intentalo más tarde.';
+    // } );
   }
 
-  servicioCreado()
-  {
+  servicioCreado() {
+    // console.log('servicio creado');
     this.creada = true;
     this.getPublications(this.identity.id_provedor);
     this.modalRef3.hide();
+    this.servicioCreate.emit(true);
   }
 
   crearMedico() {

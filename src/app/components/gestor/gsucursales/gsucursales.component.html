@@ -1,256 +1,234 @@
 <div class="container-fluid">
-  <!-- <div id="btn-agregar-pub" class="text-center"> -->
-  <br />
-  <div class="card-header">
-    <h1>Mis Sucursales !</h1>
-  </div>
-  <br />
+    <!-- <div id="btn-agregar-pub" class="text-center"> -->
+    <br />
+    <div class="card-header">
+        <h1>Mis Sucursales !</h1>
+    </div>
+    <br />
 
-  <!-- </div> -->
+    <!-- </div> -->
 </div>
 <div class="text-center" style="padding: 10px;" *ngIf="medicos || servicios">
-  <!-- routerLink="/crear-sucursal" -->
-  <button class="btn btn-success" (click)="openModal(templateSuc,0)"
-    *ngIf="( medicos && medicos.length >= 1 ) || ( servicios && servicios.length >= 1 )">Crear sucursal</button>
+    <!-- routerLink="/crear-sucursal" -->
+    <button class="btn btn-success" (click)="openModal(templateSuc,0)" *ngIf="( medicos && medicos.length >= 1 ) || ( servicios && servicios.length >= 1 )">Crear sucursal</button>
 </div>
 
-<div class="alert alert-success alert-dismissible fade show container" role="alert"
-  style="padding-bottom: 10px; padding-top: 10px;" *ngIf="status === 'success'">
-  {{statusText}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+<div class="alert alert-success alert-dismissible fade show container" role="alert" style="padding-bottom: 10px; padding-top: 10px;" *ngIf="status === 'success'">
+    {{statusText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 
-<div class="alert alert-danger alert-dismissible fade show container" role="alert"
-  style="padding-bottom: 10px; padding-top: 10px;" *ngIf="status === 'error'">
-  {{statusText}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+<div class="alert alert-danger alert-dismissible fade show container" role="alert" style="padding-bottom: 10px; padding-top: 10px;" *ngIf="status === 'error'">
+    {{statusText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="row container-fluid">
-  <div class="col-7">
-    <div *ngIf="sucursales">
-      <div style="padding: 15px;" *ngFor="let s of sucursales">
-        <div class="card">
-          <div class="card-header">{{s.nombre}}</div>
-          <div class="card-body">
-            <p><strong>Direccion : </strong> {{s.direccion}}</p>
-            <p><strong>Teléfono : </strong> {{s.telefono}}</p>
-            <p><strong>Municipio : </strong> {{s.municipio}}</p>
-            <p><strong>id_sucursal : </strong> {{s.id_sucursales}}</p>
-            <input type="text" [value]="s.id_sucurslaes" #idsuc (input)="s.id_sucurslaes = $event.target.value">
-
-            <div class="text-right">
-              <!-- <button class="btn btn-warning" style="margin-right: 5px;"></button> -->
-              <button class="btn btn-warning" style="margin-right: 5px;"
-              (click)="openModal(templateSuc,idsuc.value)"><i class="fas fa-pencil-alt"></i></button>
-              <!-- <button class="btn btn-danger" style="margin-right: 5px;" (click)="confirmacioEliminarSucursal(s)"><i class="fas fa-trash-alt"></i></button> -->
+    <div class="col-7">
+        <div *ngIf="sucursales">
+            <div style="padding: 15px;" *ngFor="let s of sucursales">
+                <div class="card">
+                    <div class="card-header">{{s.nombre}}</div>
+                    <div class="card-body">
+                        <p><strong>Dirección : </strong> {{s.direccion}}</p>
+                        <p><strong>Teléfono : </strong> {{s.telefono}}</p>
+                        <p><strong>Municipio : </strong> {{s.municipio}}</p>
+                        <div class="text-right">
+                            <!-- <button class="btn btn-warning" style="margin-right: 5px;"></button> -->
+                            <button class="btn btn-warning" style="margin-right: 5px;" (click)="openModal(templateSuc, s.id_sucursales)"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-danger" style="margin-right: 5px;" (click)="confirmacioEliminarSucursal(s)"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <!-- *ngIf="medico || servicios" -->
 <!-- *ngIf="medicos.length < 1 || servicios.length < 1" -->
 <div style="padding: 20px;" *ngIf="medicos || servicios">
-  <div *ngIf="(medicos && servicios) && ( medicos.length < 1 || servicios.length < 1)">
-    <h5>Antes de crear una sucursal hay que tener en cuenta que debes tener creados médicos y servicios</h5>
-    <div style="padding-top: 20px;" routerLink="/medicos">
-      <button class="btn btn-success">Agregar Médico</button>
-    </div>
+    <div *ngIf="(medicos && servicios) && ( medicos.length < 1 || servicios.length < 1)">
+        <h5>Antes de crear una sucursal hay que tener en cuenta que debes tener creados médicos y servicios</h5>
+        <div style="padding-top: 20px;" routerLink="/medicos">
+            <button class="btn btn-success">Agregar Médico</button>
+        </div>
 
-    <div style="padding-top: 20px;" routerLink="/publicaciones">
-      <button class="btn btn-success">Agregar Servicio</button>
+        <div style="padding-top: 20px;" routerLink="/publicaciones">
+            <button class="btn btn-success">Agregar Servicio</button>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <!-- MODALES -->
 
 <!-- MODAL EDITAR SUCURSAL -->
-<button type="button" id="modal-editar" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
-  style="display: none;">Large modal</button>
+<button type="button" id="modal-editar" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;">Large modal</button>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" *ngIf="sucursalSelect">{{sucursalSelect.nombre}}</h5>
-        <button type="button" id="btn-cerrar-modal-editar" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="sucursalSelect">{{sucursalSelect.nombre}}</h5>
+                <button type="button" id="btn-cerrar-modal-editar" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body" *ngIf="sucursalSelect">
+            </div>
+            <div class="modal-body" *ngIf="sucursalSelect">
 
-        <form [formGroup]="datos">
+                <form [formGroup]="datos">
 
-          <div class="row">
-            <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('nombre')">
-              <label class="form-label">Nombre</label>
-              <div style="display:flex">
-                <input type="text" id="nombre" class="form-control" formControlName="nombre"
-                  [class.is-invalid]="datos.get('nombre').errors" (change)="cambio('nombre')" readonly>
-                <a *ngIf="ver === 'nombre'" (click)="editar('nombre')" class="btn btn-warning"><i
+                    <div class="row">
+                        <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('nombre')">
+                            <label class="form-label">Nombre</label>
+                            <div style="display:flex">
+                                <input type="text" id="nombre" class="form-control" formControlName="nombre" [class.is-invalid]="datos.get('nombre').errors" (change)="cambio('nombre')" readonly>
+                                <a *ngIf="ver === 'nombre'" (click)="editar('nombre')" class="btn btn-warning"><i
                     class="fas fa-pencil-alt"></i></a>
-              </div>
+                            </div>
 
-              <!-- input   [class.is-invalid]="datos.get('nombres').errors" -->
-              <div *ngIf="datos.get('nombre').errors">
-                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('required')">* El campo es requerido.</p>
-                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('minlength')">Cantidad minima de caracteres
-                  (2).</p>
-                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('maxlength')">Cantidad maxima de caracteres
-                  (50).</p>
-                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('pattern')">Este campo solo acepta letras.
-                </p>
-              </div>
+                            <!-- input   [class.is-invalid]="datos.get('nombres').errors" -->
+                            <div *ngIf="datos.get('nombre').errors">
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('required')">* El campo es requerido.</p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('minlength')">Cantidad minima de caracteres (2).
+                                </p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('maxlength')">Cantidad maxima de caracteres (50).
+                                </p>
+                                <p class="alerta-error" *ngIf="datos.get('nombre').hasError('pattern')">Este campo solo acepta letras.
+                                </p>
+                            </div>
 
-            </div>
+                        </div>
 
-            <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('direccion')">
-              <label class="form-label">Direccion</label>
-              <div style="display: flex;">
-                <input type="text" id="direccion" class="form-control" formControlName="direccion"
-                  [class.is-invalid]="datos.get('direccion').errors" (change)="cambio('direccion')" readonly>
-                <a *ngIf="ver === 'direccion'" (click)="editar('direccion')" class="btn btn-warning"><i
+                        <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('direccion')">
+                            <label class="form-label">Dirección</label>
+                            <div style="display: flex;">
+                                <input type="text" id="direccion" class="form-control" formControlName="direccion" [class.is-invalid]="datos.get('direccion').errors" (change)="cambio('direccion')" readonly>
+                                <a *ngIf="ver === 'direccion'" (click)="editar('direccion')" class="btn btn-warning"><i
                     class="fas fa-pencil-alt"></i></a>
-              </div>
+                            </div>
 
-              <div *ngIf="datos.get('direccion').errors">
-                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('required')">* El campo es requerido.</p>
-                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('minlength')">Cantidad minima de
-                  caracteres (2).</p>
-                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('maxlength')">Cantidad maxima de
-                  caracteres (100).</p>
-              </div>
-            </div>
-          </div>
+                            <div *ngIf="datos.get('direccion').errors">
+                                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('required')">* El campo es requerido.</p>
+                                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('minlength')">Cantidad minima de caracteres (2).</p>
+                                <p class="alerta-error" *ngIf="datos.get('direccion').hasError('maxlength')">Cantidad maxima de caracteres (100).</p>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="row">
-            <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('telefono')">
-              <label class="form-label">Telefono</label>
-              <div style="display: flex;">
-                <input type="text" id="telefono" class="form-control" formControlName="telefono"
-                  [class.is-invalid]="datos.get('telefono').errors" (change)="cambio('telefono')" readonly>
-                <a *ngIf="ver === 'telefono'" (click)="editar('telefono')" class="btn btn-warning"><i
+                    <div class="row">
+                        <div class="col" (mouseleave)="mouseLeave()" (mouseenter)="mouseEnter('telefono')">
+                            <label class="form-label">Telefono</label>
+                            <div style="display: flex;">
+                                <input type="text" id="telefono" class="form-control" formControlName="telefono" [class.is-invalid]="datos.get('telefono').errors" (change)="cambio('telefono')" readonly>
+                                <a *ngIf="ver === 'telefono'" (click)="editar('telefono')" class="btn btn-warning"><i
                     class="fas fa-pencil-alt"></i></a>
-              </div>
+                            </div>
 
-              <!-- input   [class.is-invalid]="datos.get('nombres').errors" -->
-              <div *ngIf="datos.get('telefono').errors">
-                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('pattern')">* Este campo solo acepta
-                  números sin caracteres especiales ni puntos.</p>
-                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('minlength')">* Cantidad minima de
-                  caracteres (7).</p>
-                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('maxlength')">* Cantidad maxima de
-                  caracteres (12).</p>
-              </div>
+                            <!-- input   [class.is-invalid]="datos.get('nombres').errors" -->
+                            <div *ngIf="datos.get('telefono').errors">
+                                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('pattern')">* Este campo solo acepta números sin caracteres especiales ni puntos.</p>
+                                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('minlength')">* Cantidad minima de caracteres (7).</p>
+                                <p class="alerta-error" *ngIf="datos.get('telefono').hasError('maxlength')">* Cantidad maxima de caracteres (12).</p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label">Municipio</label>
+                            <input type="text" formControlName="municipio" class="form-control">
+
+                            <div *ngIf="datos.get('municipio').errors">
+                                <p class="alerta-error" *ngIf="datos.get('municipio').hasError('required')">* Este campo es requerido.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
-
-            <div class="col">
-              <label class="form-label">Municipio</label>
-              <input type="text" formControlName="municipio" class="form-control">
-
-              <div *ngIf="datos.get('municipio').errors">
-                <p class="alerta-error" *ngIf="datos.get('municipio').hasError('required')">* Este campo es requerido.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </form>
-
-      </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <!-- Modal eliminar sucursal -->
-<button type="button" style="display: none;" id="btn-modal-confirmacion" class="btn btn-primary" data-toggle="modal"
-  data-target="#exampleModal">
+<button type="button" style="display: none;" id="btn-modal-confirmacion" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-        <button type="button" id="btn-cerrar-modal-confirmacion" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                <button type="button" id="btn-cerrar-modal-confirmacion" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body" *ngIf="sucursalEliminar">
-        ¿Estás seguro que deseas eliminar {{sucursalEliminar.nombre}}?,Ten en cuenta que se borraran los consultorios
-        las citas asignadas y la cuenta de usuario de la sucursal.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarSucursal()">Eliminar</button>
-      </div>
+            </div>
+            <div class="modal-body" *ngIf="sucursalEliminar">
+                ¿Estás seguro que deseas eliminar {{sucursalEliminar.nombre}}?,Ten en cuenta que se borraran los consultorios las citas asignadas y la cuenta de usuario de la sucursal.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminarSucursal()">Eliminar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <!-- Button trigger modal -->
-<button type="button" id="btn-info-medico" style="display: none" class="btn btn-primary" data-toggle="modal"
-  data-target="#exampleModalInfo">
+<button type="button" id="btn-info-medico" style="display: none" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalInfo">
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
-        <button type="button" id="btn-modal-cerrar-info" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal fade" id="exampleModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" id="btn-modal-cerrar-info" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        No tienes médicos disponibles para crear un consultorio, por favor agrega un médico.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" routerLink="/medicos">Crear Médico</button>
-      </div>
+            </div>
+            <div class="modal-body">
+                No tienes médicos disponibles para crear un consultorio, por favor agrega un médico.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" routerLink="/medicos">Crear Médico</button>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
 <!-- Fin modal -->
 <!-- MODAL DE AGREGAR EDITAR SUCURSAL -->
 <!-- Nuevo Modal -->
 <ng-template #templateSuc>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Administrador de sucursales</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef1.hide()">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Administrador de sucursales</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef1.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="modal-body">
-    <app-g-admin-sucursal  [idSucursal]="idsc" > </app-g-admin-sucursal>
-  </div>
-  <div class="modal-body" [ngSwitch]="cambio">
-    INFORMACION COSULTORIOS
-  </div>
+    </div>
+    <div class="modal-body">
+        <app-g-admin-sucursal [idSucursal]="idsc" (pubExitosa)="publicacionExitosa()"> </app-g-admin-sucursal>
+    </div>
+    <div class="modal-body" [ngSwitch]="cambio">
+        <!-- INFORMACION COSULTORIOS -->
+    </div>
 </ng-template>
 
 
 <div class="loading" *ngIf="loading">
-  <img src="/assets/pulso.gif" alt="">
+    <img src="/assets/pulso.gif" alt="">
 </div>
