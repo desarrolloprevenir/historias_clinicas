@@ -37,6 +37,11 @@
 
             <div style="padding-top: 30px;">
 
+                <div class="text-center">
+                    <p style="padding: 5px; color: #04ad93;" *ngIf="(infoSucursal && infoSucursal.consultorio && infoSucursal.consultorio.length >= 1) && mymodel === 'consultorios'">Mis consultorios</p>
+                </div>
+
+
                 <div class="contenedor">
                     <div class="tab-content scroll" id="nav-tabContent">
 
@@ -892,21 +897,35 @@
                 </button>
                     </div>
 
-                    <div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+                    <div class="row" style="padding-top: 40px; padding-bottom: 20px;">
 
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
-
                             <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button>
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-success" (click)="mostrarHorario('false')" [disabled]="!btnHorario">Agregar otro Horario</button>
                         </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-1.5"></div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+
+
+                        </div>
                         <div class="col-md-3">
                             <button class="btn btn-info" (click)="crearConsultorio('true')" [disabled]="!this.medicoSelect.valid || !this.nombreConsultorio.valid || !this.servicioSelect.value">Crear consultorio</button>
                         </div>
+                        <div class="col-md-3">
+
+                        </div>
                         <div class="col-md-1.5"></div>
                     </div>
+
 
                     <div class="row" style="padding-top: 20px; padding-bottom: 30px;">
 

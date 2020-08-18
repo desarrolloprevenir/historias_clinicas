@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl : 'http://192.168.0.107:3000'
-  apiUrl: 'http://cdn.prevenirexpress.com:3000'
+  // apiUrl: 'http://cdn.prevenirexpress.com:3000'
+    apiUrl : 'localhost:3000'
 };
 
 /*

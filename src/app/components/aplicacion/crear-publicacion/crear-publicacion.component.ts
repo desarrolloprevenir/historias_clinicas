@@ -53,6 +53,7 @@ export class CrearPublicacionComponent implements OnInit {
   options: User[];
   filteredOptions: Observable<User[]>;
   public statusW: string;
+  public texto: string;
 
 
   // public horasDesdeHastaManana;
@@ -1351,32 +1352,30 @@ _handleReaderLoaded(readerEvt) {
     let token = this.userService.getToken();
     let user = this.userService.getIdentity();
 
-    let ch;
+    // let ch;
 
-    if (this.chips.length >= 1) {
+    // if (this.chips.length >= 1) {
 
-     // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.chips.length; i++) {
+    //  // tslint:disable-next-line: prefer-for-of
+    // for (let i = 0; i < this.chips.length; i++) {
 
-      if (!ch) {
-        ch = this.chips[i].nombre;
-      } else {
-        ch = ch + ',' + ' ' + this.chips[i].nombre;
-      }
-    }
+    //   if (!ch) {
+    //     ch = this.chips[i].nombre;
+    //   } else {
+    //     ch = ch + ',' + ' ' + this.chips[i].nombre;
+    //   }
+    // }
 
-    }
+    // }
 
     this.formulario = {id_usuario: user.id_provedor, token, nombre: this.datos.value.nombre,
         precio: this.datos.value.precio, imagenes: this.imagenes,
         descuento: this.datos.value.descuento, duracion: this.datos.value.duracion,
         id_ctga: this.myControl.value.id_categoria, video : this.datos.value.video,
-        max_citas: this.numeroMaxCitas.value, descripcion: this.datos.value.descripcion, creador: user.nombre, chips : ch };
+        max_citas: this.numeroMaxCitas.value, descripcion: this.datos.value.descripcion, creador: user.nombre, chips : this.chips };
 
 
-
-
-
+    // asignar consultorio en la sucursal creada o crear nueva sucursal
     // console.log(this.formulario);
 
     this.provedorService.pubService(this.formulario).subscribe( (res) => {
@@ -1384,6 +1383,8 @@ _handleReaderLoaded(readerEvt) {
       // console.log(res);
 
       if (res[0].agregado === true) {
+        // tslint:disable-next-line: max-line-length
+        this.texto = ' La publicación ha sido creada correctamente, para que el servicio sea visible para los usuarios es necesario asociarlo a un consultorio, ¿ Desea hacerlo ahora ?.';
         document.getElementById('btn-publicacion-exitosa').click();
       } else {
         // this.pg.status = 'error';
@@ -1400,6 +1401,45 @@ _handleReaderLoaded(readerEvt) {
 
   }
 
+ }
+
+ asociarConsultorio() {
+
+    let identity = this.userService.getIdentity().id_provedor;
+    this.provedorService.getMedicosProvedor(identity).subscribe( (response: any) => {
+      // this.medicos = response;
+      // console.log('medicos', response);
+
+
+      if (response.length >= 1) {
+        this.router.navigate(['consultorio']);
+
+        // tslint:disable-next-line: prefer-for-of
+        // for (let i = 0; i < this.medicos.length; i++) {
+
+        //   if ( this.medicos[i].activo === 'false') {
+        //     // console.log('aqui');
+        //     this.siguiente = true;
+        //     break;
+        //   } else {
+        //     this.siguiente = false;
+        //   }
+        // }
+      } else {
+          this.texto = 'No tienes médicos disponibles para crear un consultorio, por favor ponte en contacto con el administrador.';
+      }
+
+      // if (this.siguiente === true) {
+      //   this.router.navigate(['consultorio']);
+      // } else {
+      //   document.getElementById('btn-info-medico').click();
+      // }
+
+      // console.log(this.siguiente);
+
+    }, () => {
+    });
+  
  }
 
 //  publicarServicio() {

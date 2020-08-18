@@ -1263,6 +1263,8 @@ export class CrearSucursalComponent implements OnInit {
      }
 
    }
+
+
   }
 
   // desabilitar dias escogidos en el horario 2

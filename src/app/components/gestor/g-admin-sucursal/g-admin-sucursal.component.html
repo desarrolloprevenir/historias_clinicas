@@ -304,16 +304,16 @@
 
 
                         <!-- ------------------------------------- ALERTAS ------------------------------------------------- -->
-                        <div>
+                        <div class="pt-3">
 
-                            <div class="alert alert-success alert-dismissible fade show container" role="alert" *ngIf="status === 'success_contra'">
+                            <div class="alert alert-success alert-dismissible fade show container" role="alert" *ngIf="status === 'success_cambio'">
                                 {{statusText}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
                                     <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
 
-                            <div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error_contra'">
+                            <div class="alert alert-danger alert-dismissible fade show container" role="alert" *ngIf="status === 'error_cambio'">
                                 {{statusText}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
                                  <span aria-hidden="true">&times;</span>
@@ -447,6 +447,10 @@
 
             <div>
 
+                <div class="text-center">
+                    <p style="padding: 5px; color: #04ad93; font-size: 20px;" *ngIf="(infoSucursal && infoSucursal.consultorio && infoSucursal.consultorio.length >= 1)">Mis consultorios</p>
+                </div>
+
                 <div class="contenedor">
                     <div class="tab-content scroll" id="nav-tabContent">
 
@@ -570,7 +574,7 @@
 
 
                                     <div class="col">
-                                        <label class="form-label">extension</label>
+                                        <label class="form-label">extension Telefónica</label>
                                         <input type="text" class="form-control" [formControl]="extensionConsultorio" maxlength="20">
                                     </div>
                                 </div>
@@ -814,31 +818,31 @@
                                     <div class="col-lg-4 div-dias">
                                         <p>Dias</p>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="lunesCheck2" (change)="diasHorario2($event)" value="lunes">
+                                            <input type="checkbox" class="form-check-input" id="lunesCheck2" (change)="diasHorario2($event)" value="lunes" [disabled]="!this.ds[0].dia.disponible">
                                             <label class="form-check-label" for="lunesCheck2">Lunes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="martesCheck2" (change)="diasHorario2($event)" value="martes">
+                                            <input type="checkbox" class="form-check-input" id="martesCheck2" (change)="diasHorario2($event)" value="martes" [disabled]="!this.ds[1].dia.disponible">
                                             <label class="form-check-label" for="martesCheck2">Martes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="miercolesCheck2" (change)="diasHorario2($event)" value="miércoles">
+                                            <input type="checkbox" class="form-check-input" id="miercolesCheck2" (change)="diasHorario2($event)" value="miércoles" [disabled]="!this.ds[2].dia.disponible">
                                             <label class="form-check-label" for="miercolesCheck2">Miércoles</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="juevesCheck2" (change)="diasHorario2($event)" value="jueves">
+                                            <input type="checkbox" class="form-check-input" id="juevesCheck2" (change)="diasHorario2($event)" value="jueves" [disabled]="!this.ds[3].dia.disponible">
                                             <label class="form-check-label" for="juevesCheck2">Jueves</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="viernesCheck2" (change)="diasHorario2($event)" value="viernes">
+                                            <input type="checkbox" class="form-check-input" id="viernesCheck2" (change)="diasHorario2($event)" value="viernes" [disabled]="!this.ds[4].dia.disponible">
                                             <label class="form-check-label" for="viernesCheck2">Viernes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="sabadoCheck2" (change)="diasHorario2($event)" value="sábado">
+                                            <input type="checkbox" class="form-check-input" id="sabadoCheck2" (change)="diasHorario2($event)" value="sábado" [disabled]="!this.ds[5].dia.disponible">
                                             <label class="form-check-label" for="sabadoCheck2">Sábado</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="domingoCheck2" (change)="diasHorario1($event)" value="domingo">
+                                            <input type="checkbox" class="form-check-input" id="domingoCheck2" (change)="diasHorario1($event)" value="domingo" [disabled]="!this.ds[6].dia.disponible">
                                             <label class="form-check-label" for="domingoCheck2">Domingo</label>
                                         </div>
                                     </div>
@@ -909,31 +913,31 @@
                                     <div class="col-lg-4 div-dias">
                                         <p>Dias</p>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="lunesCheck3" (change)="diasHorario3($event)" value="lunes">
+                                            <input type="checkbox" class="form-check-input" id="lunesCheck3" (change)="diasHorario3($event)" value="lunes" [disabled]="!ds[0].dia.dispobible">
                                             <label class="form-check-label" for="lunesCheck3">Lunes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="martesCheck3" (change)="diasHorario3($event)" value="martes">
+                                            <input type="checkbox" class="form-check-input" id="martesCheck3" (change)="diasHorario3($event)" value="martes" [disabled]="!ds[1].dia.dispobible">
                                             <label class="form-check-label" for="martesCheck3">Martes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="miercolesCheck3" (change)="diasHorario3($event)" value="miércoles">
+                                            <input type="checkbox" class="form-check-input" id="miercolesCheck3" (change)="diasHorario3($event)" value="miércoles" [disabled]="!ds[2].dia.dispobible">
                                             <label class="form-check-label" for="miercolesCheck3">Miércoles</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="juevesCheck3" (change)="diasHorario3($event)" value="jueves">
+                                            <input type="checkbox" class="form-check-input" id="juevesCheck3" (change)="diasHorario3($event)" value="jueves" [disabled]="!ds[3].dia.dispobible">
                                             <label class="form-check-label" for="juevesCheck3">Jueves</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="viernesCheck3" (change)="diasHorario3($event)" value="viernes">
+                                            <input type="checkbox" class="form-check-input" id="viernesCheck3" (change)="diasHorario3($event)" value="viernes" [disabled]="!ds[4].dia.dispobible">
                                             <label class="form-check-label" for="viernesCheck3">Viernes</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="sabadoCheck3" (change)="diasHorario3($event)" value="sábado">
+                                            <input type="checkbox" class="form-check-input" id="sabadoCheck3" (change)="diasHorario3($event)" value="sábado" [disabled]="!ds[5].dia.dispobible">
                                             <label class="form-check-label" for="sabadoCheck3">Sábado</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="domingoCheck3" (change)="diasHorario3($event)" value="domingo">
+                                            <input type="checkbox" class="form-check-input" id="domingoCheck3" (change)="diasHorario3($event)" value="domingo" [disabled]="!ds[6].dia.dispobible">
                                             <label class="form-check-label" for="domingoCheck3">Domingo</label>
                                         </div>
                                     </div>
@@ -1006,23 +1010,41 @@
             </button>
                 </div>
 
-                <div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+                <div class="row" style="padding-top: 40px">
 
                     <div class="col-md-1"></div>
                     <div class="col-md-3">
 
-                        <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button>
+                        <!-- <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button> -->
                     </div>
                     <div class="col-md-3">
                         <button class="btn btn-success" (click)="mostrarHorario('false')" [disabled]="!btnHorario">Agregar otro Horario</button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-info" (click)="crearConsultorio('true')" [disabled]="!this.medicoSelect.valid || !this.nombreConsultorio.valid || !this.servicioSelect.value">Crear consultorio</button>
+
                     </div>
                     <div class="col-md-1.5"></div>
                 </div>
 
-                <div class="row" style="padding-top: 20px; padding-bottom: 30px;">
+                <div class="row" style="padding-top: 40px; padding-bottom: 20px;">
+
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+
+                        <!-- <button class="btn btn-secondary btns-consultorio" (click)="atras(false)">Atrás</button> -->
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-info" (click)="crearConsultorio('true')" [disabled]="!this.medicoSelect.valid || !this.nombreConsultorio.valid || !this.servicioSelect.value">Crear consultorio</button>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-1.5"></div>
+                </div>
+
+
+
+                <div class="row" style="padding-bottom: 30px;">
 
                     <div class="col-md-1"></div>
                     <div class="col-md-3"></div>

@@ -48,7 +48,7 @@ export class RegistroComponent implements OnInit {
 
       // console.log(userData);
 
-      this.provedorService.registerProvedor(userData).subscribe( (response) => {
+      this.provedorService.registerProvedor(userData).subscribe( (response) => { 
         // console.log(response);
 
         if (response[0].existe === false) {

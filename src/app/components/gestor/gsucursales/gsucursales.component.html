@@ -8,7 +8,10 @@
 
     <!-- </div> -->
 </div>
+
 <div class="text-center" style="padding: 10px;" *ngIf="medicos || servicios">
+
+    <p class="text-left pt-2" style="color: #04ad93; font-size: 20px;">Puedes asignar consultorios editando una sucursal ya creada o crear una nueva sucursal</p>
     <!-- routerLink="/crear-sucursal" -->
     <button class="btn btn-success" (click)="openModal(templateSuc,0)" *ngIf="( medicos && medicos.length >= 1 ) || ( servicios && servicios.length >= 1 )">Crear sucursal</button>
 </div>

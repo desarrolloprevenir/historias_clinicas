@@ -77,6 +77,8 @@ export class GestionarPublicacionesComponent implements OnInit {
 
     this.provedorService.getPublications(id).subscribe( (response) => {
 
+      console.log(response);
+
       if (response[0].vacio === true) {
         this.vacio = true;
         // console.log(this.vacio);
@@ -135,7 +137,7 @@ export class GestionarPublicacionesComponent implements OnInit {
     this.status = null;
 
     this.provedorService.getInfoEditar(idPublicacion).subscribe( (response) => {
-      console.log(response);
+      console.log('servicio', response);
       this.editInfo = response;
       // this.getDepartamento(response.depar);
       // this.getMunicipio(response.id_departamento, response.id_muni);

@@ -162,7 +162,7 @@
                                     <mat-option value="2">2</mat-option>
                                     <mat-option value="3">3</mat-option>
                                     <mat-option value="4">4</mat-option>
-                                    <mat-option value="5">5</mat-option>
+                                    <!-- <mat-option value="5">5</mat-option> -->
                                 </mat-select>
 
                                 <mat-error *ngIf="numeroMaxCitas.hasError('required')">
@@ -390,10 +390,11 @@
         </button>
             </div>
             <div class="modal-body">
-                La publicación ha sido creada correctamente.
+                {{texto}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="pubExitosa()">Aceptar</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="asociarConsultorio()">Asociar a Consultorio</button>
             </div>
         </div>
     </div>

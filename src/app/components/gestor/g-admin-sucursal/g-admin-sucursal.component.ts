@@ -85,6 +85,7 @@ export class GAdminSucursalComponent implements OnInit {
                                           Validators.minLength(7), Validators.maxLength(12)]);
   id_sucu = new FormControl('');
   nombreConsultorio = new FormControl('', Validators.required);
+  psswAdmin = new FormControl('', [Validators.required, Validators.minLength(8)]);
   pssw = new FormControl('', [Validators.required, Validators.minLength(8)]);
   psswConfirm = new FormControl('', [Validators.required, Validators.minLength(8)]);
   username = new FormControl('', [Validators.required, Validators.pattern('[a-zA-z_0-9]*')]);
@@ -726,7 +727,7 @@ diasHorario2(ev) {
   } else {
 
     let posicion = this.diasH2.indexOf(ev.target.value);
-    console.log(posicion);
+    // console.log(posicion);
 
     if (posicion >= 0) {
       this.diasH2.splice(posicion, 1);
@@ -789,14 +790,14 @@ if (ev.checked === false && h === 'h3') {
 
 
 horasHorarios(ev, info) {
-console.log(ev, info);
+// console.log(ev, info);
 
 // H1
 
 if (info === 'mdesde_h1') {
   // tslint:disable-next-line:radix
   this.mananaDesdeH1 = parseInt(ev.target.value);
-  console.log(this.mananaDesdeH1);
+  // console.log(this.mananaDesdeH1);
 }
 
 if (info === 'mhasta_h1') {
@@ -1312,6 +1313,10 @@ for (var i = 0; i < this.diasH1.length; i++) {
  }
 
 }
+
+console.log('dias', this.ds);
+
+console.log(this.ds[0].dia.disponible);
 }
 
 // desabilitar dias escogidos en el horario 2
@@ -1498,14 +1503,6 @@ Swal.fire({
 
 cambioContra() {
 
-//   <div class="alert alert-warning alert-dismissible fade show container" role="alert" *ngIf="status === 'warning_modal'">
-//   {{statusText}}
-//   <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
-//   <span aria-hidden="true">&times;</span>
-//   </button>
-// </div>
-
-
   Swal.fire({
     title: this.infoSucursal.nombre,
     html:
@@ -1525,6 +1522,11 @@ cambioContra() {
       // tslint:disable-next-line: max-line-length
       ' <input type="password" id="newContra" class="form-control" required minlength="8">' +
       '</div>' +
+      '<div class="form-group">' +
+      '<label class="form-label text-left">Confirmar Contraseña</label>' +
+      // tslint:disable-next-line: max-line-length
+      ' <input type="password" id="confirmContra" class="form-control" required minlength="8">' +
+      '</div>' +
       '</form>',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -1533,20 +1535,60 @@ cambioContra() {
       cancelButtonText: 'Cancelar',
       reverseButtons: true
   }).then((result) => {
-    console.log(result);
+    // console.log(result);
 
     if (result.value) {
       var psswAdmin: any;
       var username: any;
       var psswNew: any;
+      var confirmNew: any;
 
       psswAdmin = document.getElementById('contraAdmin');
       username = document.getElementById('username');
       psswNew = document.getElementById('newContra');
-      
+      confirmNew = document.getElementById('confirmContra');
+
       // validaciones
+
+      this.psswAdmin.setValue(psswAdmin.value);
+      this.pssw.setValue(psswNew.value);
+      this.psswConfirm.setValue(confirmNew.value);
+      this.usernameSucursal.setValue(username.value);
+
+      // console.log(this.psswAdmin.value, this.pssw.value, this.usernameSucursal.value, this.psswConfirm.value );
+
+      if (this.psswAdmin.invalid) {
+        this.status = 'error_cambio';
+        this.statusText = 'La contraseña de administrador no es valida.';
+        return;
+    }
+
+      // console.log(this.usernameSucursal.invalid);
+      if (this.usernameSucursal.invalid) {
+          this.status = 'error_cambio';
+          this.statusText = 'Nombre de usuario no es valido, no debe contener espacios';
+          return;
+      }
+
+      if (this.pssw.invalid) {
+        this.status = 'error_cambio';
+        this.statusText = 'La contraseña no es valida, debe contener al menos 8 caracteres';
+        return;
+    }
+
+      if (this.pssw.value !== this.psswConfirm.value) {
+        this.status = 'error_cambio';
+        this.statusText = 'Las contraseñas no coinciden.';
+        return;
+    }
+
+      this.cambioContrasena();
     }
   });
+
+  // this.usernameSucursal.setValue(this.infoSucursal.email);
+  (<HTMLInputElement>document.getElementById('username')).value = this.infoSucursal.email;
+  
 }
 
 confirmacionEliminarConsulApi(info) {
@@ -1649,28 +1691,35 @@ cambioContrasena() {
 this.loading = true;
 let admin = this.userService.getIdentity();
 
-let info = { email: admin.correo, passadmin: this.aplicationService.encriptar(this.formCambio.value.psswAdmin),
+let info = { email: admin.correo, passadmin: this.aplicationService.encriptar(this.psswAdmin.value),
              id_sucur : this.infoSucursal.id_sucursales, usu: this.usernameSucursal.value,
-            passnu : this.aplicationService.encriptar(this.formCambio.value.pssw) };
+            passnu : this.aplicationService.encriptar(this.pssw.value) };
+
+// let info = { email: admin.correo, passadmin: this.psswAdmin.value,
+//               id_sucur : this.infoSucursal.id_sucursales, usu: this.usernameSucursal.value,
+//              passnu : this.pssw.value };
+
+// console.log(info);
 
 this.provedorService.putCambioContrasenaUsuario(info).subscribe( (response) => {
   this.loading = false;
   // console.log(response);
 
   if (response. resp === false) {
-      this.status = 'warning_modal';
+      this.status = 'error_cambio';
       this.statusText = 'La contraseña de administrador no es correcta.';
   } else {
-    this.status = 'success';
+    this.status = 'success_cambio';
     this.statusText = 'Usuario o contraseña cambiados exitosamente';
-    this.formCambio.reset();
+    // this.formCambio.reset();
     this.getInfoSucursal(this.idSucursal);
-    document.getElementById('cerrar-modal-cambio').click();
+    // document.getElementById('cerrar-modal-cambio').click();
   }
 }, () => {
   this.loading = true;
-  this.status = 'error';
-  this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
+  // this.status = 'error';
+  // this.statusText = 'Error en la conexion, por favor revisa tu conexion o intentalo mas tarde';
+  Swal.fire('Error', 'En la conexión, por favor intentalo más tarde.', 'error');
   this.loading = false;
 } );
 

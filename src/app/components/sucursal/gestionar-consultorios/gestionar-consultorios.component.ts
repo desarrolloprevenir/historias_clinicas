@@ -117,17 +117,20 @@ export class GestionarConsultoriosComponent implements OnInit {
       this.medicos = response;
 
       if (this.medicos.length >= 1) {
+        this.siguiente = true;
         // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < this.medicos.length; i++) {
+        // for (let i = 0; i < this.medicos.length; i++) {
 
-          if ( this.medicos[i].activo === 'false') {
-            // console.log('aqui');
-            this.siguiente = true;
-            break;
-          } else {
-            this.siguiente = false;
-          }
-        }
+        //   if ( this.medicos[i].activo === 'false') {
+        //     // console.log('aqui');
+        //     this.siguiente = true;
+        //     break;
+        //   } else {
+        //     this.siguiente = false;
+        //   }
+        // }
+      } else {
+        this.siguiente = false;
       }
 
       if (this.siguiente === true) {

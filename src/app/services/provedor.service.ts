@@ -69,7 +69,7 @@ export class ProvedorService {
    // Obtener las publicaciones de un provedor
    getPublications(id): Observable<any> {
     return this.http.get(apiUrl + '/services/' + id, {headers});
-  }
+}
 
   // Obtener los medicos del provedor
 
@@ -88,7 +88,6 @@ getFotosServicio(id) {
 }
 
  // Ruta para obtener los datos de una mascota
-
  getMascotaInfo(idProvedor): Observable <any> {
   return this.http.get(apiUrl + '/mascotam/' + idProvedor);
 }
