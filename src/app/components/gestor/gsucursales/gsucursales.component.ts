@@ -9,7 +9,6 @@ import { UserService } from 'src/app/services/user.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import Swal from 'sweetalert2';
-import { reverse } from 'dns';
 
 @Component({
   selector: 'app-gsucursales',

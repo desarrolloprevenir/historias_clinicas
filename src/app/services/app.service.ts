@@ -137,6 +137,11 @@ postGuardarLentes(info) {
   return this.http.post(apiUrl + '/material-l', info, {headers});
 }
 
+// Ruta para actualizar número de celular y enviar sms de confirmación de cuenta
+
+postSmsConfirmar(info) {
+  return this.http.post( apiUrl + '/smsconfirm', info, {headers});
+}
 //  <!-- ----------------------------------------------------------------------------------------------------- -->
 //  <!-- -------------------------------------------- METODOS DELETE ----------------------------------------- -->
 //  <!-- ----------------------------------------------------------------------------------------------------- -->

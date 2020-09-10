@@ -37,7 +37,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6 textoContenedor">
                 <h1>Activa tu cuenta</h1>
-                <p>* Ingresa el codigo que esta en el correo, si no has recibo el correo, puedes revisa en correos no deseados o spam.
+                <p>* Ingresa el codigo que esta en el correo con el cual te registraste, si no has recibo el correo, puedes revisa en correos no deseados o spam.
                 </p>
             </div>
             <div class="col-md-3"></div>
@@ -48,9 +48,6 @@
             <div class="col-md-6">
                 <form (submit)="confirmar()">
                     <input type="text" placeholder="Ingresa el codigo" class="form-control" [formControl]="codigo">
-
-
-
                 </form>
             </div>
         </div>
@@ -59,15 +56,90 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
+
                 <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-12">
                         <button type="submit" class="btn btn-success w-100" [disabled]="!codigo.valid" (click)="confirmar()"><i
-                  class="fas fa-check"></i>&nbsp;Confirmar</button>
+                            class="fas fa-check"></i>&nbsp;Confirmar</button>
+                    </div>
+
+                </div>
+
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-info w-100" data-toggle="modal" data-target="#modalCelular" (click)="reiniciar()"><i class="fas fa-redo-alt"></i>&nbsp;Reenviar codigo al celular</button>
+
+
+                        <!-- ----------------------------------------------------------------------------------------------------- -->
+                        <!-- -------------------------------------- Modal Número celular ----------------------------------------- -->
+                        <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                        <!-- Button trigger modal -->
+                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCelular">
+                            Launch demo modal
+                          </button>
+                                    -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCelular" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                                        <button type="button" id="cerrar-modal-confirm" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="status === 'warning_modal'">
+                                            {{statusText}}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                        </div>
+
+                                        <div *ngIf="identity.telefono">
+                                            Se enviara un código de confirmación al número {{identity.telefono}}
+
+                                            <div *ngIf="cambiarNumero">
+                                                <div class="pt-1">
+                                                    <input class="form-control" placeholder="Número de celular" type="number" [(ngModel)]="numeroCelular" (change)="validarNumero()">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="!identity.telefono">
+                                            No tienes un número de celular asociado, ¿Desea agregar un número de celular?
+
+                                            <div class="pt-1">
+                                                <input class="form-control" placeholder="Número de celular" type="number" [(ngModel)]="numeroCelular" (change)="validarNumero()">
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="modal-footer" *ngIf="identity.telefono">
+                                        <button type="button" class="btn btn-secondary" (click)="cambiarNumero = true" *ngIf="!cambiarNumero">Cambiar número</button>
+                                        <button type="button" class="btn btn-secondary" (click)="cambiarNumero = false" *ngIf="cambiarNumero">Cancelar cambió número</button>
+                                        <button type="button" class="btn btn-primary" (click)="reenviarCelular()">Enviar Código</button>
+                                    </div>
+
+                                    <div class="modal-footer" *ngIf="!identity.telefono">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" (click)="reenviarCelular()">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-info w-100" (click)="reenviar()"><i class="fas fa-redo-alt"></i>&nbsp;Reenviar codigo</button>
-
-
+                        <button class="btn btn-info w-100" (click)="reenviar()"><i class="fas fa-redo-alt"></i>&nbsp;Reenviar codigo al correo</button>
                     </div>
 
                 </div>

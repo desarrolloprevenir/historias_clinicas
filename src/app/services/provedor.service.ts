@@ -172,19 +172,16 @@ getConsultoriosSucursal(idSucursal) {
   }
 
 // Editar datos del perfil de provedor
-
 editProv(datos, token): Observable<any> {
   return this.http.put(apiUrl + '/provedores/' + '?token=' + token, datos, {headers});
 }
 
 // Publicar un servicio
-
 pubService(formulario): Observable<any> {
   return this.http.post(apiUrl + '/services' , formulario, {headers});
 }
 
 // Cambio contraseña y usuario sucursal
-
 putCambioContrasenaUsuario(info) {
   return this.http.put<{resp}>(apiUrl + '/contrasuc' , info, {headers});
 }

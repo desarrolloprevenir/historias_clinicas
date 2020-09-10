@@ -42,9 +42,33 @@
                             <p class="alerta-error" *ngIf="psswConf.hasError('maxlength')">Cantidad maxima de caracteres (15)</p>
                         </div>
 
-                        <div style="padding:50px">
-                            <button class="btn btn-primary" type="submit" [disabled]="!codigo.valid || !pssw.valid || !psswConf.valid">Cambiar
-                  contraseña</button></div>
+                        <div class="row">
+
+                            <div class="col-1"></div>
+                            <div class="col-10">
+
+
+                                <div style="padding:50px">
+                                    <button class="btn btn-primary" type="submit" [disabled]="!codigo.valid || !pssw.valid || !psswConf.valid">Cambiar
+                          contraseña</button>
+
+
+                                    <div class="pt-3">
+                                        <button type="button" class="btn btn-warning " style="color: white !important;" [routerLink]="['/login']">Volver</button>
+                                    </div>
+
+                                    <!-- <div class="text-center">
+                                        <a class="btn btn-warning center-block w-100" [routerLink]="['/login']" style="color:white"><i class="fas fa-arrow-left"></i>&nbsp;Volver</a>
+                                    </div> -->
+                                </div>
+
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+
+
+
 
                     </form>
 

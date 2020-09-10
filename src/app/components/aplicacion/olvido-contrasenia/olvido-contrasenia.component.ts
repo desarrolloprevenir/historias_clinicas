@@ -14,7 +14,7 @@ export class OlvidoContraseniaComponent implements OnInit {
   pssw = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]);
   psswConf = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]);
   loading;
-  cambio = false;
+  cambio = true;
   status;
   statusText;
 
